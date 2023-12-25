@@ -1,13 +1,10 @@
 // ExploreMore For SSC
 import React, { useState,useEffect,useRef } from "react";
 import styles from "./ExploreMore.module.css";
-import Footer from "../Footer02.js/Footer";
-import Header from "../Components/HomePage01/Header/Header";
 import sscLogo from "./ssc-logo.webp";
 import { Link } from "react-router-dom";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
-import data from "./data.json";
 import { AiFillLeftCircle , AiFillRightCircle } from "react-icons/ai";
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
