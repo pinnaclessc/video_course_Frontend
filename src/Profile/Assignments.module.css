@@ -1,0 +1,45 @@
+.Assignmenets-Heading{
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 40px;
+
+}
+
+.checkbox-divSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5rem;
+}
+
+.Select-Section{
+    width: max-content;
+    height: 100%;
+    margin: 0.25rem;
+    padding: 0.25rem;
+    font-size: 14px;
+}
+.checkbox-empty-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin: auto;
+    margin-top: 1rem;
+
+
+}
+
+.emptyCart-imageDiv{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyCart-image{
+    width: 400px;
+    height: 200px;
+}

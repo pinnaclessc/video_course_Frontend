@@ -1,0 +1,43 @@
+.Announcement-empty-fullPage{
+    
+
+}
+
+.Announcement-full-Page{
+    margin: 0.25rem;
+    padding: 0.25rem;
+}
+
+.Announcement-heading{
+    font-size: 26px;
+    font-weight: bold;
+    line-height:60px ;
+}
+
+.empty-cart-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    margin: auto;
+}
+
+.emptyCart-imageDiv{
+
+}
+
+.emptyCart-image{
+    width: 400px;
+    height: 200px;
+}
+
+.emptyCart-description{
+    line-height: 30px;
+    font-size: 14px;
+    margin-top: 1rem;
+    
+
+}

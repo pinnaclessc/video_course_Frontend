@@ -1,0 +1,38 @@
+.bottombar,
+.left_arrow,
+.numbers,
+.right_arrow {
+  display: flex;
+}
+
+.bottombar {
+  padding-left: 40%;
+  margin-top: 5%;
+  margin-left: 4%;
+}
+
+.left_arrow a,
+.right_arrow a {
+  color: black;
+  opacity: 0.35;
+  text-decoration: none;
+}
+.numbers a {
+  color: #007bff;
+}
+.num1,
+.num2,
+.num3,
+.num4 {
+  padding: 18%;
+}
+.right_arrow {
+  margin-left: 8%;
+}
+.bottombar {
+  margin: 0 auto;
+  margin-top: 9%;
+}
+.num1 {
+  margin-left: 10%;
+}

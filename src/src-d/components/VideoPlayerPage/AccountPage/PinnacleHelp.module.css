@@ -1,0 +1,69 @@
+header {
+}
+.unordered_list {
+  border-bottom: rgba(0, 0, 0, 0.02);
+  display: flex;
+  justify-content: space-evenly;
+}
+.header_img {
+  width: 8rem;
+  font-size: 10px;
+  margin-left: 25%;
+}
+.help_main_container {
+  width: 100%;
+  height: 10rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.help_ask_container {
+  width: 17%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 1%;
+  margin: 1%;
+}
+.card_main_container {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: calc(24.33% - 20px);
+  height: 10rem;
+}
+.card_image {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  padding: 1%;
+  background-color: black;
+  margin-left: 45%;
+  margin-top: 4%;
+}
+.card_text {
+  font-size: 14px;
+  margin-left: 33%;
+  font-weight: bold;
+}
+.card_sub_text {
+  font-size: 10px;
+  margin-left: 63px;
+}
+.card_container {
+  line-height: 1.5rem;
+}
+.card_container {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+.card_prior_container {
+  margin-left: 18%;
+}
+.help_ask_heading {
+  margin-top: 3%;
+}
+.help_ask_container1 {
+  margin-top: 3%;
+}
+.help_ask_container1 {
+  background-image: "./images/coverImage0402.svg";
+}

@@ -1,0 +1,41 @@
+.Body_FullPage{
+    margin-left: 5%;
+    margin-right:10%;
+
+   
+
+
+}
+.Categories-VideoFeatures-Comments-div{
+    display: flex;
+
+}
+.videoAndComments_div{
+    width: 70%;
+    margin: 3%;
+
+}
+.Comments_div{
+    width: 100%;
+    margin: 20px;
+    margin-left: 60px;
+
+}
+.categories_component{
+    width: 20%;
+    margin-left: -5px;
+
+}
+
+.RecLunchedCourse_div{
+    margin-top: 70px;
+}
+
+.UpcomingCourse_div{
+    margin-top: 70px;
+
+}
+.MostPopularCourses_div{
+    margin-top: 70px;
+    margin-bottom: 120px;
+}

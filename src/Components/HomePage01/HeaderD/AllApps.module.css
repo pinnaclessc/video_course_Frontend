@@ -1,0 +1,70 @@
+.Cart_card {
+  border: 0.5px #d1d7dc solid;
+  width: 24%;
+  position: absolute;
+  right: 1%;
+  z-index: 1;
+  top: 5%;
+  color: #444746;
+  box-sizing: border-box;
+  padding: 29px;
+  border-radius: 24px;
+  margin-bottom: 11px;
+  display: flex;
+  height: 45%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.dropdown {
+  color: white;
+  padding: 9px;
+  font-size: 14px;
+  border: none;
+  height: 100%;
+}
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+.cart_btn {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.cart {
+  line-height: 3rem;
+  text-align: center;
+  font-size: 16px;
+  color: black;
+}
+.cart_shopping {
+  margin-top: 2%;
+  font-size: 14px;
+  color: #0a90e9;
+  text-align: center;
+}
+.cart_app_para {
+  font-size: 14px;
+}
+.Cart_card {
+  flex-wrap: wrap;
+}
+.cart_app_container {
+  width: 33%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.cart_app_image {
+  margin-right: 5px;
+}
+
+/* Add media query to handle responsiveness */
+@media (max-width: 767px) {
+  .Cart_card {
+    width: 90%;
+    height: auto;
+  }
+
+  .cart_app_container {
+    width: 100%;
+  }
+}

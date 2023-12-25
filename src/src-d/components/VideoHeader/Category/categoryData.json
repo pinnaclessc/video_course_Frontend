@@ -1,0 +1,218 @@
+[
+  {
+    "categoryName": "SSC CGL",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science1",
+        "subsubcategories": [
+          { "name": "Topic Alpha", "url": "/topicAlpha" },
+          { "name": "Topic Beta", "url": "/topicBeta" },
+          { "name": "Topic Gamma", "url": "/topicGamma" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topicI" },
+          { "name": "Topic 2", "url": "/topicII" },
+          { "name": "Topic 3", "url": "/topicIII" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC CHSL",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science1",
+        "subsubcategories": [
+          { "name": "Topic Alpha", "url": "/topicAlpha" },
+          { "name": "Topic Beta", "url": "/topicBeta" },
+          { "name": "Topic Gamma", "url": "/topicGamma" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC CPO",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science",
+        "subsubcategories": [
+          { "name": "Topic Alpha", "url": "/topicAlpha" },
+          { "name": "Topic Beta", "url": "/topicBeta" },
+          { "name": "Topic Gamma", "url": "/topicGamma" }
+        ]
+      },
+      {
+        "subcategoryName": "Qualitative Analysis",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topicI" },
+          { "name": "Topic 2", "url": "/topicII" },
+          { "name": "Topic 3", "url": "/topicIII" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC GD",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "Qualitative Analysis",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topicAlpha" },
+          { "name": "Topic 2", "url": "/topicBeta" },
+          { "name": "Topic 3", "url": "/topicGamma" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC MTS",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topicAlpha" },
+          { "name": "Topic 2", "url": "/topicBeta" },
+          { "name": "Topic 3", "url": "/topicGamma" }
+        ]
+      },
+      {
+        "subcategoryName": "Qualitative Analysis",
+        "subsubcategories": [
+          { "name": "Topic A", "url": "/topicA" },
+          { "name": "Topic B", "url": "/topicB" },
+          { "name": "Topic C", "url": "/topicC" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC Selection Post",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "Qualitative Analysis",
+        "subsubcategories": [
+          { "name": "Topic Alpha", "url": "/topicAlpha" },
+          { "name": "Topic Beta", "url": "/topicBeta" },
+          { "name": "Topic Gamma", "url": "/topicGamma" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC JE",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science",
+        "subsubcategories": [
+          { "name": "Topic Alpha", "url": "/topicAlpha" },
+          { "name": "Topic Beta", "url": "/topicBeta" },
+          { "name": "Topic Gamma", "url": "/topicGamma" }
+        ]
+      },
+      {
+        "subcategoryName": "Qualitative Analysis",
+        "subsubcategories": [
+          { "name": "Topic A", "url": "/topicA" },
+          { "name": "Topic B", "url": "/topicB" },
+          { "name": "Topic C", "url": "/topicC" }
+        ]
+      }
+    ]
+  },
+  {
+    "categoryName": "SSC STENO",
+    "subcategories": [
+      {
+        "subcategoryName": "Quantitative Aptitude1",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topic1" },
+          { "name": "Topic 2", "url": "/topic2" },
+          { "name": "Topic 3", "url": "/topic3" }
+        ]
+      },
+      {
+        "subcategoryName": "General Science",
+        "subsubcategories": [
+          { "name": "Topic Alpha", "url": "/topicAlpha" },
+          { "name": "Topic Beta", "url": "/topicBeta" },
+          { "name": "Topic Gamma", "url": "/topicGamma" }
+        ]
+      },
+      {
+        "subcategoryName": "Political Science",
+        "subsubcategories": [
+          { "name": "Topic 1", "url": "/topicI" },
+          { "name": "Topic 2", "url": "/topicII" },
+          { "name": "Topic 3", "url": "/topicIII" }
+        ]
+      },
+      {
+        "subcategoryName": "Qualitative Analysis",
+        "subsubcategories": [
+          { "name": "Topic A", "url": "/topicA" },
+          { "name": "Topic B", "url": "/topicB" },
+          { "name": "Topic C", "url": "/topicC" }
+        ]
+      }
+    ]
+  }
+]

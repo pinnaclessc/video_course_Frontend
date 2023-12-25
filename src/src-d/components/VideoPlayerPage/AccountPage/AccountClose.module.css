@@ -1,0 +1,31 @@
+.close_btn {
+  width: 7rem;
+  height: 3rem;
+  background-color: black;
+}
+.warning_text {
+  color: #b32d0f;
+}
+.header_container {
+}
+.close_container {
+  line-height: 1.7rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: 65rem;
+  margin-top: 9%;
+  margin-left: 3%;
+}
+.close_header {
+  margin-left: 36%;
+}
+.header_para {
+  margin-left: 28%;
+}
+.close_body_container {
+  display: flex;
+  padding: 2%;
+}
+.close_btn_box {
+  padding: 2%;
+}

@@ -1,0 +1,49 @@
+.ProfilePicture-fullPage{
+    width: 65rem;
+   
+}
+.preview-div{
+    height: 8rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.preview-image{
+    height: 150px;
+}
+.input-div{
+    height: 2rem;
+    width:42.5%;
+    border: 1px solid black;
+
+}
+
+.file-input{
+    width: 100%;
+    height:2rem;
+
+}
+
+.Preview{
+    border: 1px solid black;
+    width: 40%;
+    height: 10rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.preview-heading{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 40px;
+}
+.save-btn{
+    width: 20%;
+    height: 2.5rem;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #020062;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

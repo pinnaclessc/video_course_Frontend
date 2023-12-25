@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction to React",
+    "duration": "30 mins"
+  },
+  {
+    "id": 2,
+    "title": "Working with Components",
+    "duration": "1 hour"
+  },
+  {
+    "id": 3,
+    "title": "State and Props",
+    "duration": "45 mins"
+  },
+  {
+    "id": 4,
+    "title": "Hooks in React",
+    "duration": "1.5 hours"
+  }
+]

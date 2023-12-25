@@ -1,0 +1,50 @@
+.timer-fullpage{
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	
+}
+
+.timer {
+	
+	display: flex;
+	width: 100%;
+	height: 2.5rem;
+	font-weight: 400;
+	font-size: 16px;
+	background: #eceb98;
+	color: #1c1d1f;
+	
+}
+
+.timer_content {
+	
+	margin: 0.5%;
+	margin-left: 20%;
+	font-weight: 600;
+}
+
+.timer_time {
+	display: flex;
+	margin-top: 0.5%;
+	font-weight: 700;
+	color:#3300FF;
+}
+
+.cross_button {
+	/* width: 100%;
+	top: 15%;
+	position: absolute;
+	right: 25px; */
+	background: transparent;
+	border: 0;
+
+}
+
+.cross_button_div {
+	width: 4%;
+	position: absolute;
+	right:1rem;
+	top:0.5rem;
+
+}

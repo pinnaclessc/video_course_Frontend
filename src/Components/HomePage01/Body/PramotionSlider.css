@@ -1,0 +1,107 @@
+.pramotionSlider-fullpage{
+    width: 100%;
+    height: 10rem;
+}
+
+
+.slider-button-prev-button{
+    position: absolute;
+    top: 300px;
+    left: 135px;
+    border: none;
+    background-color: transparent;
+
+}
+.slider-button-next-button{
+    position: absolute;
+    top: 300px;
+    right: 135px;
+    border:none;
+    border: none;
+    background-color: transparent;
+}
+.fixedCard{
+    border: 4px solid black;
+    background-color: white;
+    width:40%;
+    height: 5rem;
+    margin: 5%;
+    padding: 2%;
+}
+
+.Slider{
+    width: 80%;
+    margin: auto;
+    height: 23rem;
+}
+.Slider:hover{
+    border: 1px solid #0271B4 ;
+}
+.photoslider{
+    background-color:#B7D9FC52;
+    width: 1365px;
+    height: 365px;
+}
+.image-content-div{
+    display: inline-block;
+    margin:10%;
+    text-align: left;
+
+
+}
+.img{
+    position:fixed;
+    top: 20%;
+    height: 200px;
+    height: 200;
+    border: 2px soid black;
+}
+.Pramotion-Quote{
+    position: absolute;
+    top: 170px;
+    right: 400px;
+    font-size: 34px;
+    font-weight: 600;
+
+
+}
+
+.lunch-btn{
+    position: absolute;
+    right: 200px;
+    top: 380px;
+    border:none;
+    background-color: #CD8902;
+    width: 200px;
+    height: 40px;
+    border-radius: 24px;
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+ul.carousel .slider {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style: none;
+    width: 100%;
+    height: 20rem;
+}
+
+ul.slider.animated{
+    height: 20rem;
+}
+
+Slider-wrapper axis-horizontal{
+    height: 20rem;
+}
+carousel carousel-Slider{
+    height: 20rem;
+}

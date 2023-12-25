@@ -1,0 +1,161 @@
+.Message-fullPage{
+}
+.Message-Heading{
+font-size:21px ;
+font-weight: bold;
+line-height: 3rem;
+}
+
+.checkbox-section{
+    display: flex;
+    gap: 1.5rem;
+    height:3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Compose-div{
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 12px;
+}
+
+.Compose-btn{
+    width: 100%;
+    height: 100%;
+    background-color:#020062;
+    color:white;
+    border: none;
+    border-radius: 16px;
+}
+
+.dropdown-section{
+    width: 20rem;
+    height: 2rem;
+}
+
+.select-option-div{
+    width: 15rem;
+    height: 100%;
+    font-size: 16px;
+}
+
+.message-body-section{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    height: 25rem;
+    display: flex;
+    margin: 0.25rem;
+
+}
+
+.message-body-box1{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin: 0.5rem;
+    width: 30%;
+}
+
+.message-body-box2{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    margin: 0.5rem;
+    width: 70%;
+}
+
+.Search-div{
+    display: flex;
+    height: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    color: #020062;
+
+}
+
+.image-noResult-div{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-image-div{
+    width: 200px;
+    height: 100px;
+}
+
+/* composeNewMessage */
+
+.ComposeNewMessage-fullPage{
+
+}
+
+.heading-decion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.heading-div{
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 50px;
+
+}
+
+.cancle-button{
+    width: 7rem;
+    height: 2.5rem;
+    color: white;
+    background-color: #020062;
+    border: none;
+    border-radius: 12px;
+
+}
+
+.send-to-div{
+    margin-top: 1rem;
+    display: flex;
+
+
+}
+.To-div{
+    width: 15%;
+    font-size:1rem;
+    line-height: 40px;
+    text-align: end;
+}
+.emai-input{
+    width: 85%;
+    height: 1.5rem;
+    font-size:1rem;
+    border: 1px solid black;
+    padding:1rem ;
+}
+
+.message-text-div{
+    width: 90%;
+    margin-top: 1rem;
+    margin-left: 7rem;
+    margin-bottom: 1rem;
+}
+
+.message-text-box{
+    width: 100%;
+    border: 1px solid black;
+    height:80%;
+    font-size: 1rem;
+    padding: 0.5rem;
+}
+
+.Save-div{
+    display: flex;
+    justify-content: end;
+}
+
+.Save-botton{
+    background-color: #020062;
+    color: white;
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+}

@@ -1,0 +1,137 @@
+.account_container {
+  border: 0.5px #d1d7dc solid;
+  width: 18%;
+  position: absolute;
+  z-index: 1;
+  top: 5%;
+  color: black;
+  right: 0;
+}
+.dropdown {
+  color: white;
+  padding: 9px;
+  font-size: 16px;
+  border: none;
+  height: 100%;
+}
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+.account_btn {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.unordered_list {
+  text-decoration: none;
+  list-style: none;
+}
+.account_icon {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 15%;
+  text-align: center;
+  padding-top: 3%;
+  margin-right: 10%;
+}
+.account_icon_head {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  padding-top: 3%;
+  margin-right: 10%;
+}
+.account_para1 {
+  font-size: 14px;
+  margin: 16%;
+}
+.user_email {
+  font-size: 12px;
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+}
+.user {
+  font-size: 14px;
+  color: black;
+  font-weight: 700;
+  text-decoration: none;
+}
+.unordered_list1 {
+  text-decoration: none;
+  list-style: none;
+  padding: 3%;
+}
+.unordered_list2 {
+  text-decoration: none;
+  list-style: none;
+  padding: 3%;
+}
+.unordered_list3 {
+  text-decoration: none;
+  list-style: none;
+  padding: 3%;
+}
+.unordered_list4 {
+  text-decoration: none;
+  list-style: none;
+  padding: 3%;
+}
+.unordered_list5 {
+  text-decoration: none;
+  list-style: none;
+  padding: 3%;
+}
+.list {
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  padding: 3%;
+}
+.list1 {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 2rem;
+}
+.list2 {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 2rem;
+}
+.list3 {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 2rem;
+}
+.list4 {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 2rem;
+}
+.list5 {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 2rem;
+}
+.lang {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5%;
+  display: flex;
+}
+.lang_name {
+  margin-left: 40%;
+  margin-right: 5%;
+}
+.lang_icon {
+  width: 10%;
+}
+.Sidemain_container {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: 70%;
+}

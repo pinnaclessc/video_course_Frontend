@@ -1,0 +1,40 @@
+.Languages-fullPage {
+    width:80%;
+    margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    
+}
+.all-button-div{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.Languages-Heading{
+    line-height:2.5rem;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.button-div{
+    text-align: center;
+
+}
+
+.btn{
+    width: 7rem;
+    height: 2rem;
+    background-color: transparent;
+    font-size: 14px;
+    text-align: center;
+    border:none
+
+}
+
+.btn:hover{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    color: blueviolet;
+    cursor: pointer;
+
+}

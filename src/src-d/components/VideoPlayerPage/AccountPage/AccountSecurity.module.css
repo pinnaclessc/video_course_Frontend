@@ -1,0 +1,67 @@
+.enable_btn {
+  width: 3rem;
+  height: 2rem;
+  background-color: black;
+}
+.account_container {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  /* margin: 1%; */
+  margin-left: 3%;
+  margin-top: 8.5%;
+}
+.heading_para {
+  padding-left: 20%;
+  padding-top: 1%;
+}
+.account_heading {
+  padding-left: 40%;
+  padding-top: 1%;
+}
+.email_container {
+  padding: 2% 0% 2% 10%;
+}
+.email_input {
+  padding: 1%;
+  width: 78%;
+}
+.new_password_input {
+  padding: 1%;
+  margin-top: 4%;
+  width: 20%;
+}
+.new_password_input {
+  padding: 1%;
+  width: 78%;
+  margin-top: 4%;
+}
+.new_password_input {
+  padding: 1%;
+  width: 78%;
+  margin-top: 3%;
+}
+.password_input {
+  padding: 1%;
+  width: 78%;
+  margin-top: 3%;
+}
+.email_btn {
+  width: 3rem;
+  height: 2.1rem;
+  background-color: black;
+  margin-left: 1%;
+  margin-top: 2%;
+}
+.password_container {
+  margin-left: 10%;
+}
+.MFA_container {
+  padding: 4%;
+}
+.MFA_para {
+  font-size: 14px;
+  margin-top: 2%;
+}
+.enable_btn {
+  margin-top: 2%;
+}

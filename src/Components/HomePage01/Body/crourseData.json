@@ -1,0 +1,35 @@
+[
+    {
+      "imageUrl": "https://example.com/image1.jpg",
+      "title": "Course 1",
+      "teacher": "Teacher 1",
+      "rating": 4,
+      "price": "999",
+      "fprice": "2999"
+    },
+    {
+      "imageUrl": "https://example.com/image2.jpg",
+      "title": "Course 2",
+      "teacher": "Teacher 2",
+      "rating": 3,
+      "price": "549",
+      "fprice": "999"
+    },
+    {
+      "imageUrl": "https://example.com/image3.jpg",
+      "title": "Course 3",
+      "teacher": "Teacher 3",
+      "rating": 4,
+      "price": "999",
+      "fprice": "2999"
+    },
+    {
+      "imageUrl": "https://example.com/image4.jpg",
+      "title": "Course 4",
+      "teacher": "Teacher 4",
+      "rating": 5,
+      "price": "499",
+      "fprice": "999"
+    }
+  ]
+  

@@ -1,0 +1,59 @@
+.main_container {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin-left: 3%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin-top: 9.2%;
+}
+
+.save_btn {
+  background-color: black;
+  width: 3rem;
+  height: 2rem;
+  margin: 2%;
+}
+.notify_title {
+  padding: 5%;
+}
+.notify_heading {
+  margin-left: 35%;
+  margin-bottom: 1%;
+}
+.notify_para {
+  margin-left: 10%;
+}
+.notify_heading2 {
+  margin-left: 5%;
+}
+.label1 {
+  display: flex;
+}
+.body_container1,
+.body_container2,
+.body_container3 {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin: 4%;
+  padding: 3%;
+}
+.body_container4 {
+  margin-bottom: 5%;
+  margin-left: 2%;
+}
+.label1,
+.label2,
+.label3 {
+  display: flex;
+}
+.heading_label1,
+.heading_label2,
+.heading_label3 {
+  margin-left: 2%;
+}
+.label_para {
+  margin-left: 5%;
+  font-size: 14px;
+  margin-top: 0.5%;
+  line-height: 1.2rem;
+}

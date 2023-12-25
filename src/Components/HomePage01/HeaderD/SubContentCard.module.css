@@ -1,0 +1,43 @@
+.subContentCard {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.subContentCard a {
+  display: block;
+  padding: 5px;
+  color: #333;
+  text-decoration: none;
+}
+
+.subContentCard a:hover {
+  background-color: #f1f1f1;
+}
+
+.itemList {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 150px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.subContentCard:hover .itemList {
+  display: block;
+}
+
+.itemList a {
+  display: block;
+  padding: 5px;
+  color: #333;
+  text-decoration: none;
+}
+
+.itemList a:hover {
+  background-color: #f1f1f1;
+}

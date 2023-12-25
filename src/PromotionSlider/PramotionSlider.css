@@ -1,0 +1,140 @@
+.slider {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-container {
+    background-color:#B7D9FC;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    position: relative;
+    width: 75%;
+    height:25rem;
+    /* top: 150px; */
+    /* justify-content: center;
+        align-items: center; */
+}
+
+.carousel-item {
+    width: fit-content;
+    height: 35rem;
+    min-width: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 80px;
+    gap: 20px;
+    transition: 1s cubic-bezier(0.60, 0.9, 0.565, 1);
+}
+
+.imagediv {
+    grid-column: 3/4;
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+}
+
+.image {
+    height: 12rem;
+    rotate: -10deg;
+    margin-bottom: 15rem;
+}
+
+.description {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 12rem;
+}
+
+.description>h1 {
+    /* width: 500px; */
+    font-size:30px;
+    /* justify-content: left; */
+}
+
+.description>p {
+
+    font-size: 12px;
+}
+
+.buttonText {
+    background-color: #CD8902;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    padding: 9px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 4px;
+    width: fit-content;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.Share-button{
+    background-color:transparent;
+    border: none;
+    color:black;
+    padding: 9px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    border-radius: 4px;
+    width: fit-content;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+
+
+.slideStyles {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rightArrowStyles {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 32px;
+    font-size: 45px;
+    color: #000;
+    cursor: pointer;
+}
+
+.leftArrowStyles {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    left: 32px;
+    font-size: 45px;
+    color: #000;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.sliderStyles {
+    position: relative;
+    height: 100%;
+}
+
+.dotsContainerStyles {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.dotStyle {
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000;
+
+}

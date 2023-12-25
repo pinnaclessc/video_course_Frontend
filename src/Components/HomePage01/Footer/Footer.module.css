@@ -1,0 +1,26 @@
+.Footer_fullPage{
+    padding: 2%;
+    background-color: black;
+    height:125px;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+
+}
+.para{
+    width: 20%;
+    font-size: 12px;
+    line-height: 28px;
+
+}
+.language_btn{
+    font-size: 11px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    margin-bottom: 5em;
+}
+.language-icon{
+  color: white;
+}

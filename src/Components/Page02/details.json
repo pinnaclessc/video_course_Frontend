@@ -1,0 +1,26 @@
+  [
+    {
+        "heading": "Introduction to Programming",
+        "description": "Learn the fundamentals of programming with this comprehensive course.",
+        "faculty": "John Smith",
+        "best_seller": true,
+        "rating": 4.5,
+        "students": 5000
+      },
+      {
+        "heading": "Web Development Bootcamp",
+        "description": "Become a professional web developer with this hands-on bootcamp.",
+        "faculty": "Emily Johnson",
+        "best_seller": false,
+        "rating": 4.2,
+        "students": 3000
+      },
+      {
+        "heading": "Data Science Masterclass",
+        "description": "Master the art of data science and machine learning with this advanced course.",
+        "faculty": "David Thompson",
+        "best_seller": true,
+        "rating": 4.8,
+        "students": 2000
+      }
+  ]

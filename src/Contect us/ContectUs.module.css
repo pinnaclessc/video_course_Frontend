@@ -1,0 +1,21 @@
+.ContectUs-fullPage{
+    display: flex;
+    flex-direction: column;
+    padding:5rem;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    width: 50%;
+
+}
+
+.ContectUs-heading{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: bold;
+}
+
+.ContectUs-Para{
+    font-size: 14px;
+    line-height: 30px;
+
+}

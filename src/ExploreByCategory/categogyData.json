@@ -1,0 +1,52 @@
+{
+    "categories": {
+        "SSC": {
+            "SSC CGL(Combined Graduate Level)": [
+                "Tier 1: Preliminary Examination (Online)",
+                "Tier 2: Mains Examination (Online)",
+                "Tier 3: Descriptive Examination (Offline)",
+                "Tier 4: Data Entry Skill Test/ Computer Proficiency Test"
+            ],
+            "SSC CHSL (Combined Higher Secondary Level)":[
+                " Tier 1 (Computer Based Test)",
+                "Tier 2 (Descriptive Paper)",
+                "Tier 3 (Typing and Skill Test)"
+            ],
+            "SSC Multitasking (Non-Technical)":[
+                "Paper-I (Computer Based Exam, Objective Type)",
+                " Paper-II (Descriptive)"
+            ],
+            "SSC Stenographers Grade 'C' & 'D'":[
+                "Online Computer Based Exam",
+                "Skill Test"
+            ],
+            "SSC CPO (Central Police Organization)":[
+                "Paper-I",
+                "Physical Standard Test (PST)/ Physical Endurance Test (PET)",
+                "Paper-II",
+                "Medical Examination (DME)."
+            ], 
+            "SSC JE (Junior Engineer)" :[
+                "Paper-I (Computer Based Examination)",
+                "Paper-II (Descriptive Type)"
+            ],                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+            " SSC Junior Hindi Translator": [
+                "Junior Translator in Central Secretariat Official Language Service (CSOLS)",
+                "Junior Translator in Armed Forces Headquarters (AFHQ)",
+                "Junior Translator in M/o Railways (Railway Board)",
+                "Senior Hindi Translator in several Central Government departments, ministries, and offices"
+            ],
+            "Group D": []
+        },
+        "Railway": {
+            "Railway Recruitment Board Junior Engineer": [],
+            "RRB Paramedical Recruitment": [],
+            "RITES Recruitment": [],
+            "RPF Constable Exam ":[],
+            "RRB ALP":[],
+            "RPF SI Exam":[],
+            "RRB NTPC Exam":[],
+            "RRB Group D":[]
+        }
+    }
+}

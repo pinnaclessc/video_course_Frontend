@@ -1,0 +1,132 @@
+.comments_fullpage{
+  position: relative;
+  width: 94%;
+}
+
+.scroll-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 10px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  background: transparent;
+  /* make scrollbar transparent */
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+
+.card-wrapper {
+  display: flex;
+}
+
+.card {
+  flex: 0 0 auto;
+  margin-right: 30px;
+  padding: 10px;
+  background-color: white;
+  width: 200px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;}
+
+.comment {
+  font-size: 14px;
+  line-height: 18px;
+
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: black;
+  color: white
+}
+
+.circular_div {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: black;
+  color: white;
+
+}
+
+.circular_div_para {
+  position: relative;
+  top: 30%;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.name {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.post{
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: bold;
+
+}
+
+.link {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: blue;
+}
+
+.comments_Heading {
+  margin-top: 15%;
+  margin-left:2%;
+  font-size: 17px;
+  font-weight:bold;
+}
+
+.slider-button-left {
+  border: none;
+  background-color: transparent;
+  position:absolute;
+  top: 40%;
+  left: -26px;
+  cursor: pointer;
+}
+
+.slider-button-right {
+  border: none;
+  background-color: transparent;
+  position:absolute;
+  top: 40%;
+  left: 101%;
+  cursor: pointer;
+
+}
+
+.image_name_post_div {
+  margin:5% 1% 1% 1%;
+  display:flex;
+
+}
+
+.name_post_div {
+  margin: 3.5% 1% 1% 5%;
+
+}
+
+.videoLink {
+  color: #5E24FF;
+  margin-top: 10%;
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
+}

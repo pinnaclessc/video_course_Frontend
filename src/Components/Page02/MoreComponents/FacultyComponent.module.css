@@ -1,0 +1,87 @@
+.FacultyComponent-fullpage{
+    padding: 1.5rem;
+
+}
+
+.FacultyComponent-review{
+    width: 90%;
+    padding: 2.5rem;
+}
+.FacultyComponent-review-heading{
+    font-size:17px;
+    line-height: 40px;
+    font-weight: bold;
+
+}
+
+.sub-heading{
+    color: gray;
+    line-height:40px;
+
+
+}
+.image-section{
+    display:flex;
+    gap:20px;
+}
+.Image{
+    border-radius: 50%;
+    background-color: #C3CBCC;
+    border: none;
+
+}
+.Name{
+    margin-top: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: bold;
+
+}
+
+.reviews{
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: bold;
+
+}
+
+.courses{
+    font-size: 16px;
+    line-height:30px;
+    font-weight: bold;
+   
+
+}
+
+.student{
+    font-size: 16px;
+    line-height:30px;
+    font-weight: bold;
+
+
+}
+.rating-section{
+    font-size: 14px;
+    line-height:25px;
+
+}
+
+.description-section{
+    padding-bottom:10px;
+    font-size: 16px;
+    line-height:30px;
+}
+.like-section{
+    font-size: 16px;
+    line-height: 30px;
+    font-weight:bold;
+
+}
+
+.btn{
+
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin:5px;
+}

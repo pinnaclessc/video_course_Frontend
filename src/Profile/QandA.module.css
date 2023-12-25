@@ -1,0 +1,68 @@
+.QandA-fullPage{
+}
+
+.QandA-empty-fullPage{
+}
+.HEADING{
+    font-size: 21px ;
+    font-weight: bold;
+    line-height:3rem;
+    margin-left: 1rem;
+}
+.empty-body-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.qna-image{
+    width:250px;
+    height:200px;
+    border-radius:50%;
+}
+.qna-para{
+    line-height: 30px;
+}
+
+.student-Question-div{
+    /* border: 1px solid  red; */
+    margin: 0.25rem;
+    display: flex;
+}
+
+
+
+.Student-div{
+    /* border: 2px solid yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
+    margin: 0.25rem;
+}
+
+.Question-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid green; */
+    
+}
+
+.Answer-div{
+    /* border: 1px solid black; */
+    margin: 0.25rem;
+    display: flex;
+}
+
+.Student-img-div{
+    
+}
+.Student-img{
+    width:50px;
+    height:50px;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color:#e7f2f8;
+}

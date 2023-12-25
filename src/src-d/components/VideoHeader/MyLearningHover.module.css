@@ -1,0 +1,85 @@
+.card {
+  border: 0.5px #d1d7dc solid;
+  width: 29%;
+  position: absolute;
+  right: 1%;
+  z-index: 1;
+  top: 5%;
+}
+.dropdown {
+  color: white;
+  padding: 9px;
+  font-size: 16px;
+  border: none;
+  height: 100%;
+}
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+
+.card_img_container {
+  position: relative;
+  overflow: hidden;
+  width: 68%;
+  padding: 1%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.card_main_container {
+  display: flex;
+}
+.card_img {
+  border: 0.5px #d1d7dc solid;
+}
+.myLearningContainer {
+  display: flex;
+  padding: 1%;
+}
+.myLearning_Description {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 3%;
+  color: black;
+}
+.myLearning_progress {
+  padding-top: 5%;
+}
+.courses_para {
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+  margin-right: 57%;
+}
+.mylearn_para {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(97, 2, 107);
+}
+.mylearning_btn {
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+}
+.GotoMyLearinig_btn {
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+}
+.GotoMyLearinig_div {
+  text-align: center;
+  background-color: black;
+  height: 2rem;
+  padding-top: 2%;
+}
+.progress {
+  margin-bottom: 10px;
+}
+hr {
+  border-top: 1px solid #ccc;
+}
+.heading {
+  display: flex;
+  padding: 1%;
+  height: 1.7rem;
+}

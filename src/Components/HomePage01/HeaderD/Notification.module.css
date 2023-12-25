@@ -1,0 +1,69 @@
+.notify_card {
+  border: 0.5px #d1d7dc solid;
+  width: 29%;
+  padding: 1%;
+  position: absolute;
+  right: 1%;
+  z-index: 1;
+  top: 5%;
+}
+.dropdown {
+  color: white;
+  padding: 9px;
+  font-size: 16px;
+  border: none;
+  height: 100%;
+}
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+.notify_btn {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.notify_container {
+  display: flex;
+}
+.notify {
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+  margin-right: 55%;
+}
+.instructor {
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+  margin-right: 55%;
+}
+.students {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(97, 4, 113);
+}
+.settings {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(97, 4, 113);
+}
+.notify_unorderlist {
+  list-style: none;
+}
+.motify_item {
+  font-size: 14px;
+  text-align: center;
+}
+.notify_list {
+  font-size: 14px;
+  line-height: 2rem;
+  font-weight: 400;
+  text-align: center;
+  color: black;
+}
+.notification_container {
+  display: flex;
+  padding: 0 5% 0 5%;
+  font-size: 12px;
+  margin-top: 5%;
+}

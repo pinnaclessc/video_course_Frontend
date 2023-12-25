@@ -1,0 +1,58 @@
+.PaymentSteps-fullPage {
+    /* border: 1px solid red; */
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.PaymentSteps-Heading {
+
+    font-size: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    /* border: 1px solid; */
+
+}
+
+.PaymentSteps-MainContainer {
+    /* border: 1px solid navy; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0.5rem;
+    padding: 0.5rem;
+
+}
+.PaymentSteps-image-div{
+    /* border: 1px solid red; */
+    width: 100%;
+    height:25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.PaymentSteps-image{
+    width: 90%;
+    height:85%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+
+.heading-div {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    margin-left: 5rem;
+    padding: 1rem;
+}
+
+.para-div {
+
+    font-size: 14px;
+    line-height: 30px;
+    margin-left: 5rem;
+    padding: 1rem;
+}

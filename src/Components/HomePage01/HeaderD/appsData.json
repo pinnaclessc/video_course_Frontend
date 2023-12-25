@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "iconUrl": "/images/playstore.png",
+    "title": "Toppers Guidelines"
+  },
+  {
+    "id": 2,
+    "iconUrl": "/images/playstore.png",
+    "title": "Pinnacle Video Course"
+  },
+
+  {
+    "id": 3,
+    "iconUrl": "/images/playstore.png",
+    "title": "Pinnacle ERP"
+  },
+
+  {
+    "id": 4,
+    "iconUrl": "/images/playstore.png",
+    "title": "Pinnacle Digital Ebooks"
+  },
+
+  {
+    "id": 5,
+    "iconUrl": "/images/playstore.png",
+    "title": "Pinnacle Business"
+  },
+
+  {
+    "id": 6,
+    "iconUrl": "/images/playstore.png",
+    "title": "Pinncle PlayStore"
+  }
+]

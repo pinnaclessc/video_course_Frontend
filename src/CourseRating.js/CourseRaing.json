@@ -1,0 +1,23 @@
+[
+    {
+      "username": "Alice123",
+      "comment": "Great course! Really informative and well-structured.",
+      "rating": 4.5
+    },
+    {
+      "username": "BobSmith",
+      "comment": "The teacher was excellent, and I learned a lot.",
+      "rating": 4.8
+    },
+    {
+      "username": "EllaM",
+      "comment": "Highly recommended. I loved it!",
+      "rating": 5.0
+    },
+    {
+      "username": "MarkJohnson",
+      "comment": "The content was a bit too advanced for me, but still good.",
+      "rating": 3.7
+    }
+  ]
+  

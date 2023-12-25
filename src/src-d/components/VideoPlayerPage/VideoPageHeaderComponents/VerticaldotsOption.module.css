@@ -1,0 +1,65 @@
+.optionsVdots {
+  width: 20%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  height: auto;
+  position: absolute;
+  right: 7px;
+  top: 68px;
+  background-color: white;
+  color: black;
+  height: 18rem;
+}
+.option_unorder_list {
+  list-style: none;
+  padding: 1%;
+  padding-left: 2%;
+}
+
+.option_list {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.option_list span {
+  margin-left: 10px;
+}
+
+hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+.verticalDotsContainer {
+  position: relative;
+}
+
+.verticalDotsButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dot {
+  display: block;
+  width: 4px;
+  height: 4px;
+  margin: 2px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.optionsVdots {
+  width: 20%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  position: absolute;
+  top: -100%;
+  right: 0;
+  background-color: white;
+  color: black;
+}
+
+/* Rest of the CSS remains the same */

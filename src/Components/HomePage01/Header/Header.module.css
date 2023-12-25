@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&display=swap');
+
+
+.Header_fullPage {
+  width: 100%;
+  height: 5rem;
+  font-weight:bold;
+  font-size:14px;
+  background-color:#FFFAFA;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative; 
+}
+
+.main {
+  padding: 0.5%;
+  height: 3rem;
+  width: fit-content;
+}
+
+.logo_div {
+  height: 2rem;
+  width: 4rem;
+}
+
+.logo_img {
+  height: 200%;
+  width: 210%;
+}
+.cgbox {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 190%;
+  box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+  left: 20%;
+  margin-top: 1%;
+}
+
+.dropdown_content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown_content a:hover {
+  background-color: #e6e6e6;
+}
+
+.cgbox:hover .dropdown_content {
+  display: block;
+}
+
+.arrow {
+  color: black;
+  margin-left: 40%;
+  margin-top: 3%;
+}
+
+.arrw_icon1 {
+  padding-left: 59%;
+}
+
+.arrw_icon2 {
+  padding-left: 54%;
+}
+
+.arrw_icon3 {
+  padding-left: 57%;
+}
+
+.arrw_icon4 {
+  padding-left: 61%;
+}
+
+.dropdown_content a {
+  display: flex;
+}
+
+.option1 {
+  background-color: #7e8185;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.option1:hover {
+  display: block;
+}
+
+.option1 a {
+  float: none;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+
+  text-align: left;
+}
+
+.sub_content1 {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: black;
+  margin: 0;
+}
+
+.sub_content {
+  font-size: 16px;
+  color: white;
+  padding: -16px -16px;
+  background-color: #807d;
+  font-family: inherit;
+  margin: 0;
+}
+
+.sub_content1 {
+  /* display: none; */
+  position: absolute;
+  background-color: #7e8185;
+  margin-left: 1px;
+  top: 1%;
+  left: 100%;
+  min-width: fit-content;
+  z-index: 1;
+}
+
+.sub_content1 a {
+  float: left;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.subnav_content:hover .subnav_content1 {
+  display: block;
+}
+
+.subnav {
+  /* overflow: hidden; */
+  float: left;
+  color: black;
+  margin-left: 210%;
+  margin-top: -61%;
+  position: relative;
+  z-index: 5;
+}
+
+.subnav_content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 135%;
+  z-index: 1;
+  margin-top: 2%;
+  box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.subnav_content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.subnavbtn {
+  display: flex;
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 46.5%;
+  color: black;
+  size: 14px;
+  height: 19%;
+  cursor: pointer;
+}
+
+.subnav .subnavbtn {
+  font-size: 14px;
+  border: none;
+  outline: none;
+}
+
+.subnavbtn2x {
+  font-size: 14px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: -14px -14px;
+  background-color: #ffffff;
+  font-family: inherit;
+  margin: 0;
+}
+
+.subnavbtn:hover {
+  color: blueviolet;
+}
+
+.subnav_content2x {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-left: 1px;
+  top: 1%;
+  left: 100%;
+  z-index: 1;
+  width: 165%;
+}
+
+.subnavbtn2x {
+  width: 96%;
+}
+
+.subnav_content2x a {
+  float: left;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  width: 100.55%;
+}
+
+.subnav_content a:hover {
+  background-color: #e9ecee;
+}
+
+.subnav:hover .subnav_content {
+  display: block;
+}
+
+.subnav .subnav_content_subnav:hover .subnav_content2x {
+  display: block;
+}
+
+.subnav_content_subnav a {
+  display: flex;
+}
+
+.subnav_content2x :hover {
+  background-color: #e25656;
+}
+
+.item {
+  width: 104%;
+}
+
+.arrow {
+  width: 100%;
+}
+
+/* till here   */
+
+.navSearchBar {
+  margin-left: 15%;
+  margin-top: 2%;
+  width: 30%;
+}
+
+.navSearchbox {
+  border-radius: 20px;
+  height: 60%;
+  width: 122%;
+  font-size: 20px;
+  font-weight: 500;
+
+}
+
+.cart_icone {
+  margin-top:0.25rem;
+  margin-left:6rem;
+}
+
+.login {
+  width: 6%;
+  margin-left: 2%;
+}
+
+.login_btn {
+  border: 2px solid black;
+  width: 100%;
+  height: 40%;
+  margin-top: 31%;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 1%;
+  cursor: pointer;
+
+}
+
+.signup {
+  width: 6%;
+  margin-left: 1%;
+}
+
+.signup_btn {
+  border: 2px solid black;
+  width: 100%;
+  height: 40%;
+  margin-top: 31%;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+
+
+}
+
+.globe_icon {
+  border: 1px solid black;
+  padding: 0.2%;
+  height: 25px;
+  margin-top: 22px;
+  margin-left: 2%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.playStore_icone{
+
+margin-top: 2%;
+margin-left: -100px;
+border: none;
+background-color:transparent;
+
+} 
+.Playstore_btn{
+  border: none;
+  background-color:transparent;
+  cursor: pointer;
+}
+.playStore_image{
+  border: none;
+  background-color:transparent;
+}
+.Playstore_description{
+  position: absolute;
+    font-size: 12px;
+    bottom: 11%;
+    right: 24%;
+    left:63%;
+  }
+
+.Playstore-a{
+  text-decoration: none;
+  color: black;
+ 
+}
+
+.moreApps_div{
+  position: absolute;
+  top: 92%;
+  left: 69%;
+  width: 30%;
+}
+.moreapp_icon{
+  border: 1px solid black;
+  padding: 0.2%;
+  height: 25px;
+  margin-top: 22px;
+  margin-left:1%;
+  
+}
+.MoreApps-btn{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.Languages_div{
+  position: absolute;
+  top: 88%;
+  left: 83%;
+  width: 17%;
+  z-index: 3;
+  background-color:#F7F9FA;
+}
+.login_div{
+  position: absolute;
+  top: 88%;
+  left: 83%;
+  width: 17%;
+
+}
+
+.Account-div{
+  position: absolute;
+  top: 88%;
+  border: 1px solid red;
+
+}
+

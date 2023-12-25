@@ -1,0 +1,96 @@
+.PurchaseHistory-fullPage{
+    margin: 1rem;
+}
+
+.PurchaseHistory-heading{
+    font-size: 2rem;
+    font-weight:bold;
+    padding:0.5rem;
+    margin: 0.5rem;
+}
+.PurchaseHistory-belloHeading{
+    margin: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    
+    
+}
+.Course-Subscriptions-Refunds{
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.Course-Subscriptions-Refunds:hover{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.Course-Subscriptions-Refunds-Result-div{
+    margin: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+/* course */
+
+.individual{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    margin:0.5rem;
+}
+
+.individual-headings{
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    margin:0.5rem;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+.courseName{
+    width:50% ;
+
+}
+
+.date{
+    width: 10%;
+
+}
+
+.totalPrice{
+    width: 10%;
+
+
+}
+
+.payment-type{
+    width:10%;
+
+
+}
+
+.Receipt{
+    width:8%;
+ 
+
+}
+
+.Invoice{
+    width:8%;
+   
+
+}
+.btns{
+    background-color:#3B3884 ;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 0.5rem;
+
+}

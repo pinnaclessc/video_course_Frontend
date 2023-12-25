@@ -1,0 +1,28 @@
+.PrivacyPolicy-fullPage{
+    display: flex;
+    flex-direction: column;
+}
+
+.PrivacyPolicy-Heading{
+    font-size:1.5rem ;
+    font-weight: bold;
+    line-height: 2rem;
+    padding: 2rem;
+    margin: 1rem;
+
+}
+
+.PrivacyPolicy-subheading{
+    font-size:16px ;
+    line-height:30px;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin:5px;
+}
+
+.PrivacyPolicy-Para{
+    font-size:16px ;
+    line-height:30px;
+    padding: 0.5rem;
+    margin:5px;
+}

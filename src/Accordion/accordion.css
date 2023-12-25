@@ -1,0 +1,25 @@
+.accordion-FullPage {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .accordion-title {
+    padding: 10px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
+  
+  .accordion-content {
+    padding: 10px;
+    line-height:40px;
+    background-color: #ffffff;
+  }
+  

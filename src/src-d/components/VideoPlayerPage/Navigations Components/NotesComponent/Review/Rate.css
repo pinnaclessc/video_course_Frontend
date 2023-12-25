@@ -1,0 +1,93 @@
+.cards-for-star-rating {
+  /* border: solid 1px black; */
+
+  width: 25%;
+  display: inline-block;
+}
+
+.card-for-star-rating .card-link-wrapper-for-star-rating {
+  margin-top: auto;
+}
+.container-for-rating {
+  width: 100%;
+  display: flex;
+  border: solid 1px white;
+}
+
+.card-content-for-star-rating {
+  display: flex;
+  align-items: center;
+  /* border: solid 1px black; */
+  /* padding-left: 10%; */
+  font-size: 13px;
+}
+
+.Total-rating {
+  font-size: 14px;
+  color: #b4690e;
+  text-align: center;
+}
+
+.For-Star {
+  padding-bottom: 5px;
+  padding-left: 2px;
+  font-size: 16px;
+  color: #b4690e;
+  font-family: Helvetica, Arial, sans-serif, color symbol;
+  font-weight: 700;
+  max-width: 36em;
+}
+.card-content-for-star-rating {
+  font-size: 30px;
+  margin-left: 25%;
+  display: flex;
+
+  color: #b4690e;
+  font-weight: 1000;
+}
+.card-content-for-star-rating h2 {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  font-weight: 700;
+  margin-left: 10px;
+  font-size: 3.8rem;
+}
+.cards-for-star-rating-2 {
+  width: 80%;
+  padding-left: 5%;
+}
+.list-star {
+  align-items: center;
+  display: flex;
+}
+
+.list-star-icon {
+  /* margin-bottom: 4px; */
+  margin-top: 3px;
+  margin-right: 10px;
+  margin-left: 3px;
+}
+.a {
+  width: 100%;
+  display: inline-block;
+}
+
+.card-for-star-rating ul {
+  display: inline-block;
+  list-style-type: disc;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+  margin-left: 35%;
+  width: 10%;
+}
+.giverating {
+  margin-left: 10%;
+  margin-top: 1%;
+  font-family: Helvetica, Arial, sans-serif color symbol;
+  font-weight: 400;
+  margin-left: 9%;
+  color: #b4690e;
+}

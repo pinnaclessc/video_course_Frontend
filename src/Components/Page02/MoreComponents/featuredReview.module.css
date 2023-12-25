@@ -1,0 +1,62 @@
+.featured-review-fullPage{
+    padding: 1.5rem;
+
+}
+
+.featured-review{
+    border: 0.01px solid rgb(218, 214, 214);
+    width: 90%;
+    padding: 2.5rem;
+}
+.featured-review-heading{
+    font-size: 16px;
+    line-height: 35px;
+    font-weight: bold;
+
+}
+.image-section{
+    display: flex;
+    gap: 10px;
+}
+.Image{
+    border-radius: 50%;
+
+}
+.Name{
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+
+}
+
+.courses{
+    font-size: 14px;
+    line-height:20px;
+   
+
+}
+.rating-section{
+    font-size: 14px;
+    line-height:25px;
+
+}
+
+.description-section{
+    font-size: 16px;
+    line-height:30px;
+
+}
+.like-section{
+    font-size: 16px;
+    line-height: 30px;
+    font-weight:bold;
+
+}
+
+.btn{
+
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin:5px;
+}

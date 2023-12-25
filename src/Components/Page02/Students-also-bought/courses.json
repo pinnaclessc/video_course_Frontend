@@ -1,0 +1,36 @@
+[
+    {
+      "id": 1,
+      "image1": "/image/coverImage0101.svg",
+      "image2": "/image/coverImage0102.svg",
+
+      "name": "SSC GS theory book video course",
+      "rating": 4.5,
+      "students": 100,
+      "price": 999,
+      "duration":20
+    },
+    {
+      "id": 2,
+      "image1": "/image/coverImage0201.svg",
+      "image2": "/image/coverImage0202.svg",
+
+      "name": "SSC GS theory book video course",
+      "rating": 4.2,
+      "students": 75,
+      "price": 599,
+      "duration":40
+
+    },
+    {
+      "id": 3,
+      "image1": "/image/coverImage0301.svg",
+      "image2": "/image/coverImage0302.svg",
+      "name": "SSC GS theory book video course",
+      "rating": 4.8,
+      "students": 120,
+      "price": 999,
+      "duration":50
+    }
+  ]
+  

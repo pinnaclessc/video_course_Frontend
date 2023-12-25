@@ -1,0 +1,62 @@
+.overlay {
+  position: fixed;
+  top: 70%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 0px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 55%;
+  height: 33%;
+}
+
+.overlay input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.closeBtn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-left: 73%;
+  padding-left: 5%;
+}
+.shareBtn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding-left: 5%;
+}
+
+.overlay button:hover {
+  background-color: #0056b3;
+}
+
+.overlay button:focus {
+  outline: none;
+}
+.share_header {
+  width: 98%;
+  display: flex;
+  color: black;
+  padding: 1%;
+}
+.share_heading {
+  color: black;
+}
+.shareLinks {
+  display: flex;
+  border: solid gray 2px;
+}
+.share_para {
+  color: black;
+}
+.closeBtn {
+  color: black;
+}

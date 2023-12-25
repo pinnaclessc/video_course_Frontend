@@ -1,0 +1,16 @@
+.unordered_list {
+  border-bottom: rgba(0, 0, 0, 0.02);
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 14px;
+}
+.header_img {
+  width: 8rem;
+  font-size: 10px;
+  margin-left: 25%;
+}
+.troubleshooting_heading {
+  margin: auto;
+  text-align: center;
+  padding: 1%;
+}

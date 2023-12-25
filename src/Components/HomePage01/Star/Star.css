@@ -1,0 +1,30 @@
+/* button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #ffd300;
+}
+.off {
+  color: #ababab;
+}
+li {
+  list-style-type: none;
+}
+.star-rating{
+  text-align: left;
+  content-visibility: hidden;
+
+}
+.star{
+  
+   display: inline-block;
+   font-size: 100%;
+}
+.forStar {
+    width: 100%;
+    display: inline-block;
+    background-color: white
+} */

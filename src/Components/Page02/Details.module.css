@@ -1,0 +1,62 @@
+.Details-fullpage{
+    margin-top: 1.5rem;
+
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: left;
+    padding-left:7rem;
+    padding-top: 2rem;
+
+}
+
+.heading{
+    font-weight:  bold;
+    font-size: 21px;
+    line-height:40px;
+    width: 60%;
+    
+}
+.description{
+    font-size:17px;
+    line-height:40px;
+    width: 50%;
+}
+.Faculty{
+    font-size: 16px;
+    line-height:40px;
+    width: 30%;
+}
+.bestSeler-div{
+    display: flex;
+    width: 50%;
+    height: 3rem;
+    gap: 20px;
+    align-items: center;
+}
+.bestSeler-btn{
+    background-color: #FFE535;
+    width:10rem;
+    height: 2.5rem;
+    font-size: 14px;
+    font-weight: bold;
+
+
+}
+.language-caption-div{
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    gap: 20px;
+}
+.rate{
+    font-weight: bold;
+    color: #FFE535;
+  }
+
+.ratingStar{
+    color: #FFE535;
+}
+  

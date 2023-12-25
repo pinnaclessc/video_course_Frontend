@@ -1,0 +1,61 @@
+.individual{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    margin:0.5rem;
+}
+
+.individual-headings{
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    margin:0.5rem;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+.courseName{
+    width:50% ;
+
+}
+
+.date{
+    width: 10%;
+
+}
+
+.totalPrice{
+    width: 10%;
+
+
+}
+
+.payment-type{
+    width:10%;
+
+
+}
+
+.Receipt{
+    width:8%;
+ 
+
+}
+
+.Invoice{
+    width:8%;
+   
+
+}
+.btns{
+    background-color:#3B3884 ;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 0.5rem;
+
+}

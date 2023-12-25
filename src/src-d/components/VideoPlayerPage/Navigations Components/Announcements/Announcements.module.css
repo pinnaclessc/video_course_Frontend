@@ -1,0 +1,44 @@
+.announce_container {
+  margin-top: 2%;
+  width: 70%;
+  margin-left: 3%;
+}
+.ins_image {
+  width: 4rem;
+}
+.instructor_image {
+  margin-top: 5px;
+  width: 3rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+.announce_section {
+  display: flex;
+}
+.heading {
+  margin-top: 2%;
+  font-size: 14px;
+  font-weight: 500;
+}
+.heading1 {
+  font-size: 14px;
+  margin-bottom: 5%;
+}
+.ins_name {
+  font-weight: 600;
+}
+.ins {
+  font-size: 14px;
+}
+.ins_section_para {
+  margin-bottom: 2%;
+}
+.ins_sections {
+  font-size: 14px;
+}
+.ins_details {
+  margin-top: 2%;
+}
+.ins_section_para a {
+  color: #007bff;
+}

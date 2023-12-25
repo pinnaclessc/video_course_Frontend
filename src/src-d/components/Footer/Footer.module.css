@@ -1,0 +1,76 @@
+.footer {
+  background-color: black;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 8%;
+  color: white;
+  font-size: 14px;
+}
+
+.footerColumns {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.footerColumn {
+  flex: 1 1 200px;
+  margin: 0px 0px 5px 38px;
+  padding-top: 2%;
+}
+
+.footerColumnlast {
+  display: flex;
+  flex: 0 0 10%;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid white;
+  height: 40%;
+  margin-right: 3%;
+}
+
+.footerRow {
+  margin-bottom: 10px;
+}
+
+.footerGlobeIcon {
+  margin-right: 5px;
+}
+
+.footerLanguage {
+  font-size: 16px;
+  color: white;
+  margin-right: 32px;
+}
+
+.youtubeicon {
+  margin-left: 10%;
+}
+
+.telegramicon {
+  margin-left: 10%;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footerColumn {
+    flex: none;
+  }
+}
+
+.footerCopyright {
+  color: white;
+  font-size: 14px;
+  margin-left: 77%;
+  margin-top: 1%;
+}
+
+.footerCopyrightIcon {
+  margin-right: 5px;
+}

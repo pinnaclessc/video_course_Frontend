@@ -1,0 +1,57 @@
+.Commmunication-fullPage{
+    display: flex;
+    margin: 1rem;
+}
+
+.Commmunication-container1{
+    width: 10%;
+    height: 25.25rem;
+    padding: 1rem;
+    display: flex;
+}
+
+.container1-box1{
+}
+.container1-box2{
+    padding:1rem;
+
+}
+.heading{
+    font-size: 16px;
+    line-height: 40px;
+}
+.heading:hover{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Commmunication-container2{
+    width: 90%;
+    padding: 1rem;
+}
+
+.container2-box1{}
+.container2-box2{
+    padding: 0.5rem;
+}
+
+
+.Profile-header{
+    display: flex;
+    justify-content:right;
+    gap:1.5rem;
+    padding: 0.5rem;
+}
+
+.Profile-small-image{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color:black;
+    color: white;
+    text-align: center;
+    justify-content: center;
+}
+.Profile-small-text{
+    text-align: center;
+}

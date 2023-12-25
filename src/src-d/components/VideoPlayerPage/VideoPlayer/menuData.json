@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "title": "Number System Day1",
+    "submenu": [
+      {
+        "id": 11,
+        "Day": 1,
+        "title": "Guidance: Intro and Index",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day1/Maths+6800+Intro+%26+Index.mp4",
+        "pdf": [
+          {
+            "url": "./images/connecting-ends.pdf"
+          },
+          {
+            "url": "./images/another-pdf.pdf"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Number System Basics Part1",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day1/Maths+6800+Number+System+Basics+Part+1.mp4",
+        "pdf": [
+          {
+            "url": "./images/connecting-ends.pdf"
+          },
+          {
+            "url": "./images/another-pdf.pdf"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Number System Basics Part2",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day1/Maths+6800+Number+System+Basic+Part+2.mp4"
+      },
+      {
+        "id": 14,
+        "title": "Number System Basics Part3",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day1/Maths+6800+Number+System+basics+part+3.mp4",
+        "pdf": [
+          {
+            "url": "./images/connecting-ends.pdf"
+          },
+          {
+            "url": "./images/another-pdf.pdf"
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Number System Basics 1-25",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day1/Maths+6800+Number+System+1-25.mp4",
+        "pdf": [
+          {
+            "url": "./images/connecting-ends.pdf"
+          },
+          {
+            "url": "./images/another-pdf.pdf"
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "title": "Number System Basics 26-50",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day1/Maths+6800+Number+System+26-50.mp4"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Number System Day2",
+    "submenu": [
+      {
+        "id": 21,
+        "title": "Maths 6800 Number System 51-75",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day2/Maths+6800+Number+System+51-75.mp4"
+      },
+      {
+        "id": 22,
+        "title": "Maths 6800 Number System 76-100",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day2/Maths+6800+Number+System+76-100.mp4"
+      },
+      {
+        "id": 23,
+        "title": "Maths 6800 Number System 100-125",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day2/Maths+6800+Number+System+101-125.mp4"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Number System Day 3",
+    "submenu": [
+      {
+        "id": 41,
+        "title": "SSC CGL 2021 Tier 2 Q 126-150",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day3/Maths+6800+Number+System+126-150.mp4"
+      },
+      {
+        "id": 42,
+        "title": "SSC CHSL 2021 Tier 1 Q 151-175",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day3/Maths+6800+Number+System+151-175.mp4"
+      },
+      {
+        "id": 43,
+        "title": "SSC CGL 2021 Tier 1 Q 176-200",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day3/Maths+6800+Number+System+176-200.mp4"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Menu 4",
+    "submenu": [
+      {
+        "id": 51,
+        "title": "SSC CGL 2020 Tier 1 Q 201-225 ",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day4/Maths+6800+Number+System+201-225.mp4"
+      },
+      {
+        "id": 52,
+        "title": "SSC CPO 2020 Tier 1 Q 226-250",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day4/Maths+6800+Number+System+226-250.mp4"
+      },
+      {
+        "id": 53,
+        "title": "SSC CHSL 2019 Tier 1 Q 25-269",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day4/Maths+6800+Number+System+251-269.mp4"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "LCM & HCF",
+    "submenu": [
+      {
+        "id": 61,
+        "title": "Basic Concepts",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day5/Maths+6800+LCM+HCF+Basic.mp4"
+      },
+      {
+        "id": 66,
+        "title": "Varieties Questions Q 1-25",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day5/Maths+6800+LCM+HCF+1-25.mp4"
+      },
+      {
+        "id": 62,
+        "title": "Varieties Questions Q 26-50",
+        "video": "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day5/Maths+6800+LCM+and+HCF+26-50.mp4"
+      }
+    ]
+  }
+]

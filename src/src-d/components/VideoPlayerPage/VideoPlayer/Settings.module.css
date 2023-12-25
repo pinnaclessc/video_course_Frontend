@@ -1,0 +1,51 @@
+.settingsIcon {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+
+.settingsIcon svg {
+  /* Styles for the SVG icon within the settings icon button */
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}
+
+.settingsOpen {
+  /* Styles when the settings menu is open */
+}
+
+.settingsOpen .settingsIcon svg {
+  /* Styles for the SVG icon when the settings menu is open */
+  transform: rotate(90deg);
+}
+
+.settingsOpen ul {
+  /* Styles for the settings options list when the menu is open */
+  display: block;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.settingsOpen ul li {
+  /* Styles for each settings option item when the menu is open */
+  margin-bottom: 5px;
+}
+
+.settingsOpen ul li button {
+  /* Styles for the settings option button when the menu is open */
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+.activeOption {
+  /* Styles for the active video quality option */
+  font-weight: bold;
+}
+
+.loadingIcon {
+  /* Styles for the loading icon */
+  display: inline-block;
+  margin-left: 10px;
+}

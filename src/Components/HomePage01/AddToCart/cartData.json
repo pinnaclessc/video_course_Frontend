@@ -1,0 +1,36 @@
+[
+    {
+      "id": 1,
+      "comment": "I am proud to say that when I started preparation for SSC exam, I was clueless. Then I bought Pinnacle book and after that Video course of the book. Thanks Pinnacle I got selected as GST Inspector.",
+      "image": "/image/coverImage0101.svg",
+      "alt":"RP",
+      "name": "Rahul Pandey",
+      "post":"GST Inspector",
+      "link": "https://example.com",
+      "linkPlaceHolder":"SSC Maths 6800 book course",
+      "imageUrl": "/image/coverImage0102.svg",
+      "title": "SSC Maths 6800 TCS MCQ Chapter wise book Video course",
+      "teacher": "Ramniwash Sir ",
+      "rating": 4,
+      "price": "999",
+      "fprice": "2999"
+
+    },
+    {
+      "id": 2,
+      "comment": "I got selected in MEA which was dream. I got this dream job because Pinnacle course boost my preparation. Thanks Pinnacle for providing well structured courses",
+      "image": "/image/coverImage0201.svg",
+      "alt":"SS",
+      "name": "Shruti Sharma",
+      "post":"MEA",
+      "link": "https://example.com",
+      "linkPlaceHolder":"SSC Maths 6800 book course",
+      "imageUrl": "/image/coverImage0202.svg",
+      "title": "SSC Maths 6800 TCS MCQ Chapter wise book Video course",
+      "teacher": "Ranniwsah Sir",
+      "rating": 4,
+      "price": "549",
+      "fprice": "999"
+    }
+   
+  ]

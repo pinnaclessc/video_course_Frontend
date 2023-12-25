@@ -1,0 +1,32 @@
+.star-rating {
+  display: flex;
+  width: 49%;
+  margin-left: 57%;
+  align-items: center;
+  justify-content: center;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star > svg {
+  transition: color 0.2s;
+}
+
+.star.active > svg {
+  color: #f1c40f; /* Color for the active (filled) star */
+}
+
+.rating-text {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #333;
+}
+.rating_para {
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+  width: 27%;
+  margin-left: 73%;
+}

@@ -1,0 +1,18 @@
+.ApplyCoupon-fullPage{
+    margin-top: 0.5rem;
+    display: flex;
+}
+.inputBox{
+    height:1.5rem;
+    padding: 0.5rem;
+    font-size: 14px;
+
+}
+.apply-btn{
+    background-color: #0271b4;
+    color: white;
+    width: 4rem;
+    font-size: 14px;
+    border:none;
+
+}

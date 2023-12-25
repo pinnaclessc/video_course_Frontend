@@ -1,0 +1,32 @@
+.PrivacySettings-fullPage{
+    width: 65rem;
+    height: 20rem;
+}
+
+.PrivacySettings-checkbox1{
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    gap: 1rem;
+    
+}
+.checkbox-ps{
+    color: white;
+    background-color: #020062;
+}
+
+.PrivacySettings-checkbox2{
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    gap: 1rem;
+}
+.save-btn{
+    width: 10%;
+    height: 2.5rem;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #020062;
+    color: white;
+}

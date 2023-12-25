@@ -1,0 +1,24 @@
+.RefundPolicy-fullPage{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+.RefundPolicy-heading{
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 2rem;
+    padding: 0.5rem;
+    margin: 5px;
+
+}
+
+.RefundPolicy-Para{
+    font-size:16px;
+    line-height:30px;
+    padding:0.5rem;
+    margin: 5px;
+   
+
+}

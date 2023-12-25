@@ -1,0 +1,125 @@
+.notesEditor {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.select_card {
+  z-index: 1;
+  border: 1px red solid;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.navItem i {
+  margin-right: 5px;
+}
+
+.addButton {
+  background-color: #0077ff;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 3rem;
+  height: 2rem;
+}
+
+.notes_list {
+  list-style: none;
+  padding: 0;
+}
+.navbar {
+  border: 1px solid gray;
+}
+
+.editButton,
+.deleteButton {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.navItem i {
+  margin-right: 5px;
+}
+.notes {
+  margin: 10px;
+  width: 77%;
+  height: 10rem;
+}
+
+.numbered {
+  list-style-type: decimal;
+}
+
+.bulleted {
+  list-style-type: disc;
+}
+
+.normalText {
+  font-size: 12px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.numbered {
+  list-style-type: decimal;
+}
+
+.bulleted {
+  list-style-type: disc;
+}
+
+.normalText {
+  font-size: 12px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.numbered {
+  list-style-type: decimal;
+}
+.bulleted {
+  list-style-type: circle;
+}
+.bold {
+  font-weight: bold;
+}

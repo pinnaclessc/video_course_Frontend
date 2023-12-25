@@ -1,0 +1,51 @@
+.volume-control {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  height: 128%;
+}
+
+.volume-control button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  color: #f0f0f0;
+}
+
+.volume-control input[type="range"] {
+  -webkit-appearance: none;
+  width: 100px;
+  background: linear-gradient(to top, purple 0%, purple 100%);
+  outline: none;
+  opacity: 0.7;
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(271deg);
+  transition: opacity 0.3s;
+  visibility: hidden;
+  cursor: grab;
+  z-index: 1;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 40px; /* Adjust the height as per your preference */
+  background: #ffffff;
+  border: 1px solid #000000;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.volume-control input[type="range"]:active {
+  cursor: grabbing;
+}
+
+.volume-control:hover input[type="range"] {
+  opacity: 1;
+  visibility: visible;
+}

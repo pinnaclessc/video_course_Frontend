@@ -1,0 +1,64 @@
+/* .ExplorCategory-page{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 2px solid orangered;
+}
+.ExplorCategory-heading{
+  padding:0.5rem;
+  margin: 0.5rem;
+  margin-left: 1rem;
+}
+
+.ExplorCategory-ssclogo{
+  width:7rem;
+  height:7rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  
+}
+.ExplorCategory-Deatils{
+  display: flex;
+  border: 2px solid green;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.ExplorCategory-detailsMore{
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 70%;
+}
+
+.ExplorCategory-relatedCourses{
+  border: 2px solid navy;
+}
+
+.details-para{
+  line-height: 30px;
+}
+
+.CourseCart{
+  height: 15rem;
+  border: 1px solid ;
+  padding: 0.25rem;
+  margin: 0.25rem;
+}
+
+.MoreSimilarExams-div{
+
+}
+
+.exploreMore-page{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.exploreMore-header{
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px soild red;
+
+
+} */

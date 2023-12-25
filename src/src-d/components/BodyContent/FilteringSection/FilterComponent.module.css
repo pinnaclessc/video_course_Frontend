@@ -1,0 +1,148 @@
+.sort {
+  display: flex;
+  margin-top: 4%;
+  font-family: "Open Sans", sans-serif;
+  color: #919191;
+  font-size: 16px;
+  margin-left: 6%;
+  margin-bottom: 1%;
+}
+
+.select {
+  margin-right: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  width: 13%;
+  padding-left: 1%;
+}
+.select1 {
+  margin-right: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  width: 10%;
+  padding-left: 0.5%;
+}
+.select1:focus {
+  outline: none;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.input_search {
+  padding: 5%;
+  border: 1px solid black;
+}
+
+.input_search:focus {
+  outline: none;
+}
+
+.search_container {
+  border-radius: 12px;
+  margin-left: 5.8%;
+}
+
+.search {
+  display: flex;
+  margin-left: 67%;
+  border-radius: 12px;
+  height: 100%;
+  width: 121%;
+}
+
+.searchbtn_container {
+  background-color: #000000;
+  width: 40px;
+}
+
+.filtered {
+  margin-left: 10%;
+  color: #919191;
+  font-size: 16px;
+}
+
+.options {
+  margin-top: 2px;
+  display: flex;
+  margin-left: 5.7%;
+}
+
+.reset_btn {
+  border-radius: 28px;
+  color: #919191;
+  font-size: 16px;
+  background: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.searchbtn {
+  color: white;
+  margin: 30%;
+}
+
+/* Responsive Styles */
+
+@media (max-width: 768px) {
+  .sort {
+    margin-left: 0;
+    margin-top: 2%;
+    font-size: 14px;
+  }
+
+  .select {
+    margin-right: 10px;
+    font-size: 12px;
+  }
+
+  .search_container {
+    margin-left: 0;
+  }
+
+  .search {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .reset_btn {
+    font-size: 14px;
+  }
+
+  .searchbtn {
+    margin: 20%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sort {
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+
+  .select {
+    margin-right: 5px;
+    font-size: 10px;
+  }
+
+  .search_container {
+    border-radius: 10px;
+  }
+
+  .input_search {
+    padding: 4%;
+  }
+
+  .reset_btn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .searchbtn {
+    margin: 16%;
+  }
+}

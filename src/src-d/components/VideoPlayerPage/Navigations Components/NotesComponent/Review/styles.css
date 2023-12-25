@@ -1,0 +1,74 @@
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #b4690e;
+}
+.off {
+  color: #ababab;
+}
+li {
+  list-style-type: none;
+}
+
+.forStar {
+  display: inline-block;
+  margin-top: 5%;
+  width: 100%;
+}
+.fullStar {
+  margin-top: 5%;
+  margin-left: 23%;
+}
+.star-rating {
+  display: flex;
+  padding: 1%;
+  width: 20%;
+}
+.heding {
+  margin-left: 1%;
+  font-family: Helvetica, Arial, sans-serif, color symbol;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 2rem;
+}
+.rfpage {
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 20%;
+}
+.reviewHeading {
+  margin-top: 6%;
+  margin-left: 2%;
+  font-family: Helvetica, Arial, sans-serif, color symbol;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.5rem;
+}
+
+.filter-search {
+  margin-left: 1%;
+  border: 1px solid black;
+  height: 2rem;
+  width: 60%;
+}
+
+.rating-filter {
+  margin-left: 5%;
+  height: 2rem;
+}
+.searchBtn {
+  background-color: black;
+  color: white;
+  height: 2rem;
+  margin-left: -4%;
+  border: 2px solid black;
+  border-bottom: 5px solid black;
+}
+
+.filterrationgHeading {
+  margin-left: 70%;
+}

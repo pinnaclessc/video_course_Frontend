@@ -1,0 +1,15 @@
+.Show-More-FullPage{
+    position: relative;
+
+}
+
+.Show-More-btn{
+    border: none;
+    background-color: transparent;
+    color: #0271B4;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    cursor:pointer;
+}

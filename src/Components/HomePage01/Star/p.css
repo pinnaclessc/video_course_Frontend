@@ -1,0 +1,103 @@
+/* 
+
+.progressbar {
+  width: 85%;
+  height: 9px;
+  animation: width 0.75s ease-out;
+  background-color:white;
+  position: relative;
+}
+
+.progressPercent {
+  font-weight: 400;
+  left: 50%;
+  top: 50%;
+  color: #878787;
+  padding-right: 10px;
+  font-size: 12px;
+}
+.list-star-numb {
+  display: flex;
+  font-size: 12px;
+}
+.Progress {
+  list-style-type: disc;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.progress-span {
+  animation: progressBar 1.5s ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes progressBar5 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: "{filled5}%";
+  }
+}
+@keyframes progressBar4 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: "{filled4}%";
+  }
+}
+@keyframes progressBar3 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: "{filled3}%";
+  }
+}
+
+@keyframes progressBar2 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: "{filled2}%";
+  }
+}
+@keyframes progressBar1 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: "{filled1}%";
+  }
+}
+@media (min-width: 1550px) {
+  .progress-span{
+    height: 60%;
+  }
+  .progressbar {
+    width: 85%;
+    height: 12px;
+  }
+  .list-star-numb {
+    display: flex;
+    font-size: 17px;
+  }
+   */
+
+  /* .list-star-icon {
+
+    margin-top: 6px;
+    margin-right: 10px;
+    margin-left: 3px;
+    font-size: 0.8rem;
+  }
+  .progressPercent {
+    font-size: 15px;
+  } */
+/* } */
+

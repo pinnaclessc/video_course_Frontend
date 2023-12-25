@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  height: 10rem;
+  margin: 1rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  background-color: white;
+  margin-left: 30%;
+
+
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.input-copy-container {
+  display: flex;
+}
+
+.share-input {
+  margin-bottom: 10px;
+  padding: 5px;
+  line-height: 35px;
+}
+
+.copyButton {
+  margin-bottom: 10px;
+  padding: 5px 15px;
+  background-color: black;
+  color: white;
+}
+
+.showcopyButton {
+  width: 4rem;
+  font-size: 12px;
+  font-weight: bold;
+  color: green;
+}
+
+.shareButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.shareButton {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: black;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.content {
+  overflow: hidden;
+}
+
+
+.heading-cancleBtn-div{
+  display: flex;
+ justify-content: space-between;
+ align-items: center;
+ width: 90%;
+ margin: 0.5rem;
+}
+
+.Cross-btn{
+  border: none;
+  background-color:transparent;
+  cursor: pointer;
+}

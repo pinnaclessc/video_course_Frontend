@@ -1,0 +1,86 @@
+.main_container {
+  width: 35%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin: 3%;
+}
+.msg_heading {
+  width: 40%;
+  padding-left: 3%;
+  padding-top: 1%;
+}
+.msg_text {
+  margin-left: 3%;
+  margin-top: 1%;
+}
+.compose_container {
+  height: 2.5rem;
+}
+.options_container {
+  display: flex;
+}
+.compose_input {
+  height: 100%;
+  width: 57%;
+  outline: none;
+}
+.compose_btn {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  background-color: black;
+  padding: 15%;
+}
+.unread_container {
+  margin-left: 3%;
+}
+.select_container {
+  padding: 7%;
+  width: 321%;
+  outline: none;
+  font-size: 14px;
+  margin-left: 11%;
+}
+.options_container {
+  margin-left: 3%;
+}
+.search_icon {
+  background-color: black;
+  color: white;
+  padding: 2%;
+}
+.search_container {
+  width: 90%;
+  display: flex;
+  margin-left: 3%;
+  margin-top: 1%;
+}
+.search_input {
+  width: 100%;
+  padding: 2.3%;
+  outline: none;
+}
+.user_image {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1%;
+}
+
+.checkbox {
+  border-radius: 50%;
+}
+.subheading_container {
+  margin-left: 4%;
+}
+
+.time {
+  margin-left: 50%;
+}
+.comment_text {
+  font-size: 12px;
+  color: gray;
+  margin-left: 1%;
+}
+.username {
+  font-size: 14px;
+}

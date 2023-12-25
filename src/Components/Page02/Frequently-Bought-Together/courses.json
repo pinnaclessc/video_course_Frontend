@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "image1": "/image/coverImage0101.svg",
+      "image2": "/image/coverImage0102.svg",
+      "name": "SSC GS theory book video course",
+      "rating": 4.5,
+      "students": 6800,
+      "price": 999,
+      "fPrice":1999,
+      "duration":20,
+      "teacher":"Ramniwash"
+    },
+    {
+      "id": 2,
+      "image1": "/image/coverImage0201.svg",
+      "image2": "/image/coverImage0202.svg",
+
+      "name": "SSC GS theory book video course",
+      "rating": 4.2,
+      "students": 7555,
+      "price": 599,
+      "fPrice":1999,
+      "duration":40,
+      "teacher":"Ramniwash"
+
+    },
+    {
+      "id": 3,
+      "image1": "/image/coverImage0301.svg",
+      "image2": "/image/coverImage0302.svg",
+      "name": "SSC GS theory book video course",
+      "rating": 4.8,
+      "students": 4820,
+      "price": 999,
+      "fPrice":1999,
+      "duration":50,
+      "teacher":"Ramniwash"
+    },
+    {
+      "id": 3,
+      "image1": "/image/coverImage0301.svg",
+      "image2": "/image/coverImage0302.svg",
+      "name": "SSC GS theory book video course",
+      "rating": 4.8,
+      "students": 4820,
+      "price": 999,
+      "fPrice":1999,
+      "duration":50,
+      "teacher":"Ramniwash"
+    }
+  ]
+  

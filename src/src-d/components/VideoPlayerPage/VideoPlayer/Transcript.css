@@ -1,0 +1,45 @@
+.transcript-container {
+  width: 600px; /* Adjust the width as desired */
+  border: 1px solid #ccc;
+  padding: 20px;
+  position: relative; /* Added */
+}
+
+.transcript-container.closed {
+  display: none;
+}
+
+.transcript-title {
+  font-size: 20px;
+  margin-top: 0;
+  position: sticky; /* Added */
+  top: 0; /* Added */
+  background-color: #fff; /* Added */
+  z-index: 1; /* Added */
+}
+
+.transcript-close {
+  background-color: #ccc;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: sticky; /* Added */
+  top: 0; /* Added */
+  float: right; /* Added */
+  z-index: 1; /* Added */
+}
+
+.transcript-content {
+  margin-top: 40px; /* Updated */
+  max-height: 400px; /* Adjust the max-height as desired */
+  overflow-y: auto; /* Added */
+}
+
+.transcript-paragraph {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  /* Add more styles as needed */
+}

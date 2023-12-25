@@ -1,0 +1,169 @@
+.UpcomingCourse-firstDiv{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .scroll-container {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    padding: 10px;
+  }
+  
+  .scroll-container::-webkit-scrollbar {
+    height: 0px;
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+    -webkit-appearance: none;
+  }
+  
+  .card-wrapper {
+    display: flex;
+  }
+  
+  .card {
+    flex: 0 0 auto;
+    width:255px;
+    text-align: center;
+  
+  }
+  
+  .Course_Heading {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight:bold;
+    color: #7C7D81;
+  }
+  
+  .sliderButton-left {
+    border: none;
+    background-color: transparent;
+    position:absolute;
+    top:35%;
+    left: -0.5%;
+  }
+  
+  .sliderButton-right {
+    border: none;
+    background-color: transparent;
+    position:absolute;
+    top: 35%;
+    left: 95.5%;
+  
+  }
+  
+  .image_name_post_div {
+    margin: 5% 1% 1% 1%;
+    display: flex;
+  
+  }
+  
+  .name_post_div {
+    margin: 3.5% 1% 1% 5%;
+  
+  }
+  
+  .videoLink {
+    color: #5E24FF;
+    margin-top: 10%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  }
+  
+  /* Recently Launched Course */
+  
+  .Upcomming-course-fullPage{
+    font-family: 'Open Sans';
+  }
+  
+  .Image-section {
+    border: solid .25px #dad5d5;
+    
+    padding: 5px;
+    padding-top:8px ;
+    width: 220px;
+  }
+  
+  .price-fprice-div {
+    display: flex;
+  
+  }
+  
+  
+  .description-section {
+   font-size: 14px;
+   width: 190px;
+   
+  text-align: left;
+  }
+  
+  .title {
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bold;
+  
+  }
+  
+  .teacher {
+    font-size: 10px;
+    line-height: 25px;
+    color: #7C7D81;
+    font-weight: 600;
+  }
+  
+  .rating {}
+  
+  .try-for-free {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .Rating {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    height: 100%;
+    margin-left: 2px;
+  }
+  
+  .Star-Rating {
+    line-height: normal;
+    display: inline-block;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    vertical-align: middle;
+    background-color: #388e3c;
+    display: flex;
+    padding: 2px 2px 2px 6px;
+  }
+  
+  .Total-Rating {
+    font-size: 15px;
+    padding-left: 8px;
+    font-weight: 500;
+    color: #878787;
+  }
+  
+  .Star-Rating-1 {
+    margin: 2px 2px 0px 2px;
+    height: 10px;
+  }
+  
+  .For-Star-div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .StarRating {
+    position: absolute;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .forbutton_div{
+    width: 100%;
+  }

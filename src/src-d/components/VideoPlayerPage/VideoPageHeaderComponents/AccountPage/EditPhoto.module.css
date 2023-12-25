@@ -1,0 +1,79 @@
+.photo_container {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: 67rem;
+  margin-top: 8.8%;
+  margin-left: 3%;
+}
+.photo_heading {
+  padding-left: 42%;
+  margin-top: 1%;
+}
+.photo_heading_text {
+  padding-left: 31%;
+  margin-top: 1%;
+}
+.preview-div {
+  height: 8rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.preview-image {
+  height: 150px;
+}
+.input-div {
+  height: 2rem;
+  width: 42.5%;
+  border: 1px solid black;
+}
+
+.file-input {
+  width: 42%;
+  height: 2rem;
+}
+
+.Preview {
+  border: 1px solid black;
+  width: 40%;
+  height: 10rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.preview-heading {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+}
+.save-btn {
+  width: 20%;
+  height: 2.5rem;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #020062;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.input_heading {
+  padding: 3%;
+}
+.upload_image {
+  margin-left: 1%;
+}
+.upload_btn {
+  background-color: #020062;
+  width: 6rem;
+  height: 2rem;
+  margin-left: 1.5%;
+}
+.save-btn {
+  margin-left: 1%;
+}
+.file-input {
+  padding-left: 1%;
+}
+.image_heading {
+  margin-bottom: 1%;
+}

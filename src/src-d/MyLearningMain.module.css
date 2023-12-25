@@ -1,0 +1,15 @@
+.content {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 9%;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.footer_main {
+  position: absolute;
+  top: 60vh;
+  z-index: 1;
+}

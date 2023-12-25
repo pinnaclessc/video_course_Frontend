@@ -1,0 +1,16 @@
+{
+    "image1": "/image/coverImage0101.svg",
+    "image2": "/image/coverImage0102.svg",
+    "heading": "Maths 6800 TCS MCQ Chapter wise Book Video course",
+    "description": "Get this course, plus 40+ of our top-rated courses, with Personal Plan.",
+    "Faculty":"Ramniwas sir",
+    "subscriptionPrice":500,
+    "Best Seller":"Best Seller",
+    "price": {
+      "1": 500,
+      "6": 850,
+      "12": 1250,
+      "24": 1500
+    }
+  }
+  

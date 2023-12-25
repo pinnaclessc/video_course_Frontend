@@ -1,0 +1,161 @@
+/* CourseOverview.module.css */
+
+.overview {
+  font-size: 14px;
+  width: 100%;
+}
+.overview_heading {
+  font-size: 16px;
+  padding-bottom: 5px;
+  font-weight: 600;
+}
+.overview_heading_container {
+  padding: 3%;
+}
+
+/* Course Information Section */
+.courseInfo {
+  display: flex;
+  padding: 3%;
+}
+.overview_subheading {
+  font-size: 14px;
+  padding-bottom: 5px;
+}
+
+/* New Section */
+.newSection {
+  display: flex;
+  padding: 3%;
+  list-style: none;
+}
+.courseData {
+  margin-right: 10%;
+  margin-bottom: 2%;
+}
+.courseData1 {
+  margin-right: 31%;
+  margin-bottom: 2%;
+}
+.courseData2 {
+  margin-bottom: 2%;
+}
+.descriptionSection {
+  padding: 3%;
+  display: flex;
+}
+.descriptionSection h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.description_data {
+  margin-top: 5%;
+}
+.description_data ul {
+  list-style: none;
+}
+.description_data li {
+  margin-top: 2%;
+}
+/* Course Content Section */
+.courseContentSection h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.courseContentSection ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.courseContentSection li {
+  margin-bottom: 5px;
+}
+
+/* Instructor Section */
+.instructorSection {
+  margin-top: 20px;
+  padding: 3%;
+}
+
+.instructorInfo img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #c3cbcc;
+}
+.instructorname {
+  margin: 2%;
+  font-size: 14px;
+}
+.faculty_name {
+  list-style: none;
+  font-size: 14px;
+}
+.faculty_desig {
+  list-style: none;
+  margin-top: 1%;
+  font-size: 12px;
+}
+.instructorInfo {
+  display: flex;
+}
+.instructorDetails {
+  margin-top: 4%;
+  margin-left: 3%;
+}
+.instructorDetails p {
+  margin-top: 10px;
+}
+
+.instructorDetails button {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.img_bg {
+  background-color: #c3cbcc;
+  width: 12%;
+  height: 12%;
+  border-radius: 50%;
+}
+/* Arrow icon */
+.arrowUp {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #000;
+  margin-left: 5px;
+  transform: rotate(-90deg);
+}
+
+/* Course Information Section */
+.courseInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.courseInfo ul {
+  list-style: none;
+}
+.courseContentSection ul {
+  list-style: none;
+}
+.availability ul {
+  list-style: none;
+}
+.availability li {
+  margin-bottom: 1%;
+}
+.column {
+  margin-right: 24%;
+}
+.showMore_btn {
+  color: #1000ff;
+}
+.showless_btn {
+  color: #1000ff;
+}

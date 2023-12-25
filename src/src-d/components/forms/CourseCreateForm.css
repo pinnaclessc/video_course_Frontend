@@ -1,0 +1,59 @@
+/* CourseCreateForm.css */
+.course-create-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.textarea-group {
+  margin-bottom: 20px;
+}
+
+.ant-select {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.btn-upload {
+  border: 2px solid #007bff;
+  color: #007bff;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.file-input {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.avatar-preview {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+}
+
+.submit-button {
+  margin-top: 20px;
+}

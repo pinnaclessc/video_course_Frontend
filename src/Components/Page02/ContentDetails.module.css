@@ -1,0 +1,31 @@
+.ContentDetails-fullpage {
+    margin-bottom: 1.5rem;
+    width: 90%;
+    margin-top:-32%;
+}
+
+.ContentDetails-heading {
+    margin-top:1.5rem;
+    margin-bottom:1.5rem;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.ContentDetails-points {
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.What-learn-div {
+
+    display: flex;
+    line-height: 40px;
+}
+
+.includes-div {
+    display: flex;
+    gap: 40px;
+    line-height: 40px;
+
+}

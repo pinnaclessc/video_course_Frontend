@@ -1,0 +1,186 @@
+
+.above-cart-fullpage {
+  position: relative;
+  width: 25%;
+  left: 70%;
+  margin-top: -17.5%;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  background-color: white;
+
+}
+
+.cart-fullpage {
+  display: inline;
+  background-color: white;
+  color: black;
+  z-index: 1;
+  width: 30%;
+  border-radius: 12px;
+}
+
+.image-section {
+  width: 52%;
+  height: 6rem;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.image1 {
+  width: 8rem;
+  height: 5rem;
+  z-index: 1;
+}
+
+.image2 {
+  width: 8rem;
+  height: 5rem;
+  z-index: 1;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.heading {
+  margin-top: 0.5rem;
+  color: black;
+  font-size: 16px;
+  line-height: 35px;
+}
+
+.buttons button {
+  margin: 5px;
+  padding: 5px 10px;
+}
+
+.buttons button.active {
+  background-color: #00aaff;
+  color: #fff;
+}
+
+.course {
+  font-size: 12px;
+  margin-top: 10px;
+  line-height: 35px;
+}
+
+.price {
+  margin-top: 10px;
+}
+
+.months {
+  margin-top: 10px;
+}
+
+.Start-Subscription-btn {
+  width: 250px;
+  height: 40px;
+  background-color: #0271b4;
+  color: white;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.Buy-this-course {
+  width: 250px;
+  height: 40px;
+  background-color: #0271b4;
+  color: white;
+  cursor: pointer;
+}
+
+.video-preview-div {
+  position: absolute;
+  width: 60%;
+  top: 5%;
+  color: black;
+  z-index: 12;
+}
+
+.video-icon {
+  z-index: 10;
+}
+
+.video-icon-p-div {
+  position: absolute;
+  top: 85%;
+  left:15%;
+  color:white;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.buttons-section {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.individual-btn {
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.range-slider-container {
+  position: relative;
+  width: 250px;
+  height: 6px;
+  margin-top: 20px;
+}
+
+.range-slider {
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  outline: none;
+  background: linear-gradient(to right, #707070 0%, #707070 100%);
+  border-radius: 10px;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #060606;
+  cursor: pointer;
+}
+
+/* .triangle-pointer {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 15px solid #060606;
+  top: -5px;
+  rotate: 180deg;
+} */
+
+.Months-price-section {
+
+  font-size: 12px;
+  margin: 1rem;
+}
+
+.Subscription-para{
+  font-size: 12px;
+  margin-top: 10px;
+  line-height: 35px;
+}
