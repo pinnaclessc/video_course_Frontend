@@ -9,7 +9,9 @@ import ShowMoreButton from "./ShowMoreButton";
 import Cart from "./Cart";
 import Accordion from "../../Accordion/Accordion";
 import CourseRating from "../../CourseRating.js/CourseRating";
+import { useParams } from 'react-router-dom';
 export default function CourseDetails(){
+  const { courseId } = useParams();
   return (
   <div className={styles["full-Course-Details"]}>
       {courseDetailsData.map((data) => (
@@ -34,7 +36,7 @@ export default function CourseDetails(){
                 <div>66 h 7 m total length</div>
               </div>
               <div>
-                <Accordion />
+              <Accordion courseId={courseId} />
               </div>
             </div>
             <div className={styles["requirements-div"]}>

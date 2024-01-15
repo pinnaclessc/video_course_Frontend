@@ -7,8 +7,10 @@ export default function UpdateProduct() {
     const [ teacherName,setTeacherName]=useState("");
     const [ rating,setRating]=useState("");
     const [ price,setPrice]=useState("");
-    const [ mrp,setMrp]=useState("");
-    const navigate=useNavigate();
+    const[category,setCategory]=useState("");
+    const[SEOCode,setSEOCode]=useState("");
+    const [updated,setUpdated]=useState();
+    // const navigate=useNavigate();
     const params =useParams();
     useEffect(()=>{
         getCourseDetails();
@@ -20,21 +22,34 @@ export default function UpdateProduct() {
         console.log(result);
         setCourseTitle(result.courseTitle);
         setCourseDetails(result.courseDetails);
+        setCategory(result.category);
+        setSEOCode(result.SEOCode)
         setTeacherName(result.teacherName);
         setRating(result.rating);
         setPrice(result.price);
-        setMrp(result.mrp);
+  
 
 }
   const updateProdutHandler= async()=>{
-    console.log();
     let result= await fetch(`http://localhost:8000/course/${params.id}`,{
       method:"Put",
-      body:JSON.stringify({courseTitle,courseDetails,teacherName,rating,price,mrp}),
+      body:JSON.stringify({courseTitle,courseDetails,teacherName,rating,price,category,SEOCode}),
       headers:{"Content-Type":"application/json"}
     });
     result=result.json();
-    navigate('/');
+    // navigate('/');
+    clearField()
+    setUpdated(true)
+  }
+
+  const clearField=()=>{
+    setCourseTitle('');
+    setCourseDetails('');
+    setCategory('');
+    setSEOCode('')
+    setTeacherName('');
+    setRating('');
+    setPrice('');
   }
 
 
@@ -45,23 +60,25 @@ export default function UpdateProduct() {
 
     <div className={styles["AddCourse-fullPage"]}>
       <div className={styles["AddCourse-Heading"]}><h4>Update Course</h4></div>
-      <div>Name Of Course</div>
+      <div className={styles["AddCourse-label"]}>Name Of Course</div>
       <input type="text" placeholder="Enter Course Title" className={styles['AddCourse-inputbox']} value={courseTitle} onChange={(e)=>(setCourseTitle(e.target.value))}></input>
-      <div>Course Details</div>
+      <div className={styles["AddCourse-label"]}>Course Details</div>
       <input type="text" placeholder="Enter Course Details" className={styles['AddCourse-inputbox']} value={courseDetails} onChange={(e)=>(setCourseDetails(e.target.value))}></input>
-      <div>Teacher's Name</div>
+      <div className={styles["AddCourse-label"]}>Teacher's Name</div>
       <input type="text" placeholder="Teacher's Name" className={styles['AddCourse-inputbox']} value={teacherName} onChange={(e)=>(setTeacherName(e.target.value))}></input>
-      <div>Course Rating</div>
+      <div className={styles["AddCourse-label"]}>Category</div>
+      <input type="text" placeholder="Category" className={styles['AddCourse-inputbox']} value={category} onChange={(e)=>(setCategory(e.target.value))}></input>
+      <div className={styles["AddCourse-label"]}>SEO Code</div>
+      <input type="text" placeholder="SEO Code" className={styles['AddCourse-inputbox']} value={SEOCode} onChange={(e)=>(setSEOCode(e.target.value))}></input>
+      <div className={styles["AddCourse-label"]}>Course Rating</div>
       <input type="text" placeholder="Rating" className={styles['AddCourse-inputbox']} value={rating} onChange={(e)=>(setRating(e.target.value))}></input>
-      <div>Price</div>
+      <div className={styles["AddCourse-label"]}>Price</div>
       <input type="text" placeholder="price" className={styles['AddCourse-inputbox']} value={price} onChange={(e)=>(setPrice(e.target.value))}></input>
-      <div>MRP </div>
-      <input type="text" placeholder="MRP" className={styles['AddCourse-inputbox']} value={mrp} onChange={(e)=>(setMrp(e.target.value))}></input>
       <button type="submit" className={styles['AddCourse-addCourseBtn']} onClick={updateProdutHandler}>Update Course</button>
+      {updated&&<div className={styles['AddCourse-successMsg']}>!! Updated Successfully !!</div> }
 
     </div>
     
     </>
   );
 }
-

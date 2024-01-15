@@ -34,6 +34,7 @@ const Cart = () => {
   const [rating, setRating] = useState();
   const [price, setPrice] = useState();
   const [mrp, setMrp] = useState();
+  const [buy,setBuy]=useState(false);
 
   const { image1, image2, heading, description, subscriptionPrice } = data;
 
@@ -65,7 +66,9 @@ const Cart = () => {
   
       if (data.success) {
         // Purchase was successful, you can redirect or show a success message
-        console.log('Course purchased successfully');
+          setTimeout(() => {
+          setBuy(true);
+        }, 1000);
       } else {
         // Handle error
         console.error('Failed to purchase course');
@@ -162,6 +165,8 @@ const Cart = () => {
           >
             Buy this course
           </button>
+          {buy&&<div className={styles["success-msg"]}>Successfull</div>}
+          
 
           {/* ******** */}
 

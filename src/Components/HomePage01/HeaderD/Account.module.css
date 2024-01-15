@@ -1,3 +1,10 @@
+.Account-wraper{
+
+  height: 3rem;
+  margin-top:0.75rem;
+}
+
+
 .account_container {
   border: 0.5px #d1d7dc solid;
   width: 18%;

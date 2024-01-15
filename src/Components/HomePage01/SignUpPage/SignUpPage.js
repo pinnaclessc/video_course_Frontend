@@ -1,10 +1,9 @@
 import React,{useState,useEffect} from "react";
 import classes from "./SignUpPage.module.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 import {Link,useNavigate} from "react-router-dom";
 
 export default function SignUpPage() {
+  const userId=JSON.parse(localStorage.getItem("user"))._id
   const navigate=useNavigate();
 
   const [name,setName]=useState("");
@@ -14,7 +13,7 @@ export default function SignUpPage() {
     const auth = localStorage.getItem("user");
 
     if (auth) {
-      navigate("/MyLearningMain");
+      navigate(`/MyLearningPage/:${userId}`)
       window.location.reload();
     }
   }, []);
@@ -37,7 +36,6 @@ export default function SignUpPage() {
   };
   return (
     <>
-      <Header />
       <div className={classes["signup-fullpage"]}>
         <div className={classes["signup-heading"]}>
           Sign up and start learning
@@ -65,7 +63,6 @@ export default function SignUpPage() {
         Already have an account?<Link to="/login">Log in</Link>
         </p>
       </div>
-      <Footer />
     </>
   );
 }

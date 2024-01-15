@@ -1,102 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
-import styles from './AllCourses.module.css'
+import React,{useState,useEffect} from 'react'
+import styles from './AllStudent.module.css';
+import { Link } from 'react-router-dom';
 
 export default function AllStudent() {
-  const [student, setStudent] = useState([]);
-
+  const[student,setStudent]=useState([]);
   useEffect(() => {
-
-
-    fetch("http://localhost:8000/courses")
+    fetch("http://localhost:8000/student")
       .then((response) => response.json())
-      .then((data) =>{
+      .then((data) => {
         console.log("Fetched data:", data);
         if (Array.isArray(data)) {
           // Check if data is an array
           setStudent(data);
         } else {
           console.error("Data is not an array:", data);
-          setStudent([]);// Set an empty array in case of non-array data
+          setStudent([]); // Set an empty array in case of non-array data
         }
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
-  
-  // const deleteHandler= async(id)=>
-  // {
-  //   const confirm=window.confirm("Delete");
-  //   if(confirm){
-  //     let result= await fetch(`http://localhost:8000/course/${id}`,
-  //     {method:"Delete"});
-  //     window.location.reload();
-  //     result=await result.json();
-
-  //   }
-  
-  // }
-
-
-
-  const deleteHandler= async (id) => {
-    const confirm = window.confirm("Delete");
-    if (confirm) {
-      try {
-        let result = await fetch(`http://localhost:8000/course/${id}`, {
-          method: "DELETE",
-        });
-        result = await result.json();
-        console.log(result);
-        window.location.reload();
-      } catch (error){
-        console.error("Error deleting course:", error);
-      }
-    }
-  };
-
-  const searchHandler=async(event)=>{
-    let key= event.target.value;
-    if(key){
-      let result= await fetch(`http://localhost:5000/search/${key}`);
+  const deleteHandler= async(id)=>{
+    const confirm=window.confirm("Delete");
+    if(confirm){
+      let result= await fetch(` http://localhost:8000/student/${id}`,
+      {method:"Delete"});
+      window.location.reload();
       result=await result.json();
-      if(result){
-        setStudent(result);
-      }
+
     }
-    // else{
-    // window.location.reload();
-    // }
-}
-
-
-  return(
-  <div className={styles['AllCourses-FullDiv']}>
-    <div><h3>All Course List</h3>
-    <input className="searchInputBox" placeholder="Search Products" onChange={searchHandler}></input>
-    </div>
-    <div className={styles["AllCourses-heading"]}>
-        <div className={styles["AllCourses-srno"]}>Sr.No.</div>
-        <div className={styles["AllCourses-nameOfCourse"]}>Name Of Course</div>
-        <div className={styles["AllCourses-teacherName"]}>Teacher Name</div>
-        <div className={styles["AllCourses-heading-rating"]}>Rating</div>
-        <div className={styles["AllCourses-heading-price"]}>Price</div>
-        <div className={styles["AllCourses-heading-mrp"]}>MRP</div>
-        </div>
-       {
-        student.length>0?student.map((item, index)=>(
-          <div key={item._id} className={styles["AllCourses-subheading"]}>
-            <div className={styles["AllCourses-srno"]}>{index+1}</div>
-            <div className={styles["AllCourses-nameOfCourse"]}>{item.courseTitle} </div>
-            <div className={styles["AllCourses-teacherName"]}>{item.teacherName} </div>
-            <div className={styles["AllCourses-heading-rating"]}>{item.rating}</div>
-            <div className={styles["AllCourses-heading-price"]}>{item.price}</div>
-            <div className={styles["AllCourses-heading-mrp"]}>{item.mrp}</div>
-
-            <div><button onClick={()=>deleteHandler(item._id)} className="deleteBtn">Delete</button><Link to={"/update/"+item._id} className="editLink">Edit</Link></div>
-            </div>
-        )):<h1>No Result Found</h1>
-      }
   
+  }
+
+
+  return (
+    <div className={styles["allStudent-wraper"]}>
+      <div className={styles["allStudent-heading"]}>
+      <div className={styles["SrNo"]}>Sr.No.</div>
+      <div className={styles["Name-student"]}>Name Of Student</div>
+      <div className={styles["email-student"]}>Email Of Student</div>
+      <div className={styles["purchased-courses"]}>PurchasedCourses</div>
     </div>
-  );
+    {student.length>0?student.map((item, index) =>(
+          <div key={item._id} className={styles["allStudent-subHeading"]}>
+            <div className={styles["SrNo"]}>{index+1}</div>
+            <div className={styles["Name-student"]}>{item.name} </div>
+            <div className={styles["email-student"]}>{item.email} </div>
+            <div className={styles["purchased-courses"]}>{item.purchasedCourses.length}</div>
+            <div><button onClick={()=>deleteHandler(item._id)} className={styles["AllCourses-DeleteBTN"]}>Delete</button>
+            <Link to={"/admin/updateCourse/"+item._id}  className={styles["AllCourses-editLink"]}>Edit</Link></div>
+            </div>
+        )):<p>Loading .....</p>
+        }
+    </div>
+  )
 }

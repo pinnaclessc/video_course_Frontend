@@ -9,7 +9,7 @@ export default function Page02() {
   }, []);
   return (
     <div>
-      <Timer />
+      {/* <Timer /> */}
       <CourseDetails/>
       <div className={styles['reportAbouse-div']}>
       <Link to='/reportAbouse' className={styles['reportAbouse-Link']}>Report Abouse</Link>

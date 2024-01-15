@@ -17,7 +17,7 @@ import Settings from "./Settings"
 import SeekBar from "./SeekBar"
 import Volume from "./Volume"
 import PlayPauseButton from "./PlayButton"
-import FullscreenButton from "./FullScreen"
+import FullscreenButton from "./FullScreen";
 import SideBar from "./SideBar"
 import menuData from "./menuData.json"
 
@@ -332,7 +332,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
             ref={videoRef}
             src={
               selectedVideo ||
-              "https://pinnacle-video-storage.s3.ap-south-1.amazonaws.com/Maths+6800/Day5/Maths+6800+LCM+HCF+Basic.mp4"
+              "https://dcnqeme0do8vw.cloudfront.net/Ratio/SSC%20GD%20Constable%202024%20Maths%20Ratio%20and%20Proportion%201-25.mp4"
             }
             type="video/mp4"
             onTimeUpdate={handleVideoTimeUpdate}

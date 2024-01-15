@@ -11,9 +11,12 @@ import Star from "../Star/Star";
 import { useNavigate } from "react-router-dom";
 
 export default function UpcomingCourse() {
+
+ // const userId = JSON.parse(localStorage.getItem('user'))._id;
   const navigate = useNavigate();
   const [isHovering2, setIsHovering2] = useState(false);
   const [course, setCourse] = useState();
+
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -49,6 +52,16 @@ export default function UpcomingCourse() {
     }
   };
 
+const cartHandler=()=>{
+
+}
+const wishlistHandler=()=>{
+
+}
+
+
+
+
   return (
     <div className={styles["UpcomingCourse-firstDiv"]}>
       <div className={styles.forbutton_div}>
@@ -64,15 +77,15 @@ export default function UpcomingCourse() {
               course.map((data, index) => (
                 <div
                   key={data.id}
-                  className={styles["card"]}
-                  onClick={() => navigate("/CourseDescription/"+data._id)}
-                >
+                  className={styles["card"]}>
                   <div className={styles["Upcomming-course-fullPage"]}>
                     <div className={styles["Image-section"]}>
                       <img src={coverImage1} alt="" width="90" height="90"></img>
                       <img src={coverImage2} alt="" width="90" height="90"></img>
                     </div>
-                    <div className={styles["description-section"]}>
+                    <div 
+                      className={styles["description-section"]}
+                      onClick={() => navigate("/CourseDescription/"+data._id)}>
                       <div className={styles["title"]}>{data.courseTitle}</div>
                       <div className={styles["teacher"]}>
                         Mr./Ms.{data.teacherName}
@@ -96,11 +109,16 @@ export default function UpcomingCourse() {
                         {isHovering2 && <Star/>}
                       </div>
                       <div className={styles["price-fprice-div"]}>
-                        <div>&#8377;{data.price}</div>
+                        <div>&#8377; {data.price * 0.9}</div>
                         <div>
-                          &nbsp;&nbsp;&nbsp;&nbsp;<s>&#8377;{data.mrp}</s>
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                          <s>&#8377;{data.price}</s>
                         </div>
                       </div>
+                    </div>
+                    <div className={styles["cart-wishlist-Btn-div"]}>
+                      <button className={styles["cartBtn"]} onClick={cartHandler}>Add to Cart</button>
+                      <button className={styles["cartBtn"]} onClick={wishlistHandler}>Add to wishlist</button>
                     </div>
                   </div>
                 </div>

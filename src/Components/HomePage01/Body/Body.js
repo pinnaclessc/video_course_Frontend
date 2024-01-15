@@ -16,7 +16,7 @@ export default function Body() {
           <Categories/>
         </div>
         <div className={classes.videoAndComments_div}>
-          <div><VideoFeatures /></div>
+          <div><VideoFeatures/></div>
          <div className={classes.Comments_div}> <Comments /></div>
         </div>
         </div>

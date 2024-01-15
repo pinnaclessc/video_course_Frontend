@@ -6,6 +6,7 @@ import { FaFacebook } from "react-icons/fa";
 import { BsApple } from "react-icons/bs";
 
 export default function LoginPage(){
+  
   const navigate=useNavigate("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
@@ -13,7 +14,8 @@ export default function LoginPage(){
 
     const auth=localStorage.getItem('user')
     if(auth){
-      navigate('/MyLearningMain')
+      const userId=JSON.parse(localStorage.getItem("user"))._id
+      navigate(`/MyLearningPage/:${userId}`)
       window.location.reload();
 
     }
@@ -36,7 +38,8 @@ result=await result.json();
  if(result.name){
  localStorage.setItem('user',JSON.stringify(result));
  console.log(result)
- navigate('/MyLearningMain');
+ const userId=JSON.parse(localStorage.getItem("user"))._id
+ navigate(`/MyLearningPage/${userId}`)
  }
  else{
   alert("please Enter the Correct Field")

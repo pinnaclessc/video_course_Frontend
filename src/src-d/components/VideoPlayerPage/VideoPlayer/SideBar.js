@@ -43,7 +43,7 @@ const Sidebar = ({ menuData, onVideoSelect, onSubMenuSelect }) => {
   const handleCheckboxChange = (menuId, submenuId) => {
     const updatedMenuData = menuData.map((menu) => {
       if (menu.id === menuId) {
-        const updatedSubmenu = menu.submenu.map((submenu) => {
+        const updatedSubmenu = menu.submenu.map((submenu) =>{
           if (submenu.id === submenuId) {
             return {
               ...submenu,
@@ -164,7 +164,7 @@ const Sidebar = ({ menuData, onVideoSelect, onSubMenuSelect }) => {
               {menu.title}
 
               {activeMenuIds.includes(menu.id) ? (
-                <RiArrowDropUpLine className={styles.arrow_icon} size={26} />
+                <RiArrowDropUpLine className={styles.arrow_icon} size={26}/>
               ) : (
                 <RiArrowDropDownLine className={styles.arrow_icon} size={26} />
               )}

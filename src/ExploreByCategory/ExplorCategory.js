@@ -42,7 +42,6 @@ export default function ExplorCategory() {
 
   return (
     <div className={styles["EC-page-wraper"]}>
-      <Header />
       {/* EM-NavBar */}
       <div className={styles["EM-NavBar"]}>
       <div className={styles["EM-navLinks"]}><Link to='/exploreMore' className={styles["EM-navLink"]}>&nbsp;&nbsp;SSC&nbsp;&nbsp;</Link></div>
@@ -176,8 +175,6 @@ export default function ExplorCategory() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 }

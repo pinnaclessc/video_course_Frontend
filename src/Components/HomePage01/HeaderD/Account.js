@@ -7,6 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 
 function Account()
  {
+  const userId=JSON.parse(localStorage.getItem("user"))._id
   const navigate=useNavigate();
   const [showCard, setShowCard] = useState(false)
   const [showAccountSettings, setShowAccountSettings] = useState(false)
@@ -49,7 +50,7 @@ function Account()
     }    
   }
   return (
-    <>
+    <div className={classes["Account-wraper"]}>
       <div
         className={classes.dropdown}
         onMouseEnter={handleMouseEnter}
@@ -81,7 +82,7 @@ function Account()
             </div>
             <hr />
             <ul className={classes.unordered_list1}>
-              <Link to="/learningPage">
+            <Link to={`/MyLearningPage/${userId}`}>
                 <li className={classes.list1}>My learning</li>
               </Link>
               <Link to="/mylearning/cart">
@@ -136,7 +137,7 @@ function Account()
           </Card>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

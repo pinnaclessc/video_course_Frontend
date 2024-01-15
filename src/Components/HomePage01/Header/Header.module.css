@@ -313,8 +313,6 @@
   color: white;
   background-color: black;
   cursor: pointer;
-
-
 }
 
 .globe_icon {
@@ -363,6 +361,7 @@ background-color:transparent;
   top: 92%;
   left: 69%;
   width: 30%;
+  color: black;
 }
 .moreapp_icon{
   border: 1px solid black;
@@ -376,6 +375,7 @@ background-color:transparent;
   border: none;
   background-color: transparent;
   cursor: pointer;
+  color: black;
 }
 
 .Languages_div{
@@ -393,11 +393,9 @@ background-color:transparent;
   width: 17%;
 
 }
-
 .Account-div{
   position: absolute;
   top: 88%;
   border: 1px solid red;
-
 }
 

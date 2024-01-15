@@ -1,7 +1,6 @@
 import React from 'react'
 import CartList from './CartList'
 import CartPage from './CartPage'
-import Footer from '../../../Footer02.js/Footer';
 
 export default function AddToCart() {
     const CARTDATA=[
@@ -11,7 +10,6 @@ export default function AddToCart() {
   return (<div>
   <CartList CartData={CARTDATA}/>
   <CartPage CartPage={CARTDATA}/>
-  <Footer/>
   
   </div>)
 }

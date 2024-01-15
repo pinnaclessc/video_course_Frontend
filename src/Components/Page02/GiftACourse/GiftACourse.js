@@ -21,7 +21,6 @@ export default function GiftACourse() {
   ];
   return (
     <>
-      <Header />
       <div className={Style["Main-heading"]}>Gift a course</div>
       <div className={Style["GiftCourse-fullPage"]}>
         <div className={Style["body-container01"]}>
@@ -77,7 +76,6 @@ export default function GiftACourse() {
           ))}
         </div>
       </div>
-      <Footer />
     </>
   );
 }
