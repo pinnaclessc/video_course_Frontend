@@ -170,7 +170,7 @@ export default function App() {
           <Route path="/account-main" element={<AccountMain />} />
           <Route path="/troubleshooting" element={<TroubleshootingHelp />} />
         </Routes>
-        <Footer/>
+        {/* <Footer/> */}
       </Router>
     </div>
   );

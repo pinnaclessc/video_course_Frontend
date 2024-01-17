@@ -17,9 +17,9 @@ import Settings from "./Settings"
 import SeekBar from "./SeekBar"
 import Volume from "./Volume"
 import PlayPauseButton from "./PlayButton"
-import FullscreenButton from "./FullScreen";
+import FullscreenButton from "./FullScreen"
 import SideBar from "./SideBar"
-import menuData from "./menuData.json"
+
 
 const VideoPlayer = ({ onVideoSelect }) => {
   const videoRef = useRef(null)
@@ -53,6 +53,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isCurrentlyFullScreen, setIsCurrentlyFullScreen] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [courseId, setCourseId] = useState(null);
 
   useEffect(() => {
     const video = videoRef.current
@@ -66,7 +67,26 @@ const VideoPlayer = ({ onVideoSelect }) => {
       video.removeEventListener("loadedmetadata", handleLoadedMetadata)
     }
   }, [])
+  
+   useEffect(() => {
+    // Fetch data only when courseId is available
+    if (courseId) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:8000/vc/api/chapters/65a62b88316e83e8570b7d42`);
+          const data = await response.json();
+          // Process the fetched data as needed and update the state
+          console.log("Fetched data:", data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          // Handle error state if needed
+        }
+      };
 
+      // Call the fetchData function with the dynamic courseId
+      fetchData();
+    }
+  }, [courseId]); 
   const handleCenterPlayClick = () => {
     handlePlayPause()
   }
@@ -332,7 +352,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
             ref={videoRef}
             src={
               selectedVideo ||
-              "https://dcnqeme0do8vw.cloudfront.net/Ratio/SSC%20GD%20Constable%202024%20Maths%20Ratio%20and%20Proportion%201-25.mp4"
+              "https://dgkwgu5olgqh6.cloudfront.net/videos/test46.mp4"
             }
             type="video/mp4"
             onTimeUpdate={handleVideoTimeUpdate}
@@ -374,7 +394,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
               <SideBar
                 isOpen={isSidebarOpen}
                 handleClose={() => setIsSidebarOpen(false)}
-                menuData={menuData}
+                // menuData={updatedMenuData}
                 onVideoSelect={handleVideoSelect}
                 onSubMenuSelect={handleSubMenuSelect}
               />
@@ -386,7 +406,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
             isFullscreen ? "fullscreen" : ""
           }`}
         >
-          {/* //Seekbar */}
+          {/* Seekbar */}
           <div className="seekbar_container">
             <div className="seekbar">
               <SeekBar

@@ -1,3 +1,11 @@
+.AddChapter-wraper{
+  width: 90%;
+  border: 2px solid navy;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+
 /* AddChapter.module.css */
 
 .AddChapter-fullPage {
