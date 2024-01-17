@@ -22,7 +22,7 @@ const AddTopicForm = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/courses");
+        const response = await fetch("http://13.200.156.92:8000/api/courses");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -45,7 +45,7 @@ const AddTopicForm = () => {
     const fetchVideosAndPdfs = async () => {
       try {
         const videosResponse = await fetch(
-          `http://localhost:8000/api/videos/${selectedCourse}`
+          `http://13.200.156.92:8000/api/videos/${selectedCourse}`
         );
         if (!videosResponse.ok) {
           throw new Error(`HTTP error! Status: ${videosResponse.status}`);
@@ -54,7 +54,7 @@ const AddTopicForm = () => {
         setAvailableVideos(videosData);
 
         const pdfsResponse = await fetch(
-          `http://localhost:8000/api/pdfs/${selectedCourse}`
+          `http://13.200.156.92:8000/api/pdfs/${selectedCourse}`
         );
         if (!pdfsResponse.ok) {
           throw new Error(`HTTP error! Status: ${pdfsResponse.status}`);
@@ -131,7 +131,7 @@ const AddTopicForm = () => {
 
       console.log("Sending data to server:", newChapter);
 
-      const response = await fetch("http://localhost:8000/vc/api/chapters", {
+      const response = await fetch("http://13.200.156.92:8000/vc/api/chapters", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
