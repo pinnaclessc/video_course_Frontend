@@ -1,26 +1,62 @@
-import React,{useState,useEffect} from "react";
+// import React,{useState,useEffect} from "react";
+// import classes from "./SignUpPage.module.css";
+// import {Link,useNavigate} from "react-router-dom";
+
+// export default function SignUpPage() {
+//   const userId=JSON.parse(localStorage.getItem("user"))._id
+//   const navigate=useNavigate();
+
+//   const [name,setName]=useState("");
+//   const [email,setEmail]=useState("");
+//   const [password,setPassword]=useState("");
+//   useEffect(() => {
+//     const auth = localStorage.getItem("user");
+
+//     if (auth) {
+//       navigate(`/MyLearningPage/:${userId}`)
+//       window.location.reload();
+//     }
+//   }, []);
+
+
+//   const submitHandler = async (event) => {
+//     let result = await fetch("http://localhost:8000/add-new-user",{
+//       method: "post",
+//       body: JSON.stringify({ name, email, password }),
+//       headers: { "Content-Type": "application/json" },
+//     });
+
+//     result = await result.json();
+//     console.log(result);
+//     localStorage.setItem("user", JSON.stringify(result));
+//       if(result){
+//       navigate("/MyLearningMain");
+//      console.log("Singnup Completed");
+//     }
+//   };
+
+import React, { useState, useEffect } from "react";
 import classes from "./SignUpPage.module.css";
-import {Link,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
-  const userId=JSON.parse(localStorage.getItem("user"))._id
-  const navigate=useNavigate();
+  const storedUser = localStorage.getItem("user");
+  const userId = storedUser ? JSON.parse(storedUser)._id : null;
+  const navigate = useNavigate();
 
-  const [name,setName]=useState("");
-  const [email,setEmail]=useState("");
-  const [password,setPassword]=useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   useEffect(() => {
-    const auth = localStorage.getItem("user");
-
-    if (auth) {
-      navigate(`/MyLearningPage/:${userId}`)
+    if (userId) {
+      navigate(`/MyLearningPage/:${userId}`);
       window.location.reload();
     }
-  }, []);
-
+  }, [userId, navigate]);
 
   const submitHandler = async (event) => {
-    let result = await fetch("http://localhost:8000/api/register",{
+    let result = await fetch("http://localhost:8000/add-new-user", {
       method: "post",
       body: JSON.stringify({ name, email, password }),
       headers: { "Content-Type": "application/json" },
@@ -29,9 +65,9 @@ export default function SignUpPage() {
     result = await result.json();
     console.log(result);
     localStorage.setItem("user", JSON.stringify(result));
-      if(result){
+    if (result) {
       navigate("/MyLearningMain");
-     console.log("Singnup Completed");
+      console.log("Signup Completed");
     }
   };
   return (

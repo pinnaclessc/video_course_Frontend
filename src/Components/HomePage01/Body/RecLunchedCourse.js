@@ -20,7 +20,7 @@ export default function UpcomingCourse() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/courses")
+    fetch("http://localhost:8000/api/courses")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data);

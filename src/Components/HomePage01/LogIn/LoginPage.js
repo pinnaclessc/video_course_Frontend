@@ -25,7 +25,7 @@ export default function LoginPage(){
   const loginHandler=async(e)=>{
     // console.log(email,password)
 
-    let result=await fetch('http://localhost:8000/api/login',
+    let result=await fetch('http://localhost:8000/vc/api/login',
     {
     method:'post',
     body:JSON.stringify({email,password}),
