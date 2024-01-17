@@ -10,7 +10,7 @@ const VideoUploadForm = () => {
 
   useEffect(() => {
     // Fetch the list of courses when the component mounts
-    fetch('http://localhost:8000/api/courses')
+    fetch('http://13.200.156.92:8000/api/courses')
       .then(response => response.json())
       .then(data => setCourses(data))
       .catch(error => console.error('Error fetching courses:', error));
@@ -33,7 +33,7 @@ const VideoUploadForm = () => {
         formData.append('video', file);
         formData.append('courseId', courseId);
 
-        const response = await fetch('http://localhost:8000/api/upload-video', {
+        const response = await fetch('http://13.200.156.92:8000/api/upload-video', {
           method: 'POST',
           body: formData,
         });
