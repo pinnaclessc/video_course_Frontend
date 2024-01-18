@@ -17,7 +17,7 @@ const AddTopicForm = () => {
     // Fetch the list of courses
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/courses');
+        const response = await fetch('http://13.200.156.92:8000/api/courses');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
