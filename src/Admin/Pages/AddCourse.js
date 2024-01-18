@@ -37,7 +37,7 @@ const addCourseHandler = async (e) => {
   e.preventDefault();
   const videoData = { courseTitle, courseDetails, rating, teacherName,price,category,SEOCode};// Include subtitle in videoData
 try {
-    const response = await fetch("http://localhost:8000/add-course",{
+    const response = await fetch("http://13.200.156.92:8000/add-course",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
