@@ -1,7 +1,7 @@
 .container {
     max-width: 400px;
     margin: auto;
-    border: 2px solid yellow;
+    border: 2px solid #aaaaaa;
     padding: 0.5rem;
     margin: 0.5rem;
   }
@@ -29,5 +29,6 @@
     font-weight: bold;
   }
   
-  /* You can add more styles as needed */
+  
+  
   
