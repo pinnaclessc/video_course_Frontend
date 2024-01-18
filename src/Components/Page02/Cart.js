@@ -5,25 +5,39 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import ApplyCoupon from "./ApplyCoupon";
 import Share from "./ShareComponent/Share";
-import { Link ,useParams} from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+
   useEffect(() => {
     getCourseDetails();
   }, []);
-    const getCourseDetails = async () => {
-    let result = await fetch(`http://localhost:8000/course/${params.id}`);
-    result = await result.json();
-    console.log(result);
-    setCourseTitle(result.courseTitle);
-    setCourseDetails(result.courseDetails);
-    setTeacherName(result.teacherName);
-    setRating(result.rating);
-    setPrice(result.price);
-    setMrp(result.mrp);
+
+  const getCourseDetails = async () => {
+    try {
+      const response = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch course details. Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log(result);
+
+      // Assuming result properties exist, update state accordingly
+      setCourseTitle(result.courseTitle);
+      setCourseDetails(result.courseDetails);
+      setTeacherName(result.teacherName);
+      setRating(result.rating);
+      setPrice(result.price);
+      setMrp(result.mrp);
+      
+    } catch (error) {
+      console.error('Error fetching course details:', error);
+    }
   };
-  const navigate = useNavigate();
-  const params = useParams();
 
   const [selectedMonths, setSelectedMonths] = useState(1);
   const [showCoupon, setShowCoupon] = useState(false);
@@ -34,16 +48,22 @@ const Cart = () => {
   const [rating, setRating] = useState();
   const [price, setPrice] = useState();
   const [mrp, setMrp] = useState();
-  const [buy,setBuy]=useState(false);
+  const [buy, setBuy] = useState(false);
 
   const { image1, image2, heading, description, subscriptionPrice } = data;
+
+  const navigateHandler = () => {
+    navigate(`/mylearning/${params.id}`);
+  };
 
   const handleShare = () => {
     setIsShare(!isShare);
   };
+
   const handleMonthsChange = (event) => {
     setSelectedMonths(Number(event.target.value));
   };
+
   const ApplyCouponHandler = () => {
     setShowCoupon(!showCoupon);
   };
@@ -51,22 +71,22 @@ const Cart = () => {
   const handleBuy = async () => {
     try {
       const userId = JSON.parse(localStorage.getItem('user'))._id;
-      const response = await fetch(`http://localhost:8000/purchase/${userId}/${params.id}`, {
+      const response = await fetch(`http://localhost:8000/purchase/${userId}/${params.course_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           userId: userId,
-          courseId: params.id, // Assuming courseId is available in params
+          courseId: params.course_id,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
         // Purchase was successful, you can redirect or show a success message
-          setTimeout(() => {
+        setTimeout(() => {
           setBuy(true);
         }, 1000);
       } else {
@@ -77,9 +97,6 @@ const Cart = () => {
       console.error('Error during purchase:', error);
     }
   };
-
-  
-  
 
   const getPrice = () => {
     switch (selectedMonths) {
@@ -115,7 +132,7 @@ const Cart = () => {
         </div>
         <div className={styles.overlay}>
           <div className={styles["video-preview-div"]}>
-            <div className={styles["video-icon"]}>
+            <div className={styles["video-icon"]} onClick={navigateHandler}>
               <AiOutlinePlayCircle size={40} />
             </div>
             <div className={styles["video-icon-p-div"]}>
@@ -147,17 +164,11 @@ const Cart = () => {
               onChange={handleMonthsChange}
               className={styles["range-slider"]}
             />
-            {/* <div
-              className={styles["triangle-pointer"]}
-              style={{ left: `${(selectedMonths / 23) * 100}%` }}
-            ></div> */}
           </div>
           <div className={styles["Months-price-section"]}>
             <p className={styles.months}>Months: {selectedMonths}</p>
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
-
-          {/* buy this Course */}
 
           <button
             className={styles["Buy-this-course"]}
@@ -165,10 +176,7 @@ const Cart = () => {
           >
             Buy this course
           </button>
-          {buy&&<div className={styles["success-msg"]}>Successfull</div>}
-          
-
-          {/* ******** */}
+          {buy && <div className={styles["success-msg"]}>Successful</div>}
 
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
@@ -189,7 +197,7 @@ const Cart = () => {
             </button>
           </div>
 
-          <div>{showCoupon && <ApplyCoupon/>}</div>
+          <div>{showCoupon && <ApplyCoupon />}</div>
         </div>
       </div>
       {isShare && <Share />}
@@ -198,4 +206,3 @@ const Cart = () => {
 };
 
 export default Cart;
-

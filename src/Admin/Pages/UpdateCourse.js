@@ -17,7 +17,7 @@ export default function UpdateProduct() {
     },[])
 
     const getCourseDetails=async()=>{
-        let result= await fetch(`http://localhost:8000/course/${params.id}`);
+        let result= await fetch(`http://13.200.156.92:8000/course/${params.id}`);
         result=await result.json();
         console.log(result);
         setCourseTitle(result.courseTitle);
@@ -31,7 +31,7 @@ export default function UpdateProduct() {
 
 }
   const updateProdutHandler= async()=>{
-    let result= await fetch(`http://localhost:8000/course/${params.id}`,{
+    let result= await fetch(`http://13.200.156.92:8000/course/${params.id}`,{
       method:"Put",
       body:JSON.stringify({courseTitle,courseDetails,teacherName,rating,price,category,SEOCode}),
       headers:{"Content-Type":"application/json"}

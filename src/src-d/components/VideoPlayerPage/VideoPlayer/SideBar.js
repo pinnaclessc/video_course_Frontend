@@ -1,250 +1,172 @@
-import React, { useState, useEffect } from "react"
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri"
-import { MdOndemandVideo } from "react-icons/md"
-import { SiFiles } from "react-icons/si"
-import Card from "../../BodyContent/Card/Card"
-import { Link } from "react-router-dom"
-import styles from "./Sidebar.module.css"
-const Sidebar = ({ menuData, onVideoSelect, onSubMenuSelect }) => {
-  const [activeMenuIds, setActiveMenuIds] = useState([])
-  const [selectedVideo, setSelectedVideo] = useState(null)
-  const [videoDurations, setVideoDurations] = useState({})
-  const [submenuLengths, setSubmenuLengths] = useState({})
-  const [selectedSubmenu, setSelectedSubmenu] = useState(null)
-  const [selectedSubmenuIndex, setSelectedSubmenuIndex] = useState(null)
-  const [isMenuData, setMenuData] = useState()
-  const [showCard, setShowCard] = useState(false)
-  const [selectedSubmenuId, setSelectedSubmenuId] = useState(null)
+import React, { useState, useEffect } from "react";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import { MdOndemandVideo } from "react-icons/md";
+import { SiFiles } from "react-icons/si";
+import Card from "../../BodyContent/Card/Card";
+import styles from "./Sidebar.module.css";
+import { useParams } from "react-router";
 
-  const [selectedResourceSubmenuId, setSelectedResourceSubmenuId] =
-    useState(null)
-
-  const handleResourcesClick = (submenuId) => {
-    if (selectedResourceSubmenuId === submenuId) {
-      // If the same "Resources" label is clicked again, close the Card
-      setShowCard(false)
-      setSelectedResourceSubmenuId(null)
-    } else {
-      const selectedSubmenu = menuData
-        .flatMap((menu) => menu.submenu)
-        .find((submenu) => submenu.id === submenuId)
-
-      setSelectedSubmenu(selectedSubmenu)
-      setSelectedResourceSubmenuId(submenuId) // Set the selected resource submenu ID
-      setShowCard(true)
-    }
-  }
-
-  // Function to toggle card visibility
-  const toggleCard = () => {
-    setShowCard((prevShowCard) => !prevShowCard)
-  }
-
-  const handleCheckboxChange = (menuId, submenuId) => {
-    const updatedMenuData = menuData.map((menu) => {
-      if (menu.id === menuId) {
-        const updatedSubmenu = menu.submenu.map((submenu) =>{
-          if (submenu.id === submenuId) {
-            return {
-              ...submenu,
-              isPlayed: !submenu.isPlayed,
-            }
-          }
-          return submenu
-        })
-        return {
-          ...menu,
-          submenu: updatedSubmenu,
-        }
-      }
-      return menu
-    })
-
-    setMenuData(updatedMenuData)
-  }
-
-  const handleMenuClick = (menuId) => {
-    setActiveMenuIds((prevMenuIds) => {
-      if (prevMenuIds.includes(menuId)) {
-        return prevMenuIds.filter((id) => id !== menuId)
-      } else {
-        return [...prevMenuIds, menuId]
-      }
-    })
-  }
-
-  const handleVideoSelect = (videoUrl, submenuIndex, submenuTitle) => {
-    onVideoSelect(videoUrl, submenuTitle)
-    setSelectedSubmenuIndex(submenuIndex)
-  }
-
-  const formatTime = (length) => {
-    const hours = Math.floor(length / 3600)
-    const minutes = Math.floor((length % 3600) / 60)
-    const seconds = Math.floor(length % 60)
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-  }
-
-  const getVideoDuration = async (videoUrl) => {
-    return new Promise((resolve) => {
-      const video = document.createElement("video")
-      video.src = videoUrl
-
-      video.onloadeddata = () => {
-        const duration = video.duration
-
-        resolve(duration)
-      }
-
-      video.onerror = () => {
-        resolve("Unknown")
-      }
-
-      video.load()
-    })
-  }
+const Sidebar = ({ onVideoSelect, onSubMenuSelect }) => {
+  const [activeMenuIds, setActiveMenuIds] = useState([]);
+  const [selectedResourceSubmenuId, setSelectedResourceSubmenuId] = useState(null);
+  const [chapters, setChapters] = useState([]);
+  const [videoLengths, setVideoLengths] = useState({});
+  const { course_id } = useParams();
+  const [overallTopicIndex, setOverallTopicIndex] = useState(0);
 
   useEffect(() => {
-    const calculateSubmenuLengths = async () => {
-      const lengths = {}
+    const fetchData = async () => {
+      try {
+        console.log(course_id);
+        const response = await fetch(`http://13.200.156.92:8000/vc/api/chapters/${course_id}`);
+        const data = await response.json();
 
-      for (const menu of menuData) {
-        let totalLength = 0
-        const durationPromises = []
+        if (!Array.isArray(data)) {
+          console.error("Invalid response format. Expected an array.");
+          return;
+        }
 
-        for (const submenu of menu.submenu) {
-          if (!videoDurations[submenu.id]) {
-            const durationPromise = getVideoDuration(submenu.video)
-            durationPromises.push({
-              promise: durationPromise,
-              submenuId: submenu.id,
-            })
+        console.log("Chapters:", data);
+        setChapters(data);
+
+        const lengths = {};
+        let topicIndex = 0;
+
+        for (const chapter of data) {
+          if (!Array.isArray(chapter.topics)) {
+            console.error("Invalid topics format. Expected an array.");
+            continue;
+          }
+
+          for (const topic of chapter.topics) {
+            if (topic.selectedVideo) {
+              const videoLength = await getVideoLength(topic.selectedVideo, topic._id);
+              lengths[topic._id] = videoLength;
+            }
+            topic.overallIndex = topicIndex;
+            topicIndex++;
           }
         }
 
-        const durations = await Promise.all(
-          durationPromises.map((item) => item.promise)
-        )
-
-        durations.forEach((duration, index) => {
-          const { submenuId } = durationPromises[index]
-          setVideoDurations((prevDurations) => ({
-            ...prevDurations,
-            [submenuId]: duration,
-          }))
-          totalLength += duration || 0
-        })
-
-        lengths[menu.id] = totalLength
+        console.log("Video Lengths:", lengths);
+        setVideoLengths(lengths);
+        setOverallTopicIndex(topicIndex);
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
+    };
 
-      setSubmenuLengths(lengths)
-    }
+    fetchData();
+  }, [course_id]);
 
-    calculateSubmenuLengths()
-  }, [menuData])
+  const handleResourcesClick = (submenuId) => {
+    setSelectedResourceSubmenuId((prevId) => (prevId === submenuId ? null : submenuId));
+  };
+
+  const getVideoLength = async (videoUrl, topicId) => {
+    const timestampedVideoUrl = `${videoUrl}?t=${Date.now()}`;
+
+    const videoElement = document.createElement("video");
+    videoElement.src = timestampedVideoUrl;
+
+    return new Promise((resolve) => {
+      videoElement.addEventListener("loadedmetadata", () => {
+        const videoLengthInSeconds = videoElement.duration;
+        const formattedVideoLength = formatVideoLength(videoLengthInSeconds);
+        resolve(formattedVideoLength);
+      });
+
+      videoElement.load();
+    });
+  };
+
+  const formatVideoLength = (lengthInSeconds) => {
+    const hours = Math.floor(lengthInSeconds / 3600);
+    const minutes = Math.floor((lengthInSeconds % 3600) / 60);
+    const seconds = Math.floor(lengthInSeconds % 60);
+
+    const formattedHours = hours > 0 ? `${hours}h` : "";
+    const formattedMinutes = minutes > 0 ? `${minutes}m` : "";
+    const formattedSeconds = seconds > 0 ? `${seconds}s` : "";
+
+    return `${formattedHours} ${formattedMinutes} ${formattedSeconds}`;
+  };
+
+  const handlePdfTitleClick = (pdfUrl) => {
+    window.open(pdfUrl, "_blank");
+  };
 
   return (
     <div className={styles.sidebar}>
-      {menuData.map((menu) => (
+      {chapters.map((chapter) => (
         <div
-          key={menu.id}
-          className={`${styles.accordion} ${
-            activeMenuIds.includes(menu.id) ? styles.active : ""
-          }`}
+          key={chapter._id}
+          className={`${styles.accordion} ${activeMenuIds.includes(chapter._id) ? styles.active : ""
+            }`}
         >
-          {" "}
-          <div className={styles.accordion_title_container}>
-            <div
-              className={styles.accordion_title}
-              onClick={() => handleMenuClick(menu.id)}
-            >
-              {menu.title}
-
-              {activeMenuIds.includes(menu.id) ? (
-                <RiArrowDropUpLine className={styles.arrow_icon} size={26}/>
+          <div
+            className={styles.accordion_title_container}
+            onClick={() =>
+              setActiveMenuIds((prevMenuIds) =>
+                prevMenuIds.includes(chapter._id)
+                  ? prevMenuIds.filter((id) => id !== chapter._id)
+                  : [...prevMenuIds, chapter._id]
+              )
+            }
+          >
+            <div className={styles.accordion_title}>
+              {chapter.chapterTitle}
+              {activeMenuIds.includes(chapter._id) ? (
+                <RiArrowDropUpLine className={styles.arrow_icon} size={26} />
               ) : (
                 <RiArrowDropDownLine className={styles.arrow_icon} size={26} />
               )}
             </div>
-            <div className={styles.total_length}>
-              {formatTime(submenuLengths[menu.id])}
-            </div>
           </div>
-          {activeMenuIds.includes(menu.id) && (
+          {activeMenuIds.includes(chapter._id) && (
             <ul className={styles["submenu-list"]}>
-              {menu.submenu.map((submenu) => (
-                <li
-                  key={submenu.id}
-                  className={styles["submenu-item"]}
-                  onClick={() => {
-                    onSubMenuSelect(submenu.title)
-                  }}
-                >
+              {chapter.topics.map((topic, index) => (
+                <li key={topic._id} className={styles["submenu-item"]}>
                   <div className={styles.submenu_content}>
-                    <input
-                      className={styles.checkbox}
-                      type="checkbox"
-                      checked={submenu.isPlayed}
-                      onChange={() => handleCheckboxChange(menu.id, submenu.id)}
-                    />
                     <button
                       className={styles["submenu-button"]}
                       onClick={() => {
-                        handleVideoSelect(submenu.video)
+                        onVideoSelect(topic.selectedVideo);
+                        onSubMenuSelect(topic.videoTitle);
                       }}
                     >
-                      {submenu.title}
+                      {/* {topic.videoTitle} */}
+                      {`${topic.overallIndex + 1}. ${topic.videoTitle}`}
+
                     </button>
                     <div className={styles.options_container}>
                       <MdOndemandVideo
                         className={styles.video_icon}
-                        onClick={() => {
-                          handleVideoSelect(submenu.video)
-                        }}
+                        onClick={() => onVideoSelect(topic.selectedVideo)}
                       />
-                      <div
-                        className={styles.submenu_vlength}
-                        onClick={() => {
-                          handleVideoSelect(submenu.video)
-                        }}
-                      >
-                        {formatTime(videoDurations[submenu.id])}
+                      <p className={styles.video_length}>
+                        {videoLengths[topic._id] && `${videoLengths[topic._id]}`}
+                      </p>
+                      <div className={styles.dropdown_container}>
+                        <label
+                          className={styles.dropdown_container1}
+                          onClick={() => handleResourcesClick(topic._id)}
+                        >
+                          <SiFiles className={styles.pdf_icon} size={10} />
+                          Resources
+                        </label>
+                        {selectedResourceSubmenuId === topic._id && (
+                          <Card className={styles.pdf_dropdown}>
+                            <ul>
+                              <li>
+                                <a href={topic.selectedPdf} target="_blank" rel="noopener noreferrer">
+                                  {topic.pdfTitle || "Untitled PDF"}
+                                </a>
+                              </li>
+                            </ul>
+                          </Card>
+                        )}
                       </div>
-                      {submenu.pdf && (
-                        <div className={styles.dropdown_container}>
-                          <label
-                            className={styles.dropdown_container1}
-                            htmlFor={`pdf-dropdown-${submenu.id}`}
-                            onClick={() => handleResourcesClick(submenu.id)}
-                          >
-                            <SiFiles className={styles.pdf_icon} size={10} />
-                            Resources
-                          </label>
-                          {selectedResourceSubmenuId === submenu.id && (
-                            <Card
-                              id={`pdf-dropdown-${submenu.id}`}
-                              className={styles.pdf_dropdown}
-                            >
-                              <ul>
-                                {submenu.pdf.map((pdf, index) => (
-                                  <li
-                                    key={index}
-                                    onClick={() => {
-                                      const pdfUrl = pdf.url + "#toolbar=0"
-                                      window.open(pdfUrl, "_blank")
-                                    }}
-                                  >
-                                    {`Option ${index + 1} `}
-                                  </li>
-                                ))}
-                              </ul>
-                            </Card>
-                          )}
-                        </div>
-                      )}
                     </div>
                   </div>
                 </li>
@@ -254,7 +176,7 @@ const Sidebar = ({ menuData, onVideoSelect, onSubMenuSelect }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
