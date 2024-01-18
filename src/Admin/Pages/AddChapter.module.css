@@ -1,108 +1,48 @@
-.AddChapter-wraper{
-  border: 2px solid navy;
-  padding: 0.5rem;
+.AddChapter-wrapper {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
 }
 
+.AddChapter-wrapper label {
+  display: block;
+  margin-bottom: 10px;
+}
 
-/* AddChapter.module.css */
+.AddChapter-wrapper select,
+.AddChapter-wrapper input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
 
-.AddChapter-fullPage {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f8f8f8;
-  }
-  
-  .AddChapter-Heading {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .AddChapter-formSection {
-    margin-bottom: 20px;
-  }
-  
-  .AddChapter-formLabel {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .AddChapter-inputbox {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .AddChapter-select {
-    margin-top: 10px;
-    padding: 8px;
-    box-sizing: border-box;
-    width: 48%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .AddChapter-option {
-    /* Customize option styles if necessary */
-  }
-  
-  .AddChapter-buttonGroup {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .AddChapter-button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .AddChapter-submitButton {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .AddChapter-clearButton {
-    background-color: #e74c3c;
-    color: white;
-  }
-  
-  .AddChapter-addedChapters {
-    margin-top: 20px;
-  }
-  
-  .AddChapter-chapterList {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .AddChapter-chapterItem {
-    margin-bottom: 8px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-  }
-  
-  .AddChapter-chapterItemTitle {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-.AddChapter-addTopic-Button{
-  background-color: #4CAF50;
+.AddChapter-wrapper button {
+  background-color: #4caf50;
   color: white;
-  padding: 0.25rem;
-  margin: 0.25rem;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
 }
-  
+
+.AddChapter-wrapper button:hover {
+  background-color: #45a049;
+}
+
+.AddChapter-wrapper > div {
+  margin-bottom: 15px;
+}
+
+.AddChapter-wrapper > div input,
+.AddChapter-wrapper > div select {
+  width: calc(104% - 5px);
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.AddChapter-wrapper > div select {
+  width: calc(100% + 8px);
+}
+
+.AddChapter-wrapper > div:last-child {
+  margin-bottom: 0;
+}
