@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AddChapter.module.css";
 
-const AddTopicForm = () => {
+const AddChapterForm = () => {
   const [videoTitle, setVideoTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [pdfTitle, setPdfTitle] = useState("");
@@ -91,7 +91,7 @@ const AddTopicForm = () => {
     const { name, value } = e.target;
     if (name === "course") {
       setSelectedCourse(value);
-      setCurrentCourseId(value); // Update currentCourseId when course changes
+      setCurrentCourseId(value);
       setVideoTitle("");
       setVideoUrl("");
       setPdfTitle("");
@@ -109,7 +109,6 @@ const AddTopicForm = () => {
     e.preventDefault();
 
     try {
-      // Ensure that videoTitle is set, use a default value if currentTitle is not set
       const newTopic = {
         videoTitle: currentTitle || 'Default Video Title',
         selectedVideo: currentSelectedVideo,
@@ -160,14 +159,14 @@ const AddTopicForm = () => {
       setCurrentPdfTitle("");
       setCurrentSelectedPdf("");
 
-      window.location.reload()// for reload window
+      window.location.reload()
     } catch (error) {
       console.error("Error adding chapter:", error.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles["AddChapter-wraper"]}>
+    <form onSubmit={handleSubmit} className={styles["AddChapter-wrapper"]}>
       <label>
         Select Course:
         <select
@@ -247,4 +246,5 @@ const AddTopicForm = () => {
   );
 };
 
-export default AddTopicForm;
+export default AddChapterForm
+
