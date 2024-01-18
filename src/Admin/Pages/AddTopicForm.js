@@ -42,7 +42,7 @@ const AddTopicForm = () => {
       if (!selectedCourse) return;
 
       try {
-        const response = await fetch(`http://localhost:8000/vc/api/chapters/${selectedCourse}`);
+        const response = await fetch(`http://13.200.156.92:8000/vc/api/chapters/${selectedCourse}`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -68,14 +68,14 @@ const AddTopicForm = () => {
       if (!selectedCourse) return;
 
       try {
-        const videosResponse = await fetch(`http://localhost:8000/api/videos/${selectedCourse}`);
+        const videosResponse = await fetch(`http://13.200.156.92:8000/api/videos/${selectedCourse}`);
         if (!videosResponse.ok) {
           throw new Error(`HTTP error! Status: ${videosResponse.status}`);
         }
         const videosData = await videosResponse.json();
         setAvailableVideos(videosData);
 
-        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/${selectedCourse}`);
+        const pdfsResponse = await fetch(`http://13.200.156.92:8000/api/pdfs/${selectedCourse}`);
   
 
         if (!pdfsResponse.ok) {
@@ -107,7 +107,7 @@ const AddTopicForm = () => {
         completed: [],
       };
 
-      const response = await fetch(`http://localhost:8000/api/chapters/${selectedChapter}/add-topic`, {
+      const response = await fetch(`http://13.200.156.92:8000/api/chapters/${selectedChapter}/add-topic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
