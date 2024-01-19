@@ -120,8 +120,6 @@ const AddTopicForm = () => {
       }
 
       console.log('Topic added successfully');
-
-      // Clear form fields after successful addition
       setVideoTitle('');
       setSelectedVideo('');
       setPdfTitle('');
@@ -132,7 +130,7 @@ const AddTopicForm = () => {
   };
 
   return (
-    <div className={styles["AddTopic-wraper"]}>
+    <div className={styles['topic-form']}>
       <label>
         Select Course:
         <select name="course" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
