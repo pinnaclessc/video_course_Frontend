@@ -254,6 +254,7 @@ const AddChapterForm = () => {
 };
 
 export default AddChapterForm;
+
 <<<<<<< HEAD
 =======
 
