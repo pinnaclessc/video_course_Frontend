@@ -1,16 +1,39 @@
-import React from 'react'
-import VideoUploadForm from './VideoUploadForm'
-import PdfUploadForm from './PdfUploadForm'
-import AddChapter from './AddChapter'
-import AddTopicForm from './AddTopicForm'
+import React from 'react';
+import VideoUploadForm from './VideoUploadForm';
+import PdfUploadForm from './PdfUploadForm';
+import AddChapter from './AddChapter';
+import AddTopicForm from './AddTopicForm';
+import styles from './AddCourseContent.module.css';
 
 export default function AddCourseContent() {
   return (
-    <div>
-      <div><VideoUploadForm/></div>
-      <div><PdfUploadForm/></div>
-      <div><AddChapter/></div>
-      <div><AddTopicForm/></div>
+    <div className={styles['AddCourseContent-container']}>
+      <div className={styles['AddCourseContent-section']}>
+        <div className={styles['AddCourseContent-section-header']}>Video Upload</div>
+        <div className={styles['VideoUploadForm-container']}>
+          <VideoUploadForm />
+        </div>
+
+        <div className={styles['AddCourseContent-section-header']}>PDF Upload</div>
+        <div className={styles['PdfUploadForm-container']}>
+          <PdfUploadForm />
+        </div>
+      </div>
+
+      <div className={styles['AddCourseContent-section']}>
+        <div className={styles['AddCourseContent-section-header']}>Add Chapter</div>
+        <div className={styles['AddChapter-container']}>
+          <AddChapter />
+        </div>
+      </div>
+
+      <div className={styles['AddCourseContent-section']}>
+        <div className={styles['AddCourseContent-section-header']}>Add Topic</div>
+        <div className={styles['AddTopicForm-container']}>
+          <AddTopicForm />
+        </div>
+      </div>
     </div>
-  )
+  );
 }
+
