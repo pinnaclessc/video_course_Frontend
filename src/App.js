@@ -71,7 +71,6 @@ import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
 // test imports
 // import videoContent from "./src-d/components/NewComponentBP/videoContent";
-import UpdateChapterForm from "./update/UpdateChapterForm";
 
 export default function App() {
   return (
@@ -79,7 +78,6 @@ export default function App() {
       <Router>
         <Header />
         <Routes>
-        <Route path="/u" element={<UpdateChapterForm />}></Route>
           <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses />}></Route>
           <Route
