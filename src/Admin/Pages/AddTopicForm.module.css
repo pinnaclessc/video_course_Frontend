@@ -1,4 +1,30 @@
-.AddTopic-wraper{
-    border: 2px solid skyblue;
-    padding: 0.5rem;
-}
+.AddTopic-wrapper {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .AddTopic-wrapper label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .AddTopic-wrapper select,
+  .AddTopic-wrapper input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .AddTopic-wrapper button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .AddTopic-wrapper button:hover {
+    background-color: #45a049;
+  }
+  

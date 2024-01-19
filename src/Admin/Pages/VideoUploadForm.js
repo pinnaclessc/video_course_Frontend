@@ -59,18 +59,19 @@ const VideoUploadForm = () => {
 
   return (
     <div className={styles.container}>
+       <select value={courseId} onChange={handleCourseChange} className={styles.courseSelect}>
+        <option value="" disabled>Select a Course</option>
+        {courses.map(course => (
+          <option key={course._id} value={course._id}>{course.courseTitle}</option>
+        ))}
+      </select>
       <input
         type="file"
         accept="video/*"
         onChange={handleFileChange}
         className={styles.fileInput}
       />
-      <select value={courseId} onChange={handleCourseChange} className={styles.courseSelect}>
-        <option value="" disabled>Select a Course</option>
-        {courses.map(course => (
-          <option key={course._id} value={course._id}>{course.courseTitle}</option>
-        ))}
-      </select>
+     
       <button
         onClick={handleUpload}
         disabled={loading}

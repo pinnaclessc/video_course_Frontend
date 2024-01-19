@@ -9,10 +9,6 @@ const PdfUploadForm = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-// <<<<<<< HEAD
-//     // Fetch the list of courses when the component mounts
-// =======
-// >>>>>>> 0724e504c7799da72b5426e048b66b697bdf6c90
     fetch('http://13.200.156.92:8000/api/courses')
       .then(response => response.json())
       .then(data => setCourses(data))
@@ -62,18 +58,19 @@ const PdfUploadForm = () => {
 
   return (
     <div className={styles.container}>
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={handleFileChange}
-        className={styles.fileInput}
-      />
       <select value={courseId} onChange={handleCourseChange} className={styles.courseSelect}>
         <option value="" disabled>Select a Course</option>
         {courses.map(course => (
           <option key={course._id} value={course._id}>{course.courseTitle}</option>
         ))}
       </select>
+      <input
+        type="file"
+        accept="application/pdf"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+      
       <button
         onClick={handleUpload}
         disabled={loading}
@@ -89,3 +86,6 @@ const PdfUploadForm = () => {
 };
 
 export default PdfUploadForm;
+
+
+
