@@ -166,7 +166,7 @@ const AddChapterForm = () => {
       setCurrentSelectedPdf("");
 
       // Reload the page after successfully adding the chapter
-      window.location.reload();
+      //window.location.reload();
     } catch (error) {
       console.error("Error adding chapter:", error.message);
     }
