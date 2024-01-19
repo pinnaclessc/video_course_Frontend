@@ -11,7 +11,7 @@ const AddTopicForm = () => {
   const [pdfTitle, setPdfTitle] = useState('');
   const [selectedPdf, setSelectedPdf] = useState('');
   const [availableVideos, setAvailableVideos] = useState([]);
-  const [availablePdfs, setAvailablePdfs] = useState([]); // Initialize as an empty array
+  const [availablePdfs, setAvailablePdfs] = useState([]); 
 
   useEffect(() => {
     // Fetch the list of courses
