@@ -130,7 +130,7 @@ const AddChapterForm = () => {
 
       console.log("Sending data to server:", newChapter);
 
-      const response = await fetch("http://13.200.156.92:8000/vc/api/chapters", {
+      const response = await fetch("http://localhost:8000/vc/api/chapters", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -159,13 +159,13 @@ const AddChapterForm = () => {
       setCurrentPdfTitle("");
       setCurrentSelectedPdf("");
 
-      window.location.reload()
     } catch (error) {
       console.error("Error adding chapter:", error.message);
     }
   };
 
   return (
+    
     <form onSubmit={handleSubmit} className={styles["AddChapter-wrapper"]}>
       <label>
         Select Course:

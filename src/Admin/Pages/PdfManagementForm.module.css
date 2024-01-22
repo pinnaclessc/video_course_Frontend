@@ -1,0 +1,21 @@
+/* PdfManagementForm.module.css */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .courseSelect {
+    margin-bottom: 20px;
+  }
+  
+  .pdfList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .pdfListItem {
+    margin-bottom: 10px;
+  }
+  
+  /* Add any additional styles as needed */
+  

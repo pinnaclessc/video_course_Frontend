@@ -9,10 +9,6 @@ const PdfUploadForm = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-<<<<<<< HEAD
-    // Fetch the list of courses when the component mounts
-=======
->>>>>>> 0724e504c7799da72b5426e048b66b697bdf6c90
     fetch('http://13.200.156.92:8000/api/courses')
       .then(response => response.json())
       .then(data => setCourses(data))
@@ -89,12 +85,3 @@ const PdfUploadForm = () => {
 };
 
 export default PdfUploadForm;
-
-
-
-
-
-export default PdfUploadForm;
-
-
-

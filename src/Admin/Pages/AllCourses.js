@@ -56,21 +56,17 @@ export default function AllCourses() {
     <div className={styles["AllCourses-heading"]}>
         <div className={styles["AllCourses-srno"]}>Sr.No.</div>
         <div className={styles["AllCourses-nameOfCourse"]}>Name Of Course</div>
-        <div className={styles["AllCourses-teacherName"]}>Teacher Name</div>
-        <div className={styles["AllCourses-heading-rating"]}>Rating</div>
-        <div className={styles["AllCourses-heading-price"]}>Price</div>
 
     </div>
        {courses.length>0?courses.map((item, index) =>(
           <div key={item._id} className={styles["AllCourses-subheading"]}>
             <div className={styles["AllCourses-srno"]}>{index+1}</div>
             <div className={styles["AllCourses-nameOfCourse"]}>{item.courseTitle} </div>
-            <div className={styles["AllCourses-teacherName"]}>{item.teacherName} </div>
-            <div className={styles["AllCourses-heading-rating"]}>{item.rating}</div>
-            <div className={styles["AllCourses-heading-price"]}>{item.price}</div>
             <div><button onClick={()=>deleteHandler(item._id)} className={styles["AllCourses-DeleteBTN"]}>Delete</button>
             <Link to={"/admin/updateCourse/"+item._id}  className={styles["AllCourses-editLink"]}>Edit</Link></div>
-            <Link to={"/admin/updateCoursecontent/"+item._id}  className={styles["AllCourses-edit-course-content-Link"]}>Edit Course Content</Link>
+            <Link to={"/admin/updateChapter/"+item._id}  className={styles["AllCourses-edit-course-content-Link"]}>Edit Course Content</Link>
+            <Link to={`/admin/all-PDFs/`+item._id}  className={styles["AllCourses-edit-course-content-Link"]}>All PDFs</Link>
+            <Link to={`/admin/all-videos/`+item._id}  className={styles["AllCourses-edit-course-content-Link"]}>All Videos</Link>
             </div>
         )):<p>No data Found</p>
       }

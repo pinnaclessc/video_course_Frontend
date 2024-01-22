@@ -37,7 +37,7 @@ import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import Header from "./Components/HomePage01/Header/Header";
 
-
+import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
 // copy Imports of D
 // import PdfUploadForm from "./Admin/D-admin/PdfUploadForm";
 // import VideoUploadForm from "./Admin/D-admin/VideoUploadForm";
@@ -71,7 +71,6 @@ import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
 // test imports
 // import videoContent from "./src-d/components/NewComponentBP/videoContent";
-import UpdateChapterForm from "./update/UpdateChapterForm";
 
 export default function App() {
   return (
@@ -79,23 +78,20 @@ export default function App() {
       <Router>
         <Header />
         <Routes>
-        <Route path="/u" element={<UpdateChapterForm />}></Route>
           <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses />}></Route>
           <Route
             path="/admin/updateCourse/:id"
-            element={<UpdateCourse />}
+            element={<UpdateCourse/>}
           ></Route>
-            <Route
-            path="/admin/updateCoursecontent/:id"
-            element={<UpdateChapter/>}
-          ></Route>
-          <Route path="/admin/courseContent/:id" element={<CourseContent />} />
-          <Route path="/admin/addVideoForm" element={<AddVideoForm />} />
+            <Route path="/admin/updateChapter/:course_id" element={<UpdateChapter/>} />
+            {/* <Route path="/update-chapter"></Route> */}
+            <Route path="/admin/courseContent/:id" element={<CourseContent />} />
+            <Route path="/pdf-management/:courseId" element={<PdfManagementForm/>} />
+            <Route path="/admin/addVideoForm" element={<AddVideoForm />} />
           {/* <Route path="/admin/videoUploadForm" element={<VideoUploadForm />} />
           <Route path="/admin/pdfUploadForm" element={<PdfUploadForm />} /> */}
           <Route path="/admin/addCourse" element={<AddCourse />} />
-
           <Route path="/" element={<HomePage01 />} />
           {/* <Route path="/page02" element={<Page02 />}/> */}
           <Route path="/CourseDescription/:id" element={<Page02 />} />
