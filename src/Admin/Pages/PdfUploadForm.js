@@ -84,12 +84,4 @@ const PdfUploadForm = () => {
     </div>
   );
 };
-
-<<<<<<< HEAD
 export default PdfUploadForm;
-=======
-export default PdfUploadForm;
-
-
-
->>>>>>> 5e7176a7cd927d8f18fe271c4999aead3aa5c061
