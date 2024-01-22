@@ -58,18 +58,19 @@ const PdfUploadForm = () => {
 
   return (
     <div className={styles.container}>
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={handleFileChange}
-        className={styles.fileInput}
-      />
       <select value={courseId} onChange={handleCourseChange} className={styles.courseSelect}>
         <option value="" disabled>Select a Course</option>
         {courses.map(course => (
           <option key={course._id} value={course._id}>{course.courseTitle}</option>
         ))}
       </select>
+      <input
+        type="file"
+        accept="application/pdf"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+      
       <button
         onClick={handleUpload}
         disabled={loading}
@@ -84,4 +85,11 @@ const PdfUploadForm = () => {
   );
 };
 
+<<<<<<< HEAD
 export default PdfUploadForm;
+=======
+export default PdfUploadForm;
+
+
+
+>>>>>>> 5e7176a7cd927d8f18fe271c4999aead3aa5c061

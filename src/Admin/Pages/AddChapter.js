@@ -103,16 +103,19 @@ const AddChapterForm = () => {
       else if (name === "videoUrl") setVideoUrl(value);
       else if (name === "pdfTitle") setPdfTitle(value);
       else if (name === "pdfUrl") setPdfUrl(value);
+      else if (name === "currentTitle") setCurrentTitle(value);
+      else if (name === "currentPdfTitle") setCurrentPdfTitle(value);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const newTopic = {
-        videoTitle: currentTitle || 'Default Video Title',
+        videoTitle: currentTitle || "Default Video Title",
         selectedVideo: currentSelectedVideo,
-        pdfTitle: currentPdfTitle,
+        pdfTitle: pdfTitle || "Default PDF Title", // Use pdfTitle instead of currentPdfTitle
         selectedPdf: currentSelectedPdf,
         completed: [],
       };
@@ -130,6 +133,7 @@ const AddChapterForm = () => {
 
       console.log("Sending data to server:", newChapter);
 
+<<<<<<< HEAD
       const response = await fetch("http://localhost:8000/vc/api/chapters", {
         method: "POST",
         headers: {
@@ -137,6 +141,18 @@ const AddChapterForm = () => {
         },
         body: JSON.stringify(newChapter),
       });
+=======
+      const response = await fetch(
+        "http://13.200.156.92:8000/vc/api/chapters",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newChapter),
+        }
+      );
+>>>>>>> 5e7176a7cd927d8f18fe271c4999aead3aa5c061
 
       console.log("Server response:", response);
 
@@ -159,6 +175,11 @@ const AddChapterForm = () => {
       setCurrentPdfTitle("");
       setCurrentSelectedPdf("");
 
+<<<<<<< HEAD
+=======
+      // Reload the page after successfully adding the chapter
+      //window.location.reload();
+>>>>>>> 5e7176a7cd927d8f18fe271c4999aead3aa5c061
     } catch (error) {
       console.error("Error adding chapter:", error.message);
     }
@@ -222,8 +243,8 @@ const AddChapterForm = () => {
             <input
               type="text"
               placeholder="Enter PDF Title"
-              value={currentPdfTitle}
-              onChange={(e) => setCurrentPdfTitle(e.target.value)}
+              value={pdfTitle}
+              onChange={(e) => setPdfTitle(e.target.value)}
             />
             <select
               value={currentSelectedPdf || ""}
@@ -233,7 +254,7 @@ const AddChapterForm = () => {
                 Select PDF
               </option>
               {availablePdfs.map((pdf) => (
-                <option key={pdf.originalname} value={pdf.originalname}>
+                <option key={pdf.s3Key} value={pdf.cloudFrontUrl}>
                   {pdf.originalname}
                 </option>
               ))}
@@ -246,5 +267,4 @@ const AddChapterForm = () => {
   );
 };
 
-export default AddChapterForm
-
+export default AddChapterForm;

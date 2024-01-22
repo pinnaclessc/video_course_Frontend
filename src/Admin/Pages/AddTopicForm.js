@@ -17,7 +17,7 @@ const AddTopicForm = () => {
     // Fetch the list of courses
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/courses');
+        const response = await fetch('http://13.200.156.92:8000/api/courses');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -120,8 +120,6 @@ const AddTopicForm = () => {
       }
 
       console.log('Topic added successfully');
-
-      // Clear form fields after successful addition
       setVideoTitle('');
       setSelectedVideo('');
       setPdfTitle('');
@@ -132,7 +130,7 @@ const AddTopicForm = () => {
   };
 
   return (
-    <div className={styles["AddTopic-wraper"]}>
+    <div className={styles['topic-form']}>
       <label>
         Select Course:
         <select name="course" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
