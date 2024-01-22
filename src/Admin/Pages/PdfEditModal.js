@@ -1,12 +1,11 @@
-// PdfEditModal.jsx
 import React, { useState } from 'react';
 import styles from './PdfEditModal.module.css';
 
 const PdfEditModal = ({ pdf, onClose }) => {
   const [newData, setNewData] = useState({
-    // Initialize with existing PDF data
+   
     originalname: pdf.originalname,
-    // Add other fields as needed
+    
   });
 
   const handleInputChange = (e) => {
@@ -17,7 +16,7 @@ const PdfEditModal = ({ pdf, onClose }) => {
   };
 
   const handleSave = () => {
-    // Implement the save/update logic
+    
     console.log('Save PDF data:', newData);
     onClose();
   };
@@ -34,7 +33,7 @@ const PdfEditModal = ({ pdf, onClose }) => {
           onChange={handleInputChange}
         />
       </label>
-      {/* Add other input fields as needed */}
+     
       <button onClick={handleSave}>Save</button>
       <button onClick={onClose}>Cancel</button>
     </div>

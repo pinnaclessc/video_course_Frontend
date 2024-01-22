@@ -68,27 +68,6 @@ const validCourseId = mongoose.Types.ObjectId(courseId);
   };
 
 
-  // const handleSubmit = async () => {
-  //   try {
-  //     const response = await fetch('http://localhost:8000/add-courseContent', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(courseContent),
-  //     });
-
-  //     if (response.ok) {
-  //       console.log('Course content successfully submitted');
-  //       // You can reset the form or perform other actions upon successful submission
-  //     } else {
-  //       console.error('Failed to submit course content');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error while submitting course content:', error);
-  //   }
-  // };
-
   const handleSubmit = async () => {
     try {
       const response = await fetch('http://localhost:8000/add-courseContent', {
@@ -101,18 +80,16 @@ const validCourseId = mongoose.Types.ObjectId(courseId);
   
       if (response.ok) {
         console.log('Course content successfully submitted');
-        // You can reset the form or perform other actions upon successful submission
+    
       } else {
-        // Log detailed error information
-        const errorData = await response.json(); // Parse response body as JSON
+      
+        const errorData = await response.json();
         console.error('Failed to submit course content:', errorData);
   
-        // You may perform additional error handling based on errorData if needed
       }
     } catch (error) {
       console.error('Error while submitting course content:', error);
   
-      // Handle specific types of errors if needed
       if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
         console.error('Network error. Make sure the server is running.');
       }

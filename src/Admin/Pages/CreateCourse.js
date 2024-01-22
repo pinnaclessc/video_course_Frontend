@@ -5,12 +5,9 @@ import {saveOutlined} from '@ant-design/icons'
 import styles from '../Admin.module.css'
 import Resizer from 'react-image-file-resizer';
 
-
-
-
 const {Option} =Select;
 export default function CreateCourse() {
-    //state 
+  
     const [values,setValues]=useState({
         name:"",
         description:"",
@@ -60,15 +57,6 @@ export default function CreateCourse() {
         console.log(values);
     }
 
-    // const CreateCourseForm=()=>{
-    //     <form onSubmit={handleSubmit}>
-    //         <div>
-    //             <input type='text' name='name' className='create-course-inputBox' placeholder='Name'  value={values.name} onChange={handleChange}></input>
-    //         </div>
-
-    //     </form>
-
-    // }
   return (
     <>
         <form onSubmit={handleSubmit} className={styles["createCourseForm"]}>

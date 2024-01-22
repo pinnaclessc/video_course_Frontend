@@ -1,7 +1,6 @@
-// PdfManagementForm.jsx
 import React, { useState, useEffect } from 'react';
 import styles from './PdfManagementForm.module.css';
-import PdfEditModal from './PdfEditModal'; // Adjust the path based on your project structure
+import PdfEditModal from './PdfEditModal'; 
 import { useParams } from 'react-router-dom';
 
 const PdfManagementForm = () => {

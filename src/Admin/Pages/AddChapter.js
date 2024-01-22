@@ -132,16 +132,6 @@ const AddChapterForm = () => {
       };
 
       console.log("Sending data to server:", newChapter);
-
-<<<<<<< HEAD
-      const response = await fetch("http://localhost:8000/vc/api/chapters", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newChapter),
-      });
-=======
       const response = await fetch(
         "http://13.200.156.92:8000/vc/api/chapters",
         {
@@ -152,7 +142,6 @@ const AddChapterForm = () => {
           body: JSON.stringify(newChapter),
         }
       );
->>>>>>> 5e7176a7cd927d8f18fe271c4999aead3aa5c061
 
       console.log("Server response:", response);
 
@@ -174,12 +163,6 @@ const AddChapterForm = () => {
       setCurrentSelectedVideo("");
       setCurrentPdfTitle("");
       setCurrentSelectedPdf("");
-
-<<<<<<< HEAD
-=======
-      // Reload the page after successfully adding the chapter
-      //window.location.reload();
->>>>>>> 5e7176a7cd927d8f18fe271c4999aead3aa5c061
     } catch (error) {
       console.error("Error adding chapter:", error.message);
     }
