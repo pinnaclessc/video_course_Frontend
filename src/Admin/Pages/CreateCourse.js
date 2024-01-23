@@ -47,9 +47,6 @@ export default function CreateCourse() {
         let file=e.target.file[0]
         setPreviewH(window.URL.createObjectURL(e.target.files[0]))
         setUploadBtnTestHM(file.name);
-
-        //resizer
-
     }
 
     const handleSubmit=e=>{

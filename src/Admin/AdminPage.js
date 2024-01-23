@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import style from './AdminPage.module.css';
 import AllCourses from './Pages/AllCourses';
 import AllStudent from './Pages/AllStudent';
@@ -6,6 +7,7 @@ import AddCourse from './Pages/AddCourse';
 import AddCourseContent from './Pages/AddCourseContent';
 
 export default function AdminPage() {
+  const navigate = useNavigate();
 
   const[allCourses,setAllCourses]=useState(true);
   const[allStudent,setAllStudnt]=useState(false);
@@ -41,6 +43,9 @@ export default function AdminPage() {
     setAllStudnt(false);
 
   }
+  const ViewcourseContentHandler=()=>{
+    navigate('/admin/show-course-Content');
+  }
 
 
 
@@ -51,6 +56,7 @@ export default function AdminPage() {
       <div className={style["admin-navbar"]}>
         <div className={style["admin-navItems"]}onClick={handleAllCourses}>All Coures</div>
         <div className={style["admin-navItems"]}onClick={handleAllStudent}>All Students</div>
+        <div className={style["admin-navItems"]}onClick={ViewcourseContentHandler}>View Course Content</div>
         <div className={style["admin-navItems-addCourses" ]}onClick={handleAddNewCourse}>Add New Course</div>
         <div className={style["admin-navItems-addCourses" ]}onClick={handleAddcourseContent}>Add Course Content</div>
         {/* <div className={style["admin-navItems-addCourses" ]}onClick={handleAddcourseContent}>Add Chapter</div> */}

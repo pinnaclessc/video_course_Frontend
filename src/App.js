@@ -69,6 +69,7 @@ import AdminPage from "./Admin/AdminPage";
 import CourseContent from "./Admin/Pages/CourseContent";
 import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
+import ShowCourseContent from "./Admin/Pages/ShowCourseContent"
 // test imports
 // import videoContent from "./src-d/components/NewComponentBP/videoContent";
 
@@ -78,6 +79,7 @@ export default function App() {
       <Router>
         <Header />
         <Routes>
+        <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
           <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses />}></Route>
           <Route

@@ -80,7 +80,7 @@ const AddChapterForm = () => {
     );
     setForVideo(videoData ? videoData.url : "");
     setForPdf(pdfData ? pdfData.url : "");
-  }, [
+  }, [ 
     currentSelectedVideo,
     currentSelectedPdf,
     availableVideos,
