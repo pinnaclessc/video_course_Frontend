@@ -332,7 +332,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
             ref={videoRef}
             src={
               selectedVideo ||
-              "https://dcnqeme0do8vw.cloudfront.net/Ratio/SSC%20GD%20Constable%202024%20Maths%20Ratio%20and%20Proportion%201-25.mp4"
+              "https://dgkwgu5olgqh6.cloudfront.net/videos/Default_Video.mp4"
             }
             type="video/mp4"
             onTimeUpdate={handleVideoTimeUpdate}
