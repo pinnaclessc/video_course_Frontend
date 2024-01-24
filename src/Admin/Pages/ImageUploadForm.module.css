@@ -1,0 +1,45 @@
+/* ImageUploadForm.module.css */
+
+.uploadContainer {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.errorMessage {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.languageLabel {
+  margin-bottom: 10px;
+}
+
+.languageSelect {
+  margin-right: 10px;
+}
+
+.fileInput {
+  margin-bottom: 20px;
+}
+
+.uploadButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.uploadButton:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.uploadProgress {
+  margin-top: 10px;
+}
