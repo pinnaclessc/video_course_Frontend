@@ -8,7 +8,7 @@ import Share from "./ShareComponent/Share";
 import { Link, useParams } from "react-router-dom";
 
 const Cart = () => {
-  const userId = JSON.parse(localStorage.getItem('user'))._id;
+  // const userId = JSON.parse(localStorage.getItem('user'))._id;
   const navigate = useNavigate();
   const params = useParams();
 
@@ -68,7 +68,7 @@ const Cart = () => {
   const ApplyCouponHandler = () => {
     setShowCoupon(!showCoupon);
   };
-  console.log(`user_id:${userId} and course_id:${params.course_id}`)
+  // console.log(`user_id:${userId} and course_id:${params.course_id}`)
 
   const handleBuy = async () => {
     try {
