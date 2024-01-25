@@ -6,7 +6,7 @@ export default function AllCourses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://http://13.200.156.92:8000/api/courses")
+    fetch("http://13.200.156.92:8000/api/courses")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
