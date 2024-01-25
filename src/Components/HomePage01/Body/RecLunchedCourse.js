@@ -17,7 +17,7 @@ export default function UpcomingCourse() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://http://13.200.156.92:8000/vc/recently-lunched/courses")
+    fetch("http://13.200.156.92:8000/vc/recently-lunched/courses")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data);
