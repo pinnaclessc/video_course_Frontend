@@ -45,7 +45,9 @@
   background-color: transparent;
   position:absolute;
   top:35%;
-  left: -0.5%;
+ 
+  left: -3%;
+  color: black;
 }
 
 .sliderButton-right {
@@ -53,7 +55,8 @@
   background-color: transparent;
   position:absolute;
   top: 35%;
-  left: 97%;
+  left: 101%;
+  color: black;
 
 }
 

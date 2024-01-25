@@ -287,7 +287,8 @@
 }
 
 .login_btn {
-  border: 2px solid black;
+  border: 1.5px solid black;
+  color: black;
   width: 100%;
   height: 40%;
   margin-top: 31%;
