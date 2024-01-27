@@ -27,8 +27,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState()
   const [isPlaying, setIsPlaying] = useState(false)
-  const [showCaptions, setShowCaptions] = useState(false)
-  const [selectedLanguage, setSelectedLanguage] = useState("en")
   const [isFullScreen, setIsFullScreen] = useState(false)
   const [isExpandedMode, setIsExpandedMode] = useState(true)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -40,7 +38,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
   const [playRate, setPlayRate] = useState(1)
   const [isPlayRateMenuOpen, setIsPlayRateMenuOpen] = useState(false)
   const playRateOptions = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [videoQuality, setVideoQuality] = useState("1080p")
   const [volume, setVolume] = useState(0.5)
   const [muted, setMuted] = useState(false)
@@ -53,28 +50,64 @@ const VideoPlayer = ({ onVideoSelect }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isCurrentlyFullScreen, setIsCurrentlyFullScreen] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+  const [selectedChapter, setSelectedChapter] = useState(null);
+  const [selectedTopicIndex, setSelectedTopicIndex] = useState(0);
+  const [isSidebarBelowNavVisible, setIsSidebarBelowNavVisible] = useState(false);
+
+
+  // useEffect(() => {
+  //   const video = videoRef.current
+  //   const handleLoadedMetadata = () => {
+  //     setDuration(video.duration)
+  //   }
+
+  //   video.addEventListener("loadedmetadata", handleLoadedMetadata)
+
+  //   return () => {
+  //     video.removeEventListener("loadedmetadata", handleLoadedMetadata)
+  //   }
+  // }, [])
 
   useEffect(() => {
-    const video = videoRef.current
+    const video = videoRef.current;
     const handleLoadedMetadata = () => {
-      setDuration(video.duration)
-    }
+      setDuration(video.duration);
+    };
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata)
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
 
     return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata)
-    }
-  }, [])
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+    };
+  }, [selectedVideoIndex]);
 
   const handleCenterPlayClick = () => {
-    handlePlayPause()
-  }
+    handlePlayPause();
+  };
+
+  useEffect(() => {
+    // Show play button icon for a few seconds when video is played or paused
+    setShowCenterPlayButton(true);
+    const timeout = setTimeout(() => {
+      setShowCenterPlayButton(false);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isPlaying]); 
+
+  // const handleCenterPlayClick = () => {
+  //   handlePlayPause()
+  // }
   const handleSubMenuSelect = (submenuTitle, isPlayed) => {
-    // Do something with the updated isPlayed status for the specific submenu
-    console.log("Submenu title:", submenuTitle)
-    console.log("Is played:", isPlayed)
-  }
+    setSelectedSubmenu(submenuTitle);
+    // Reset the state of showCenterPlayButton when changing submenu
+    setShowCenterPlayButton(!isPlayed);
+    console.log("Submenu title:", submenuTitle);
+    console.log("Is played:", isPlayed);
+  };
 
   const handleVideoSelectMenu = (submenu) => {
     setSelectedSubmenu(submenu.title)
@@ -84,18 +117,28 @@ const VideoPlayer = ({ onVideoSelect }) => {
     setError(true)
   }
 
+  // const handleVideoSelect = (videoUrl) => {
+  //   setSelectedVideo(videoUrl)
+  // }
   const handleVideoSelect = (videoUrl) => {
-    setSelectedVideo(videoUrl)
-  }
+    setSelectedVideo(videoUrl);
+
+    // Pause the video and show the play icon when selecting a new video
+    if (videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+      setShowCenterPlayButton(true);
+    }
+  };
 
   const handleButtonClick = (option) => {
     setActiveButton((prevButton) => (prevButton === option ? null : option))
-    closeOpenedButtons() // Close any opened buttons
+    closeOpenedButtons() 
   }
 
   //function to handle closing all opened buttons
   const closeOpenedButtons = () => {
-    setIsSettingsOpen(false)
+
     setIsPlayRateMenuOpen(false)
     setIsNotesOpen(false)
     setIsVolumeOpen(false)
@@ -110,10 +153,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
     setIsHovered(false)
   }
 
-  //Settings Handlers
-  const handleSettingsToggle = () => {
-    setIsSettingsOpen(!isSettingsOpen)
-  }
 
   const handleQualityOptionClick = async (quality) => {
     setIsLoading(true)
@@ -245,7 +284,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
   }
 
   //Fullscreen
-  const handleToggleFullScreen = () => {
+   const handleToggleFullScreen = () => {
     const videoContainer = document.getElementById("video-container")
 
     if (!document.fullscreenElement) {
@@ -277,25 +316,13 @@ const VideoPlayer = ({ onVideoSelect }) => {
     }
   }
 
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement)
-    }
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange)
-
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange)
-    }
-  }, [])
-
   //Expanded Mode
   const handleToggleExpandedMode = () => {
     setIsExpandedMode(!isExpandedMode)
     setIsSidebarOpen(false)
     setIsNavbarItemVisible((isExpandedMode) => !isExpandedMode)
   }
-
+  
   //Toggle Sidebar
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -314,6 +341,30 @@ const VideoPlayer = ({ onVideoSelect }) => {
     isExpandedMode && "videoNavbar_expanded"
   } `
 
+  // const handlePreviousTopic = () => {
+  //   if (selectedTopicIndex > 0) {
+  //     setSelectedTopicIndex((prevIndex) => prevIndex - 1);
+  //   }
+  // };
+
+  // const handleNextTopic = () => {
+  //   if (selectedTopicIndex < selectedChapter?.topics.length - 1) {
+  //     setSelectedTopicIndex((prevIndex) => prevIndex + 1);
+  //   }
+  // };
+
+  const handleChapterSelect = (chapter) => {
+    setSelectedChapter(chapter);
+    setSelectedTopicIndex(0);
+  };
+
+  useEffect(() => {
+    const selectedVideo =
+      selectedChapter?.topics[selectedTopicIndex]?.selectedVideo || null;
+   
+  }, [selectedChapter, selectedTopicIndex]);
+  
+
   return (
     <>
       <div
@@ -321,7 +372,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
         className={videoPlayerClass}
         onClick={handleVideoClick}
       >
-        {" "}
+
         {isLoading ? (
           <div className="loading-container">
             <FaSpinner className="loading-icon" />
@@ -342,25 +393,35 @@ const VideoPlayer = ({ onVideoSelect }) => {
             onCanPlayThrough={() => setError(false)}
             onError={handleVideoError}
             quality={videoQuality}
+           
           >
-            {" "}
           </video>
         )}
         <div id="submenu" className="submenu-title">
           {" "}
           {selectedSubmenu}
         </div>
-        <div className="center-controls">
+
+        {/* <div className="previous_next_buttons">
+        <button onClick={handlePreviousTopic}>Previous </button>
+        <button onClick={handleNextTopic}>Next </button>
+      </div> */}
+     
+        <div className="center-controls"> 
           {showCenterPlayButton && (
-            <div className="center-play-button" onClick={handleCenterPlayClick}>
+            <div
+              className="center-play-button"
+              onClick={handleCenterPlayClick}
+            >
               {isPlaying ? (
                 <FaPause className="center-play-icon" />
               ) : (
                 <FaPlay className="center-play-icon" />
               )}
             </div>
-          )}
-        </div>
+             )}
+
+             </div>
         {isExpandedMode && !isSidebarOpen && (
           <div className="sidebar_container">
             <div className="sidebar">
@@ -377,15 +438,18 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 menuData={menuData}
                 onVideoSelect={handleVideoSelect}
                 onSubMenuSelect={handleSubMenuSelect}
+                onChapterSelect={handleChapterSelect} 
               />
             </div>
           </div>
         )}
+
         <div
           className={`control_btn_container ${
             isFullscreen ? "fullscreen" : ""
           }`}
         >
+
           {/* //Seekbar */}
           <div className="seekbar_container">
             <div className="seekbar">
@@ -396,17 +460,16 @@ const VideoPlayer = ({ onVideoSelect }) => {
               />
             </div>
           </div>
+
           {/* //All Control Buttons */}
           <div className={`control_bar ${isFullscreen ? "fullscreen" : ""}`}>
-            {/* Play/Pause button */}
-            <div className="play_pause_container">
-              <PlayPauseButton
-                isPlaying={isPlaying}
-                handlePlayPause={handlePlayPause}
-                showCenterPlayButton={showCenterPlayButton}
-                onClick={handlePlayPause} // Add this line
-              />
-            </div>
+             <div className="play_pause_container">
+          <PlayPauseButton
+            isPlaying={isPlaying}
+            handlePlayPause={handlePlayPause}
+          />
+        </div>
+
             {/* Backward button */}
             <div className="backward_container">
               <button
@@ -418,7 +481,8 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 <BsArrowCounterclockwise className="backward_icon" size={25} />
               </button>
             </div>
-            {/* Playrate code */}
+
+            {/* Playrate  */}
             <PlayRateButtons
               playRate={playRate}
               playRateOptions={playRateOptions}
@@ -438,6 +502,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 <BsArrowClockwise className="forward_icon" size={25} />
               </button>
             </div>
+            
             {/* //duration */}
             <div className="duration">
               <span className="current_duration">{currentDuration}</span>/
@@ -465,14 +530,8 @@ const VideoPlayer = ({ onVideoSelect }) => {
               </div>
             </div>
 
-            {/* //Show captions */}
-            <div className="caption_container">
-              <button>
-                <CgTranscript size={25}></CgTranscript>
-              </button>
-            </div>
             {/* //Fullscreen */}
-            <div className="fullscreen_container">
+            {/* <div className="fullscreen_container">
               <div className="fullscreen_container">
                 <button
                   onClick={handleToggleFullScreen}
@@ -485,7 +544,16 @@ const VideoPlayer = ({ onVideoSelect }) => {
                   )}
                 </button>
               </div>
-            </div>
+            </div> */}
+             <div className="fullscreen_container">
+        <button onClick={handleToggleFullScreen} className="fullscreen-button">
+          {isCurrentlyFullScreen ? (
+            <MdOutlineFullscreenExit size={25} />
+          ) : (
+            <MdOutlineFullscreen size={25} />
+          )}
+        </button>
+      </div>
             <div className="expanded_container">
               {isExpandedMode ? (
                 <button
@@ -509,17 +577,10 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 </button>
               )}
             </div>
+          
 
-            {/* // settings button */}
-            <div className="settings-container">
-              <Settings
-                handleSettingsToggle={handleSettingsToggle}
-                isSettingsOpen={isSettingsOpen}
-                videoQuality={videoQuality}
-                handleQualityOptionClick={handleQualityOptionClick}
-              />
-            </div>
           </div>
+          
         </div>
       </div>
 
@@ -543,7 +604,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
         </Link>
         &nbsp;&nbsp;
         <Link to="/mylearning/notes" className="links">
-          Notes
+          NotesEditor
         </Link>
         &nbsp;&nbsp;
         <Link to="/mylearning/announcement" className="links">
