@@ -1,51 +1,50 @@
- .volumeControl {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  height: 128%;
-}
+import React, { useState, useEffect } from "react";
+import styles from "./Volume.module.css";
+import { GoMute, GoUnmute } from "react-icons/go";
 
-.volumeControl button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-right: 0.5rem;
-  color: #f0f0f0;
-}
+const Volume = ({ videoRef }) => {
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
 
-.volumeControl input[type="range"] {
-  -webkit-appearance: none;
-  width: 100px;
-  background: linear-gradient(to top, purple 0%, purple 100%);
-  outline: none;
-  opacity: 0.7;
-  position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(271deg);
-  transition: opacity 0.3s;
-  visibility: hidden;
-  cursor: grab;
-  z-index: 1;
-}
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+      videoRef.current.muted = isMuted;
+    }
+  }, [videoRef, volume, isMuted]);
 
-.volumeControl input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 10px;
-  height: 40px; 
-  background: #ffffff;
-  border: 1px solid #000000;
-  cursor: grab;
-  z-index: 2;
-}
+  const handleVolumeChange = (event) => {
+    const volumeValue = parseFloat(event.target.value);
+    setVolume(volumeValue);
+    setIsMuted(volumeValue === 0);
+  };
 
-.volumeControl input[type="range"]:active {
-  cursor: grab;
-}
+  const handleMuteToggle = () => {
+    setIsMuted(!isMuted);
+  };
 
-.volumeControl:hover input[type="range"] {
-  opacity: 1;
-  visibility: visible;
-} 
+  const fillPercentage = isMuted ? "0%" : `${volume * 100}%`;
+
+  const color = isMuted ? "white" : volume > 0 ? "purple" : "white";
+
+  return (
+    <div className={styles.volumeControl}>
+      <button onClick={handleMuteToggle}>
+        {isMuted ? <GoMute size={25} /> : <GoUnmute size={25} />}
+      </button>
+      <input
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value={isMuted ? 0 : volume}
+        onChange={handleVolumeChange}
+        style={{
+          background: `linear-gradient(to right, ${color} ${fillPercentage}, white ${fillPercentage})`
+        }}
+      />
+    </div>
+  );
+};
+
+export default Volume;
