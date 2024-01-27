@@ -1,11 +1,11 @@
-.volume-control {
+ .volumeControl {
   display: flex;
   align-items: center;
   position: absolute;
   height: 128%;
 }
 
-.volume-control button {
+.volumeControl button {
   background: none;
   border: none;
   cursor: pointer;
@@ -14,7 +14,7 @@
   color: #f0f0f0;
 }
 
-.volume-control input[type="range"] {
+.volumeControl input[type="range"] {
   -webkit-appearance: none;
   width: 100px;
   background: linear-gradient(to top, purple 0%, purple 100%);
@@ -30,22 +30,22 @@
   z-index: 1;
 }
 
-.volume-control input[type="range"]::-webkit-slider-thumb {
+.volumeControl input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 10px;
-  height: 40px; /* Adjust the height as per your preference */
+  height: 40px; 
   background: #ffffff;
   border: 1px solid #000000;
-  cursor: pointer;
+  cursor: grab;
   z-index: 2;
 }
 
-.volume-control input[type="range"]:active {
-  cursor: grabbing;
+.volumeControl input[type="range"]:active {
+  cursor: grab;
 }
 
-.volume-control:hover input[type="range"] {
+.volumeControl:hover input[type="range"] {
   opacity: 1;
   visibility: visible;
-}
+} 
