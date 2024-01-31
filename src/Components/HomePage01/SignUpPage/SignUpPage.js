@@ -1,6 +1,6 @@
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import classes from "./SignUpPage.module.css";
-import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
   const storedUser = localStorage.getItem("user");
