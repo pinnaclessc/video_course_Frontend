@@ -133,8 +133,11 @@ export default function App() {
         </Routes>
         {/* copy All Routes of D */}
          <Routes>
+         <Route path="/mylearning/:userId/:course_id" element={<VideoCoursesMain />}/>
+          <Route path="/course/:courseId" element={<VideoCoursesMain />}/>
           <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
-          <Route path="/mylearning" element={<VideoCoursesMain />}>
+          {/* <Route path="/checkout" element={<CheckoutPage/>}/> */}
+          {/* <Route path="/mylearning" element={<VideoCoursesMain />}>
             <Route path="/mylearning/overview" element={<CourseOverview/>} />
             <Route path="/mylearning/reviews" element={<Review />} />
             <Route path="/mylearning/search" element={<SearchBar />} />
@@ -142,10 +145,10 @@ export default function App() {
               path="/mylearning/announcement"
               element={<Announcements />}
             />
-          </Route>
-          <Route path="/mylearning/notes" element={<NotesEditor />} />
+          </Route> */}
+          {/* <Route path="/mylearning/notes" element={<NotesEditor />} />
           <Route path="/mylearning/q&a" element={<QandA />} />
-          <Route path="/mylearning/learningtools" element={<LearningTools />} />
+          <Route path="/mylearning/learningtools" element={<LearningTools />} /> */}
           <Route path="/user/username" element={<PinnacleProfile />}/>
           <Route path="/user/edit-photo" element={<EditPhoto />} />
           <Route path="/user/edit-account" element={<AccountSecurity />} />

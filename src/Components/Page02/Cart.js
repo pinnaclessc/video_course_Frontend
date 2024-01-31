@@ -32,7 +32,6 @@ const Cart = () => {
       const result = await response.json();
       console.log(result);
 
-      // Assuming result properties exist, update state accordingly
       setCourseTitle(result.courseTitle);
       setCourseDetails(result.courseDetails);
       setTeacherName(result.teacherName);
@@ -83,7 +82,7 @@ const Cart = () => {
     try {
       const userId = JSON.parse(localStorage.getItem("user"))._id;
       const response = await fetch(
-        `http://localhost:8000/purchase/${userId}/${params.id}`,
+        `http://13.200.156.92:8000/purchase/${userId}/${params.id}`,
         {
           method: "POST",
           headers: {
@@ -98,7 +97,7 @@ const Cart = () => {
 
       const data = await response.json();
       if (data.success) {
-        // Purchase was successful, you can redirect or show a success message
+       
         Swal.fire({
           title: 'Success!',
           text: 'Congratulations! You own this course.',
@@ -120,13 +119,12 @@ const Cart = () => {
     if (!auth) {
       navigate('/signup');
 
-
       return;
     }
     try {
       const userId = JSON.parse(localStorage.getItem("user"))._id;
       const response = await fetch(
-        `http://localhost:8000/add-to-cart/${userId}/${params.id}`,
+        `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
         
         {
           method: "POST",
@@ -143,7 +141,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Purchase was successful, you can redirect or show a success message
+     
         Swal.fire({
           title: 'Success!',
           text: 'Added in cart',
@@ -169,7 +167,7 @@ const Cart = () => {
     try {
       const userId = JSON.parse(localStorage.getItem("user"))._id;
       const response = await fetch(
-        `http://localhost:8000/add-to-wishlist/${userId}/${params.id}`,
+        `http://13.200.156.92:8000/add-to-wishlist/${userId}/${params.id}`,
         
         {
           method: "POST",
@@ -186,7 +184,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Purchase was successful, you can redirect or show a success message
+      
         Swal.fire({
           title: 'Success!',
           text: 'Added to Wishlist',
