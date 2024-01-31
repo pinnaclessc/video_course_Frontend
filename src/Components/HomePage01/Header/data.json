@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "image": "/images/coverImage0301.svg",
+    "imageUrl": "/images/coverImage0302.svg",
+    "title": " Maths 6800 Number System 100-125",
+    "instructor": "Ram Niwas Sir "
+  },
+  {
+    "id": 2,
+    "image": "/images/coverImage0501.svg",
+    "imageUrl": "/images/coverImage0502.svg",
+    "title": " Maths 6800 Number System 100-125",
+    "instructor": "Ram Niwas Sir "
+  },
+  {
+    "id": 3,
+    "image": "/images/coverImage0201.svg",
+    "imageUrl": "/images/coverImage0202.svg",
+    "title": "Maths 6800 Number System 100-125",
+    "instructor": "Ram Niwas Sir "
+  }
+]

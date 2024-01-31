@@ -11,8 +11,8 @@ export default function Page02() {
     <div>
       {/* <Timer /> */}
       <CourseDetails/>
-      <div className={styles['reportAbouse-div']}>
-      <Link to='/reportAbouse' className={styles['reportAbouse-Link']}>Report Abouse</Link>
+      <div className={styles['reportAbuse-div']}>
+      <Link to='/reportAbuse' className={styles['reportAbuse-Link']}>Report Abuse</Link>
       </div>
     </div>
   );
