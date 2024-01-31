@@ -7,7 +7,7 @@ function AllCourses() {
     { id: 1, title: "Course 1" },
     { id: 2, title: "Course 2" },
     { id: 3, title: "Course 3" },
-    // Add more courses as needed
+  
   ]
 
   return (

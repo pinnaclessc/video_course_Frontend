@@ -26,10 +26,9 @@ function MainContent() {
           throw new Error('User ID not found in URL parameters.');
         }
 
-        const response = await axios.get(`http://localhost:8000/purchased-courses/${userId}`);
+        const response = await axios.get(`http://13.200.156.92:8000/purchased-courses/${userId}`);
         setPurchasedCourses(response.data.purchasedCourses);
 
-        // SetVerticalOptions with the correct length
         setVerticalOptions(Array(response.data.purchasedCourses.length).fill(false));
       } catch (error) {
         console.error('Error fetching purchased courses:', error);
@@ -41,7 +40,7 @@ function MainContent() {
   }, [userId]);
 
   const handleCloseSideDots = () => {
-    setSideDotsOpen(false); // Set the state directly instead of using isSideDotsOpen
+    setSideDotsOpen(false); 
   };
 
   const handlePlayClick = (link) => {
