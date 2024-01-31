@@ -1,40 +1,3 @@
-// import React,{useState,useEffect} from "react";
-// import classes from "./SignUpPage.module.css";
-// import {Link,useNavigate} from "react-router-dom";
-
-// export default function SignUpPage() {
-//   const userId=JSON.parse(localStorage.getItem("user"))._id
-//   const navigate=useNavigate();
-
-//   const [name,setName]=useState("");
-//   const [email,setEmail]=useState("");
-//   const [password,setPassword]=useState("");
-//   useEffect(() => {
-//     const auth = localStorage.getItem("user");
-
-//     if (auth) {
-//       navigate(`/MyLearningPage/:${userId}`)
-//       window.location.reload();
-//     }
-//   }, []);
-
-
-//   const submitHandler = async (event) => {
-//     let result = await fetch("http://localhost:8000/add-new-user",{
-//       method: "post",
-//       body: JSON.stringify({ name, email, password }),
-//       headers: { "Content-Type": "application/json" },
-//     });
-
-//     result = await result.json();
-//     console.log(result);
-//     localStorage.setItem("user", JSON.stringify(result));
-//       if(result){
-//       navigate("/MyLearningMain");
-//      console.log("Singnup Completed");
-//     }
-//   };
-
 import React, { useState, useEffect } from "react";
 import classes from "./SignUpPage.module.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -56,7 +19,7 @@ export default function SignUpPage() {
   }, [userId, navigate]);
 
   const submitHandler = async (event) => {
-    let result = await fetch("http://localhost:8000/add-new-user", {
+    let result = await fetch("http://13.200.156.92:8000/add-new-user", {
       method: "post",
       body: JSON.stringify({ name, email, password }),
       headers: { "Content-Type": "application/json" },
