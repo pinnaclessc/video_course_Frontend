@@ -97,31 +97,6 @@
   margin-bottom: 1%;
 }
 
-.controls {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
-.controls button {
-  color: #fff;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-}
-.play_pause_container {
-  position: relative;
-  width: 2.5%;
-  left: 0;
-  align-items: center;
-}
 .play-pause-button {
   color: #f0f0f0;
 }
@@ -136,8 +111,8 @@
   position: relative;
   z-index: 0;
   margin-left: 1%;
-  height: 14px;
   width: 98%;
+  background-color: #ccc;
 }
 
 .add_notes a {
@@ -145,35 +120,20 @@
   top: 0;
   margin-top: -1%;
 }
-.seekbar {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 98%;
-  height: 12px;
-  background-color: #ccc;
-}
 
-.play_pause_container {
-  position: relative;
-  width: 3%;
-  left: 0;
-  align-items: center;
-}
 .play_pause {
   padding: 0 0.6rem;
   width: 3.4rem;
   color: #f0f0f0;
 }
-
-/* //forward */
+ /* //forward  */
 .forward_container {
   position: absolute;
-  left: 149px;
+  left: 152px;
 }
 .backward_container {
   position: absolute;
-  left: 44px;
+    left: 52px;
 }
 .forward .backward {
   width: auto;
@@ -188,6 +148,7 @@
   display: inline-block;
   color: #f0f0f0;
 }
+
 /* //Add Notes */
 .add_notes {
   width: 3.4rem;
@@ -196,84 +157,76 @@
 .add_notes a {
   margin-top: -22%;
 }
-/* //playrate */
-.play-rate {
-  width: 4rem;
-  background-color: #f0f0f0;
-  color: black;
-  text-align: center;
-  height: 1.4rem;
-}
-.play-rate-buttons li button.active {
-  background-color: #f0f0f0;
-  color: #333;
-  width: 100%;
-  border: #0b52de solid 1px;
-  height: 5vh;
-}
-.play-rate-menu li:hover {
-  background-color: #3e4143;
-  color: #f0f0f0;
-  height: 5vh;
-}
-.play-rate-menu_List {
-  margin: 1% 0 1% 0;
-  height: 5vh;
-}
+
+
+/* Play Rate */
+.play-rate-menu,
 .play-rate-buttons {
   background-color: #f0f0f0;
-  width: 5%;
   color: black;
   height: 1.4rem;
-  position: absolute;
-  left: 84px;
 }
 
-.play-rate-menu_unorderedList {
-  list-style: none;
-  padding-left: 0px !important;
-  padding-top: 0px !important;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
 .play-rate-menu {
   background: #1c1d1f;
-  border-color: #3e4143;
   border: 1px solid #d1d7dc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
-  overflow: auto;
-}
-
-.play-rate-menu {
-  list-style: none;
   position: absolute;
   top: -281px;
-}
-
-.play-rate-menu ul li button {
-  padding-left: 3.2rem;
-  padding-right: 3.2rem;
-  outline-offset: -0.4rem !important;
-  position: relative;
   white-space: nowrap;
-  padding-top: 8%;
 }
 
-button {
-  background-color: transparent;
-  border: none;
+.play-rate-menu button {
+  padding: 0.5rem 1rem;
+  display: inline-block;
   color: #f0f0f0;
-  font-weight: 600;
+  background-color: #3e4143;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.play-rate-menu button:hover {
+  background-color: #545759;
+}
+
+/* Play Rate Buttons */
+.play-rate-buttons {
+  width: 5%;
+  height: 1.4rem;
+  position: absolute;
+  left: 87px;
+}
+
+.play-rate-buttons button {
+  background-color: #f0f0f0;
+  color: black;
+  width: 100%;
+  height: 100%;
+  border: #0b52de solid 1px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.play-rate-buttons button:hover {
+  background-color: #d1d7dc;
+  color: #333;
+}
+
+.play-rate-buttons button.active {
+  background-color: #b4d2e9;
+  color: #333;
 }
 
 .volume_slider_container {
   background-color: transparent;
-  height: 8vh;
-  position: absolute;
-  color: #f0f0f0;
-  top: 2px;
-  right: 217px;
+    height: 8vh;
+    position: absolute;
+    color: #f0f0f0;
+    top: 1px;
+    right: 138px;
 }
+
 .volume-slider {
   position: absolute;
   display: none;
@@ -284,11 +237,7 @@ button {
   top: -117px;
   right: -12px;
 }
-.transcript {
-  position: absolute;
-  top: 23px;
-  right: 186px;
-}
+
 .volume-button {
   background: none;
   border: none;
@@ -298,6 +247,7 @@ button {
   color: #f0f0f0;
   margin-left: 10px;
 }
+
 .volume-container {
   width: 3rem;
   margin-left: 60vw;
@@ -473,29 +423,14 @@ button {
   top: 0;
   margin-top: -1%;
 }
-.seekbar {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  height: 11px;
-  background-color: #ccc;
-  top: 0;
-}
-.seekbar:hover {
-  height: 100%;
-  width: 99.8%;
-  cursor: pointer;
-  position: absolute;
-  z-index: 2;
-}
+
 .play-pause {
   color: black;
 }
 .play_pause_container {
   position: relative;
   width: 3%;
-  left: 0;
+  left: 9px;
   align-items: center;
 }
 .play_pause {
@@ -504,11 +439,9 @@ button {
   color: #f0f0f0;
 }
 .sidebar_container {
-  position: fixed;
-  top: 2%;
-  left: 55%;
-  right: 0%;
-  width: 305px;
+  margin-left: 67%;
+  margin-top: 1%;
+  width: 340px;
   height: 100vh;
   background-color: #f2f2f2;
   overflow-x: hidden;
@@ -517,8 +450,8 @@ button {
 }
 .sidebar {
   background-color: #f5f5f5;
-  padding: 3px;
-  overflow-y: auto;
+  margin-bottom: 10%;
+  overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #bdbdbd #f5f5f5;
 }
@@ -581,9 +514,32 @@ button {
   cursor: pointer;
 }
 .expanded {
-  width: 78%;
+  width: 77%;
   margin-left: 0;
   height: 77%;
+}
+
+/* Center play button styles */
+.center-controls {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.center-play-button {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-play-icon {
+  color: #fff;
 }
 
 .Navbar_container {
@@ -606,12 +562,12 @@ button {
 .fullscreen_container {
   position: absolute;
   color: white;
-  right: 68px;
+  right: 90px;
 }
 .expanded_container {
   right: 23px;
   position: absolute;
-  top: 22px;
+  top: 25px;
 }
 .expanded-mode-button {
   color: white;
@@ -629,8 +585,8 @@ button {
 }
 .Notes_button_container {
   position: absolute;
-  left: 320px;
-  top: 17px;
+  left: 326px;
+  top: 25px;
 }
 
 .loading-container {
@@ -679,6 +635,10 @@ button {
 
 .video-container.fullscreen .sidebar_container:hover + .submenu-title {
   display: block;
+}
+
+.previous_next_buttons{
+  margin-top: 10%;
 }
 
 /* Animation keyframes for the loading indicator */

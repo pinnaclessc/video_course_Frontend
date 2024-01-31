@@ -22,7 +22,9 @@ export default function AllCourses() {
   const deleteHandler= async(id)=>{
     const confirm=window.confirm("Delete");
     if(confirm){
+      
       let result= await fetch(` http://13.200.156.92:8000/course/${id}`,
+
       {method:"Delete"});
       window.location.reload();
       result=await result.json();
@@ -33,7 +35,9 @@ export default function AllCourses() {
   const searchHandler = async (event) => {
     let key = event.target.value;
     if (key) {
+
       let result = await fetch(`http:13.200.156.92:8000/search/${key}`);
+
       result = await result.json();
       if (result) {
         setCourses(result);
