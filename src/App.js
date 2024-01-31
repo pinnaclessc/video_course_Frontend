@@ -129,13 +129,14 @@ export default function App() {
           <Route path="/exploreMore" element={<ExploreMore />} />
           <Route path="/railwayExploreMore" element={<Railway />} />
           <Route path="/adminPage" element={<AdminPage />} />
+          <Route path="/mylearning/:userId/:course_id" element={<VideoCoursesMain />}/>
+          <Route path="/course/:courseId" element={<VideoCoursesMain />}/>
+          <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
           {/* <Route path="/learningPage/:userId" element={<LearningPage/>}/> */} 
         </Routes>
         {/* copy All Routes of D */}
          <Routes>
-         <Route path="/mylearning/:userId/:course_id" element={<VideoCoursesMain />}/>
-          <Route path="/course/:courseId" element={<VideoCoursesMain />}/>
-          <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
+        
           {/* <Route path="/checkout" element={<CheckoutPage/>}/> */}
           {/* <Route path="/mylearning" element={<VideoCoursesMain />}>
             <Route path="/mylearning/overview" element={<CourseOverview/>} />
