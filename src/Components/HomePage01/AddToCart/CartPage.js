@@ -1,7 +1,6 @@
 import React from "react";
 import Styles from "./CartPage.module.css";
 import Data from "./cartData.json";
-import Header from "../Header/Header";
 import YouMightAlsoLike from "./YouMightAlsoLike";
 import image from "./empty-shoping-cart.png";
 
@@ -9,7 +8,6 @@ export default function CartPage() {
   if (Data.length === 0) {
     return (
       <div className={Styles["cartPage-first-div"]}>
-        <Header />
         <div className={Styles["empty-shoping-cart-div"]}>
           <div className={Styles["Shopping-Cart-heading"]}>Shopping Cart</div>
           <div className={Styles["empty-shoping-para"]}>0 Courses in Cart</div>
@@ -30,7 +28,6 @@ export default function CartPage() {
   }
   return (
     <div className={Styles["CartPage-FullPage"]}>
-      <Header />
       <div className={Styles[""]}>
         <div className={Styles["Shopping-Cart-heading"]}>Shopping Cart</div>
         <div className={Styles["empty-shoping-para"]}>

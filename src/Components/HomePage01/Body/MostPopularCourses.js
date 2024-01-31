@@ -17,7 +17,7 @@ export default function UpcomingCourse() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://http://13.200.156.92:8000/:8000/courses/sorted-by-rating")
+    fetch("http://13.200.156.92:8000/courses/sorted-by-rating")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data);
@@ -111,20 +111,6 @@ export default function UpcomingCourse() {
                           <s>&#8377;{data.price}</s>
                         </div>
                       </div>
-                    </div>
-                    <div className={styles["cart-wishlist-Btn-div"]}>
-                      <button
-                        className={styles["cartBtn"]}
-                        onClick={cartHandler}
-                      >
-                        Add to Cart
-                      </button>
-                      <button
-                        className={styles["cartBtn"]}
-                        onClick={wishlistHandler}
-                      >
-                        Add to wishlist
-                      </button>
                     </div>
                   </div>
                 </div>

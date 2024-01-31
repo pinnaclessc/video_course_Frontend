@@ -203,7 +203,7 @@ return (
           <div className={classes.signup}>
             <button
               className={classes.signup_btn}
-              onClick={() => navigate("/sighup")}>Sign up
+              onClick={() => navigate("/signup")}>Sign up
             </button>
           </div>
         </>}

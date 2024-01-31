@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
 import data from "./data.json";
 import styles from "./Cart.module.css";
 import { AiOutlinePlayCircle } from "react-icons/ai";
@@ -6,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import ApplyCoupon from "./ApplyCoupon";
 import Share from "./ShareComponent/Share";
 import { Link, useParams } from "react-router-dom";
+import { IoHeartCircleOutline } from "react-icons/io5";
 
 const Cart = () => {
-  const userId = JSON.parse(localStorage.getItem('user'))._id;
   const navigate = useNavigate();
   const params = useParams();
 
@@ -18,10 +19,14 @@ const Cart = () => {
 
   const getCourseDetails = async () => {
     try {
-      const response = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
+      const response = await fetch(
+        `http://13.200.156.92:8000/course/${params.id}`
+      );
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch course details. Status: ${response.status}`);
+        throw new Error(
+          `Failed to fetch course details. Status: ${response.status}`
+        );
       }
 
       const result = await response.json();
@@ -34,9 +39,8 @@ const Cart = () => {
       setRating(result.rating);
       setPrice(result.price);
       setMrp(result.mrp);
-      
     } catch (error) {
-      console.error('Error fetching course details:', error);
+      console.error("Error fetching course details:", error);
     }
   };
 
@@ -49,7 +53,6 @@ const Cart = () => {
   const [rating, setRating] = useState();
   const [price, setPrice] = useState();
   const [mrp, setMrp] = useState();
-  const [buy, setBuy] = useState(false);
 
   const { image1, image2, heading, description, subscriptionPrice } = data;
 
@@ -68,37 +71,136 @@ const Cart = () => {
   const ApplyCouponHandler = () => {
     setShowCoupon(!showCoupon);
   };
-  console.log(`user_id:${userId} and course_id:${params.course_id}`)
 
   const handleBuy = async () => {
+    const auth = localStorage.getItem('user');
+
+    if (!auth) {
+      navigate('/signup');
+     
+      return;
+    }
     try {
-      const userId = JSON.parse(localStorage.getItem('user'))._id;
-      const response = await fetch(`http://localhost:8000/purchase/${userId}/${params.course_id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: userId,
-          courseId: params.course_id,
-        }),
-      });
+      const userId = JSON.parse(localStorage.getItem("user"))._id;
+      const response = await fetch(
+        `http://localhost:8000/purchase/${userId}/${params.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: params.course_id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      if (data.success) {
+        // Purchase was successful, you can redirect or show a success message
+        Swal.fire({
+          title: 'Success!',
+          text: 'Congratulations! You own this course.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+      } else {
+        // Handle error
+        console.error("Failed to purchase course");
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
+  };
+
+  const cartHandler=async () =>{
+    const auth = localStorage.getItem('user');
+
+    if (!auth) {
+      navigate('/signup');
+
+
+      return;
+    }
+    try {
+      const userId = JSON.parse(localStorage.getItem("user"))._id;
+      const response = await fetch(
+        `http://localhost:8000/add-to-cart/${userId}/${params.id}`,
+        
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: params.course_id,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (data.success) {
         // Purchase was successful, you can redirect or show a success message
-        setTimeout(() => {
-          setBuy(true);
-        }, 1000);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Added in cart',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
       } else {
         // Handle error
-        console.error('Failed to purchase course');
+        console.error("Failed to purchase course");
       }
     } catch (error) {
-      console.error('Error during purchase:', error);
+      console.error("Error during purchase:", error);
     }
-  };
+  }
+  const wishlistHandler=async () =>{
+    const auth = localStorage.getItem('user');
+
+    if (!auth) {
+      navigate('/signup');
+   
+      return;
+    }
+    try {
+      const userId = JSON.parse(localStorage.getItem("user"))._id;
+      const response = await fetch(
+        `http://localhost:8000/add-to-wishlist/${userId}/${params.id}`,
+        
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: params.course_id,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Purchase was successful, you can redirect or show a success message
+        Swal.fire({
+          title: 'Success!',
+          text: 'Added to Wishlist',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+      } else {
+        // Handle error
+        console.error("Failed to purchase course");
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
+  }
 
   const getPrice = () => {
     switch (selectedMonths) {
@@ -145,9 +247,10 @@ const Cart = () => {
           <h2 className={styles.heading}>{courseTitle}</h2>
           <p className={styles.course}>
             {courseDetails}
+            <br />
             <Link to="/personalPlane">Learn More</Link>
           </p>
-          <button
+          {/* <button
             className={styles["Start-Subscription-btn"]}
             onClick={() => navigate("/checkout")}
           >
@@ -155,7 +258,7 @@ const Cart = () => {
           </button>
           <p className={styles["Subscription-para"]}>
             Starting at ₹ {price} per month Cancel anytime
-          </p>
+          </p> */}
           <div className={styles["range-slider-container"]}>
             <input
               type="range"
@@ -172,14 +275,9 @@ const Cart = () => {
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
 
-          <button
-            className={styles["Buy-this-course"]}
-            onClick={handleBuy}
-          >
+          <button className={styles["Buy-this-course"]} onClick={handleBuy}>
             Buy this course
           </button>
-          {buy && <div className={styles["success-msg"]}>Successful</div>}
-
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
@@ -203,6 +301,20 @@ const Cart = () => {
         </div>
       </div>
       {isShare && <Share />}
+      <div className={styles["cart-wishlist-Btn-div"]}>
+        <button
+          className={styles["cartBtn"]}
+          onClick={cartHandler}
+        >
+          Add to Cart
+        </button>
+        <button
+          className={styles["wishListBtn"]}
+          onClick={wishlistHandler}
+        >
+          <IoHeartCircleOutline size={40}/>
+        </button>
+      </div>
     </div>
   );
 };

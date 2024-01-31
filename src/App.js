@@ -35,6 +35,7 @@ import Railway from "./ExploreByCategory/Railway";
 import CreateCourse from "./Admin/Pages/CreateCourse";
 import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
+import AddUserForm from './Admin/user/AddUserForm';
 import Header from "./Components/HomePage01/Header/Header";
 
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
@@ -69,7 +70,7 @@ import AdminPage from "./Admin/AdminPage";
 import CourseContent from "./Admin/Pages/CourseContent";
 import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
-import ShowCourseContent from "./Admin/Pages/ShowCourseContent"
+import ShowCourseContent from "./Admin/Pages/ShowCourseContent";
 // test imports
 // import videoContent from "./src-d/components/NewComponentBP/videoContent";
 
@@ -81,7 +82,9 @@ export default function App() {
         <Routes>
         <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
           <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
-          <Route path="/admin/allCourses" element={<AllCourses />}></Route>
+          <Route path="/admin/allCourses" element={<AllCourses/>}></Route>
+          <Route path="/admin/add-new-user" element={<AddUserForm />}></Route>
+
           <Route
             path="/admin/updateCourse/:id"
             element={<UpdateCourse/>}
@@ -100,7 +103,7 @@ export default function App() {
           <Route path="/share" element={<Share />} />
           <Route path="/language" element={<Language />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/sighup" element={<SignUpPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/cartHover" element={<AddToCart />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/error" element={<PageNotFound />} />
@@ -126,12 +129,10 @@ export default function App() {
           <Route path="/exploreMore" element={<ExploreMore />} />
           <Route path="/railwayExploreMore" element={<Railway />} />
           <Route path="/adminPage" element={<AdminPage />} />
-          <Route path="/mylearning/:course_id" element={<VideoCoursesMain />}/>
-
           {/* <Route path="/learningPage/:userId" element={<LearningPage/>}/> */} 
         </Routes>
         {/* copy All Routes of D */}
-        {/* <Routes>
+         <Routes>
           <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
           <Route path="/mylearning" element={<VideoCoursesMain />}>
             <Route path="/mylearning/overview" element={<CourseOverview/>} />
@@ -145,7 +146,7 @@ export default function App() {
           <Route path="/mylearning/notes" element={<NotesEditor />} />
           <Route path="/mylearning/q&a" element={<QandA />} />
           <Route path="/mylearning/learningtools" element={<LearningTools />} />
-          <Route path="/user/username" element={<PinnacleProfile />} />
+          <Route path="/user/username" element={<PinnacleProfile />}/>
           <Route path="/user/edit-photo" element={<EditPhoto />} />
           <Route path="/user/edit-account" element={<AccountSecurity />} />
           <Route
@@ -154,7 +155,7 @@ export default function App() {
           />
           <Route
             path="/user/edit-payment-methods"
-            element={<PaymentMethod />}
+            element={<PaymentMethod/>}
           />
           <Route path="/user/edit-privacy" element={<Privacy />} />
           <Route
@@ -166,10 +167,10 @@ export default function App() {
           <Route path="/giftcourse" element={<GiftACourseD />} />
           <Route path="/user/messages" element={<Messages />} />
           <Route path="/pinnacle-help" element={<PinnacleHelp />} />
-          <Route path="/signup" element={<SignUpHelp />} />
+          <Route path="/signuphelp" element={<SignUpHelp />} />
           <Route path="/account-main" element={<AccountMain />} />
           <Route path="/troubleshooting" element={<TroubleshootingHelp />} />
-        </Routes> */}
+        </Routes> 
         {/* <Footer/> */}
       </Router>
     </div>

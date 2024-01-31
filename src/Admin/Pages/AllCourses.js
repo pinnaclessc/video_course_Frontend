@@ -6,7 +6,7 @@ export default function AllCourses() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://http://13.200.156.92:8000/:8000/api/courses")
+    fetch("http://13.200.156.92:8000/api/courses")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -22,7 +22,7 @@ export default function AllCourses() {
   const deleteHandler= async(id)=>{
     const confirm=window.confirm("Delete");
     if(confirm){
-      let result= await fetch(` http://http://13.200.156.92:8000/:8000/course/${id}`,
+      let result= await fetch(` http://13.200.156.92:8000/course/${id}`,
       {method:"Delete"});
       window.location.reload();
       result=await result.json();
@@ -33,7 +33,7 @@ export default function AllCourses() {
   const searchHandler = async (event) => {
     let key = event.target.value;
     if (key) {
-      let result = await fetch(`http://http://13.200.156.92:8000/:8000/search/${key}`);
+      let result = await fetch(`http:13.200.156.92:8000/search/${key}`);
       result = await result.json();
       if (result) {
         setCourses(result);
@@ -65,7 +65,6 @@ export default function AllCourses() {
             <div className={styles["AllCourses-heading-price"]}>{item.price}</div>
             <div><button onClick={()=>deleteHandler(item._id)} className={styles["AllCourses-DeleteBTN"]}>Delete</button>
             <Link to={"/admin/updateCourse/"+item._id}  className={styles["AllCourses-editLink"]}>Edit</Link></div>
-            <Link to={"/admin/updateCoursecontent/"+item._id}  className={styles["AllCourses-edit-course-content-Link"]}>Edit Course Content</Link>
             </div>
 
         )):<p>No data Found</p>

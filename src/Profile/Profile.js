@@ -4,7 +4,6 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import PinnacleProfile from "./PinnacleProfile";
 import ProfilePicture from "./ProfilePicture";
 import PrivacySettings from "./PrivacySettings";
-import Footer from "../Components/HomePage01/Footer/Footer";
 import { MdOndemandVideo, MdMessage } from "react-icons/md";
 import {BsBarChartFill,BsQuestionCircle,BsTriangleFill,} from "react-icons/bs";
 import { TbTool } from "react-icons/tb";
@@ -90,18 +89,8 @@ export default function Profile() {
           </div>
           <div className={Styles["Heading"]}>Profile & settings</div>
           <div className={Styles["profile-picture-privacy-section"]}>
-            <div
-              className={Styles["individual-section"]}
-              onClick={PinnacleProfileHandler}
-            >
-              Pinnacle Profile
-            </div>
-            <div
-              className={Styles["individual-section"]}
-              onClick={ProfilePictureHandler}
-            >
-              Profile Picture
-            </div>
+            <div className={Styles["individual-section"]}onClick={PinnacleProfileHandler}>Pinnacle Profile</div>
+            <div className={Styles["individual-section"]}onClick={ProfilePictureHandler}>Profile Picture</div>
             <div
               className={Styles["individual-section"]}
               onClick={PrivacySettingHandler}
@@ -116,8 +105,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

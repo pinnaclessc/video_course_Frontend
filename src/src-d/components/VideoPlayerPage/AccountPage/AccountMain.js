@@ -5,13 +5,11 @@ import SideMenu from "./SideMenu"
 
 function AccountMain() {
   return (
-    <div className={classes.main_container}>
-      <Header />
       <div className={classes.Sidemain_container}>
-        <SideMenu />
+        <SideMenu/>
       </div>
-    </div>
+
   )
 }
 
-export default AccountMain
+export default AccountMain;

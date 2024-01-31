@@ -46,7 +46,7 @@ const ChaptersList = () => {
 //         console.log('courseId:', courseId);
 // console.log('chapterId:', chapterId);
 
-//       const response = await axios.put(`http://localhost:8000/course/${courseId}/update-chapter/${chapterId}`, {
+//       const response = await axios.put(`http://http://13.200.156.92:8000/:8000/course/${courseId}/update-chapter/${chapterId}`, {
 //         chapterTitle: newTitle,
         
 //       });
@@ -132,7 +132,7 @@ const ChaptersList = () => {
         </select>
       </label>
 
-      {chapters.length > 0 && (
+      {chapters.length>0 && (
         <div className={styles.chapterContainer}>
           {chapters.map((chapter) => (
 
