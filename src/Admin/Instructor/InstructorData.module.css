@@ -1,0 +1,128 @@
+.instructorForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .labelContainer {
+    display: block;
+    margin-bottom: 15px;
+  }
+   
+  .inputField,
+  .imageField {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+
+.quillEditor {
+    height: 250px; 
+  }
+  
+  .submitButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5%;
+  }
+  
+  .ql-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .ql-editor {
+    min-height: 300px;
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  .inputContainer {
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .quillContainer {
+    margin-bottom: 10px;
+    height:50%;
+  }
+  
+  .dropzoneContainer {
+    margin-top: 10px;
+    border: 2px dashed #aaaaaa;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .dropzoneText {
+    text-align: center;
+  }
+
+.imagePreviewContainer {
+    margin-top: 5px;
+    height: 10%;
+  }
+  
+  .imagePreview {
+    max-width: 100%;
+  
+  }
+ 
+.container {
+    margin: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  
+.container ol {
+  list-style-type: decimal; 
+}
+
+.container ul {
+  list-style-type: disc; 
+}
+
+  

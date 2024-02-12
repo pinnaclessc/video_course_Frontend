@@ -1,0 +1,145 @@
+.formContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  .labelContainer {
+    display: block;
+    margin-bottom: 15px;
+  }
+   
+  .inputField,
+  .imageField {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+
+  .formContainer label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .container {
+    margin: 20px;
+  }
+
+  .formContainer input {
+    margin-top: 8px;
+    width: 100%;
+    padding: 8px;
+  }
+
+  .tableContainer {
+    margin-top: 20px;
+  }
+  
+  .tableContainer table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .tableContainer th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .tableContainer th {
+    background-color: #f2f2f2;
+  }
+
+  .submitButton {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 5%;
+  }
+
+.course_container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.course_container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.course_container label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.course_container input,
+textarea {
+  margin-bottom: 16px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.course_container button {
+  padding: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.course_container button:hover {
+  background-color: #2980b9;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-top: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label input {
+  margin-right: 8px;
+}
+
+.dropzoneContainer {
+  margin-top: 10px;
+  border: 2px dashed #aaaaaa;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.dropzoneText {
+  text-align: center;
+}
+
+.imagePreviewContainer {
+  margin-top: 5px;
+  height: 10%;
+}
+
+.imagePreview {
+  max-width: 100%;
+
+}

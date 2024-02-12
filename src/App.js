@@ -37,6 +37,12 @@ import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
 import Header from "./Components/HomePage01/Header/Header";
+import InstructorForm from "./Admin/Instructor/InstructorData";
+import InstructorDataList from "./Admin/Instructor/InstructorDataList";
+import CourseForm from "./Admin/Courses/CourseForm";
+import Category from "./Admin/Courses/Category";
+import CourseList from "./Admin/Courses/CourseList"
+import VideoUploadForm from "./Admin/Pages/VideoUploadForm";
 
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
 // copy Imports of D
@@ -84,7 +90,13 @@ export default function App() {
           <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses/>}></Route>
           <Route path="/admin/add-new-user" element={<AddUserForm />}></Route>
-
+          <Route path="/admin/instructor" element={<InstructorForm />}></Route>
+          <Route path="/instructor-list" element={<InstructorDataList/>}/>
+          <Route path="/notes" element={<NotesEditor />}></Route> 
+          <Route path="/add-course" element={<CourseForm />}></Route> 
+          <Route path="/category" element={<Category/>}></Route> 
+          <Route path="/courselist" element={<CourseList/>} />
+          {/* <Route path="/video-form" element={<VideoUploadForm/>} /> */}
           <Route
             path="/admin/updateCourse/:id"
             element={<UpdateCourse/>}
