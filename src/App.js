@@ -96,7 +96,7 @@ export default function App() {
           <Route path="/add-course" element={<CourseForm />}></Route> 
           <Route path="/category" element={<Category/>}></Route> 
           <Route path="/courselist" element={<CourseList/>} />
-          {/* <Route path="/video-form" element={<VideoUploadForm/>} /> */}
+          <Route path="/video-form" element={<VideoUploadForm/>} />
           <Route
             path="/admin/updateCourse/:id"
             element={<UpdateCourse/>}

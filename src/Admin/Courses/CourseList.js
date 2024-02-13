@@ -11,7 +11,7 @@ const CourseList = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/courses')
+        axios.get('http://localhost:8000/courses')
             .then(response => {
                 setCourses(response.data);
                 setLoading(false);

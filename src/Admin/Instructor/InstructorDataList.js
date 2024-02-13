@@ -13,7 +13,7 @@ const InstructorDataList = () => {
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/instructors');
+        const response = await axios.get('http://localhost:8000/instructors');
         setInstructors(response.data.instructors);
       } catch (error) {
         console.error('Error fetching instructors:', error.message);

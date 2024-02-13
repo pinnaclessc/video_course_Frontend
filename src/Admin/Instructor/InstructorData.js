@@ -69,7 +69,7 @@ const InstructorData = () => {
       formData.append('instructorName', instructorName);
       formData.append('instructorDescription', editorValue);
 
-      await axios.post('http://localhost:5000/upload', formData);
+      await axios.post('http://localhost:8000/upload', formData);
       Swal.fire({
         icon: 'success',
         title: 'Instructor Created!',

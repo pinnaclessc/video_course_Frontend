@@ -29,7 +29,7 @@
 
 
 //   useEffect(() => {
-//     axios.get('http://localhost:5000/categories')
+//     axios.get('http://localhost:8000/categories')
 //       .then(response => {
 //         console.log('Categories data:', response.data);
 //         setCategories(response.data);
@@ -38,7 +38,7 @@
 //   }, []);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:5000/instructors')
+//     axios.get('http://localhost:8000/instructors')
 //       .then(response => {
 //         console.log('Instructors data:', response);
 //         if (Array.isArray(response.data.instructors)) {
@@ -91,8 +91,8 @@
 //       const englishImageFormData = new FormData();
 //       englishImageFormData.append('image', courseData.englishCoverImage);
 
-//       const hindiImageResponse = await axios.post('http://localhost:5000/api/upload', hindiImageFormData);
-//       const englishImageResponse = await axios.post('http://localhost:5000/api/upload', englishImageFormData);
+//       const hindiImageResponse = await axios.post('http://localhost:8000/api/upload', hindiImageFormData);
+//       const englishImageResponse = await axios.post('http://localhost:8000/api/upload', englishImageFormData);
 
 //       // Update courseData with Hindi and English image URLs from S3
 //       const updatedCourseData = {
@@ -105,7 +105,7 @@
 //       console.log(englishImageResponse.data.imageUrl)
 
 
-//       await axios.post('http://localhost:5000/api/courses', updatedCourseData);
+//       await axios.post('http://localhost:8000/api/courses', updatedCourseData);
 //       console.log('Course data submitted successfully!');
 //     } catch (error) {
 //       console.error('Error submitting course data:', error);
@@ -278,13 +278,13 @@ const CourseForm = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:5000/categories')
+    axios.get('http://localhost:8000/categories')
       .then(response => setCategories(response.data))
       .catch(error => console.error('Error fetching categories:', error));
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/instructors')
+    axios.get('http://localhost:8000/instructors')
       .then(response => {
         if (Array.isArray(response.data.instructors)) {
           setInstructors(response.data.instructors);
@@ -350,7 +350,7 @@ const CourseForm = () => {
       formData.append('englishCoverImage', courseData.englishCoverImage);
 
       setLoading(true);
-      const response = await axios.post('http://localhost:5000/create-course', formData);
+      const response = await axios.post('http://localhost:8000/create-course', formData);
       console.log('Course created successfully!', response.data);
 
       Swal.fire({
