@@ -297,6 +297,7 @@ const AddChapterForm = () => {
 
     fetchCourses();
   }, []);
+  console.log(availableVideos)
 
   useEffect(() => {
     const fetchVideosAndPdfs = async () => {
@@ -399,7 +400,7 @@ const AddChapterForm = () => {
         }
       );
 
-      console.log("Server response:", response);
+      console.log("Server response:",response);
 
       if (!response.ok) {
         throw new Error("Failed to add chapter");

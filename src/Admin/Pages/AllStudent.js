@@ -1,56 +1,63 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 import styles from './AllStudent.module.css';
 import { Link } from 'react-router-dom';
 
 export default function AllStudent() {
-  const[student,setStudent]=useState([]);
+  const [students, setStudents] = useState([]);
+  
   useEffect(() => {
-    fetch("http://localhost:8000/student")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Fetched data:", data);
+    fetch("http://13.200.156.92:8000/student")
+      .then(response => response.json())
+      .then(data => {
         if (Array.isArray(data)) {
-          // Check if data is an array
-          setStudent(data);
+          setStudents(data);
         } else {
           console.error("Data is not an array:", data);
-          setStudent([]); // Set an empty array in case of non-array data
+          setStudents([]);
         }
       })
-      .catch((error) => console.error("Error fetching products:", error));
+      .catch(error => console.error("Error fetching students:", error));
   }, []);
-  const deleteHandler= async(id)=>{
-    const confirm=window.confirm("Delete");
-    if(confirm){
-      let result= await fetch(` http://localhost:8000/student/${id}`,
-      {method:"Delete"});
-      window.location.reload();
-      result=await result.json();
 
+  const deleteHandler = async (id) => {
+    const confirm = window.confirm("Are you sure you want to delete?");
+    if (confirm) {
+      try {
+        await fetch(`http://localhost:8000/student/${id}`, { method: "DELETE" });
+        setStudents(students.filter(student => student._id !== id)); // Optimistically remove the student from UI
+      } catch (error) {
+        console.error("Error deleting student:", error);
+      }
     }
-  
-  }
-
+  };
 
   return (
-    <div className={styles["allStudent-wraper"]}>
-      <div className={styles["allStudent-heading"]}>
-      <div className={styles["SrNo"]}>Sr.No.</div>
-      <div className={styles["Name-student"]}>Name Of Student</div>
-      <div className={styles["email-student"]}>Email Of Student</div>
-      <div className={styles["purchased-courses"]}>PurchasedCourses</div>
+    <div className={styles.wrapper}>
+      <table>
+        <thead>
+          <tr>
+            <th>Sr.No.</th>
+            <th>Name of Student</th>
+            <th>Email of Student</th>
+            <th>Purchased Courses</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.length > 0 ? students.map((student, index) => (
+            <tr key={student._id}>
+              <td>{index + 1}</td>
+              <td>{student.name}</td>
+              <td>{student.email}</td>
+              <td>{student.purchasedCourses.length}</td>
+              <td>
+                <button onClick={() => deleteHandler(student._id)} className={styles.deleteBtn}>Delete</button>
+                <Link to={`/admin/updateStudent/${student._id}`} className={styles.editLink}>Edit</Link>
+              </td>
+            </tr>
+          )) : <tr><td colSpan="5">No Data Found</td></tr>}
+        </tbody>
+      </table>
     </div>
-    {student.length>0?student.map((item, index) =>(
-          <div key={item._id} className={styles["allStudent-subHeading"]}>
-            <div className={styles["SrNo"]}>{index+1}</div>
-            <div className={styles["Name-student"]}>{item.name} </div>
-            <div className={styles["email-student"]}>{item.email} </div>
-            <div className={styles["purchased-courses"]}>{item.purchasedCourses.length}</div>
-            <div><button onClick={()=>deleteHandler(item._id)} className={styles["AllCourses-DeleteBTN"]}>Delete</button>
-            <Link to={"/admin/updateCourse/"+item._id}  className={styles["AllCourses-editLink"]}>Edit</Link></div>
-            </div>
-        )):<p>Loading .....</p>
-        }
-    </div>
-  )
+  );
 }

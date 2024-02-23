@@ -31,8 +31,6 @@ const Cart = () => {
 
       const result = await response.json();
       console.log(result);
-
-      // Assuming result properties exist, update state accordingly
       setCourseTitle(result.courseTitle);
       setCourseDetails(result.courseDetails);
       setTeacherName(result.teacherName);
@@ -83,7 +81,7 @@ const Cart = () => {
     try {
       const userId = JSON.parse(localStorage.getItem("user"))._id;
       const response = await fetch(
-        `http://localhost:8000/purchase/${userId}/${params.id}`,
+        `http://13.200.156.92:8000/purchase/${userId}/${params.id}`,
         {
           method: "POST",
           headers: {
@@ -98,7 +96,6 @@ const Cart = () => {
 
       const data = await response.json();
       if (data.success) {
-        // Purchase was successful, you can redirect or show a success message
         Swal.fire({
           title: 'Success!',
           text: 'Congratulations! You own this course.',
@@ -126,7 +123,7 @@ const Cart = () => {
     try {
       const userId = JSON.parse(localStorage.getItem("user"))._id;
       const response = await fetch(
-        `http://localhost:8000/add-to-cart/${userId}/${params.id}`,
+        `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
         
         {
           method: "POST",
@@ -143,7 +140,6 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Purchase was successful, you can redirect or show a success message
         Swal.fire({
           title: 'Success!',
           text: 'Added in cart',
@@ -151,7 +147,6 @@ const Cart = () => {
           confirmButtonText: 'OK',
         });
       } else {
-        // Handle error
         console.error("Failed to purchase course");
       }
     } catch (error) {
@@ -169,7 +164,7 @@ const Cart = () => {
     try {
       const userId = JSON.parse(localStorage.getItem("user"))._id;
       const response = await fetch(
-        `http://localhost:8000/add-to-wishlist/${userId}/${params.id}`,
+        `http://13.200.156.92:8000/add-to-wishlist/${userId}/${params.id}`,
         
         {
           method: "POST",
@@ -186,7 +181,6 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Purchase was successful, you can redirect or show a success message
         Swal.fire({
           title: 'Success!',
           text: 'Added to Wishlist',
@@ -194,7 +188,6 @@ const Cart = () => {
           confirmButtonText: 'OK',
         });
       } else {
-        // Handle error
         console.error("Failed to purchase course");
       }
     } catch (error) {
@@ -250,15 +243,6 @@ const Cart = () => {
             <br />
             <Link to="/personalPlane">Learn More</Link>
           </p>
-          {/* <button
-            className={styles["Start-Subscription-btn"]}
-            onClick={() => navigate("/checkout")}
-          >
-            Start Subscription
-          </button>
-          <p className={styles["Subscription-para"]}>
-            Starting at ₹ {price} per month Cancel anytime
-          </p> */}
           <div className={styles["range-slider-container"]}>
             <input
               type="range"

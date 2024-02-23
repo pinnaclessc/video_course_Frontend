@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Timer from "./Components/HomePage01/Header/Timer"
 import HomePage01 from "./Components/HomePage01/HomePage01";
 import Page02 from "./Components/Page02/Page02";
 import Share from "./Components/Page02/ShareComponent/Share";
@@ -36,8 +37,8 @@ import CreateCourse from "./Admin/Pages/CreateCourse";
 import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
+import Instructor from "./Admin/instructor/Instructor";
 import Header from "./Components/HomePage01/Header/Header";
-
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
 // copy Imports of D
 // import PdfUploadForm from "./Admin/D-admin/PdfUploadForm";
@@ -67,10 +68,14 @@ import SignUpHelp from "./src-d/components/VideoPlayerPage/AccountPage/Messages/
 import TroubleshootingHelp from "./src-d/components/VideoPlayerPage/AccountPage/Messages/TroubleshootingHelp";
 import Footer from "./Footer02.js/Footer";
 import AdminPage from "./Admin/AdminPage";
-import CourseContent from "./Admin/Pages/CourseContent";
 import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
 import ShowCourseContent from "./Admin/Pages/ShowCourseContent";
+import InstructorForm from "./Admin/Pages/InstructorForm"
+import CourseForm from "./Admin/course/CourseForm";
+import AddExamCategoryForm from "./Admin/course/AddExamCategoryForm";
+
+// import { AuthProvider } from "./AuthContext";
 // test imports
 // import videoContent from "./src-d/components/NewComponentBP/videoContent";
 
@@ -78,26 +83,24 @@ export default function App() {
   return (
     <div>
       <Router>
+        <Timer/>
         <Header />
         <Routes>
         <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
           <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses/>}></Route>
           <Route path="/admin/add-new-user" element={<AddUserForm />}></Route>
-
-          <Route
-            path="/admin/updateCourse/:id"
-            element={<UpdateCourse/>}
-          ></Route>
-            <Route path="/admin/updateChapter/:course_id" element={<UpdateChapter/>} />
-            {/* <Route path="/update-chapter"></Route> */}
-            <Route path="/admin/courseContent/:id" element={<CourseContent />} />
-            <Route path="/pdf-management/:courseId" element={<PdfManagementForm/>} />
-            <Route path="/admin/addVideoForm" element={<AddVideoForm />} />
+          <Route path="/admin/updateCourse/:id" element={<UpdateCourse/>}></Route>
+          <Route path="/admin/updateChapter/:course_id" element={<UpdateChapter/>} />
+          {/* <Route path="/update-chapter"></Route> */}
+          <Route path="/pdf-management/:courseId" element={<PdfManagementForm/>} />
+          <Route path="/admin/addVideoForm" element={<AddVideoForm />} />
           {/* <Route path="/admin/videoUploadForm" element={<VideoUploadForm />} />
           <Route path="/admin/pdfUploadForm" element={<PdfUploadForm />} /> */}
           <Route path="/admin/addCourse" element={<AddCourse />} />
+          <Route path="/admin/" element={<AddCourse />} />
           <Route path="/" element={<HomePage01 />} />
+          <Route path="/admin/instructorForm" element={<InstructorForm/>}/>
           {/* <Route path="/page02" element={<Page02 />}/> */}
           <Route path="/CourseDescription/:id" element={<Page02 />} />
           <Route path="/share" element={<Share />} />
@@ -129,19 +132,19 @@ export default function App() {
           <Route path="/exploreMore" element={<ExploreMore />} />
           <Route path="/railwayExploreMore" element={<Railway />} />
           <Route path="/adminPage" element={<AdminPage />} />
+          <Route path="/Instructor" element={<Instructor/>}/>
+          <Route path="/NewCourse" element={<CourseForm/>}/>
+          <Route path="/add-category" element={<AddExamCategoryForm/>}/>
           {/* <Route path="/learningPage/:userId" element={<LearningPage/>}/> */} 
         </Routes>
         {/* copy All Routes of D */}
-         <Routes>
+        <Routes>
           <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
           <Route path="/mylearning" element={<VideoCoursesMain />}>
             <Route path="/mylearning/overview" element={<CourseOverview/>} />
             <Route path="/mylearning/reviews" element={<Review />} />
             <Route path="/mylearning/search" element={<SearchBar />} />
-            <Route
-              path="/mylearning/announcement"
-              element={<Announcements />}
-            />
+            <Route path="/mylearning/announcement"element={<Announcements />}/>
           </Route>
           <Route path="/mylearning/notes" element={<NotesEditor />} />
           <Route path="/mylearning/q&a" element={<QandA />} />
@@ -149,30 +152,21 @@ export default function App() {
           <Route path="/user/username" element={<PinnacleProfile />}/>
           <Route path="/user/edit-photo" element={<EditPhoto />} />
           <Route path="/user/edit-account" element={<AccountSecurity />} />
-          <Route
-            path="/user/manage-subscriptions"
-            element={<Subscriptions />}
-          />
-          <Route
-            path="/user/edit-payment-methods"
-            element={<PaymentMethod/>}
-          />
+          <Route path="/user/manage-subscriptions"element={<Subscriptions />}/>
+          <Route path="/user/edit-payment-methods"element={<PaymentMethod/>}/>
           <Route path="/user/edit-privacy" element={<Privacy />} />
-          <Route
-            path="/user/edit-notifications"
-            element={<AccountNotification />}
-          />
+          <Route path="/user/edit-notifications"element={<AccountNotification />}/>
           <Route path="/user/close-account" element={<AccountClose />} />
           <Route path="/edit/account-settings" element={<AccountMain />} />
           <Route path="/giftcourse" element={<GiftACourseD />} />
           <Route path="/user/messages" element={<Messages />} />
-          <Route path="/pinnacle-help" element={<PinnacleHelp />} />
+          <Route path="/pinnacle-help" element={<PinnacleHelp />}/>
           <Route path="/signuphelp" element={<SignUpHelp />} />
           <Route path="/account-main" element={<AccountMain />} />
-          <Route path="/troubleshooting" element={<TroubleshootingHelp />} />
+          <Route path="/troubleshooting" element={<TroubleshootingHelp />}/>
         </Routes> 
         {/* <Footer/> */}
-      </Router>
+        </Router>
     </div>
   );
 }

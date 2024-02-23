@@ -84,8 +84,8 @@ function Account()
             <hr />
             <ul className={classes.unordered_list1}>
             <Link to={`/MyLearningPage/${userId}`}>
-                <li className={classes.list1}>My learning</li>
-              </Link>
+              <li className={classes.list1}>My learning</li>
+            </Link>
               <Link to="/mylearning/cart">
                 <li className={classes.list1}>My Cart</li>
               </Link>

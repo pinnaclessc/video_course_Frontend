@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Styles from "./HoverCart.module.css";
-import { BsCart3 } from "react-icons/bs";
+import { FaRegHeart } from "react-icons/fa";
 
-export default function HoverCart() {
+export default function Hoverwishlist() {
   const [CARTDATA, setCARTDATA] = useState([]);
   const userId = JSON.parse(localStorage.getItem("user"))._id;
-    useEffect(() => {
+  
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/cart/${userId}`);
+        const userId = JSON.parse(localStorage.getItem("user"))._id;
+        const response = await fetch(`http://localhost:8000/wishlist/${userId}`);
         const data = await response.json();
-
         // Check if the response is successful and contains cartCourses
-        if (data.success && Array.isArray(data.cartCourses)) {
+        if (data.success && Array.isArray(data.cartCourses)){
           setCARTDATA(data.cartCourses);
         } else {
-          console.error("Invalid data format received from the API:", data);
+        console.error("Invalid data format received from the API:", data);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -24,16 +26,10 @@ export default function HoverCart() {
 
     fetchData();
   }, [userId]);
-
-
-
-  // Check if CARTDATA is not an array or is empty
   if (!Array.isArray(CARTDATA) || CARTDATA.length === 0) {
     console.log("No data is in the cart");
-    // You might want to render a message or loading indicator here
   }
 
-  // Placeholder function for calculating the total price
   const calculateTotalPrice = () => {
     return CARTDATA.reduce((total, item) => total + item.price, 0);
   };
@@ -42,7 +38,7 @@ export default function HoverCart() {
     <div className={Styles.learning}>
       <div className={Styles.dropdown}>
         <button className={Styles.dropbtn}>
-          <BsCart3 size={30} />
+          <FaRegHeart size={30}/>
         </button>
         <div className={Styles.dropdown_content}>
           <div className={Styles.myLearningContainer}>
@@ -55,7 +51,9 @@ export default function HoverCart() {
                     >
                       <div className={Styles["CartList-ImageSection"]}>
                         {/* You may need to adjust the property names based on your API response */}
-                        <img src="https://dgkwgu5olgqh6.cloudfront.net/test-images/coverImage0101.svg"alt="course image"className={Styles["Image"]}></img>
+                        <img 
+                        src={data.courseImage} 
+                        alt="cImage"className={Styles["Image"]}></img>
                       </div>
 
                       <div className={Styles["CartList-descriptionSection"]}>
@@ -85,5 +83,3 @@ export default function HoverCart() {
     </div>
   );
 }
-
-

@@ -2,15 +2,17 @@
 
 
 .Header_fullPage {
-  width: 100%;
-  height: 5rem;
+  height: 4.5rem;
   font-weight:bold;
   font-size:14px;
   background-color:#FFFAFA;
   color: black;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   position: relative; 
+
 }
 
 .main {
@@ -42,7 +44,7 @@
     0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 1;
   left: 20%;
-  margin-top: 1%;
+  margin-top:1%;
 }
 
 .dropdown_content a {
@@ -210,8 +212,7 @@
   display: none;
   position: absolute;
   background-color: #ffffff;
-  box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgba(0, 0, 0, 0.08),
-    0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 1px #d1d7dc, 0 2px 4px rgba(0, 0, 0, 0.08),0 4px 12px rgba(0, 0, 0, 0.08);
   margin-left: 1px;
   top: 1%;
   left: 100%;
@@ -263,7 +264,6 @@
 
 .navSearchBar {
   margin-left: 15%;
-  margin-top: 2%;
   width: 30%;
 }
 
@@ -278,7 +278,9 @@
 
 .cart_icone {
   margin-top:0.25rem;
-  margin-left:6rem;
+}
+.wishlist-icone{
+
 }
 
 .login {
@@ -290,30 +292,31 @@
   border: 1.5px solid black;
   color: black;
   width: 100%;
-  height: 40%;
-  margin-top: 31%;
+  height:2.25rem;
   font-size: 15px;
   font-weight: 700;
   padding: 1%;
   cursor: pointer;
-
+  align-items: center;
+  justify-content: center;
 }
 
 .signup {
   width: 6%;
-  margin-left: 1%;
+
 }
 
 .signup_btn {
   border: 2px solid black;
   width: 100%;
-  height: 40%;
-  margin-top: 31%;
+  height:2.25rem;
   font-size: 15px;
   font-weight: 700;
   color: white;
-  background-color: black;
+  background-color: #020062;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
 }
 
 .globe_icon {
@@ -326,9 +329,15 @@
   align-items: center;
   cursor: pointer;
 }
-.playStore_icone{
+.mylearning-div{
+  margin: 0.25rem;
+  padding: 0.25rem;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
 
-margin-top: 2%;
+}
+.playStore_icone{
 margin-left: -100px;
 border: none;
 background-color:transparent;
@@ -348,27 +357,22 @@ background-color:transparent;
     font-size: 12px;
     bottom: 11%;
     right: 24%;
-    left:63%;
+    left:60%;
   }
 
 .Playstore-a{
   text-decoration: none;
   color: black;
- 
 }
 
 .moreApps_div{
   position: absolute;
-  top: 92%;
-  left: 69%;
   width: 30%;
   color: black;
 }
 .moreapp_icon{
-  border: 1px solid black;
   padding: 0.2%;
   height: 25px;
-  margin-top: 22px;
   margin-left:1%;
   
 }
@@ -392,11 +396,11 @@ background-color:transparent;
   top: 88%;
   left: 83%;
   width: 17%;
-
 }
-.Account-div{
-  position: absolute;
-  top: 88%;
-  border: 1px solid red;
+
+.myLearning-icon{
+  text-decoration: none;
+  color:black;
+  font-size: 17px;
 }
 

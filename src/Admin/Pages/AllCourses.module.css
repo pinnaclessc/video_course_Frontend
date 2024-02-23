@@ -1,117 +1,60 @@
-.AllCourses-FullDiv{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-    padding: 0.5rem;
-    margin: 0.5rem;
-}
-
-.AllCourses-heading{
-    display: flex;
-    line-height:12px;
-    font-size:16px;
-    padding: 0.5rem;
-    font-weight: bold;
-
-}
-
-.AllCourses-subheading{
-    display:flex;
-    padding: 0.5rem;
-    /* border: 1px solid black; */
-    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px; */
-}
-
-.AllCourses-subheading:hover{
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-
-}
-
-.AllCourses-srno{
-    width:5rem;
-    align-items: center;
-    justify-content: center;
-
-
-}
-
-.AllCourses-nameOfCourse{
-    width: 30rem;
-
-}
-
-.AllCourses-teacherName{
-    width: 25rem;
-
-}
-
-.AllCourses-heading-rating{
-    width:4rem ;
-
-}
-
-.AllCourses-heading-price{
-    width:4rem ;
-
-}
-
-.AllCourses-heading-mrp{
-    width:4rem ;
-
-}
-
-.title-searchBar-div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    margin: 1rem;
-    border: 1px solid black;
-}
-
-.searchBar{
-    border: 1px solid red;
-}
-
-
-.AllCourses-DeleteBTN{
-    padding: 0.25rem;
-    margin: 0.25rem;
-    color: white;
-    background-color: red;
-}
-
-.AllCourses-editLink{
-    text-decoration: none;
-    background-color: green;
-    padding: 0.25rem;
-    margin: 0.25rem;
-    color: white;
-}
-.AllCourses-searchbar-div{
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1rem;
-
-}
-.AllCourses-searchbar{
-    padding:0.5rem;
-    margin: 0.5rem;
-    border-radius: 24px;
-    width: 20rem;
+/* AllCourses.module.css */
+.AllCourses-FullDiv {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+  }
+  
+  .AllCourses-searchbar-div {
+    margin-bottom: 20px;
     text-align: center;
-}
-
-.AllCourses-edit-course-content-Link{
-    background-color: #3498db;
+  }
+  
+  .AllCourses-searchbar {
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #007bff;
     color: white;
-    padding: 0.25rem;
-    margin: 0.25rem;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .AllCourses-DeleteBTN, .AllCourses-editLink {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
     text-decoration: none;
-}
+    border-radius: 5px;
+  }
+  
+  .AllCourses-DeleteBTN {
+    background-color: #ff4d4f;
+    color: white;
+  }
+  
+  .AllCourses-editLink {
+    background-color: #4CAF50;
+    color: white;
+  }
+  

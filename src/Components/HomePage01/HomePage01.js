@@ -6,7 +6,6 @@ import Body from "./Body/Body";
 export default function HomePage01() {
   return (
     <div>
-      <Timer/>
       <div>
         <PromotionSlider />
       </div>

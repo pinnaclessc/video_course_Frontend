@@ -1,39 +1,46 @@
-.allStudent-wraper{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    padding: 0.5rem;
-    margin: auto;
-}
-
-.allStudent-heading{
-    display: flex;
-    line-height:12px;
-    font-size:16px;
-    padding: 0.5rem;
-    font-weight: bold;
-}
-.allStudent-subHeading{
-    display:flex;
-    padding: 0.5rem;
-}
-
-.allStudent-subHeading:hover{
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-}
-
-.SrNo{
-    width: 5rem;
-}
-
-.Name-student{
-    width: 20rem;
-}
-
-.email-student{
-    width: 30rem;
-}
-
-.purchased-courses{
-    width: 20rem;
-}
+.wrapper {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .deleteBtn, .editLink {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .deleteBtn {
+    background-color: #ff4d4f;
+    color: white;
+  }
+  
+  .editLink {
+    background-color: #4CAF50;
+    color: white;
+  }
+  

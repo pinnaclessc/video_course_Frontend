@@ -59,7 +59,7 @@ export default function UpcomingCourse() {
           <AiFillLeftCircle size={30} />
         </button>
         <div className={styles.Course_Heading}>
-          &nbsp;&nbsp;Courses recommended for upcoming exams
+        Courses recommended for upcoming exams
         </div>
         <div className={styles["scroll-container"]} ref={scrollRef}>
           <div className={styles["card-wrapper"]}>
@@ -67,14 +67,14 @@ export default function UpcomingCourse() {
               course.map((data, index) => (
                 <div key={data.id} className={styles["card"]}>
                   <div className={styles["Upcomming-course-fullPage"]}>
-                    <div className={styles["Image-section"]}>
-                      <img
+                  <div className={styles["Image-section"]} onClick={() => navigate("/CourseDescription/" + data._id)}>
+                      <img className={styles.imagecard}
                         src={coverImage1}
                         alt=""
                         width="90"
                         height="90"
                       ></img>
-                      <img
+                      <img className={styles.imagecard}
                         src={coverImage2}
                         alt=""
                         width="90"

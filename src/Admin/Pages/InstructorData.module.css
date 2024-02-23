@@ -1,0 +1,61 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .inputContainer {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .quillContainer {
+    margin-top: 10px;
+  }
+  
+  .dropzoneContainer {
+    border: 2px dashed #aaa;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .dropzoneText {
+    margin: 0;
+  }
+  
+  .imagePreviewContainer {
+    margin-top: 10px;
+  }
+  
+  .imagePreview {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .submitButton {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submitButton:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  

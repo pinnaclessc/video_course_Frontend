@@ -25,19 +25,20 @@
 
 .card {
   flex: 0 0 auto;
-  width:280px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
+    width: 323px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
 }
 
 .Course_Heading {
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight:bold;
   color: #7C7D81;
+  margin-left: 26px;
 }
 
 .sliderButton-left {
@@ -85,10 +86,15 @@
 }
 
 .Image-section {
-  border: solid .25px #dad5d5;
-  padding: 5px;
-  padding-top:8px ;
-  width: 220px;
+  border: solid 0.25px #dad5d5;
+  /* padding: 21px; */
+  /* padding-top: 8px; */
+  width: 243px;
+  display: flex;
+  /* margin-right: 22px; */
+  height: 200px;
+  padding-left: 21px;
+  padding-right: 21px;
 }
 
 .price-fprice-div {
@@ -102,16 +108,20 @@
  text-align: left;
 }
 .title {
-  font-size: 12px;
-  margin-top: 10px;
-  font-weight: bold;
+  font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+    /* border: solid; */
+    height: 41px;
 }
 
 .teacher {
-  font-size: 10px;
+  font-size: 13px;
   line-height: 25px;
   color: #7C7D81;
   font-weight: 600;
+  margin-top: 2px;
+  margin-bottom: 2px;
 
 }
 
@@ -142,6 +152,7 @@
   background-color: #388e3c;
   display: flex;
   padding: 2px 2px 2px 6px;
+  height: 20px;
 }
 
 .Total-Rating {
@@ -149,6 +160,7 @@
   padding-left: 8px;
   font-weight: 500;
   color: #878787;
+  margin-bottom: 9px;
 }
 
 .Star-Rating-1 {
@@ -168,4 +180,33 @@
 }
 .forbutton_div{
   width: 100%;
+}
+
+.UpcomingCourse_card {
+  flex: 0 0 auto;
+  width: 290px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.UpcomingCourse_Image-section {
+  border: solid 0.25px #dad5d5;
+  padding: 21px;
+  padding-top: 8px;
+  width: 243px;
+  display: flex;
+  /* margin-right: 22px; */
+}
+
+.imagecard{
+ 
+  width: 51%;
+  height: 162px;
+  padding-top: 19px;
+  margin-right: 12px;
+
 }

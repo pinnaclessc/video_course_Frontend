@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./Header.module.css";
 import MoreApps from "./MoreApps";
 import Logo from "../../../assests/Pinnacle_colored_logo.svg";
@@ -9,52 +9,39 @@ import { GrApps } from "react-icons/gr";
 import Languages from "../Language/Languages";
 import { useNavigate, Link } from "react-router-dom";
 import HoverCart from "./HoverCart";
+import Hoverwishlist from "./Hoverwishlist";
 import Account from "../HeaderD/Account";
+
 export default function Header() {
   const [showMoreApps, setShowMoreApp] = useState(false);
   const [showLanguage, setShowLanguage] = useState(false);
 
   const navigate = useNavigate();
-  const auth = localStorage.getItem('user');
-  // useEffect(() => {
-  //   const handleDocumentClick = () => {
-  //     setShowMoreApp(false);
-  //     setShowLanguage(false);
-  //   };
-
-  //   document.addEventListener("click", handleDocumentClick);
-
-  //   return () => {
-  //     document.removeEventListener("click", handleDocumentClick);
-  //   };
-  // }, []);
-
+  const auth = localStorage.getItem("user");
+  // const userId = JSON.parse(localStorage.getItem("user"))._id;
   const MoreAppsHandler = () => {
-    setShowMoreApp(true)
-    setShowLanguage(false)
-    handleMoreApp()
+    setShowMoreApp(true);
+    setShowLanguage(false);
+    handleMoreApp();
   };
 
   const LanguageHandler = () => {
-    setShowLanguage(true)
-    setShowMoreApp(false)
-    handlelLanguageHandler()
+    setShowLanguage(true);
+    setShowMoreApp(false);
+    handlelLanguageHandler();
   };
 
-  const handleMoreApp=()=>{
-    setShowMoreApp(!showMoreApps)
-    setShowLanguage(false)
-  }
+  const handleMoreApp = () => {
+    setShowMoreApp(!showMoreApps);
+    setShowLanguage(false);
+  };
 
+  const handlelLanguageHandler = () => {
+    setShowMoreApp(false);
+    setShowLanguage(!showLanguage);
+  };
 
-
-  const handlelLanguageHandler=()=>{
-    setShowMoreApp(false)
-    setShowLanguage(!showLanguage)
-  }
-
-
-return (
+  return (
     <div className={classes.Header_fullPage}>
       <div className={classes.main}>
         <div className={classes.logo_div} onClick={() => navigate("/")}>
@@ -65,7 +52,7 @@ return (
           <div className={classes.subnav_content}>
             <div className={classes.subnav_content_subnav}>
               <div className={classes.subnavbtn2x}>
-                <Link className={classes.item} to="/exploreMore" >
+                <Link className={classes.item} to="/exploreMore">
                   SSC
                   <div className={classes.arrw_icon1}>
                     <MdOutlineKeyboardArrowRight
@@ -77,10 +64,14 @@ return (
               </div>
               <div className={classes.subnav_content2x}>
                 <Link to="/exploreMore">SSC CGL (Combined Graduate Level)</Link>
-                <Link to="/exploreMore">SSC CHSL (Combined Higher Secondary Level)</Link>
+                <Link to="/exploreMore">
+                  SSC CHSL (Combined Higher Secondary Level)
+                </Link>
                 <Link to="/exploreMore">SSC Multitasking (Non-Technical)</Link>
                 <Link to="/exploreMore">SSC Stenographers Grade 'C' & 'D'</Link>
-                <Link to="/exploreMore">SSC CPO(Central Police Organization)</Link>
+                <Link to="/exploreMore">
+                  SSC CPO(Central Police Organization)
+                </Link>
                 <Link to="/exploreMore">SSC JE(Junior Engineer)</Link>
                 <Link to="/exploreMore">SSC Junior Hindi Translator</Link>
               </div>
@@ -101,7 +92,9 @@ return (
                 <Link to="/railwayExploreMore">RRB NTPC</Link>
                 <Link to="/railwayExploreMore">RRB JE</Link>
                 <Link to="/railwayExploreMore">RRB ALP</Link>
-                <Link to="/railwayExploreMore">RRB Ministerial and Isolated Categori</Link>
+                <Link to="/railwayExploreMore">
+                  RRB Ministerial and Isolated Categori
+                </Link>
                 <Link to="/railwayExploreMore">RRB Group D</Link>
                 <Link to="/railwayExploreMore">RRB Ministerial </Link>
                 <Link to="/railwayExploreMore">RRB Paramedical</Link>
@@ -111,7 +104,6 @@ return (
                 <Link to="/railwayExploreMore">RRB ntcp</Link>
                 <Link to="/railwayExploreMore">Traffic Assistant</Link>
                 <Link to="/railwayExploreMore">Trains Clerk</Link>
-
               </div>
             </div>
             <div className={classes.subnav_content_subnav}>
@@ -157,59 +149,72 @@ return (
       </div>
       <SearchBar />
       <div className={classes.playStore_icone}>
-        <button className={classes.Playstore_btn} >
+        <button className={classes.Playstore_btn}>
           <img
             src="/image/playstore.png"
             alt=""
             width="25px"
             height="25px"
-            className={classes.playStore_image} />
+            className={classes.playStore_image}
+          />
         </button>
         <div className={classes.Playstore_description}>
           <a
             href="https://play.google.com/store/search?q=pinnacle&c=apps&hl=en-IN"
             target="blank"
-            className={classes["Playstore-a"]}>
+            className={classes["Playstore-a"]}
+          >
+            {" "}
             Download Mobile app
           </a>
         </div>
       </div>
-      <div
-        className={classes.cart_icone}
-        onClick={() => navigate("/cart")}
-      ><HoverCart /></div>
-      <div className={classes.globe_icon}>
-        <BsGlobe size={20} onClick={LanguageHandler} />
-      </div>
-
-      <div className={classes.moreapp_icon}>
-        <button onClick={MoreAppsHandler} className={classes["MoreApps-btn"]}>
-          <GrApps size={20} />
-        </button>
-      </div>
-
-      {auth ?
+      {auth ? (
         <>
-          <Account className={classes["Account-div"]}/>
-        </> :
+          <div className={classes["mylearning-div"]}>
+            <Link to={`/MyLearningPage`} className={classes["myLearning-icon"]}>
+              My learning
+            </Link>
+          </div>
+          <div
+            className={classes["wishlist-icon"]}
+            onClick={() => navigate("/cart")}
+          >
+            <Hoverwishlist size={35} />
+          </div>
+          <div className={classes.cart_icone} onClick={() => navigate("/cart")}>
+            <HoverCart size={35} />
+          </div>
+          <Account className={classes["Account-div"]} />
+        </>
+      ) : (
         <>
           <div className={classes.login}>
             <button
               className={classes.login_btn}
-              onClick={() => navigate("/login")}>
+              onClick={() => navigate("/login")}
+            >
               Log in
             </button>
           </div>
           <div className={classes.signup}>
             <button
               className={classes.signup_btn}
-              onClick={() => navigate("/signup")}>Sign up
+              onClick={() => navigate("/signup")}
+            >
+              Sign up
             </button>
           </div>
-        </>}
-      <div className={classes.Languages_div}>
-        {showLanguage && <Languages />}
+        </>
+      )}
+      <div className={classes.moreapp_icon}>
+        <button onClick={MoreAppsHandler} className={classes["MoreApps-btn"]}>
+          <GrApps size={30} />
+        </button>
       </div>
+      {/* <div className={classes.Languages_div}>
+        {showLanguage && <Languages />}
+      </div> */}
       <div className={classes.moreApps_div}>{showMoreApps && <MoreApps />}</div>
     </div>
   );

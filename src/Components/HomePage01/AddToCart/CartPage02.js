@@ -13,8 +13,6 @@ export default function CartPage02() {
         {Data.map((data)=>(
             <div className={Styles["box1-box2-div"]}>
                 <div className={Styles["box1"]}>box 1</div>
-               
-
             </div>
         ))}
       </div>

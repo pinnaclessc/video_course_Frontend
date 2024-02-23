@@ -1,4 +1,4 @@
-/* Dropdown Button */
+
 .dropbtn {
     background-color:transparent;
     color: black;
@@ -24,6 +24,7 @@
     z-index: 1;
     color: Black;
     width: 21rem;
+    right: -200%;
   }
   
   /* Links inside the dropdown */
@@ -168,3 +169,5 @@
   .Total-GoTocart-Section{
     width:100%;
     margin: auto;}
+
+
