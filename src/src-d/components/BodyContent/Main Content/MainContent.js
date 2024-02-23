@@ -7,10 +7,11 @@ import Loading from "../ProgressBar/ProgressBar";
 import { Link } from "react-router-dom";
 import SideDots from "../Three Dots/SideDots";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 
 function MainContent() {
-  const { userId } = useParams();
+  const { userId} = useParams();
   const [purchasedCourses, setPurchasedCourses] = useState([]);
   const [error, setError] = useState(null);
   const [isVerticalOptions, setVerticalOptions] = useState([]);
@@ -25,11 +26,8 @@ function MainContent() {
         if (!userId) {
           throw new Error('User ID not found in URL parameters.');
         }
-
-        const response = await axios.get(`http://localhost:8000/purchased-courses/${userId}`);
+        const response = await axios.get(`http://13.200.156.92:8000/purchased-courses/${userId}`);
         setPurchasedCourses(response.data.purchasedCourses);
-
-        // SetVerticalOptions with the correct length
         setVerticalOptions(Array(response.data.purchasedCourses.length).fill(false));
       } catch (error) {
         console.error('Error fetching purchased courses:', error);
@@ -41,7 +39,7 @@ function MainContent() {
   }, [userId]);
 
   const handleCloseSideDots = () => {
-    setSideDotsOpen(false); // Set the state directly instead of using isSideDotsOpen
+    setSideDotsOpen(false); 
   };
 
   const handlePlayClick = (link) => {
@@ -64,8 +62,8 @@ function MainContent() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [purchasedCourses.length]); // Add purchasedCourses.length to dependencies
-
+  }, [purchasedCourses.length]);   
+    
   return (
     <div className={classes.card_container}>
       {purchasedCourses.map((item, index) => (
@@ -74,15 +72,12 @@ function MainContent() {
           <div className={classes.card_img}>
             <img src={item.image} alt="" width="95" height="95" />
             <img src={item.imageUrl} alt="" width="95" height="95" />
-            <div
+            <Link to={`/mylearning/${userId}/${item._id}`}><div
               className={classes.play_icon}
-              onClick={() => handlePlayClick(item.link)}
             >
-              <Link to="/mylearning">
-                {/* <PiPlayFill size={30} /> */}
-                <FaPlay  size={30}/>
-              </Link>
+                <FaPlay  size={30} />
             </div>
+            </Link>
           </div>
         </div>
         <div className={classes.sidedots} ref={ref}>
@@ -95,13 +90,12 @@ function MainContent() {
             <SideDots isOpen={true} onClose={handleCloseSideDots} />
           )}
         </div>
-        <div className={classes.heading}>
-          {/* <a href="/" className={classes.title}>
-            {item.courseTitle}
-          </a> */}
+        <div className={classes.heading} >
+<Link to={`/mylearning/${userId}/${item._id}`} className={classes.title}>
+  {item.courseTitle}
+</Link>
 
-          <Link to="" className={classes.title} >{item.courseTitle}</Link>
-          <div className={classes.instructor}>{item.teacherName}</div>
+<Link to={`/mylearning/${userId}/${item._id}`}><div className={classes.instructor}>{item.teacherName}</div></Link>
         </div>
         <Loading />
       </Card>
@@ -111,3 +105,4 @@ function MainContent() {
 }
 
 export default MainContent;
+

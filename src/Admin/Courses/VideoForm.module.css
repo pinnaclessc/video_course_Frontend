@@ -1,0 +1,54 @@
+.formcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: auto;
+    width: fit-content;
+  }
+  
+  .formcontainer label {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  
+  .formcontainer input {
+    margin-top: 10px;
+    padding: 5px;
+  }
+  
+  .formcontainer button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 10px; 
+  }
+  
+  .formcontainer button:hover {
+    background-color: #0056b3;
+  }
+  
+  .progressContainer {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+  
+  .progressBar {
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: width 0.4s ease-in-out;
+  }
+  

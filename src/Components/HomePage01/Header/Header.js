@@ -6,16 +6,17 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import { BsGlobe } from "react-icons/bs";
 import { GrApps } from "react-icons/gr";
-import Languages from "../Language/Languages";
+// import Languages from "../Language/Languages";
 import { useNavigate, Link } from "react-router-dom";
 import HoverCart from "./HoverCart";
 import Hoverwishlist from "./Hoverwishlist";
-import Account from "../HeaderD/Account";
+import Account from "./Account"
 
 export default function Header() {
+  // const userId=JSON.parse(localStorage.getItem("user"))._id
   const [showMoreApps, setShowMoreApp] = useState(false);
   const [showLanguage, setShowLanguage] = useState(false);
-
+  const [isMenuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
   // const userId = JSON.parse(localStorage.getItem("user"))._id;
@@ -189,6 +190,18 @@ export default function Header() {
         </>
       ) : (
         <>
+          <div
+            className={classes.cart_icone}
+            onClick={() => navigate("/cart")}
+          ><HoverCart /></div>
+          <div className={classes.globe_icon}>
+            <BsGlobe size={20} onClick={LanguageHandler} />
+          </div>
+          <div className={classes.moreapp_icon}>
+            <button onClick={MoreAppsHandler} className={classes["MoreApps-btn"]}>
+              <GrApps size={20} />
+            </button>
+          </div>
           <div className={classes.login}>
             <button
               className={classes.login_btn}

@@ -15,9 +15,9 @@
   border: none;
   height: 100%;
 }
-.dropdown:hover .dropdown_content {
+/* .dropdown:hover .dropdown_content {
   display: block;
-}
+} */
 .wishlist_btn {
   font-size: 16px;
   font-weight: 600;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import parse from 'html-react-parser';  // Import html-react-parser
+import parse from 'html-react-parser'; 
 import styles from './InstructorData.module.css';
 
 const FormattedInstructorDescription = ({ description }) => {
-  return <div>{parse(description)}</div>;  // Use parse() to convert HTML to React elements
+  return <div>{parse(description)}</div>; 
 };
 
 const InstructorDataList = () => {
@@ -13,7 +13,7 @@ const InstructorDataList = () => {
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/instructors');
+        const response = await axios.get('http://localhost:8000/instructors');
         setInstructors(response.data.instructors);
       } catch (error) {
         console.error('Error fetching instructors:', error.message);

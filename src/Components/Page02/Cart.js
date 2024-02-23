@@ -96,6 +96,7 @@ const Cart = () => {
 
       const data = await response.json();
       if (data.success) {
+       
         Swal.fire({
           title: 'Success!',
           text: 'Congratulations! You own this course.',
@@ -116,7 +117,6 @@ const Cart = () => {
 
     if (!auth) {
       navigate('/signup');
-
 
       return;
     }
@@ -140,6 +140,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
+     
         Swal.fire({
           title: 'Success!',
           text: 'Added in cart',
@@ -181,6 +182,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
+      
         Swal.fire({
           title: 'Success!',
           text: 'Added to Wishlist',

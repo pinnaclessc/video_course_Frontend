@@ -1,6 +1,6 @@
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import classes from "./SignUpPage.module.css";
-import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
   const storedUser = localStorage.getItem("user");
@@ -19,7 +19,7 @@ export default function SignUpPage() {
   }, [userId, navigate]);
 
   const submitHandler = async (event) => {
-    let result = await fetch("http://localhost:8000/add-new-user", {
+    let result = await fetch("http://13.200.156.92:8000/add-new-user", {
       method: "post",
       body: JSON.stringify({ name, email, password }),
       headers: { "Content-Type": "application/json" },

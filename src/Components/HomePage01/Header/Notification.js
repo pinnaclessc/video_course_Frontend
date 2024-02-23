@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Card from "../BodyContent/Card/Card"
+import Card from "./Card/Card"
 import { MdNotifications } from "react-icons/md"
 import classes from "./Notification.module.css"
 
@@ -22,7 +22,7 @@ function Notification() {
       <button className={classes.notify_btn}>
         <MdNotifications size={30} />
       </button>
-      {showCard && (
+      {/* {showCard && (
         <Card className={classes.notify_card}>
           <div className={classes.notify_container}>
             <div className={classes.notify}>Notification</div>
@@ -39,7 +39,7 @@ function Notification() {
             </ul>
           </div>
         </Card>
-      )}
+      )} */}
     </div>
   )
 }

@@ -1,11 +1,12 @@
 import React, { useState } from "react"
-import Loading from "../BodyContent/ProgresBar"
+import Loading from "./ProgresBar"
 import classes from "./MyLearningHover.module.css"
 import data from "./data.json"
-import Card from "../BodyContent/Card/Card"
-import { NavLink } from "react-router-dom"
+import Card from "./Card/Card"
+import { NavLink ,Link} from "react-router-dom"
 
 export default function MyLearning() {
+  const userId=JSON.parse(localStorage.getItem("user"))._id
   const [showCard, setShowCard] = useState(false)
 
   const handleMouseEnter = () => {
@@ -23,15 +24,16 @@ export default function MyLearning() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <button className={classes.mylearning_btn}> My Learning</button>
-        {showCard && (
+          <Link to={`/MyLearningPage/${userId}`}><button className={classes.mylearning_btn}> My Learning</button>
+          </Link>
+          {/* {showCard && (
           <Card className={classes.card}>
             <div className={classes.dropdown}>
               <div className={classes.heading}>
                 <div className={classes.courses_para}>Courses</div>
-                <NavLink to="/">
+                <Link to={`/MyLearningPage/${userId}`}> 
                   <div className={classes.mylearn_para}> My Learning</div>
-                </NavLink>
+                </Link>
               </div>
               <div className={classes.dropdown_content}>
                 {data.map((course) => (
@@ -67,7 +69,7 @@ export default function MyLearning() {
               </div>
             </div>
           </Card>
-        )}
+        )} */}
       </div>
     </>
   )

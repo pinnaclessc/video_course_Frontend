@@ -148,7 +148,7 @@ export default function App() {
           </Route>
           <Route path="/mylearning/notes" element={<NotesEditor />} />
           <Route path="/mylearning/q&a" element={<QandA />} />
-          <Route path="/mylearning/learningtools" element={<LearningTools />} />
+          <Route path="/mylearning/learningtools" element={<LearningTools />} /> 
           <Route path="/user/username" element={<PinnacleProfile />}/>
           <Route path="/user/edit-photo" element={<EditPhoto />} />
           <Route path="/user/edit-account" element={<AccountSecurity />} />

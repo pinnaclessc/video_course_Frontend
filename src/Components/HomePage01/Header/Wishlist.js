@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import Card from "../BodyContent/Card/Card"
+import Card from "./Card/Card"
 import classes from "./Wishlist.module.css"
 import { BiHeart } from "react-icons/bi"
 
@@ -22,12 +22,12 @@ export default function Wishlist() {
       <button className={classes.wishlist_btn}>
         <BiHeart size={30} />
       </button>
-      {showCard && (
+      {/* {showCard && (
         <Card className={classes.wishlist_card}>
           <div className={classes.wishlist}>Your wishlist is empty.</div>
           <div className={classes.wishlist_explore}>Explore Courses</div>
         </Card>
-      )}
+      )} */}
     </div>
   )
 }

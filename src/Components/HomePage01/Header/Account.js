@@ -8,7 +8,6 @@ import { MdAccountCircle } from "react-icons/md";
 function Account()
  {
   const userId=JSON.parse(localStorage.getItem("user"))._id
-  console.log(userId)
   const navigate=useNavigate();
   const [showCard, setShowCard] = useState(false)
   const [showAccountSettings, setShowAccountSettings] = useState(false)

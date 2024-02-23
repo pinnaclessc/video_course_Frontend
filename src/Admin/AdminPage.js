@@ -8,9 +8,11 @@ import ViewCourseContent from './Pages/ShowCourseContent';
 
 export default function AdminPage() {
   const [activeComponent, setActiveComponent] = useState('allCourses');
+
   const handleNavigation = (component) => {
     setActiveComponent(component);
   };
+  
   const renderComponent = () => {
     switch (activeComponent) {
       case 'allCourses':
