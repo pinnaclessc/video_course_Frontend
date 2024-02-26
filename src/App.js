@@ -37,7 +37,6 @@ import CreateCourse from "./Admin/Pages/CreateCourse";
 import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
-import Instructor from "./Admin/instructor/Instructor";
 import Header from "./Components/HomePage01/Header/Header";
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
 // copy Imports of D
@@ -71,7 +70,7 @@ import AdminPage from "./Admin/AdminPage";
 import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
 import ShowCourseContent from "./Admin/Pages/ShowCourseContent";
-import InstructorForm from "./Admin/Pages/InstructorForm"
+import InstructorData from "./Admin/Pages/InstructorForm"
 import CourseForm from "./Admin/course/CourseForm";
 import AddExamCategoryForm from "./Admin/course/AddExamCategoryForm";
 
@@ -100,7 +99,7 @@ export default function App() {
           <Route path="/admin/addCourse" element={<AddCourse />} />
           <Route path="/admin/" element={<AddCourse />} />
           <Route path="/" element={<HomePage01 />} />
-          <Route path="/admin/instructorForm" element={<InstructorForm/>}/>
+          <Route path="/admin/instructorForm" element={<InstructorData/>}/>
           {/* <Route path="/page02" element={<Page02 />}/> */}
           <Route path="/CourseDescription/:id" element={<Page02 />} />
           <Route path="/share" element={<Share />} />
@@ -132,7 +131,7 @@ export default function App() {
           <Route path="/exploreMore" element={<ExploreMore />} />
           <Route path="/railwayExploreMore" element={<Railway />} />
           <Route path="/adminPage" element={<AdminPage />} />
-          <Route path="/Instructor" element={<Instructor/>}/>
+         
           <Route path="/NewCourse" element={<CourseForm/>}/>
           <Route path="/add-category" element={<AddExamCategoryForm/>}/>
           {/* <Route path="/learningPage/:userId" element={<LearningPage/>}/> */} 
