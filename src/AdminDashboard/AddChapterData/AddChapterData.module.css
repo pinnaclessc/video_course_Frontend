@@ -1,0 +1,50 @@
+.AddChapter-wrapper {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .AddChapter-wrapper label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .AddChapter-wrapper select,
+  .AddChapter-wrapper input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .AddChapter-wrapper button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .AddChapter-wrapper button:hover {
+    background-color: #45a049;
+  }
+  
+  .AddChapter-wrapper > div {
+    margin-bottom: 15px;
+  }
+  
+  .AddChapter-wrapper > div input,
+  .AddChapter-wrapper > div select {
+    width: calc(104% - 5px);
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .AddChapter-wrapper > div select {
+    width: calc(100% + 8px);
+  }
+  
+  .AddChapter-wrapper > div:last-child {
+    margin-bottom: 0;
+  }
+  
+  

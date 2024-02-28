@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Swal from 'sweetalert2'
 import { useParams, useNavigate } from "react-router-dom";
-import styles from "../Admin.module.css";
+import styles from "./UpdateCourse.module.css";
+
+
 export default function UpdateProduct() {
   const [courseTitle, setCourseTitle] = useState("");
   const [courseDetails, setCourseDetails] = useState("");

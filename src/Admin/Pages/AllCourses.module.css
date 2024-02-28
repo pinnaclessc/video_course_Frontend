@@ -18,24 +18,24 @@
     border-radius: 5px;
   }
   
-  table {
+  .AllCourses-FullDiv table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
   
-  th, td {
+  .AllCourses-FullDiv th, td {
     text-align: left;
     padding: 8px;
     border: 1px solid #ddd;
   }
   
-  th {
+  .AllCourses-FullDiv th {
     background-color: #007bff;
     color: white;
   }
   
-  tr:nth-child(even) {
+  .AllCourses-FullDiv tr:nth-child(even) {
     background-color: #f2f2f2;
   }
   

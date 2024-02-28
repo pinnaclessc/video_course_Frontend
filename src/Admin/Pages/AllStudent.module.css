@@ -4,24 +4,24 @@
     min-height: 100vh;
   }
   
-  table {
+  .wrapper table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
   }
   
-  th, td {
+  .wrapper th, td {
     text-align: left;
     padding: 8px;
     border: 1px solid #ddd;
   }
   
-  th {
+  .wrapper th {
     background-color: #007bff;
     color: white;
   }
   
-  tr:nth-child(even) {
+  .wrapper tr:nth-child(even) {
     background-color: #f2f2f2;
   }
   

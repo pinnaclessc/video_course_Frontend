@@ -7,6 +7,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Swal from 'sweetalert2';
 import styles from './CourseForm.module.css';
 
+
 const CourseForm = () => {
   const [categories, setCategories] = useState([]);
   const [instructors, setInstructors] = useState([]);
@@ -84,6 +85,11 @@ const CourseForm = () => {
     emoji: {
       options: ['emoji'],
     },
+    // MATH_EQUATION: {
+    //   icon: <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(mathEquationIcon) }} />,
+    //   title: 'Insert Math Equation',
+    //   onClick: handleMathEquationClick,
+    // },
   };
 
   useEffect(() => {
@@ -143,11 +149,10 @@ const CourseForm = () => {
     try {
       const formData = new FormData();
 
-      // Append text data to FormData
       for (const key in courseData) {
         if (key !== 'hindiCoverImage' && key !== 'englishCoverImage') {
           if (key === 'longDescription') {
-            // Convert EditorState to raw content and store it as JSON
+           
             formData.append(key, JSON.stringify(convertToRaw(courseData[key].getCurrentContent())));
           } else {
             formData.append(key, courseData[key]);
@@ -195,7 +200,8 @@ const CourseForm = () => {
 
   return (
     <div className={styles.course_container}>
-      <h1>Course Form</h1>
+      <h4>Course Form</h4>
+   
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>Title:</label>
         <input type="text" name="title" value={courseData.title} onChange={handleChange} required />
@@ -219,10 +225,11 @@ const CourseForm = () => {
             </option>
           ))}
         </select>
+
         <label>Instructor Name:</label>
         <select name="instructorName" value={courseData.instructorName} onChange={handleChange} required>
           <option value="" disabled>Select an instructor</option>
-          {Array.isArray(instructors) && instructors.map(inst => (
+          {instructors.map(inst => (
             <option key={inst._id} value={inst.instructorName}>
               {inst.instructorName}
             </option>
@@ -237,7 +244,6 @@ const CourseForm = () => {
 
         <label>MRP:</label>
         <input type="number" name="mrp" value={courseData.mrp} onChange={handleChange} required />
-
         <label>
           Hindi Cover Image:
           <div

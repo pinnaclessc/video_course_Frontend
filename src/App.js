@@ -33,7 +33,6 @@ import AddCourse from "./Admin/Pages/AddCourse";
 import ExplorCategory from "./ExploreByCategory/ExplorCategory";
 import ExploreMore from "./ExploreByCategory/ExploreMore";
 import Railway from "./ExploreByCategory/Railway";
-import CreateCourse from "./Admin/Pages/CreateCourse";
 import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
@@ -70,9 +69,14 @@ import AdminPage from "./Admin/AdminPage";
 import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
 import ShowCourseContent from "./Admin/Pages/ShowCourseContent";
-import InstructorData from "./Admin/Pages/InstructorForm"
-import CourseForm from "./Admin/course/CourseForm";
-import AddExamCategoryForm from "./Admin/course/AddExamCategoryForm";
+import VideoUploadForm from "./AdminDashboard/VideoForm/VideoUpload";
+
+
+////////////////////////////////////////////////////////////////////
+import InstructorForm from "./AdminDashboard/Instructor/InstructorForm";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
+
 
 // import { AuthProvider } from "./AuthContext";
 // test imports
@@ -86,7 +90,6 @@ export default function App() {
         <Header />
         <Routes>
         <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
-          <Route path="/admin/createCourse" element={<CreateCourse />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses/>}></Route>
           <Route path="/admin/add-new-user" element={<AddUserForm />}></Route>
           <Route path="/admin/updateCourse/:id" element={<UpdateCourse/>}></Route>
@@ -99,7 +102,7 @@ export default function App() {
           <Route path="/admin/addCourse" element={<AddCourse />} />
           <Route path="/admin/" element={<AddCourse />} />
           <Route path="/" element={<HomePage01 />} />
-          <Route path="/admin/instructorForm" element={<InstructorData/>}/>
+
           {/* <Route path="/page02" element={<Page02 />}/> */}
           <Route path="/CourseDescription/:id" element={<Page02 />} />
           <Route path="/share" element={<Share />} />
@@ -131,13 +134,15 @@ export default function App() {
           <Route path="/exploreMore" element={<ExploreMore />} />
           <Route path="/railwayExploreMore" element={<Railway />} />
           <Route path="/adminPage" element={<AdminPage />} />
-         
-          <Route path="/NewCourse" element={<CourseForm/>}/>
-          <Route path="/add-category" element={<AddExamCategoryForm/>}/>
+          <Route path="/admin-dashboard" element={<AdminDashboard/>} />
+          <Route path="/upload-video" element={<VideoUpload/>}/>
+        
           {/* <Route path="/learningPage/:userId" element={<LearningPage/>}/> */} 
         </Routes>
-        {/* copy All Routes of D */}
+{/* /////////////////////////////////AdminRoutes////////////////////////////////////////////////// */}
         <Routes>
+
+        <Route path="/admin/instructorForm" element={<InstructorForm/>}/>
           <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
           <Route path="/mylearning" element={<VideoCoursesMain />}>
             <Route path="/mylearning/overview" element={<CourseOverview/>} />
@@ -163,8 +168,10 @@ export default function App() {
           <Route path="/signuphelp" element={<SignUpHelp />} />
           <Route path="/account-main" element={<AccountMain />} />
           <Route path="/troubleshooting" element={<TroubleshootingHelp />}/>
+          
         </Routes> 
-        {/* <Footer/> */}
+    
+       
         </Router>
     </div>
   );

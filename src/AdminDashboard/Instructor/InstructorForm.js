@@ -3,67 +3,95 @@ import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import styles from './InstructorData.module.css';
+import Swal from 'sweetalert2';
+import styles from './InstructorForm.module.css';
 
-
-const InstructorData = () => {
+const InstructorForm = () => {
   const [instructorName, setInstructorName] = useState('');
   const [instructorDescription, setInstructorDescription] = useState('');
   const [editorValue, setEditorValue] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const onDrop = (acceptedFiles) => {
-    const file = acceptedFiles[0];
-    const reader = new FileReader();
+  const [acceptedFiles, setAcceptedFiles] = useState([]);
 
+  const dropzoneStyles = {
+    border: '2px dashed #cccccc',
+    borderRadius: '4px',
+    padding: '20px',
+    textAlign: 'center',
+    cursor: 'pointer',
+  };
+
+  const imagePreviewStyles = {
+    marginTop: '10px',
+    maxWidth: '200px',
+  };
+
+  const onDrop = (files) => {
+    const file = files[0];
+    const reader = new FileReader();
     reader.onload = () => {
       setSelectedImage(reader.result);
     };
-
     reader.readAsDataURL(file);
+
+    setAcceptedFiles(files);
   };
+
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'image/*',
+    onDropAccepted: (files) => {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    },
   });
 
-  const handleImageUpload = async () => {
-    setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectedImage) {
+      console.error('Please select an image before submitting.');
+      return;
+    }
 
     try {
-      // Your logic for image upload goes here
-      console.log('Image uploading...');
+    
+      setLoading(true);
+      const formData = new FormData();
+      formData.append('image', acceptedFiles[0]);
+      formData.append('instructorName', instructorName);
+      formData.append('instructorDescription', editorValue);
+
+      await axios.post('http://localhost:8000/upload-image', formData);
+      Swal.fire({
+        icon: 'success',
+        title: 'Instructor Created!',
+        text: 'Your instructor has been successfully created.',
+      });
+     
+      setInstructorName('');
+      setEditorValue('');
+      setSelectedImage(null);
+      setAcceptedFiles([]);
+
     } catch (error) {
-      console.error('Error uploading image:', error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'There was an error creating the instructor. Please try again.',
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Append form data including image, instructorName, and instructorDescription
-    const formData = new FormData();
-    formData.append('image', selectedImage);
-    formData.append('instructorName', instructorName);
-    formData.append('instructorDescription', editorValue);
-
-    // You can append additional data if needed
-    // formData.append('key', 'value');
-
-    try {
-      // Call the function to handle image upload along with additional data
-      await handleImageUpload();
-
-      // Add any additional form submission logic here if needed
-      console.log('Form submitted successfully');
-    } catch (error) {
-      console.error('Error submitting form:', error.message);
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -83,18 +111,15 @@ const InstructorData = () => {
             <ReactQuill theme="snow" value={editorValue} onChange={setEditorValue} />
           </div>
         </div>
-
         <div className={`${styles.dropzoneContainer} ${styles.inputContainer}`} {...getRootProps()}>
           <input {...getInputProps()} />
           <p className={styles.dropzoneText}>Drag 'n' drop an image file here, or click to select file</p>
         </div>
-
         {selectedImage && (
           <div className={styles.imagePreviewContainer}>
             <img src={selectedImage} alt="Selected" className={styles.imagePreview} />
           </div>
         )}
-
         <button type="submit" className={styles.submitButton} disabled={loading}>
           {loading ? 'Uploading...' : 'Submit'}
         </button>
@@ -103,4 +128,4 @@ const InstructorData = () => {
   );
 };
 
-export default InstructorData;
+export default InstructorForm;

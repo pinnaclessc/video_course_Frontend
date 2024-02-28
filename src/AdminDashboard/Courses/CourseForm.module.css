@@ -1,0 +1,93 @@
+/* CourseForm.module.css */
+
+.course_container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.course_container form {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.course_container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+.course_container input[type="text"],
+.course_container input[type="number"],
+.course_container textarea,
+.course_container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.course_container textarea {
+  height: 100px;
+}
+
+.rdw-editor-wrapper {
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropzone {
+  border: 2px dashed #cccccc;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.imagePreview {
+  margin-top: 10px;
+  max-width: 200px;
+  border-radius: 4px;
+}
+
+.submitButton {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
+.course_container select, .form input[type="text"], .form input[type="number"] {
+  height: 40px; 
+}
+
+
+@media (max-width: 768px) {
+  .course_container {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .course_container form {
+    grid-gap: 15px;
+  }
+}
