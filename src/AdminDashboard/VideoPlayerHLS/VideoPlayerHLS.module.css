@@ -1,0 +1,39 @@
+/* VideoPlayer.module.css */
+.videoContainer {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin: auto;
+  }
+  
+  .videoElement {
+    width: 100%;
+    height: auto;
+  }
+  
+  .controls {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+  }
+  
+  .playPauseButton {
+    cursor: pointer;
+  }
+  
+  .volumeControl {
+    cursor: pointer;
+  }
+  
+  .fullscreenButton {
+    cursor: pointer;
+  }
+  
+  .settingsButton {
+    cursor: pointer;
+  }
+  

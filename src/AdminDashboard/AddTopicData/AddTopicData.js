@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './AddTopicData.module.css';
 
 const AddTopicForm = () => {
+
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState('');
   const [chapters, setChapters] = useState([]);
@@ -11,103 +12,78 @@ const AddTopicForm = () => {
   const [pdfTitle, setPdfTitle] = useState('');
   const [selectedPdf, setSelectedPdf] = useState('');
   const [availableVideos, setAvailableVideos] = useState([]);
-  const [availablePdfs, setAvailablePdfs] = useState([]); // Initialize as an empty array
+  const [availablePdfs, setAvailablePdfs] = useState([]);
 
+  // Fetch Courses
   useEffect(() => {
-    // Fetch the list of courses
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://13.200.156.92:8000/api/courses');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        const response = await fetch('http://localhost:8000/api/courses');
         const data = await response.json();
         setCourses(data);
-
-        // Select the first course by default
-        if (data.length > 0) {
-          setSelectedCourse(data[0]._id);
-        }
+        setSelectedCourse(data[0]?._id);
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
-
     fetchCourses();
   }, []);
 
+  // Fetch Chapters based on the selected course
   useEffect(() => {
-    // Fetch chapters based on the selected course
     const fetchChapters = async () => {
       if (!selectedCourse) return;
-
       try {
-        const response = await fetch(`http://13.200.156.92:8000/vc/api/chapters/${selectedCourse}`);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        const response = await fetch(`http://localhost:8000/api/chapters/course/${selectedCourse}`);
         const data = await response.json();
         setChapters(data);
-
-        // Select the first chapter by default
-        if (data.length > 0) {
-          setSelectedChapter(data[0]._id);
-        }
+        setSelectedChapter(data[0]?._id);
       } catch (error) {
         console.error('Error fetching chapters:', error);
       }
     };
-
     fetchChapters();
   }, [selectedCourse]);
 
+  // Fetch Videos and PDFs based on the selected course
   useEffect(() => {
-    // Fetch videos and PDFs based on the selected course
-    const fetchVideosAndPdfs = async () => {
+    const fetchResources = async () => {
       if (!selectedCourse) return;
-
       try {
-        const videosResponse = await fetch(`http://13.200.156.92:8000/api/videos/${selectedCourse}`);
-        if (!videosResponse.ok) {
-          throw new Error(`HTTP error! Status: ${videosResponse.status}`);
-        }
-        const videosData = await videosResponse.json();
+        const videosResponse = await fetch(`http://localhost:8000/api/videos/course/${selectedCourse}`);
+        let videosData = await videosResponse.json();
+        videosData = Array.isArray(videosData) ? videosData : [];
         setAvailableVideos(videosData);
 
-        const pdfsResponse = await fetch(`http://13.200.156.92:8000/api/pdfs/${selectedCourse}`);
-  
-
-        if (!pdfsResponse.ok) {
-          throw new Error(`HTTP error! Status: ${pdfsResponse.status}`);
-        }
-        const pdfsData = await pdfsResponse.json();
+        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/course/${selectedCourse}`);
+        let pdfsData = await pdfsResponse.json();
+        pdfsData = Array.isArray(pdfsData) ? pdfsData : [];
         setAvailablePdfs(pdfsData);
       } catch (error) {
-        console.error('Error fetching videos and PDFs:', error);
+        console.error('Error fetching resources:', error);
+        setAvailableVideos([]);
+        setAvailablePdfs([]);
       }
     };
-
-    fetchVideosAndPdfs();
+    fetchResources();
   }, [selectedCourse]);
 
+  // Handle Add Topic form submission
   const handleAddTopic = async () => {
-    // Validate inputs
-    if (!selectedCourse || !selectedChapter || !videoTitle || !selectedVideo) {
+    if (!selectedChapter || !videoTitle || !selectedVideo || !pdfTitle || !selectedPdf) {
       console.error('Incomplete data. Please fill in all required fields.');
       return;
     }
 
-    try {
-      const newTopic = {
-        videoTitle,
-        selectedVideo,
-        pdfTitle,
-        selectedPdf,
-        completed: [],
-      };
+    const newTopic = {
+      videoTitle,
+      selectedVideo,
+      pdfTitle,
+      selectedPdf,
+    };
 
-      const response = await fetch(`http://13.200.156.92:8000/api/chapters/${selectedChapter}/add-topic`, {
+    try {
+      const response = await fetch(`http://localhost:8000/api/chapters/${selectedChapter}/add-topic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -118,81 +94,95 @@ const AddTopicForm = () => {
       if (!response.ok) {
         throw new Error('Failed to add topic');
       }
-
       console.log('Topic added successfully');
+      window.alert('Topic added successfully!');
+
       setVideoTitle('');
       setSelectedVideo('');
       setPdfTitle('');
       setSelectedPdf('');
+
     } catch (error) {
-      console.error('Error adding topic:', error.message);
+      console.error('Error adding topic:', error);
+      window.alert('Error adding topic. Please try again.');
     }
   };
 
   return (
     <div className={styles['topic-form']}>
-      <label>
-        Select Course:
-        <select name="course" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
-          {courses.map((course) => (
-            <option key={course._id} value={course._id}>
-              {course.courseTitle}
-            </option>
-          ))}
-        </select>
-      </label>
+      <h2 className={styles.formTitle}>Add New Topic</h2>
 
-      <label>
-        Select Chapter:
-        <select name="chapter" value={selectedChapter} onChange={(e) => setSelectedChapter(e.target.value)}>
-          {chapters.map((chapter) => (
-            <option key={chapter._id} value={chapter._id}>
-              {chapter.chapterTitle}
-            </option>
-          ))}
-        </select>
-      </label>
+      {/* Course selection */}
+      <label className={styles.label}>Select Course:</label>
+      <select
+        name="course"
+        value={selectedCourse}
+        className={styles.selectField}
+        onChange={(e) => setSelectedCourse(e.target.value)}>
+        <option value="" disabled style={{ color: 'gray' }}>Select the course</option>
+        {courses.map((course) => (
+          <option key={course._id} value={course._id}>{course.title}</option>
+        ))}
+      </select>
 
-      <label>
-        Topic Title:
-        <input type="text" value={videoTitle} onChange={(e) => setVideoTitle(e.target.value)} />
-      </label>
+      {/* Chapter selection */}
+      <label className={styles.label}>Select Chapter:</label>
+      <select
+        name="chapter"
+        value={selectedChapter}
+        className={styles.selectField}
+        onChange={(e) => setSelectedChapter(e.target.value)}>
+        <option value="" disabled style={{ color: 'gray' }}>Select the chapter</option>
+        {chapters.map((chapter) => (
+          <option key={chapter._id} value={chapter._id}>{chapter.chapterTitle}</option>
+        ))}
+      </select>
 
-      <label>
-        Select Video:
-        <select value={selectedVideo} onChange={(e) => setSelectedVideo(e.target.value)}>
-          <option value="" disabled>
-            Select Video
-          </option>
-          {availableVideos.map((video) => (
-            <option key={video.cloudFrontUrl} value={video.cloudFrontUrl}>
-              {video.originalname}
-            </option>
-          ))}
-        </select>
-      </label>
+      {/* Video title input */}
+      <label className={styles.label}>Video Title:</label>
+      <input
+        type="text"
+        value={videoTitle}
+        className={styles.inputField}
+        onChange={(e) => setVideoTitle(e.target.value)}
+        required
+      />
 
-      <label>
-        PDF Title:
-        <input type="text" value={pdfTitle} onChange={(e) => setPdfTitle(e.target.value)} />
-      </label>
+      {/* Video selection */}
+      <label className={styles.label}>Selected Video:</label>
+      <select
+        value={selectedVideo}
+        className={styles.selectField}
+        onChange={(e) => setSelectedVideo(e.target.value)}
+        required>
+        <option value="" disabled style={{ color: 'gray' }}>Select a Video</option>
+        {availableVideos.map(video => (
+          <option key={video._id} value={video._id}>{video.originalFilename}</option>
+        ))}
+      </select>
 
-      <label>
-        Select PDF:
-        <select value={selectedPdf} onChange={(e) => setSelectedPdf(e.target.value)}>
-          <option value="" disabled>
-            Select PDF
-          </option>
-          {availablePdfs.map((pdf) => (
-            <option key={pdf.s3Key} value={pdf.cloudFrontUrl}>
-              {/* {pdf.s3Key} */}
-              {pdf.originalname}
-            </option>
-          ))}
-        </select>
-      </label>
+      {/* PDF title input */}
+      <label className={styles.label}>PDF Title:</label>
+      <input
+        type="text"
+        value={pdfTitle}
+        className={styles.inputField}
+        onChange={(e) => setPdfTitle(e.target.value)}
+      />
 
-      <button onClick={handleAddTopic}>Add Topic</button>
+      {/* PDF selection */}
+      <label className={styles.label}>Select PDF:</label>
+      <select
+        value={selectedPdf}
+        className={styles.selectField}
+        onChange={(e) => setSelectedPdf(e.target.value)}>
+        <option value="" disabled style={{ color: 'gray' }}>Select a PDF</option>
+        {availablePdfs.map(pdf => (
+          <option key={pdf._id} value={pdf._id}>{pdf.originalname}</option>
+        ))}
+      </select>
+
+      <button type="button" onClick={handleAddTopic} className={styles.submitButton}>Add Topic</button>
     </div>
   );
 };

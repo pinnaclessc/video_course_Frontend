@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoUploadForm from '../VideoForm/VideoUpload';
-import PdfUploadForm from '../../Admin/Pages/PdfUploadForm';
+import PdfUploadForm from '../Pdf/PdfUploadData';
 import AddChapter from '../AddChapterData/AddChapterData';
 import AddTopicForm from '../AddTopicData/AddTopicData';
 import styles from './AddCourseContentData.module.css';

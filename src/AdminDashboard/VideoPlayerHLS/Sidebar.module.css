@@ -1,0 +1,53 @@
+/* Sidebar.module.css */
+.sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .accordion {
+    background-color: #e7e7e7;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+  }
+  
+  .active, .accordion:hover {
+    background-color: #ccc;
+  }
+  
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+  
+  .submenuList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .submenuItem {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .submenuButton {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+  }
+  

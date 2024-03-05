@@ -640,7 +640,9 @@
 .previous_next_buttons{
   margin-top: 10%;
 }
-
+.setting_button_container{
+  z-index: 1;
+}
 /* Animation keyframes for the loading indicator */
 @keyframes spin {
   0% {

@@ -2,9 +2,8 @@ import React, { useState, useRef, useEffect } from "react"
 import "./VideoPlayer.css"
 import { Link, Outlet } from "react-router-dom"
 import { BsArrowCounterclockwise, BsArrowClockwise } from "react-icons/bs"
-import { AiOutlineFileText, AiOutlineSearch } from "react-icons/ai"
-import { IoClose } from "react-icons/io"
-import { CgArrowsH, CgTranscript } from "react-icons/cg"
+import { AiOutlineSearch } from "react-icons/ai"
+import { CgArrowsH } from "react-icons/cg"
 import {
   MdEditNote,
   MdOutlineFullscreenExit,
@@ -17,17 +16,16 @@ import Settings from "./Settings"
 import SeekBar from "./SeekBar"
 import Volume from "./Volume"
 import PlayPauseButton from "./PlayButton"
-import FullscreenButton from "./FullScreen";
 import SideBar from "./SideBar"
-import menuData from "./menuData.json"
+import axios from "axios"
+import Hls from "hls.js";
 
-const VideoPlayer = ({ onVideoSelect }) => {
+const VideoPlayer = ({ apiUrl = 'http://localhost:8000' }) => {
   const videoRef = useRef(null)
   const [error, setError] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState()
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isFullScreen, setIsFullScreen] = useState(false)
   const [isExpandedMode, setIsExpandedMode] = useState(true)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isNavbarItemVisible, setIsNavbarItemVisible] = useState(false)
@@ -38,7 +36,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
   const [playRate, setPlayRate] = useState(1)
   const [isPlayRateMenuOpen, setIsPlayRateMenuOpen] = useState(false)
   const playRateOptions = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
-  const [videoQuality, setVideoQuality] = useState("1080p")
+  // const [videoQuality, setVideoQuality] = useState("1080p")
   const [volume, setVolume] = useState(0.5)
   const [muted, setMuted] = useState(false)
   const [prevVolume, setPrevVolume] = useState(0)
@@ -54,20 +52,196 @@ const VideoPlayer = ({ onVideoSelect }) => {
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(0);
   const [isSidebarBelowNavVisible, setIsSidebarBelowNavVisible] = useState(false);
+  const [selectedQuality, setSelectedQuality] = useState()
+  const [currentVideo, setCurrentVideo] = useState(null);
+  const [videoQuality, setVideoQuality] = useState('720p');
+  /////////////////////////////////////////////////////////////////
+  // const [videoDetails, setVideoDetails] = useState({ resolutions: [] });
+  const [currentQuality, setCurrentQuality] = useState('720p');
+  // const [selectedVideoId, setSelectedVideoId] = useState(null);
+  // const [videoUrl,setVideoUrl] = useState()
+
+  const [videoDetails, setVideoDetails] = useState({ resolutions: [] });
+  const [selectedVideoId, setSelectedVideoId] = useState(null);
+  const [videoUrl, setVideoUrl] = useState('');
+  // const apiUrl = 'http://localhost:8000'; 
+
+
+
+
+  // Inside your VideoPlayer component, above the useEffect hooks
+
+  // const fetchVideoById = async (videoId) => {
+  //   setIsLoading(true);
+  //   try {
+  //     // Replace the URL with your actual API endpoint
+  //     const response = await axios.get(`${apiUrl}/videos/${videoId}`);
+  //     if (response.status === 200) {
+  //       // Assuming the API returns the video details directly
+  //       return response.data;
+  //     } else {
+  //       console.error('Failed to fetch video details:', response.status);
+  //       setError(true);
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching video details:', error);
+  //     setError(true);
+  //     return null;
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
 
   // useEffect(() => {
-  //   const video = videoRef.current
-  //   const handleLoadedMetadata = () => {
-  //     setDuration(video.duration)
+  //   if (selectedVideoId) {
+  //     fetchVideoById(selectedVideoId).then((videoData) => {
+  //       if (videoData) {
+  //         // Assuming videoData contains a resolutions array
+  //         const resolution720p = videoData.resolutions.find(res => res.name === '720p HLS');
+  //         if (resolution720p) {
+  //           setVideoUrl(resolution720p.url);
+  //           // Set additional video details as needed
+  //           setVideoDetails(videoData);
+  //         } else {
+  //           console.error('720p resolution not found');
+  //           setError(true);
+  //         }
+  //       }
+  //     });
   //   }
+  // }, [selectedVideoId]);
 
-  //   video.addEventListener("loadedmetadata", handleLoadedMetadata)
+  // Function to fetch video details by ID
+  // Fetch video details and set resolutions
+  const fetchVideoById = async (videoId) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${apiUrl}/videos/${videoId}`);
+      if (response.status === 200) {
+        const data = response.data;
+        setVideoDetails(data);
 
-  //   return () => {
-  //     video.removeEventListener("loadedmetadata", handleLoadedMetadata)
+        // Set default quality (720p) if available
+        const defaultQuality = data.resolutions.find(r => r.name === '720p');
+        if (defaultQuality) {
+          setVideoUrl(defaultQuality.url);
+          setCurrentQuality('720p');
+        } else {
+          throw new Error('Default quality (720p) not found in resolutions.');
+        }
+      } else {
+        throw new Error(`Failed to fetch video details: ${response.status}`);
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedVideoId) {
+      fetchVideoById(selectedVideoId);
+    }
+  }, [selectedVideoId]);
+
+  // Function to change the quality of the video
+  const changeQuality = (newQuality) => {
+    const currentTime = videoRef.current.currentTime;
+    const newQualitySource = videoDetails.resolutions.find(r => r.name === newQuality)?.url;
+    
+    if (newQualitySource) {
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(newQualitySource);
+        hls.attachMedia(videoRef.current);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          videoRef.current.currentTime = currentTime;
+          videoRef.current.play();
+          setCurrentQuality(newQuality);
+        });
+      } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+        videoRef.current.src = newQualitySource;
+        videoRef.current.currentTime = currentTime;
+        videoRef.current.play();
+        setCurrentQuality(newQuality);
+      } else {
+        console.error("This video format is not supported");
+      }
+    }
+  };
+
+  ///////////////////////////////this is so it support .m3u8////////////////////////////////
+
+  // useEffect(() => {
+  //   const fetchVideoDetails = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const response = await axios.get(`${apiUrl}/videos/${selectedVideoId}`);
+  //       setVideoDetails(response.data);
+  //       setCurrentQuality(response.data.defaultQuality || '720p');
+  //     } catch (error) {
+  //       console.error("Error fetching video details:", error);
+  //       setError(true);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   if (selectedVideoId) fetchVideoDetails();
+  // }, [selectedVideoId, apiUrl]);
+
+  // useEffect(() => {
+  //   const video = videoRef.current;
+  //   if (!video) return;
+
+  //   const qualityUrl = videoDetails.resolutions.find(res => res.name === currentQuality)?.url;
+  //   if (!qualityUrl) return;
+
+  //   if (Hls.isSupported()) {
+  //     const hls = new Hls();
+  //     hls.loadSource(qualityUrl);
+  //     hls.attachMedia(video);
+  //     hls.on(Hls.Events.MANIFEST_PARSED, () => {
+  //       if (!isPlaying) video.play().then(() => setIsPlaying(true));
+  //     });
+  //   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  //     video.src = qualityUrl;
+  //     video.play().then(() => setIsPlaying(true));
   //   }
-  // }, [])
+  // }, [currentQuality, videoDetails.resolutions, isPlaying]);
+
+
+
+  const onVideoSelect = (videoId) => {
+    setSelectedVideoId(videoId);
+    setIsLoading(true);
+  };
+
+  // Function to change the quality of the video
+  const handleQualityChange = (quality) => {
+    setCurrentQuality(quality);
+  };
+  ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+  ///////////////////////////////////////////////////////
+
+  useEffect(() => {
+    const video = videoRef.current
+    const handleLoadedMetadata = () => {
+      setDuration(video.duration)
+    }
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata)
+
+    return () => {
+      video.removeEventListener("loadedmetadata", handleLoadedMetadata)
+    }
+  }, [])
 
   useEffect(() => {
     const video = videoRef.current;
@@ -82,63 +256,38 @@ const VideoPlayer = ({ onVideoSelect }) => {
     };
   }, [selectedVideoIndex]);
 
-  const handleCenterPlayClick = () => {
-    handlePlayPause();
-  };
 
-  useEffect(() => {
-    // Show play button icon for a few seconds when video is played or paused
-    setShowCenterPlayButton(true);
-    const timeout = setTimeout(() => {
-      setShowCenterPlayButton(false);
-    }, 1000);
+  /////////////////////////useEffect for centreplaybutton ///////////////////////////
+  // useEffect(() => {
+  //   // Show play button icon for a few seconds when video is played or paused
+  //   setShowCenterPlayButton(true);
+  //   const timeout = setTimeout(() => {
+  //     setShowCenterPlayButton(false);
+  //   }, 1000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isPlaying]); 
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [isPlaying]); 
+  /////////////////////////////////////////////////////////////////////////////////////
 
-  // const handleCenterPlayClick = () => {
-  //   handlePlayPause()
-  // }
   const handleSubMenuSelect = (submenuTitle, isPlayed) => {
     setSelectedSubmenu(submenuTitle);
-    // Reset the state of showCenterPlayButton when changing submenu
     setShowCenterPlayButton(!isPlayed);
     console.log("Submenu title:", submenuTitle);
     console.log("Is played:", isPlayed);
   };
 
-  const handleVideoSelectMenu = (submenu) => {
-    setSelectedSubmenu(submenu.title)
-  }
+  // const handleVideoSelectMenu = (submenu) => {
+  //   setSelectedSubmenu(submenu.title)
+  // }
 
   const handleVideoError = () => {
     setError(true)
   }
 
-  // const handleVideoSelect = (videoUrl) => {
-  //   setSelectedVideo(videoUrl)
-  // }
-  const handleVideoSelect = (videoUrl) => {
-    setSelectedVideo(videoUrl);
-
-    // Pause the video and show the play icon when selecting a new video
-    if (videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-      setShowCenterPlayButton(true);
-    }
-  };
-
-  const handleButtonClick = (option) => {
-    setActiveButton((prevButton) => (prevButton === option ? null : option))
-    closeOpenedButtons() 
-  }
-
   //function to handle closing all opened buttons
   const closeOpenedButtons = () => {
-
     setIsPlayRateMenuOpen(false)
     setIsNotesOpen(false)
     setIsVolumeOpen(false)
@@ -153,23 +302,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
     setIsHovered(false)
   }
 
-
-  const handleQualityOptionClick = async (quality) => {
-    setIsLoading(true)
-    // Simulating video loading delay using setTimeout
-    await new Promise((resolve) => setTimeout(resolve, 200))
-    setVideoQuality(quality)
-    setIsLoading(false)
-  }
-
-  const loadVideoWithQuality = (quality) => {
-    console.log(`Loading video with quality: ${quality}`)
-  }
-
-  //Quality Handlers
-  const handleQualityChange = (quality) => {
-    setVideoQuality(quality)
-  }
 
   const handleTimeUpdate = () => {
     setCurrentTime(videoRef.current.currentTime)
@@ -203,7 +335,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
   }, [currentTime])
 
   //PLAY AND PAUSE BUTTON
-
   const handlePlayPause = () => {
     const video = videoRef.current
     setShowCenterPlayButton(false)
@@ -230,7 +361,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
   }
 
   //FORWARD AND BACKWARD BUTTON
-  const seekAmount = 3
+  const seekAmount = 5
   const handleForward = () => {
     videoRef.current.currentTime -= seekAmount
   }
@@ -250,7 +381,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
   }
 
   //Sound Button videoref dena
-
   const handleVolumeChange = (value) => {
     if (muted) {
       setPrevVolume(value)
@@ -268,6 +398,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
       setVolume(0)
     }
   }
+
   const handleVideoClick = (event) => {
     const clickedElement = event.target
     const isSidebarElement = clickedElement.closest(".sidebar_container")
@@ -284,7 +415,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
   }
 
   //Fullscreen
-   const handleToggleFullScreen = () => {
+  const handleToggleFullScreen = () => {
     const videoContainer = document.getElementById("video-container")
 
     if (!document.fullscreenElement) {
@@ -322,7 +453,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
     setIsSidebarOpen(false)
     setIsNavbarItemVisible((isExpandedMode) => !isExpandedMode)
   }
-  
+
   //Toggle Sidebar
   const handleToggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
@@ -333,25 +464,11 @@ const VideoPlayer = ({ onVideoSelect }) => {
     setIsNavbarItemVisible(true)
   }
 
-  const videoPlayerClass = `video-container ${
-    isExpandedMode ? "expanded" : ""
-  } `
+  const videoPlayerClass = `video-container ${isExpandedMode ? "expanded" : ""
+    } `
 
-  const VideoNavbarStyle = `videoNavbar ${
-    isExpandedMode && "videoNavbar_expanded"
-  } `
-
-  // const handlePreviousTopic = () => {
-  //   if (selectedTopicIndex > 0) {
-  //     setSelectedTopicIndex((prevIndex) => prevIndex - 1);
-  //   }
-  // };
-
-  // const handleNextTopic = () => {
-  //   if (selectedTopicIndex < selectedChapter?.topics.length - 1) {
-  //     setSelectedTopicIndex((prevIndex) => prevIndex + 1);
-  //   }
-  // };
+  const VideoNavbarStyle = `videoNavbar ${isExpandedMode && "videoNavbar_expanded"
+    } `
 
   const handleChapterSelect = (chapter) => {
     setSelectedChapter(chapter);
@@ -361,9 +478,8 @@ const VideoPlayer = ({ onVideoSelect }) => {
   useEffect(() => {
     const selectedVideo =
       selectedChapter?.topics[selectedTopicIndex]?.selectedVideo || null;
-   
+
   }, [selectedChapter, selectedTopicIndex]);
-  
 
   return (
     <>
@@ -381,11 +497,8 @@ const VideoPlayer = ({ onVideoSelect }) => {
           <video
             className="video-element"
             ref={videoRef}
-            src={
-              selectedVideo ||
-              "https://dgkwgu5olgqh6.cloudfront.net/videos/Default_Video.mp4"
-            }
-            type="video/mp4"
+            src={videoUrl}
+            type="application/x-mpegURL"
             onTimeUpdate={handleVideoTimeUpdate}
             onLoadedMetadata={handleVideoLoadedMetadata}
             onMouseEnter={handleVideoHover}
@@ -393,7 +506,8 @@ const VideoPlayer = ({ onVideoSelect }) => {
             onCanPlayThrough={() => setError(false)}
             onError={handleVideoError}
             quality={videoQuality}
-           
+            onClick={handlePlayPause}
+
           >
           </video>
         )}
@@ -402,26 +516,6 @@ const VideoPlayer = ({ onVideoSelect }) => {
           {selectedSubmenu}
         </div>
 
-        {/* <div className="previous_next_buttons">
-        <button onClick={handlePreviousTopic}>Previous </button>
-        <button onClick={handleNextTopic}>Next </button>
-      </div> */}
-     
-        <div className="center-controls"> 
-          {showCenterPlayButton && (
-            <div
-              className="center-play-button"
-              onClick={handleCenterPlayClick}
-            >
-              {isPlaying ? (
-                <FaPause className="center-play-icon" />
-              ) : (
-                <FaPlay className="center-play-icon" />
-              )}
-            </div>
-             )}
-
-             </div>
         {isExpandedMode && !isSidebarOpen && (
           <div className="sidebar_container">
             <div className="sidebar">
@@ -435,19 +529,20 @@ const VideoPlayer = ({ onVideoSelect }) => {
               <SideBar
                 isOpen={isSidebarOpen}
                 handleClose={() => setIsSidebarOpen(false)}
-                menuData={menuData}
-                onVideoSelect={handleVideoSelect}
+                // onVideoSelect={handleVideoSelect}
+                // onVideoSelect={handleVideoSelect}
+                onVideoSelect={(videoId) => setSelectedVideoId(videoId)}
+                // onVideoSelect={onVideoSelect}
                 onSubMenuSelect={handleSubMenuSelect}
-                onChapterSelect={handleChapterSelect} 
+                onChapterSelect={handleChapterSelect}
               />
             </div>
           </div>
         )}
 
         <div
-          className={`control_btn_container ${
-            isFullscreen ? "fullscreen" : ""
-          }`}
+          className={`control_btn_container ${isFullscreen ? "fullscreen" : ""
+            }`}
         >
 
           {/* //Seekbar */}
@@ -463,12 +558,9 @@ const VideoPlayer = ({ onVideoSelect }) => {
 
           {/* //All Control Buttons */}
           <div className={`control_bar ${isFullscreen ? "fullscreen" : ""}`}>
-             <div className="play_pause_container">
-          <PlayPauseButton
-            isPlaying={isPlaying}
-            handlePlayPause={handlePlayPause}
-          />
-        </div>
+            <div className="play_pause_container">
+              <PlayPauseButton videoRef={videoRef} />
+            </div>
 
             {/* Backward button */}
             <div className="backward_container">
@@ -502,7 +594,7 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 <BsArrowClockwise className="forward_icon" size={25} />
               </button>
             </div>
-            
+
             {/* //duration */}
             <div className="duration">
               <span className="current_duration">{currentDuration}</span>/
@@ -517,7 +609,17 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 </Link>
               </button>
             </div>
+            {/* //////////////////////////////////////////////////////// */}
+     
+             <Settings
+      currentQuality={currentQuality}
+      onChangeQuality={changeQuality}
+      resolutions={videoDetails.resolutions}
+      videoRef={videoRef}
+    />
 
+
+            {/* //////////////////////////////////////////////////////// */}
             {/* //volume button */}
             <div className="volume_slider_container">
               <div className="volume-container">
@@ -530,30 +632,15 @@ const VideoPlayer = ({ onVideoSelect }) => {
               </div>
             </div>
 
-            {/* //Fullscreen */}
-            {/* <div className="fullscreen_container">
-              <div className="fullscreen_container">
-                <button
-                  onClick={handleToggleFullScreen}
-                  className="fullscreen-button"
-                >
-                  {isFullScreen ? (
-                    <MdOutlineFullscreenExit size={25} />
-                  ) : (
-                    <MdOutlineFullscreen size={25} />
-                  )}
-                </button>
-              </div>
-            </div> */}
-             <div className="fullscreen_container">
-        <button onClick={handleToggleFullScreen} className="fullscreen-button">
-          {isCurrentlyFullScreen ? (
-            <MdOutlineFullscreenExit size={25} />
-          ) : (
-            <MdOutlineFullscreen size={25} />
-          )}
-        </button>
-      </div>
+            <div className="fullscreen_container">
+              <button onClick={handleToggleFullScreen} className="fullscreen-button">
+                {isCurrentlyFullScreen ? (
+                  <MdOutlineFullscreenExit size={25} />
+                ) : (
+                  <MdOutlineFullscreen size={25} />
+                )}
+              </button>
+            </div>
             <div className="expanded_container">
               {isExpandedMode ? (
                 <button
@@ -577,12 +664,13 @@ const VideoPlayer = ({ onVideoSelect }) => {
                 </button>
               )}
             </div>
-          
+
 
           </div>
-          
+
         </div>
       </div>
+
 
       <div className={VideoNavbarStyle}>
         <Link to="/mylearning/search" className="links">

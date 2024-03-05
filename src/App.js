@@ -76,6 +76,8 @@ import VideoUploadForm from "./AdminDashboard/VideoForm/VideoUpload";
 import InstructorForm from "./AdminDashboard/Instructor/InstructorForm";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
+import VideoPlayer from "./AdminDashboard/VideoPlayerHLS/VideoPlayerHLS";
+import VideoPlayerPage from "./AdminDashboard/VideoPlayerHLS/VideoPlayerPage";
 
 
 // import { AuthProvider } from "./AuthContext";
@@ -144,12 +146,12 @@ export default function App() {
 
         <Route path="/admin/instructorForm" element={<InstructorForm/>}/>
           <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
-          <Route path="/mylearning" element={<VideoCoursesMain />}>
+          {/* <Route path="/mylearning" element={<VideoCoursesMain />}>
             <Route path="/mylearning/overview" element={<CourseOverview/>} />
             <Route path="/mylearning/reviews" element={<Review />} />
             <Route path="/mylearning/search" element={<SearchBar />} />
             <Route path="/mylearning/announcement"element={<Announcements />}/>
-          </Route>
+          </Route> */}
           <Route path="/mylearning/notes" element={<NotesEditor />} />
           <Route path="/mylearning/q&a" element={<QandA />} />
           <Route path="/mylearning/learningtools" element={<LearningTools />} /> 
@@ -168,6 +170,9 @@ export default function App() {
           <Route path="/signuphelp" element={<SignUpHelp />} />
           <Route path="/account-main" element={<AccountMain />} />
           <Route path="/troubleshooting" element={<TroubleshootingHelp />}/>
+          <Route path="/video-player" element={<VideoPlayer/>}/>
+          <Route path="/videoplayer" element={<VideoPlayerPage/>}/>
+          <Route path="/myplayer" element={<VideoCoursesMain />}></Route>
           
         </Routes> 
     

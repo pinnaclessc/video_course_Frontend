@@ -4,21 +4,20 @@ import { MdOndemandVideo } from "react-icons/md";
 import { SiFiles } from "react-icons/si";
 import Card from "../../BodyContent/Card/Card";
 import styles from "./Sidebar.module.css";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 
-const Sidebar = ({ onVideoSelect, onSubMenuSelect }) => {
+const Sidebar = ({ onVideoSelect }) => {
   const [activeMenuIds, setActiveMenuIds] = useState([]);
   const [selectedResourceSubmenuId, setSelectedResourceSubmenuId] = useState(null);
   const [chapters, setChapters] = useState([]);
   const [videoLengths, setVideoLengths] = useState({});
-  const { course_id } = useParams();
+  const course_id = "65d5c59aca321455979ee32d"
   const [overallTopicIndex, setOverallTopicIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(course_id);
-        const response = await fetch(`http://13.200.156.92:8000/vc/api/chapters/${course_id}`);
+        const response = await fetch(`http://localhost:8000/api/chapters/course/${course_id}`);
         const data = await response.json();
 
         if (!Array.isArray(data)) {
@@ -92,81 +91,46 @@ const Sidebar = ({ onVideoSelect, onSubMenuSelect }) => {
     return `${formattedHours} ${formattedMinutes} ${formattedSeconds}`;
   };
 
-  const handlePdfTitleClick = (pdfUrl) => {
-    window.open(pdfUrl, "_blank");
-  };
-
+  // Ensure onClick handlers are correctly passing the necessary info
   return (
     <div className={styles.sidebar}>
       {chapters.map((chapter) => (
-        <div
-          key={chapter._id}
-          className={`${styles.accordion} ${activeMenuIds.includes(chapter._id) ? styles.active : ""
-            }`}
-        >
-          <div
-            className={styles.accordion_title_container}
-            onClick={() =>
-              setActiveMenuIds((prevMenuIds) =>
-                prevMenuIds.includes(chapter._id)
-                  ? prevMenuIds.filter((id) => id !== chapter._id)
-                  : [...prevMenuIds, chapter._id]
-              )
-            }
-          >
+        <div key={chapter._id} className={`${styles.accordion} ${activeMenuIds.includes(chapter._id) ? styles.active : ""}`}>
+          <div className={styles.accordion_title_container} onClick={() => setActiveMenuIds((prevMenuIds) => prevMenuIds.includes(chapter._id) ? prevMenuIds.filter((id) => id !== chapter._id) : [...prevMenuIds, chapter._id])}>
             <div className={styles.accordion_title}>
               {chapter.chapterTitle}
-              {activeMenuIds.includes(chapter._id) ? (
-                <RiArrowDropUpLine className={styles.arrow_icon} size={26} />
-              ) : (
-                <RiArrowDropDownLine className={styles.arrow_icon} size={26} />
-              )}
+              {activeMenuIds.includes(chapter._id) ? <RiArrowDropUpLine className={styles.arrow_icon} size={26} /> : <RiArrowDropDownLine className={styles.arrow_icon} size={26} />}
             </div>
           </div>
           {activeMenuIds.includes(chapter._id) && (
             <ul className={styles["submenu-list"]}>
               {chapter.topics.map((topic, index) => (
                 <li key={topic._id} className={styles["submenu-item"]}>
-                  <div className={styles.submenu_content}>
-                    <button
-                      className={styles["submenu-button"]}
-                      onClick={() => {
-                        onVideoSelect(topic.selectedVideo);
-                        onSubMenuSelect(topic.videoTitle);
-                      }}
-                    >
-                      {/* {topic.videoTitle} */}
-                      {`${topic.overallIndex + 1}. ${topic.videoTitle}`}
+                  {/* <button className={styles["submenu-button"]} onClick={() => onVideoSelect(topic.selectedVideo)}>
+                    {`${topic.overallIndex + 1}. ${topic.videoTitle}`}
+                  </button> */}
+                  <button className={styles["submenu-button"]} onClick={() => onVideoSelect(topic.selectedVideo)}>
+                    {`${topic.overallIndex + 1}. ${topic.videoTitle}`}
+                  </button>
 
-                    </button>
-                    <div className={styles.options_container}>
-                      <MdOndemandVideo
-                        className={styles.video_icon}
-                        onClick={() => onVideoSelect(topic.selectedVideo)}
-                      />
-                      <p className={styles.video_length}>
-                        {videoLengths[topic._id] && `${videoLengths[topic._id]}`}
-                      </p>
-                      <div className={styles.dropdown_container}>
-                        <label
-                          className={styles.dropdown_container1}
-                          onClick={() => handleResourcesClick(topic._id)}
-                        >
-                          <SiFiles className={styles.pdf_icon} size={10} />
-                          Resources
-                        </label>
-                        {selectedResourceSubmenuId === topic._id && (
-                          <Card className={styles.pdf_dropdown}>
-                            <ul>
-                              <li>
-                                <a href={topic.selectedPdf} target="_blank" rel="noopener noreferrer">
-                                  {topic.pdfTitle || "Untitled PDF"}
-                                </a>
-                              </li>
-                            </ul>
-                          </Card>
-                        )}
-                      </div>
+                  <div className={styles.options_container}>
+                    <MdOndemandVideo className={styles.video_icon} onClick={() => onVideoSelect(topic.selectedVideo)} />
+                    <p className={styles.video_length}>{videoLengths[topic._id] && `${videoLengths[topic._id]}`}</p>
+                    <div className={styles.dropdown_container}>
+                      <label className={styles.dropdown_container1} onClick={() => handleResourcesClick(topic._id)}>
+                        <SiFiles className={styles.pdf_icon} size={10} /> Resources
+                      </label>
+                      {selectedResourceSubmenuId === topic._id && (
+                        <Card className={styles.pdf_dropdown}>
+                          <ul>
+                            <li>
+                              <a href={topic.selectedPdf} target="_blank" rel="noopener noreferrer">
+                                {topic.pdfTitle || "Untitled PDF"}
+                              </a>
+                            </li>
+                          </ul>
+                        </Card>
+                      )}
                     </div>
                   </div>
                 </li>

@@ -1,50 +1,73 @@
-import React, { useState } from "react"
-import { MdSettings } from "react-icons/md"
-import { FaSpinner } from "react-icons/fa"
-import styles from "./Settings.module.css"
+import React, { useState } from 'react';
+import { MdSettings } from 'react-icons/md';
+import { FaSpinner } from 'react-icons/fa';
+import styles from './Settings.module.css';
 
-const Settings = ({
-  handleSettingsToggle,
-  isSettingsOpen,
-  videoQuality,
-  handleQualityOptionClick,
-}) => {
-  const qualityOptions = ["240p", "480p", "720p", "1080p"]
-  const [isLoading, setIsLoading] = useState(false)
+const Settings = ({ currentQuality, onChangeQuality, resolutions, videoRef }) => {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSettingsToggle = () => {
+    setIsSettingsOpen(!isSettingsOpen);
+  };
 
   const handleQualityChange = async (quality) => {
-    setIsLoading(true)
-    await handleQualityOptionClick(quality)
-    setIsLoading(false)
-  }
+    if (currentQuality === quality) return; // If the selected quality is the same, do nothing
 
-  const toggleSettings = () => {
-    handleSettingsToggle()
-  }
+    const currentTime = videoRef.current.currentTime;
+    setIsLoading(true);
+    
+    try {
+      // Simulating an async operation before changing the quality
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      onChangeQuality(quality);
+      
+      // Wait for the video to be ready and seek to the previous time
+      videoRef.current.addEventListener('loadedmetadata', function onMetadataLoaded() {
+        videoRef.current.currentTime = currentTime;
+        videoRef.current.removeEventListener('loadedmetadata', onMetadataLoaded);
+      });
+    } catch (error) {
+      console.error("Error changing video quality:", error);
+    }
+    
+    setIsLoading(false);
+  };
 
   return (
-    <div>
-      <button className={styles.settingsIcon} onClick={toggleSettings}>
-        <MdSettings />
+    <div className={styles.settingsContainer}>
+      <button className={styles.settingsButton} onClick={handleSettingsToggle}>
+        <MdSettings size={24} />
       </button>
       {isSettingsOpen && (
-        <div>
-          <ul>
-            {qualityOptions.map((option) => (
-              <li
-                key={option}
-                className={option === videoQuality ? styles.activeOption : ""}
+        <div className={styles.settingsDropdown}>
+          {isLoading ? (
+            <FaSpinner className={styles.spinner} />
+          ) : (
+            resolutions.map(resolution => (
+              <div
+                key={resolution.name}
+                className={`${styles.qualityOption} ${
+                  resolution.name === currentQuality ? styles.active : ''
+                }`}
+                onClick={() => handleQualityChange(resolution.name)}
               >
-                <button onClick={() => handleQualityChange(option)}>
-                  {option} Quality
-                </button>
-              </li>
-            ))}
-          </ul>
+                {resolution.name}
+              </div>
+            ))
+          )}
+          <div className={styles.autoplayToggle}>
+            <label>
+              Auto
+              <input type="checkbox" />
+              <span className={styles.slider}></span>
+            </label>
+          </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

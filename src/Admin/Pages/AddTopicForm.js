@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './AddTopicForm.module.css';
 
+
 const AddTopicForm = () => {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState('');
@@ -11,7 +12,7 @@ const AddTopicForm = () => {
   const [pdfTitle, setPdfTitle] = useState('');
   const [selectedPdf, setSelectedPdf] = useState('');
   const [availableVideos, setAvailableVideos] = useState([]);
-  const [availablePdfs, setAvailablePdfs] = useState([]); // Initialize as an empty array
+  const [availablePdfs, setAvailablePdfs] = useState([]);
 
   useEffect(() => {
     // Fetch the list of courses
@@ -76,7 +77,7 @@ const AddTopicForm = () => {
         setAvailableVideos(videosData);
 
         const pdfsResponse = await fetch(`http://13.200.156.92:8000/api/pdfs/${selectedCourse}`);
-  
+
 
         if (!pdfsResponse.ok) {
           throw new Error(`HTTP error! Status: ${pdfsResponse.status}`);
@@ -92,22 +93,21 @@ const AddTopicForm = () => {
   }, [selectedCourse]);
 
   const handleAddTopic = async () => {
-    // Validate inputs
-    if (!selectedCourse || !selectedChapter || !videoTitle || !selectedVideo) {
+    if (!selectedChapter || !videoTitle || !selectedVideo || !pdfTitle || !selectedPdf) {
       console.error('Incomplete data. Please fill in all required fields.');
+      window.alert('Incomplete data. Please fill in all required fields.');
       return;
     }
 
-    try {
-      const newTopic = {
-        videoTitle,
-        selectedVideo,
-        pdfTitle,
-        selectedPdf,
-        completed: [],
-      };
+    const newTopic = {
+      videoTitle,
+      selectedVideo,
+      pdfTitle,
+      selectedPdf,
+    };
 
-      const response = await fetch(`http://13.200.156.92:8000/api/chapters/${selectedChapter}/add-topic`, {
+    try {
+      const response = await fetch(`http://localhost:8000/api/chapters/${selectedChapter}/add-topic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,15 +119,21 @@ const AddTopicForm = () => {
         throw new Error('Failed to add topic');
       }
 
+      // Success logic here
       console.log('Topic added successfully');
+      window.alert('Topic added successfully!');
+
+      // Reset the form state here
       setVideoTitle('');
       setSelectedVideo('');
       setPdfTitle('');
       setSelectedPdf('');
     } catch (error) {
-      console.error('Error adding topic:', error.message);
+      console.error('Error adding topic:', error);
+      window.alert('Error adding topic. Please try again.');
     }
   };
+
 
   return (
     <div className={styles['topic-form']}>
