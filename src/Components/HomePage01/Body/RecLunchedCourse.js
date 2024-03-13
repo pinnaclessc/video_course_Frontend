@@ -17,7 +17,7 @@ export default function UpcomingCourse() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://13.200.156.92:8000/vc/recently-lunched/courses")
+    fetch("http://localhost:8000/courses")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data);
@@ -68,13 +68,13 @@ export default function UpcomingCourse() {
                   <div className={styles["Upcomming-course-fullPage"]}>
                   <div className={styles["Image-section"]} onClick={() => navigate("/CourseDescription/" + data._id)}>
                       <img className={styles.imagecard}
-                        src={coverImage1}
+                        src={data.hindiCoverImage}
                         alt=""
                         width="90"
                         height="90"
                       ></img>
                       <img className={styles.imagecard}
-                        src={coverImage2}
+                        src={data.englishCoverImage}
                         alt=""
                         width="90"
                         height="90"
@@ -84,9 +84,9 @@ export default function UpcomingCourse() {
                       className={styles["description-section"]}
                       onClick={() => navigate("/CourseDescription/" + data._id)}
                     >
-                      <div className={styles["title"]}>{data.courseTitle}</div>
+                      <div className={styles["title"]}>{data.title}</div>
                       <div className={styles["teacher"]}>
-                        Mr./Ms.{data.teacherName}
+                        Mr./Ms.{data.instructorName}
                       </div>
                       <div className={styles["try-for-free"]}>
                         <div className={styles["Rating"]}>
@@ -104,7 +104,7 @@ export default function UpcomingCourse() {
                         </div>
                       </div>
                       <div className={styles["price-fprice-div"]}>
-                        <div>&#8377; {data.price * 0.9}</div>
+                        <div>&#8377; {data.mrp}</div>
                         <div>
                           &nbsp;&nbsp;&nbsp;&nbsp;
                           <s>&#8377;{data.price}</s>

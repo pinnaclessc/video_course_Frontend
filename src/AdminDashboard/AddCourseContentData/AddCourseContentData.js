@@ -11,7 +11,7 @@ export default function AddCourseContent() {
       <div className={styles['AddCourseContent-section']}>
         <div className={styles['AddCourseContent-section-header']}>Video Upload</div>
         <div className={styles['VideoUploadForm-container']}>
-          <VideoUploadForm />
+          <VideoUploadForm/>
         </div>
 
         <div className={styles['AddCourseContent-section-header']}>PDF Upload</div>
@@ -30,7 +30,7 @@ export default function AddCourseContent() {
       <div className={styles['AddCourseContent-section']}>
         <div className={styles['AddCourseContent-section-header']}>Add Topic</div>
         <div className={styles['AddTopicForm-container']}>
-          <AddTopicForm />
+        <AddTopicForm />
         </div>
       </div>
 
