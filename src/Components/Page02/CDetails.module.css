@@ -6,7 +6,9 @@
 }
 
 
-.Details {}
+.Details {
+    margin-bottom: 1.5rem;
+}
 
 .another-Details-div {
     width: 60%;
@@ -36,11 +38,5 @@
 }
 
 .Report-Abouse{}
-
-/* .Report-Abouse-btn{
-    text-decoration: none;
-    padding: 0.5rem;
-    margin: 0.5rem;
-    background-color: #020062;
-    color: white;
-} */
+.course-content-Details{
+}

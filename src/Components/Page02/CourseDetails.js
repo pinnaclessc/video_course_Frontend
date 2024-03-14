@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./CDetails.module.css";
+import styles from "./CDetails.module.css"; 
 import courseDetailsData from "./courseDetailsData.json";
 import Details from "./Details";
 import Requirements from "./Requirements";

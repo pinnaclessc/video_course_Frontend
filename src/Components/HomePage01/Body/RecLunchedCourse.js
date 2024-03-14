@@ -111,20 +111,6 @@ export default function UpcomingCourse() {
                         </div>
                       </div>
                     </div>
-                    {/* <div className={styles["cart-wishlist-Btn-div"]}>
-                      <button
-                        className={styles["cartBtn"]}
-                        onClick={cartHandler}
-                      >
-                        Add to Cart
-                      </button>
-                      <button
-                        className={styles["cartBtn"]}
-                        onClick={wishlistHandler}
-                      >
-                        Add to wishlist
-                      </button>
-                    </div> */}
                   </div>
                 </div>
               ))}
