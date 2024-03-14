@@ -13,7 +13,7 @@
 
 .videoArea {
   display: grid;
-  grid-template-columns: 1fr 316px;
+  grid-template-columns: 1fr 295px;
   flex-grow: 1;
 }
 
