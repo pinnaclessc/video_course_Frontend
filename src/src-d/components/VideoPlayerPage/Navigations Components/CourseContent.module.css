@@ -1,0 +1,138 @@
+.sidebar {
+    height: 100vh;
+    /* height: 100rem; */
+    overflow: hidden;
+  }
+  
+  .sidebarHeading {
+    display: flex;
+   
+    top: 0;
+    background: #fff;
+    z-index: 10;
+    padding: 16px;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .content {
+    overflow-y: auto;
+   height:100%;
+   margin-bottom:50px;
+  }
+  
+  .accordion_title_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 16px;
+  }
+  
+  .accordion_title {
+    font-weight: bold;
+  }
+  
+  .arrow_icon {
+  }
+  
+  .submenu_list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .submenu_item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    width:100%;
+  }
+  
+  .checkbox_icon,
+  .video_icon {
+    margin-right: 8px;
+    order: 3;
+  }
+  
+  .submenu_button {
+    background: none;
+    border: none;
+    padding: 5px;
+    margin: 0;
+    text-align: left;
+    color: inherit;
+    cursor: pointer;
+    margin-left: 47px;
+    width: 14rem;
+    margin-top: -10%;
+  }
+  
+  .closeIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 15%;
+    right: 2%;
+  
+  }
+  
+  .video_title {
+    order: 2;
+    font-size: 0.9rem;
+  }
+  
+  .topic_number {
+    margin-right: 8px;
+    order: 1;
+  }
+  .video_icon {
+    margin-top: 4px;
+    opacity: 0.5;
+    align-self: start;
+    margin-left: 12%;
+    fill: currentColor;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  
+  .video_duration {
+    font-size: 0.8rem;
+    color: #6c757d;
+    /* align-self: start; */
+  }
+  
+  .accordion_title_container:hover,
+  .options_container:hover {
+    background-color: #f4f4f4;
+  }
+  
+  .resource_button {
+    margin-left: 85px;
+    background: none;
+    margin-bottom:2%;
+    border: none;
+    cursor: pointer;
+    color: #70757a; 
+    position:relative;
+    border: solid 1px rgb(139, 134, 134)
+  }
+  
+  .resource_submenu {
+    background-color: #f8f9fa;
+    border: 1px solid #eaeaea;
+    padding: 8px;
+    margin-top: 4px;
+  }
+  
+  .chapterInfo{
+    font-weight: 400;
+    color: gray;
+    margin-top: 0;
+    font-size: small;
+  }
+  
+  .Sidebar_options_container{
+    position:relative;
+    width:100%;
+    padding:2px;
+    margin: 2px;
+  }

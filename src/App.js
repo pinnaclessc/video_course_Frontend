@@ -38,18 +38,17 @@ import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
 import Header from "./Components/HomePage01/Header/Header";
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
-// copy Imports of D
-// import PdfUploadForm from "./Admin/D-admin/PdfUploadForm";
-// import VideoUploadForm from "./Admin/D-admin/VideoUploadForm";
+import NoteEditor from "./AdminDashboard/NotesEditor/NotesEditor";
 import MyLearningMain from "./src-d/MyLearningMain";
+import VideoPlayerPageLayout from "./layouts/VideoPlayerPageLayout"
 import VideoCoursesMain from "./src-d/VideoCoursesMain";
 import CourseOverview from "./src-d/components/VideoPlayerPage/Navigations Components/CourseOverview";
 import QandA from "./src-d/components/VideoPlayerPage/Navigations Components/Q&A/QandA";
 import LearningTools from "./src-d/components/VideoPlayerPage/Navigations Components/LearningTools/LearningTools";
 import Announcements from "./src-d/components/VideoPlayerPage/Navigations Components/Announcements/Announcements";
 import SearchBar from "./src-d/components/VideoPlayerPage/Navigations Components/SearchBar";
-import Review from "./src-d/components/VideoPlayerPage/Navigations Components/NotesComponent/Review/Review";
-import NotesEditor from "./src-d/components/VideoPlayerPage/Navigations Components/NotesComponent/Notes";
+import Review from "./src-d/components/VideoPlayerPage/Navigations Components/Review/Review";
+// import NotesEditor from "./src-d/components/VideoPlayerPage/Navigations Components/NotesComponent/Notes";
 import PinnacleProfile from "./src-d/components/VideoPlayerPage/AccountPage/PublicProfile";
 import EditPhoto from "./src-d/components/VideoPlayerPage/AccountPage/EditPhoto";
 import AccountSecurity from "./src-d/components/VideoPlayerPage/AccountPage/AccountSecurity";
@@ -78,15 +77,14 @@ import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
 import VideoPlayer from "./AdminDashboard/VideoPlayerHLS/VideoPlayerHLS";
 import VideoPlayerPage from "./AdminDashboard/VideoPlayerHLS/VideoPlayerPage";
-
-
-// import { AuthProvider } from "./AuthContext";
-// test imports
-// import videoContent from "./src-d/components/NewComponentBP/videoContent";
+import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
+import CourseContent from "./src-d/components/VideoPlayerPage/Navigations Components/CourseContent"
+import { VideoProvider } from './context/VideoContext';
 
 export default function App() {
   return (
-    <div>
+    <>
+       <VideoProvider>
       <Router>
         <Timer/>
         <Header />
@@ -138,23 +136,18 @@ export default function App() {
           <Route path="/adminPage" element={<AdminPage />} />
           <Route path="/admin-dashboard" element={<AdminDashboard/>} />
           <Route path="/upload-video" element={<VideoUpload/>}/>
-        
-          {/* <Route path="/learningPage/:userId" element={<LearningPage/>}/> */} 
+          <Route path="/notes-editor" element={<NoteEditor />} />
+          {/* <Route path="/video_player" element={<VideoPlayerPageLayout />} /> */}
+       
         </Routes>
 {/* /////////////////////////////////AdminRoutes////////////////////////////////////////////////// */}
         <Routes>
-
+     
         <Route path="/admin/instructorForm" element={<InstructorForm/>}/>
           <Route path="/MyLearningPage/:userId" element={<MyLearningMain/>}/>
-          {/* <Route path="/mylearning" element={<VideoCoursesMain />}>
-            <Route path="/mylearning/overview" element={<CourseOverview/>} />
-            <Route path="/mylearning/reviews" element={<Review />} />
-            <Route path="/mylearning/search" element={<SearchBar />} />
-            <Route path="/mylearning/announcement"element={<Announcements />}/>
-          </Route> */}
-          <Route path="/mylearning/notes" element={<NotesEditor />} />
-          <Route path="/mylearning/q&a" element={<QandA />} />
-          <Route path="/mylearning/learningtools" element={<LearningTools />} /> 
+          
+         
+        
           <Route path="/user/username" element={<PinnacleProfile />}/>
           <Route path="/user/edit-photo" element={<EditPhoto />} />
           <Route path="/user/edit-account" element={<AccountSecurity />} />
@@ -172,12 +165,25 @@ export default function App() {
           <Route path="/troubleshooting" element={<TroubleshootingHelp />}/>
           <Route path="/video-player" element={<VideoPlayer/>}/>
           <Route path="/videoplayer" element={<VideoPlayerPage/>}/>
-          <Route path="/myplayer" element={<VideoCoursesMain />}></Route>
-          
+          <Route path="/edit-chapter" element={<EditChapterForm/>}/>
+          <Route path="/myplayer" element={<VideoPlayerPageLayout />}>
+          <Route path="/myplayer/search" element={<SearchBar />} />
+            <Route path="/myplayer/overview" element={<CourseOverview />} />
+            <Route path="/myplayer/notes" element={<NoteEditor />} />
+            <Route path="/myplayer/q&a" element={<QandA/>} />
+            <Route path="/myplayer/announcement" element={<Announcements/>} />
+            <Route path="/myplayer/coursesContent" element={<CourseContent/>} />
+            <Route path="/myplayer/learning-tool" element={<LearningTools/>} />   
+            <Route path="/myplayer/reviews" element={ <Review/>} />  
+     
+        
+        </Route>
+       
         </Routes> 
     
        
         </Router>
-    </div>
+        </VideoProvider>
+    </>
   );
 }

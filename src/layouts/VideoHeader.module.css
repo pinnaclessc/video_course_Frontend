@@ -1,0 +1,51 @@
+.courseHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background-color: #1e1e2f; 
+    color: #ffffff; 
+  }
+  
+  .backButton,
+  .previewButton,
+  .settingsButton {
+    cursor: pointer;
+    border: 1px solid #ffffff; 
+    background-color: transparent;
+    color: #ffffff; 
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s; 
+  }
+  
+  .backButton:hover,
+  .previewButton:hover,
+  .settingsButton:hover {
+    background-color: #ffffff;
+    color: #1e1e2f; 
+  }
+  
+  .courseTitle {
+    font-size: 20px; 
+    font-weight: bold; 
+    margin: 0 10px;
+    flex-grow: 1; 
+    text-align: center; 
+  }
+  
+  .courseDraftStatus {
+    background-color: #fa8231; 
+    color: #ffffff; 
+    border-radius: 4px; 
+    padding: 3px 7px; 
+    margin-left: 10px; 
+  }
+  
+  .videoContentTime {
+    font-size: 14px; 
+    margin-right: 10px; 
+  }
+  

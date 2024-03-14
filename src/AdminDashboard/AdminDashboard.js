@@ -7,9 +7,10 @@ import AddCourseContent from './AddCourseContentData/AddCourseContentData';
 import InstructorForm from "./Instructor/InstructorForm";
 import InstructorDataList from "./Instructor/InstructorDataList"
 import CategoryForm from './Courses/Category';
+import EditChapterForm from './AddChapterData/EditChapterData';
 
 export default function AdminDashboard() {
-  const [activeComponent, setActiveComponent] = useState();
+  const [activeComponent, setActiveComponent] = useState("CourseList");
 
   const handleNavigation = (component) => {
     setActiveComponent(component);
@@ -30,9 +31,11 @@ export default function AdminDashboard() {
       case 'instructorList': 
         return <InstructorDataList />;
       case 'addCategory':
-        return <CategoryForm  />;
+        return <CategoryForm />;
+      case 'editChapter':
+        return <EditChapterForm />;
       default:
-        return ;
+        return <CourseList/>;
     }
   };
 

@@ -13,26 +13,38 @@ const ChapterForm = () => {
 
   // Combined useEffect for fetching data
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCourses = async () => {
       try {
-        const coursesResponse = await fetch('http://localhost:8000/courses');
-        const coursesData = await coursesResponse.json();
-        setCourses(coursesData);
-
-        const videosResponse = await fetch('http://localhost:8000/videos');
+        const response = await fetch('http://localhost:8000/courses');
+        const data = await response.json();
+        setCourses(data);
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
+  
+    fetchCourses();
+  }, []);
+  
+  useEffect(() => {
+    const fetchVideosAndPdfs = async () => {
+      if (!selectedCourse) return;
+  
+      try {
+        const videosResponse = await fetch(`http://localhost:8000/api/videos/${selectedCourse}`);
         const videosData = await videosResponse.json();
         setVideos(videosData);
-
-        const pdfsResponse = await fetch('http://localhost:8000/api/pdfs');
+  
+        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/course/${selectedCourse}`);
         const pdfsData = await pdfsResponse.json();
         setPdfs(pdfsData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching videos/pdfs:', error);
       }
     };
-
-    fetchData();
-  }, []);
+  
+    fetchVideosAndPdfs();
+  }, [selectedCourse]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,8 +114,6 @@ const ChapterForm = () => {
         onChange={(e) => setChapterTitle(e.target.value)}
         required
       />
-
-    
 
       {topics.map((topic, index) => (
         <div key={index}>

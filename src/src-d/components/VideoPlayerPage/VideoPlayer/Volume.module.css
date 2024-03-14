@@ -12,6 +12,7 @@
   font-size: 1rem;
   margin-right: 0.5rem;
   color: #f0f0f0;
+  margin-top: 14px;;
 }
 
 .volumeControl input[type="range"] {

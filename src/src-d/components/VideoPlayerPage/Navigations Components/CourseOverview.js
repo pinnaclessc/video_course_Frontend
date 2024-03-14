@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import courseContentData from "./courseContentData.json"
 import styles from "./CourseOverview.module.css"
 
 const CourseOverview = () => {

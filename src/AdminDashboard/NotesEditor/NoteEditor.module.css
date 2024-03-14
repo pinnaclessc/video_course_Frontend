@@ -1,0 +1,35 @@
+.noteEditor {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin: auto;
+  }
+
+  .note-inputbox{
+    border: 1px solid black;
+   
+  }
+  
+.toolbar {
+    margin-bottom: 10px;
+  }
+.toolbar button{
+
+  }
+  .icon {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 5px;
+  }
+  
+  .icon:hover {
+    background-color: #f0f0f0;
+  }
+  
+
+.align-left { text-align: left; }
+.align-center { text-align: center; }
+.align-right { text-align: right; }

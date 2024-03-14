@@ -5,9 +5,9 @@
   height: 77%;
 }
 
-.video-container:hover {
+/* .video-container:hover {
   box-shadow: 0px 0px 5px #ccc;
-}
+} */
 
 .video-wrapper {
   position: relative;
@@ -26,6 +26,7 @@
   width: 100%;
   height: 100%;
 }
+
 .submenu-title {
   position: absolute;
   z-index: 3;
@@ -37,10 +38,12 @@
   font-size: 12px;
   font-weight: 600;
 }
+
 .video-container:hover .submenu-title {
   visibility: visible;
   transition: visibility 0.1s ease-in;
 }
+
 .control_btn_container {
   position: absolute;
   z-index: 3;
@@ -78,41 +81,38 @@
   transition: background-color 0.1s;
   transition-timing-function: ease-in;
 }
+
 .sidebar_container:hover + .control_btn_container {
   visibility: hidden;
   display: none;
 }
+
 .sidebar_container:hover .submenu-title {
   visibility: hidden;
   display: none;
 }
+
 .sidebar:hover + .submenu-title {
   visibility: hidden;
   display: none;
 }
 
 .control_bar {
-  margin-top: 1%;
   display: flex;
-  margin-bottom: 1%;
-}
-
-.play-pause-button {
+  align-items: center;
+  margin: 7px -0.2rem;
+  padding: 0px 1rem;
   color: #f0f0f0;
 }
+
 .play_pause {
+  position: absolute;
+  width: 3%;
+  left: 1px;
+  align-items: center;
   padding: 0 0.6rem;
   width: 3.4rem;
   color: #f0f0f0;
-}
-
-.seekbar_container {
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  margin-left: 1%;
-  width: 98%;
-  background-color: #ccc;
 }
 
 .add_notes a {
@@ -121,110 +121,46 @@
   margin-top: -1%;
 }
 
-.play_pause {
-  padding: 0 0.6rem;
-  width: 3.4rem;
-  color: #f0f0f0;
-}
- /* //forward  */
 .forward_container {
   position: absolute;
-  left: 152px;
+  left: 169px;
 }
+
 .backward_container {
   position: absolute;
-    left: 52px;
+  left: 65px;
 }
+
 .forward .backward {
   width: auto;
-  color: #f0f0f0;
+  color: #fffbfb;
   padding: 0 0.6rem;
   width: 3.4rem;
   min-width: 0;
   margin-left: 2%;
 }
+
 .backward_icon,
 .forward_icon {
   display: inline-block;
-  color: #f0f0f0;
+  color: #e7dfdf;
 }
 
-/* //Add Notes */
 .add_notes {
   width: 3.4rem;
-  color: #f0f0f0;
+  color: #ecebeb;
 }
 .add_notes a {
   margin-top: -22%;
 }
 
-
-/* Play Rate */
-.play-rate-menu,
-.play-rate-buttons {
-  background-color: #f0f0f0;
-  color: black;
-  height: 1.4rem;
-}
-
-.play-rate-menu {
-  background: #1c1d1f;
-  border: 1px solid #d1d7dc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
-  position: absolute;
-  top: -281px;
-  white-space: nowrap;
-}
-
-.play-rate-menu button {
-  padding: 0.5rem 1rem;
-  display: inline-block;
-  color: #f0f0f0;
-  background-color: #3e4143;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.play-rate-menu button:hover {
-  background-color: #545759;
-}
-
-/* Play Rate Buttons */
-.play-rate-buttons {
-  width: 5%;
-  height: 1.4rem;
-  position: absolute;
-  left: 87px;
-}
-
-.play-rate-buttons button {
-  background-color: #f0f0f0;
-  color: black;
-  width: 100%;
-  height: 100%;
-  border: #0b52de solid 1px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.play-rate-buttons button:hover {
-  background-color: #d1d7dc;
-  color: #333;
-}
-
-.play-rate-buttons button.active {
-  background-color: #b4d2e9;
-  color: #333;
-}
-
 .volume_slider_container {
   background-color: transparent;
-    height: 8vh;
-    position: absolute;
-    color: #f0f0f0;
-    top: 1px;
-    right: 138px;
+  height: 6vh;
+  position: absolute;
+  color: #f0f0f0;
+  top: 1px;
+  right: 170px;
 }
 
 .volume-slider {
@@ -264,55 +200,6 @@
   position: absolute;
   right: 149px;
 }
-.settings {
-  display: flex;
-  margin-top: 1rem;
-}
-.caption_container button {
-  color: #f0f0f0;
-}
-.quality-button,
-.autoplay-button {
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 0.5rem 1rem;
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
-.quality-button.active,
-.autoplay-button.active {
-  background-color: #f0f0f0;
-}
-.quality-button:hover,
-.autoplay-button:hover {
-  background-color: #e0e0e0;
-}
-.settings-button {
-  color: #f0f0f0;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: absolute;
-  right: 28px;
-  top: 12px;
-}
-
-.settings-list {
-  position: absolute;
-  right: 0;
-  width: 86px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  z-index: 1;
-  top: -817%;
-  left: 0;
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.play-pause {
-  color: black;
-}
 
 .fullscreen_button {
   position: absolute;
@@ -320,54 +207,6 @@
   width: 4%;
   color: white;
   right: 78px;
-}
-
-.settings-container {
-  position: absolute;
-  display: inline-block;
-  right: 60px;
-  top: 15px;
-}
-
-.settings-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.settings-list li {
-  margin-bottom: 4px;
-}
-
-.quality-button,
-.autoplay-button {
-  background-color: #fff;
-  color: #333;
-  border: none;
-  outline: none;
-  padding: 4px 8px;
-  cursor: pointer;
-}
-
-.quality-button.active,
-.autoplay-button.active {
-  background-color: #333;
-  color: #fff;
-}
-
-.quality-button {
-  margin: 0;
-  padding: 5px 10px;
-  border: none;
-  background-color: transparent;
-  color: #333;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.quality-button.active {
-  background-color: #333;
-  color: #fff;
 }
 
 .control_bar button {
@@ -381,19 +220,11 @@
   vertical-align: bottom;
   white-space: nowrap;
 }
-.lang_menu {
-  background-color: white;
-  border: black solid 2px;
-  width: 168%;
-  position: absolute;
-  top: -98px;
-  text-align: center;
-  cursor: pointer;
-  right: 0;
-}
+
 .expanded_button {
   width: 75%;
 }
+
 .videoNavbar {
   font-family: Helvetica, Arial, sans-serif, symbol;
   font-size: 18px;
@@ -403,11 +234,6 @@
   height: 2rem;
   width: 73%;
   margin-top: 1%;
-}
-
-.links {
-  text-decoration: none;
-  color: gray;
 }
 
 .transcript {
@@ -424,78 +250,12 @@
   margin-top: -1%;
 }
 
-.play-pause {
-  color: black;
-}
 .play_pause_container {
   position: relative;
   width: 3%;
-  left: 9px;
+  left: 1px;
   align-items: center;
-}
-.play_pause {
-  padding: 0 0.6rem;
-  width: 3.4rem;
-  color: #f0f0f0;
-}
-.sidebar_container {
-  margin-left: 67%;
-  margin-top: 1%;
-  width: 340px;
-  height: 100vh;
-  background-color: #f2f2f2;
-  overflow-x: hidden;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(100%);
-}
-.sidebar {
-  background-color: #f5f5f5;
-  margin-bottom: 10%;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #bdbdbd #f5f5f5;
-}
-.sidebar::-webkit-scrollbar {
-  width: 8px;
-}
-.sidebar::-webkit-scrollbar-track {
-  background: #f5f5f5;
-}
-.sidebar::-webkit-scrollbar-thumb {
-  background-color: #bdbdbd;
-  border-radius: 4px;
-}
-.sidebar::-webkit-scrollbar-thumb:hover {
-  background-color: #a0a0a0;
-}
-.sidebar.active {
-  transform: translateX(0);
-}
-
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.8rem 0.8rem 0.8rem 0.5rem;
-  border: 1px solid #d1d7dc;
-  background-color: #fff;
-}
-.sidebar-title {
-  font-family: var(--font-stack-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02rem;
-  font-size: 1.2rem;
-}
-.sidebar-close {
-  border: none;
-  background-color: transparent;
-  color: #bdbdbd;
-  font-size: 12px;
-  cursor: pointer;
-  position: absolute;
-  top: 14px;
-  right: 9px;
+  color: white;
 }
 
 .fullscreen-button {
@@ -514,12 +274,11 @@
   cursor: pointer;
 }
 .expanded {
-  width: 77%;
+  width: 100%;
   margin-left: 0;
-  height: 77%;
+  height: 75%;
 }
 
-/* Center play button styles */
 .center-controls {
   position: absolute;
   top: 50%;
@@ -555,20 +314,24 @@
 .Navbar {
   display: flex;
 }
+
 .transcript_container {
   z-index: 1;
   border: solid;
 }
+
 .fullscreen_container {
   position: absolute;
   color: white;
   right: 90px;
 }
+
 .expanded_container {
-  right: 23px;
+  right: 17px;
   position: absolute;
   top: 25px;
 }
+
 .expanded-mode-button {
   color: white;
   top: 17px;
@@ -581,12 +344,12 @@
   color: white;
   margin-top: 0.2%;
   position: absolute;
-  left: 195px;
+  left: 218px;
 }
 .Notes_button_container {
   position: absolute;
-  left: 326px;
-  top: 25px;
+  left: 343px;
+  top: 22px;
 }
 
 .loading-container {
@@ -603,7 +366,6 @@
   transform: translate(-50%, -50%);
   width: 50px;
   height: 50px;
-  border: 5px solid #ccc;
   border-top-color: #333;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -637,33 +399,115 @@
   display: block;
 }
 
-.previous_next_buttons{
-  margin-top: 10%;
+.previous_next_buttons,
+.next_container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
 }
-.setting_button_container{
-  z-index: 1;
+
+.previous_next_buttons {
+  left: 10px;
 }
-/* Animation keyframes for the loading indicator */
-@keyframes spin {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+
+.next_container {
+  right: 10px;
 }
-.video-container.fullscreen .sidebar_container .header_container {
-  display: none;
+
+.previous_next_buttons button,
+.next_container button {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  color: #333;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s;
 }
-.video-container.fullscreen .video-container {
-  width: 100vw;
-  height: 100vh;
+
+.previous_next_buttons button:hover,
+.next_container button:hover {
+  /* background-color: rgba(255, 255, 255, 0.9); */
 }
-.video-container.fullscreen .sidebar_container {
-  display: none;
-  visibility: hidden;
+.Sidebar_options_container {
+  position: relative;
 }
-.links {
-  text-decoration: none;
-  color: gray;
+
+.play-rate-buttons {
+  position: relative;
+    display: inline-block;
+    width: 5%;
+    right: -7%;
+
 }
+
+.play-rate {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.play-rate-menu {
+  position: absolute;
+    background-color: #333;
+    min-width: 86px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+    right: -25px;
+    bottom: 229%;
+}
+
+.play-rate-menu-unorderedList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.play-rate-menu-list {
+  padding: 8px 12px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.play-rate-menu-list:hover {
+  background-color: #555;
+}
+
+.play-rate-menu-list.active::before {
+  content: '';
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: purple;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.play-pause-button{
+  color:white;
+}
+
+.center-play-pause-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+  /* Optionally set background for visibility */
+  background: rgba(248, 248, 248, 0.5);
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.playPauseButton {
+  
+}
+
+

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useVideo } from '../../../../context/VideoContext';
 import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine, RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri';
-import { FaFileVideo } from 'react-icons/fa';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdOndemandVideo } from "react-icons/md";
-import styles from './Sidebar.module.css';
+import styles from './CourseContent.module.css';
 
-const Sidebar = ({ apiUrl, onClose }) => {
+const CourseContent = ({ apiUrl, onClose }) => {
   const { selectedVideoId, setSelectedVideoId } = useVideo();
   const [selectedResourceSubmenuId, setSelectedResourceSubmenuId] = useState(null);
   const [chapters, setChapters] = useState([]);
@@ -162,4 +161,4 @@ const Sidebar = ({ apiUrl, onClose }) => {
     </div>
   );
 };
-export default Sidebar;
+export default CourseContent;
