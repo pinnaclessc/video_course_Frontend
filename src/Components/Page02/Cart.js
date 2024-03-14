@@ -20,7 +20,7 @@ const Cart = () => {
   const getCourseDetails = async () => {
     try {
       const response = await fetch(
-        `http://13.200.156.92:8000/course/${params.id}`
+        `http://localhost:8000/course/${params.id}`
       );
 
       if (!response.ok) {
@@ -31,9 +31,9 @@ const Cart = () => {
 
       const result = await response.json();
       console.log(result);
-      setCourseTitle(result.courseTitle);
-      setCourseDetails(result.courseDetails);
-      setTeacherName(result.teacherName);
+      setCourseTitle(result.title);
+      setCourseDetails(result.shortDescription);
+      setTeacherName(result.instructorName);
       setRating(result.rating);
       setPrice(result.price);
       setMrp(result.mrp);

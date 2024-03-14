@@ -66,4 +66,39 @@
   .submitButton:disabled {
     background-color: #cccccc;
   }
+
+
+  .toolbar button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    padding: 6px 8px;
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center; 
+  }
+  
+  .toolbar button:hover {
+    background-color: #e2e2e2;
+  }
+  
+  .toolbar button:active {
+    background-color: #d4d4d4;
+    outline: none;
+  }
+  
+  .toolbar button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #a4a4a4;
+  }
+  
+  .editorContainer {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
   

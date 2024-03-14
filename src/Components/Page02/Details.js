@@ -16,12 +16,12 @@ export default function Details() {
     getCourseDetails();
   }, []);
     const getCourseDetails = async () => {
-    let result = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
+    let result = await fetch(`http://localhost:8000/course/${params.id}`);
     result = await result.json();
     console.log(result);
-    setCourseTitle(result.courseTitle);
-    setCourseDetails(result.courseDetails);
-    setTeacherName(result.teacherName);
+    setCourseTitle(result.title);
+    setCourseDetails(result.shortDescription);
+    setTeacherName(result.instructorName);
     setRating(result.rating);
     setPrice(result.price);
     setMrp(result.mrp);
