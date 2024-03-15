@@ -20,8 +20,10 @@ const Cart = () => {
   const [courseDetails, setCourseDetails] = useState('');
   const [teacherName, setTeacherName] = useState('');
   const [rating, setRating] = useState();
-  const [price, setPrice] = useState(); // Base price fetched from API
+  const [price, setPrice] = useState(); 
   const [mrp, setMrp] = useState();
+  const [hindiImage,setHindiImage]=useState();
+  const [EnglishImage,setEnglishImage]=useState();
 
   const { image1, image2, heading, description, subscriptionPrice } = data;
 
@@ -40,8 +42,10 @@ const Cart = () => {
       setCourseDetails(result.shortDescription);
       setTeacherName(result.instructorName);
       setRating(result.rating);
-      setPrice(result.price); // Assuming `price` is the base price in your course details
+      setPrice(result.price);
       setMrp(result.mrp);
+      setHindiImage(result.hindiCoverImage);
+      setEnglishImage(result.englishCoverImage);
     } catch (error) {
       console.error("Error fetching course details:", error);
     }
@@ -60,7 +64,7 @@ const Cart = () => {
   };
 
   const getPrice = () => {
-    if (!price) return 0; // Make sure price is loaded
+    if (!price) return 0;
 
     let finalPrice = price;
     switch (selectedMonths) {
@@ -78,16 +82,14 @@ const Cart = () => {
         finalPrice = (4 * price) * 0.8; // (4*price) - 20%
         break;
       default:
-        // Default case remains the same or you can adjust it as needed
         break;
     }
 
-    return Math.round(finalPrice); // Rounding off to the nearest whole number for better display
+    return Math.round(finalPrice); 
   };
   const buycouseHandler = () => {
-    // Assuming the user ID is stored in local storage under "user" key
     const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user ? user._id : null; // Adjust according to how you store the user information
+    const userId = user ? user._id : null;
     const courseId = params.id;
     const selectedMonthsValue = selectedMonths;
     const finalPrice = getPrice();
@@ -105,27 +107,27 @@ const addToCartHandler=()=>{}
       <div className={styles["cart-fullpage"]}>
         <div className={styles["image-section"]}>
           <img
-            src={image1}
+            src={hindiImage}
             alt="Course1"
             className={styles["image1"]}
             id="cart-image1"
           />
           <img
-            src={image2}
+            src={EnglishImage}
             alt="Course2"
             className={styles["image2"]}
             id="cart-image2"
           />
         </div>
         <div className={styles.overlay}>
-          <div className={styles["video-preview-div"]}>
+          {/* <div className={styles["video-preview-div"]}>
             <div className={styles["video-icon"]} onClick={() => navigate(`/mylearning/${params.id}`)}>
               <AiOutlinePlayCircle size={40} />
             </div>
             <div className={styles["video-icon-p-div"]}>
               <p>Preview this course</p>
             </div>
-          </div>
+          </div> */}
 
           <h2 className={styles.heading}>{courseTitle}</h2>
           <p className={styles.course}>
@@ -178,14 +180,11 @@ const addToCartHandler=()=>{}
           <button
             className={styles["cartBtn"]}
             onClick={addToCartHandler}
-          >
-            Add To <FaCartPlus />
-          </button>
+          >Add To <FaCartPlus /></button>
           <button
             className={styles["wishListBtn"]}
             onClick={wishlistHandler}
-          >
-            <IoHeartCircleOutline size={40} />
+          ><IoHeartCircleOutline size={40}/>
           </button>
         </div>
       </div>
@@ -194,7 +193,6 @@ const addToCartHandler=()=>{}
 };
 
 export default Cart;
-
 
 // import React, { useState, useEffect } from "react";
 // import Swal from 'sweetalert2'
