@@ -158,9 +158,9 @@ export default function App() {
             <Route path="/myplayer/learning-tool" element={<LearningTools/>} />   
             <Route path="/myplayer/reviews" element={ <Review/>} />  
         </Route>
-        </Routes>        <Footer/>  
+        </Routes>
+        <Footer/>  
         </Router>
-      
         </VideoProvider>
 
     </>

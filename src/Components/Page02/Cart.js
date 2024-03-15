@@ -101,7 +101,51 @@ const Cart = () => {
   };
   
 const wishlistHandler=()=>{}
-const addToCartHandler=()=>{}
+const cartHandler=async () =>{
+  const auth = localStorage.getItem('user');
+
+  if (!auth) {
+    navigate('/signup');
+
+    return;
+  }
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user ? user._id : null;
+    const courseId = params.id;
+    const response = await fetch(
+      `http://localhost:8000/vc/add-to-cart/${userId}/${courseId}`,
+      
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          courseId: courseId,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+   
+      Swal.fire({
+        title: 'Success!',
+        text: 'Added in cart',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+    } else {
+      console.error("Failed to purchase course");
+    }
+  } catch (error) {
+    console.error("Error during purchase:", error);
+  }
+}
+
   return (
     <div className={styles["above-cart-fullpage"]}>
       <div className={styles["cart-fullpage"]}>
@@ -179,7 +223,7 @@ const addToCartHandler=()=>{}
         <div className={styles["cart-wishlist-Btn-div"]}>
           <button
             className={styles["cartBtn"]}
-            onClick={addToCartHandler}
+            onClick={cartHandler}
           >Add To <FaCartPlus /></button>
           <button
             className={styles["wishListBtn"]}
@@ -309,48 +353,48 @@ export default Cart;
 //     }
 //   };
 
-//   const cartHandler=async () =>{
-//     const auth = localStorage.getItem('user');
+  // const cartHandler=async () =>{
+  //   const auth = localStorage.getItem('user');
 
-//     if (!auth) {
-//       navigate('/signup');
+  //   if (!auth) {
+  //     navigate('/signup');
 
-//       return;
-//     }
-//     try {
-//       const userId = JSON.parse(localStorage.getItem("user"))._id;
-//       const response = await fetch(
-//         `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
+  //     return;
+  //   }
+  //   try {
+  //     const userId = JSON.parse(localStorage.getItem("user"))._id;
+  //     const response = await fetch(
+  //       `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
         
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             userId: userId,
-//             courseId: params.course_id,
-//           }),
-//         }
-//       );
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userId: userId,
+  //           courseId: params.course_id,
+  //         }),
+  //       }
+  //     );
 
-//       const data = await response.json();
+  //     const data = await response.json();
 
-//       if (data.success) {
+  //     if (data.success) {
      
-//         Swal.fire({
-//           title: 'Success!',
-//           text: 'Added in cart',
-//           icon: 'success',
-//           confirmButtonText: 'OK',
-//         });
-//       } else {
-//         console.error("Failed to purchase course");
-//       }
-//     } catch (error) {
-//       console.error("Error during purchase:", error);
-//     }
-//   }
+  //       Swal.fire({
+  //         title: 'Success!',
+  //         text: 'Added in cart',
+  //         icon: 'success',
+  //         confirmButtonText: 'OK',
+  //       });
+  //     } else {
+  //       console.error("Failed to purchase course");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
+  //   }
+  // }
 //   const wishlistHandler=async () =>{
 //     const auth = localStorage.getItem('user');
 

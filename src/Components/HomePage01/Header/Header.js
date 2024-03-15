@@ -6,7 +6,6 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import { BsGlobe } from "react-icons/bs";
 import { GrApps } from "react-icons/gr";
-// import Languages from "../Language/Languages";
 import { useNavigate, Link } from "react-router-dom";
 import HoverCart from "./HoverCart";
 import Hoverwishlist from "./Hoverwishlist";
@@ -19,7 +18,12 @@ export default function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate();
   const auth = localStorage.getItem("user");
-  // const userId = JSON.parse(localStorage.getItem("user"))._id;
+  const getUserId = () => {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user)._id : null;
+  };
+
+  const userId = getUserId();
   const MoreAppsHandler = () => {
     setShowMoreApp(true);
     setShowLanguage(false);
@@ -173,7 +177,7 @@ export default function Header() {
       {auth ? (
         <>
           <div className={classes["mylearning-div"]}>
-            <Link to={`/MyLearningPage`} className={classes["myLearning-icon"]}>
+            <Link to={`/MyLearningPage/${userId}`} className={classes["myLearning-icon"]}>
               My learning
             </Link>
           </div>
