@@ -13,7 +13,7 @@
 
 .videoArea {
   display: grid;
-  grid-template-columns: 1fr 316px;
+  grid-template-columns: 1fr 295px;
   flex-grow: 1;
 }
 
@@ -50,10 +50,9 @@
   z-index: 10;
 }
 
-.outletArea{
-  height:50vh
+.outletArea {
+  height: 50vh;
 }
-
 
 @media (max-width: 768px) {
   .videoArea {
