@@ -87,18 +87,63 @@ const Cart = () => {
 
     return Math.round(finalPrice);
   };
-  const buycouseHandler = () => {
+  // const buycouseHandler = () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   const userId = user ? user._id : null;
+  //   const courseId = params.id;
+  //   const selectedMonthsValue = selectedMonths;
+  //   const finalPrice = getPrice();
+
+  //   console.log("User ID:", userId);
+  //   console.log("Course ID:", courseId);
+  //   console.log("Selected Months:", selectedMonthsValue);
+  //   console.log("Price: ₹", finalPrice);
+  // };
+
+  const buycouseHandler = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const userId = user ? user._id : null;
     const courseId = params.id;
-    const selectedMonthsValue = selectedMonths;
     const finalPrice = getPrice();
-
-    console.log("User ID:", userId);
-    console.log("Course ID:", courseId);
-    console.log("Selected Months:", selectedMonthsValue);
-    console.log("Price: ₹", finalPrice);
+  
+    // Assuming you have the endpoint setup to mark a course as purchased.
+    try {
+      const response = await fetch('http://localhost:8000/purchase-course', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          courseId,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+      
+        Swal.fire({
+          title: "Success!",
+          text: "Course purchased successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate(`/mylearning/${userId}`);
+        });
+      } else {
+    
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to purchase course",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+     
+    }
   };
+  
 
   const wishlistHandler = () => {};
   const cartHandler = async () => {

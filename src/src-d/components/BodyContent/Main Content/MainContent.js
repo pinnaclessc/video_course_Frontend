@@ -26,7 +26,7 @@ function MainContent() {
         if (!userId) {
           throw new Error('User ID not found in URL parameters.');
         }
-        const response = await axios.get(`http://13.200.156.92:8000/purchased-courses/${userId}`);
+        const response = await axios.get(`http://localhost:8000/purchased-courses/${userId}`);
         setPurchasedCourses(response.data.purchasedCourses);
         setVerticalOptions(Array(response.data.purchasedCourses.length).fill(false));
       } catch (error) {
