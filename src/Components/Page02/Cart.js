@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import data from "./data.json";
 import styles from "./Cart.module.css";
-import { AiOutlinePlayCircle } from "react-icons/ai";
-import { useNavigate, useParams ,Link} from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import ApplyCoupon from "./ApplyCoupon";
 import Share from "./ShareComponent/Share";
 import { IoHeartCircleOutline } from "react-icons/io5";
@@ -16,26 +15,27 @@ const Cart = () => {
   const [selectedMonths, setSelectedMonths] = useState(6);
   const [showCoupon, setShowCoupon] = useState(false);
   const [isShare, setIsShare] = useState(false);
-  const [courseTitle, setCourseTitle] = useState('');
-  const [courseDetails, setCourseDetails] = useState('');
-  const [teacherName, setTeacherName] = useState('');
+  const [courseTitle, setCourseTitle] = useState("");
+  const [courseDetails, setCourseDetails] = useState("");
+  const [teacherName, setTeacherName] = useState("");
   const [rating, setRating] = useState();
-  const [price, setPrice] = useState(); 
+  const [price, setPrice] = useState();
   const [mrp, setMrp] = useState();
-  const [hindiImage,setHindiImage]=useState();
-  const [EnglishImage,setEnglishImage]=useState();
+  const [hindiImage, setHindiImage] = useState();
+  const [EnglishImage, setEnglishImage] = useState();
 
   const { image1, image2, heading, description, subscriptionPrice } = data;
 
   useEffect(() => {
     getCourseDetails();
   }, []);
-
   const getCourseDetails = async () => {
     try {
       const response = await fetch(`http://localhost:8000/course/${params.id}`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch course details. Status: ${response.status}`);
+      if (!response.ok){
+        throw new Error(
+          `Failed to fetch course details. Status: ${response.status}`
+        );
       }
       const result = await response.json();
       setCourseTitle(result.title);
@@ -69,23 +69,23 @@ const Cart = () => {
     let finalPrice = price;
     switch (selectedMonths) {
       case 6:
-       // finalPrice = price * 0.95;  5% less
-       finalPrice=price
+        // finalPrice = price * 0.95;  5% less
+        finalPrice = price;
         break;
       case 12:
-        finalPrice = (2 * price) * 0.9; // (2*price) - 10%
+        finalPrice = 2 * price * 0.9; // (2*price) - 10%
         break;
       case 18:
-        finalPrice = (3 * price) * 0.85; // (3*price) - 15%
+        finalPrice = 3 * price * 0.85; // (3*price) - 15%
         break;
       case 24:
-        finalPrice = (4 * price) * 0.8; // (4*price) - 20%
+        finalPrice = 4 * price * 0.8; // (4*price) - 20%
         break;
       default:
         break;
     }
 
-    return Math.round(finalPrice); 
+    return Math.round(finalPrice);
   };
   const buycouseHandler = () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -93,58 +93,56 @@ const Cart = () => {
     const courseId = params.id;
     const selectedMonthsValue = selectedMonths;
     const finalPrice = getPrice();
-  
+
     console.log("User ID:", userId);
     console.log("Course ID:", courseId);
     console.log("Selected Months:", selectedMonthsValue);
     console.log("Price: ₹", finalPrice);
   };
-  
-const wishlistHandler=()=>{}
-const cartHandler=async () =>{
-  const auth = localStorage.getItem('user');
 
-  if (!auth) {
-    navigate('/signup');
+  const wishlistHandler = () => {};
+  const cartHandler = async () => {
+    const auth = localStorage.getItem("user");
 
-    return;
-  }
-  try {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user ? user._id : null;
-    const courseId = params.id;
-    const response = await fetch(
-      `http://localhost:8000/vc/add-to-cart/${userId}/${courseId}`,
-      
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          courseId: courseId,
-        }),
-      }
-    );
+    if (!auth) {
+      navigate("/signup");
 
-    const data = await response.json();
-
-    if (data.success) {
-   
-      Swal.fire({
-        title: 'Success!',
-        text: 'Added in cart',
-        icon: 'success',
-        confirmButtonText: 'OK',
-      });
-    } else {
-      console.error("Failed to purchase course");
+      return;
     }
-  } catch (error) {
-    console.error("Error during purchase:", error);
-  }
-}
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user ? user._id : null;
+      const courseId = params.id;
+      const response = await fetch(
+        `http://localhost:8000/vc/add-to-cart/${userId}/${courseId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: courseId,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        Swal.fire({
+          title: "Success!",
+          text: "Added in cart",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        console.error("Failed to purchase course");
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
+  };
 
   return (
     <div className={styles["above-cart-fullpage"]}>
@@ -195,7 +193,10 @@ const cartHandler=async () =>{
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
 
-          <button className={styles["Buy-this-course"]} onClick={buycouseHandler}>
+          <button
+            className={styles["Buy-this-course"]}
+            onClick={buycouseHandler}
+          >
             Buy this course
           </button>
           <div className={styles["buttons-section"]}>
@@ -221,14 +222,12 @@ const cartHandler=async () =>{
         </div>
         {isShare && <Share />}
         <div className={styles["cart-wishlist-Btn-div"]}>
-          <button
-            className={styles["cartBtn"]}
-            onClick={cartHandler}
-          >Add To <FaCartPlus /></button>
-          <button
-            className={styles["wishListBtn"]}
-            onClick={wishlistHandler}
-          ><IoHeartCircleOutline size={40}/>
+          <button className={styles["cartBtn"]} onClick={cartHandler}>
+            <FaCartPlus />
+            {/* <span>Add To Cart</span> */}
+          </button>
+          <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+            <IoHeartCircleOutline size={40} />
           </button>
         </div>
       </div>
@@ -316,7 +315,7 @@ export default Cart;
 
 //     if (!auth) {
 //       navigate('/signup');
-     
+
 //       return;
 //     }
 //     try {
@@ -337,7 +336,7 @@ export default Cart;
 
 //       const data = await response.json();
 //       if (data.success) {
-       
+
 //         Swal.fire({
 //           title: 'Success!',
 //           text: 'Congratulations! You own this course.',
@@ -353,61 +352,61 @@ export default Cart;
 //     }
 //   };
 
-  // const cartHandler=async () =>{
-  //   const auth = localStorage.getItem('user');
+// const cartHandler=async () =>{
+//   const auth = localStorage.getItem('user');
 
-  //   if (!auth) {
-  //     navigate('/signup');
+//   if (!auth) {
+//     navigate('/signup');
 
-  //     return;
-  //   }
-  //   try {
-  //     const userId = JSON.parse(localStorage.getItem("user"))._id;
-  //     const response = await fetch(
-  //       `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
-        
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           userId: userId,
-  //           courseId: params.course_id,
-  //         }),
-  //       }
-  //     );
+//     return;
+//   }
+//   try {
+//     const userId = JSON.parse(localStorage.getItem("user"))._id;
+//     const response = await fetch(
+//       `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
 
-  //     const data = await response.json();
+//       {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           userId: userId,
+//           courseId: params.course_id,
+//         }),
+//       }
+//     );
 
-  //     if (data.success) {
-     
-  //       Swal.fire({
-  //         title: 'Success!',
-  //         text: 'Added in cart',
-  //         icon: 'success',
-  //         confirmButtonText: 'OK',
-  //       });
-  //     } else {
-  //       console.error("Failed to purchase course");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during purchase:", error);
-  //   }
-  // }
+//     const data = await response.json();
+
+//     if (data.success) {
+
+//       Swal.fire({
+//         title: 'Success!',
+//         text: 'Added in cart',
+//         icon: 'success',
+//         confirmButtonText: 'OK',
+//       });
+//     } else {
+//       console.error("Failed to purchase course");
+//     }
+//   } catch (error) {
+//     console.error("Error during purchase:", error);
+//   }
+// }
 //   const wishlistHandler=async () =>{
 //     const auth = localStorage.getItem('user');
 
 //     if (!auth) {
 //       navigate('/signup');
-   
+
 //       return;
 //     }
 //     try {
 //       const userId = JSON.parse(localStorage.getItem("user"))._id;
 //       const response = await fetch(
 //         `http://13.200.156.92:8000/add-to-wishlist/${userId}/${params.id}`,
-        
+
 //         {
 //           method: "POST",
 //           headers: {
@@ -423,7 +422,7 @@ export default Cart;
 //       const data = await response.json();
 
 //       if (data.success) {
-      
+
 //         Swal.fire({
 //           title: 'Success!',
 //           text: 'Added to Wishlist',

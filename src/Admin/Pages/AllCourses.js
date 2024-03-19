@@ -7,7 +7,7 @@ export default function AllCourses() {
   const [loading, setLoading] = useState(true); // Initialize loading state to true
 
   useEffect(() => {
-    fetch("http://13.200.156.92:8000/api/courses")
+    fetch("http://localhost:8000/courses")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -29,7 +29,7 @@ export default function AllCourses() {
         if (response.ok) {
           setCourses(courses.filter(course => course._id !== id)); // Optimistically remove the course from UI
         } else {
-          alert("Failed to delete the course.");
+        alert("Failed to delete the course.");
         }
       } catch (error) {
         console.error("Error deleting course:", error);
@@ -42,7 +42,7 @@ export default function AllCourses() {
     if (!key) {
       setLoading(true);
       // Reload the courses if the search key is cleared
-      fetch("http://13.200.156.92:8000/api/courses")
+      fetch("http://localhost:8000/courses")
         .then((response) => response.json())
         .then((data) => {
           if (Array.isArray(data)) {
@@ -54,7 +54,7 @@ export default function AllCourses() {
         .catch((error) => console.error("Error fetching courses:", error))
         .finally(() => setLoading(false));
     } else {
-      let result = await fetch(`http://13.200.156.92:8000/search/${key}`);
+      let result = await fetch(`http://localhost:8000/vc/course-search/${key}`);
       result = await result.json();
       if (Array.isArray(result)) {
         setCourses(result);
@@ -89,8 +89,8 @@ export default function AllCourses() {
           {courses.length > 0 ? courses.map((item, index) => (
             <tr key={item._id}>
               <td>{index + 1}</td>
-              <td>{item.courseTitle}</td>
-              <td>{item.teacherName}</td>
+              <td>{item.title}</td>
+              <td>{item.instructorName}</td>
               <td>{item.rating}</td>
               <td>{item.price}</td>
               <td>
