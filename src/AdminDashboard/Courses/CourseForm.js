@@ -30,14 +30,14 @@ const CourseForm = () => {
   useEffect(() => {
     const fetchCategoriesAndInstructors = async () => {
       try {
-        const categoryResponse = await axios.get('http://localhost:8000/categories');
+        const categoryResponse = await axios.get('http://13.200.156.92:8000/categories');
         setCategories(categoryResponse.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
 
       try {
-        const instructorResponse = await axios.get('http://localhost:8000/instructors');
+        const instructorResponse = await axios.get('http://13.200.156.92:8000/instructors');
         setInstructors(instructorResponse.data.instructors || []);
       } catch (error) {
         console.error('Error fetching instructors:', error);
@@ -117,7 +117,7 @@ const CourseForm = () => {
     });
 
     try {
-      await axios.post('http://localhost:8000/create-course', formData, {
+      await axios.post('http://13.200.156.92:8000/create-course', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -350,13 +350,13 @@ export default CourseForm;
 //   };
 
 //   useEffect(() => {
-//     axios.get('http://localhost:8000/categories')
+//     axios.get('http://13.200.156.92:8000/categories')
 //       .then(response => setCategories(response.data))
 //       .catch(error => console.error('Error fetching categories:', error));
 //   }, []);
 
 //   useEffect(() => {
-//     axios.get('http://localhost:8000/instructors')
+//     axios.get('http://13.200.156.92:8000/instructors')
 //       .then(response => {
 //         if (Array.isArray(response.data.instructors)) {
 //           setInstructors(response.data.instructors);
@@ -421,7 +421,7 @@ export default CourseForm;
 //       formData.append('englishCoverImage', courseData.englishCoverImage);
 
 //       setLoading(true);
-//       const response = await axios.post('http://localhost:8000/create-course', formData);
+//       const response = await axios.post('http://13.200.156.92:8000/create-course', formData);
 //       console.log('Course created successfully!', response.data);
 
 //       Swal.fire({

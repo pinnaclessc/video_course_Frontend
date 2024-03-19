@@ -15,7 +15,7 @@ const ChapterForm = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://localhost:8000/courses');
+        const response = await fetch('http://13.200.156.92:8000/courses');
         const data = await response.json();
         setCourses(data);
       } catch (error) {
@@ -31,11 +31,11 @@ const ChapterForm = () => {
       if (!selectedCourse) return;
   
       try {
-        const videosResponse = await fetch(`http://localhost:8000/api/videos/${selectedCourse}`);
+        const videosResponse = await fetch(`http://13.200.156.92:8000/api/videos/${selectedCourse}`);
         const videosData = await videosResponse.json();
         setVideos(videosData);
   
-        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/course/${selectedCourse}`);
+        const pdfsResponse = await fetch(`http://13.200.156.92:8000/api/pdfs/course/${selectedCourse}`);
         const pdfsData = await pdfsResponse.json();
         setPdfs(pdfsData);
       } catch (error) {
@@ -54,7 +54,7 @@ const ChapterForm = () => {
       topics
     };
 
-    fetch('http://localhost:8000/api/chapters', {
+    fetch('http://13.200.156.92:8000/api/chapters', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

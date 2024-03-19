@@ -19,7 +19,7 @@ const CategoryForm = () => {
     try {
       setLoading(true);
 
-      await axios.post('http://localhost:8000/categories', {
+      await axios.post('http://13.200.156.92:8000/categories', {
         categoryTitle,
       });
 
@@ -34,7 +34,7 @@ const CategoryForm = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/categories');
+      const response = await axios.get('http://13.200.156.92:8000/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);

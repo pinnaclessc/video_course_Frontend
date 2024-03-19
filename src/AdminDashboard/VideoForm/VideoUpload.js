@@ -13,7 +13,7 @@ function VideoUploadForm() {
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/courses')
+        axios.get('http://13.200.156.92:8000/courses')
             .then(response => {
                 setCourses(response.data);
             })
@@ -66,7 +66,7 @@ function VideoUploadForm() {
         });
 
         try {
-            await axios.post('http://localhost:8000/upload', formData, {
+            await axios.post('http://13.200.156.92:8000/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

@@ -20,7 +20,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
 
-const VideoPlayer = ({ apiUrl = 'http://localhost:8000', onToggleSidebar, isSidebarVisible}) => {
+const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible}) => {
   const videoRef = useRef(null)
   const { selectedVideoId, videoQuality, onChangeQuality, videoDetails, setVideoDetails } = useVideo();
 

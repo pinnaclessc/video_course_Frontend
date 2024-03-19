@@ -9,7 +9,7 @@ const CourseList = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/courses')
+        axios.get('http://13.200.156.92:8000/courses')
             .then(response => {
                 setCourses(response.data);
                 setLoading(false);

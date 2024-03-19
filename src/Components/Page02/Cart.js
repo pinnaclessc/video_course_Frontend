@@ -31,7 +31,7 @@ const Cart = () => {
   }, []);
   const getCourseDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/course/${params.id}`);
+      const response = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
       if (!response.ok){
         throw new Error(
           `Failed to fetch course details. Status: ${response.status}`
@@ -108,7 +108,7 @@ const Cart = () => {
   
     // Assuming you have the endpoint setup to mark a course as purchased.
     try {
-      const response = await fetch('http://localhost:8000/purchase-course', {
+      const response = await fetch('http://13.200.156.92:8000/purchase-course', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ const Cart = () => {
       const userId = user ? user._id : null;
       const courseId = params.id;
       const response = await fetch(
-        `http://localhost:8000/vc/add-to-cart/${userId}/${courseId}`,
+        `http://13.200.156.92:8000/vc/add-to-cart/${userId}/${courseId}`,
         {
           method: "POST",
           headers: {
@@ -305,7 +305,7 @@ export default Cart;
 //   const getCourseDetails = async () => {
 //     try {
 //       const response = await fetch(
-//         `http://localhost:8000/course/${params.id}`
+//         `http://13.200.156.92:8000/course/${params.id}`
 //       );
 
 //       if (!response.ok) {

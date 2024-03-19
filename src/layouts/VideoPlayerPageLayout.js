@@ -7,7 +7,7 @@ import styles from './VideoPlayerPageLayout.module.css';
 import { Outlet } from 'react-router-dom';
 import VideoHeader from './VideoHeader';
 
-const apiUrl = 'http://localhost:8000';
+const apiUrl = 'http://13.200.156.92:8000';
 
 const VideoPlayerPageLayout = () => {
   const [sidebarVisible, setSidebarVisible] = useState(true);

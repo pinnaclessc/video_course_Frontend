@@ -19,7 +19,7 @@ export default function SignUpPage() {
   }, [userId, navigate]);
 
   const submitHandler = async (event) => {
-    let result = await fetch("http://localhost:8000/vc/register-newStudent", {
+    let result = await fetch("http://13.200.156.92:8000/vc/register-newStudent", {
       method: "post",
       body: JSON.stringify({ name, email, password }),
       headers: { "Content-Type": "application/json" },
