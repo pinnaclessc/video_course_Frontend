@@ -27,7 +27,7 @@ const VideoPlayerPageLayout = () => {
         <div className={videoPlayerWrapperClass}>
           <VideoPlayer apiUrl={apiUrl} onToggleSidebar={handleToggleSidebar} isSidebarVisible={sidebarVisible} />
           <VideoPlayerNavBar sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible} />
-          
+    
           <div className={styles.outletArea}>
           <Outlet />  
         </div>

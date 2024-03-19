@@ -1,41 +1,43 @@
 
 .above-cart-fullpage {
   position: relative;
-  width: 25%;
-  left: 70%;
+  width: 24%;
+  left:70%;
   margin-top: -17.5%;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   background-color: white;
-
+  padding: 0.5rem;
 }
-
-.cart-fullpage {
+.cart-fullpage{
   display: inline;
-  background-color: white;
   color: black;
-  z-index: 1;
+  z-index:1;
   width: 30%;
   border-radius: 12px;
 }
 
 .image-section {
-  width: 52%;
-  height: 6rem;
+  width: 90%;
+  height: 11rem;
   display: flex;
   margin: auto;
   align-items: center;
   justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding: 10px ;
+  margin-bottom: 0.5rem;
+
 }
 
 .image1 {
-  width: 8rem;
-  height: 5rem;
+  width: 50%;
+  height: 10rem;
   z-index: 1;
 }
 
 .image2 {
-  width: 8rem;
-  height: 5rem;
+  width:50%;
+  height: 10rem;
   z-index: 1;
 }
 
@@ -147,7 +149,9 @@
   height: 100%;
   appearance: none;
   outline: none;
-  background: linear-gradient(to right, #707070 0%, #707070 100%);
+  /* background: linear-gradient(to right, #0271B4 0%, #707070 100%); */
+  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
+  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 35%,  rgba(2,0,36,1)100%);
   border-radius: 10px;
   opacity: 0.7;
   -webkit-transition: 0.2s;
@@ -159,23 +163,12 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #060606;
+  background: #000000;
   cursor: pointer;
 }
 
-/* .triangle-pointer {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 15px solid #060606;
-  top: -5px;
-  rotate: 180deg;
-} */
 
 .Months-price-section {
-
   font-size: 12px;
   margin: 1rem;
 }
@@ -209,4 +202,8 @@
   color: black;
   padding: 0.25rem;
 
+}
+
+.cart-btn{
+  
 }
