@@ -80,7 +80,7 @@ export default function App() {
        <VideoProvider>
       <Router>
         <Timer/>
-        <Header />
+        {/* <Header /> */}
         <Routes>
         <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses/>}></Route>
@@ -159,7 +159,7 @@ export default function App() {
             <Route path="/myplayer/reviews" element={ <Review/>} />  
         </Route>
         </Routes>
-        <Footer/>  
+    
         </Router>
         </VideoProvider>
 

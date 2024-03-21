@@ -12,14 +12,14 @@ const Sidebar = ({ apiUrl, onClose }) => {
   const [videoDurations, setVideoDurations] = useState({});
   const [activeMenuIds, setActiveMenuIds] = useState([]);
   const [videoNumberOffset, setVideoNumberOffset] = useState({});
-  const course_id = "65d5c59aca321455979ee32d";
+  const course_id = "65f16ac10a7f3b164321f260";
 
   useEffect(() => {
     const fetchChapters = async () => {
       try {
         const response = await fetch(`${apiUrl}/api/chapters/course/${course_id}`);
-        const data = await response.json();
-        setChapters(data);
+        let data = await response.json();
+
         // Fetch durations for all videos in the chapters
         const videoIds = data.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
         const uniqueVideoIds = [...new Set(videoIds)];
@@ -27,23 +27,24 @@ const Sidebar = ({ apiUrl, onClose }) => {
           fetch(`${apiUrl}/videos/${id}`).then(res => res.json())
         );
         const durations = await Promise.all(durationsPromises);
-
-
         const durationsMap = durations.reduce((acc, video) => {
-          acc[video._id] = formatDuration(video.duration);
+          acc[video._id] = video.duration;
           return acc;
         }, {});
-        setVideoDurations(durationsMap);
 
-        let offset = 0;
-        const newVideoNumberOffset = {};
-        // Calculate the offset for video numbers
-        data.forEach(chapter => {
-          newVideoNumberOffset[chapter._id] = offset;
-          offset += chapter.topics.length;
+        // Include durations in topics and calculate total chapter durations
+        data = data.map(chapter => {
+          let chapterDurationSeconds = 0;
+          const updatedTopics = chapter.topics.map(topic => {
+            const duration = durationsMap[topic.selectedVideo] || 0;
+            chapterDurationSeconds += duration;
+            return { ...topic, duration };
+          });
+          const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
+          return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted }; // Append total duration to chapter
         });
-        setVideoNumberOffset(newVideoNumberOffset);
 
+        setChapters(data);
       } catch (error) {
         console.error("Failed to fetch chapters or video details:", error);
       }
@@ -77,22 +78,19 @@ const Sidebar = ({ apiUrl, onClose }) => {
     );
   };
 
+  // Assuming duration is provided in seconds
   const formatDuration = (durationInSeconds) => {
     const hours = Math.floor(durationInSeconds / 3600);
     const minutes = Math.floor((durationInSeconds % 3600) / 60);
-    return `${hours > 0 ? `${hours}hr ` : ''}${minutes}min`;
-  };
-
-  const getFormattedDuration = (totalMinutes) => {
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-    return `${hours}hr ${minutes}min`;
+    const seconds = Math.floor(durationInSeconds % 60);
+    return `${hours > 0 ? `${hours}hr ` : ''}${minutes > 0 ? `${minutes}min ` : ''}${seconds}s`;
   };
 
   const calculateChapterDuration = (topics) => {
-    const totalDurationMinutes = topics.reduce((acc, { duration }) => acc + duration, 0);
-    return getFormattedDuration(totalDurationMinutes);
+    const totalDurationSeconds = topics.reduce((acc, topic) => acc + topic.duration, 0);
+    return formatDuration(totalDurationSeconds);
   };
+
 
   const calculateCompletionStatus = (topics) => {
     const completedCount = topics.filter(t => t.completed).length;
@@ -114,9 +112,11 @@ const Sidebar = ({ apiUrl, onClose }) => {
             >
               <div className={styles.accordion_title}>
                 {chapter.chapterTitle}
+                
                 <div className={styles.chapterInfo}>
                   {calculateCompletionStatus(chapter.topics)} | {calculateChapterDuration(chapter.topics)}
                 </div>
+
               </div>
               {activeMenuIds.includes(chapter._id) ? (
                 <RiArrowDropUpLine className={styles.arrow_icon} size={26} />
@@ -129,7 +129,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
                 {chapter.topics.map((topic, index) => (
                   <li key={topic._id} className={styles.submenu_item}>
                     <div className={styles.options_container}>
-                    {topic.completed ? (
+                      {topic.completed ? (
                         <MdCheckBox className={styles.checkbox_icon} size={20} />
                       ) : (
                         <MdCheckBoxOutlineBlank className={styles.checkbox_icon} size={20} />
@@ -140,7 +140,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
                       >
                         {topic.videoTitle}
                       </div>
-                      
+
                       <MdOndemandVideo className={styles.video_icon} size={18} />
                       <span className={styles.video_duration}>{formatDuration(topic.duration)}</span>
                       <button
@@ -150,7 +150,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
                       >
                         Resources
                       </button>
-                     
+
                     </div>
                   </li>
                 ))}

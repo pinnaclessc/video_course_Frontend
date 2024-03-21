@@ -10,7 +10,6 @@ const SeekBar = ({ videoRef, currentTime, duration, onSeek }) => {
         onSeek(parseFloat(seekTime));
     };
 
-    // Update the buffered state based on video buffering
     useEffect(() => {
         const updateBuffered = () => {
             if (videoRef.current && videoRef.current.buffered.length) {
@@ -31,7 +30,7 @@ const SeekBar = ({ videoRef, currentTime, duration, onSeek }) => {
 
     const calculateProgress = () => (duration > 0 ? (currentTime / duration) * 100 : 0);
 
-    // Adding a click handler directly on the seek bar for smoother seek
+    // for smoother seek
     const handleSeekBarClick = (e) => {
         const seekBarRect = seekbarRef.current.getBoundingClientRect();
         const clickPositionInBar = e.clientX - seekBarRect.left;

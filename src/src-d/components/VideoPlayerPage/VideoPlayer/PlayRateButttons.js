@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import PlayRateButton from "./PlayRateButton"
-
+import styles from "./PlayRateButtons.module.css"
 const PlayRateButtons = ({ playRate, playRateOptions, onPlayRateChange }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -14,20 +13,20 @@ const PlayRateButtons = ({ playRate, playRateOptions, onPlayRateChange }) => {
   }
 
   return (
-    <div className="play-rate-buttons">
-      <button className="play-rate" onClick={handleButtonClick}>
+    <div className={styles["play-rate-buttons"]}>
+      <button className={styles["play-rate"]} onClick={handleButtonClick}>
         {playRate}x
       </button>
       {isMenuOpen && (
-        <div className="play-rate-menu">
-          <ul className="play-rate-menu-unorderedList">
+        <div className={styles["play-rate-menu"]}>
+          <ul className={styles["play-rate-menu-unorderedList"]}>
             {playRateOptions.map((option) => (
-              <li key={option} className="play-rate-menu-list">
-                <PlayRateButton
-                  rate={option}
-                  isActive={playRate === option}
-                  onClick={() => handleOptionClick(option)}
-                />
+              <li
+                key={option}
+                className={`${styles["play-rate-menu-list"]} ${playRate === option ? styles.active : ''}`}
+                onClick={() => handleOptionClick(option)}
+              >
+                {option}x
               </li>
             ))}
           </ul>

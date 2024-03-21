@@ -10,7 +10,7 @@ import {
   MdOutlineFullscreen,
 
 } from "react-icons/md"
-import { FaPause,FaPlay,FaSpinner } from "react-icons/fa"
+import { FaPause, FaPlay, FaSpinner } from "react-icons/fa"
 import PlayRateButtons from "./PlayRateButttons"
 import Settings from "./Settings"
 import SeekBar from "./SeekBar"
@@ -20,9 +20,9 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
 
-const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible}) => {
+const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible }) => {
   const videoRef = useRef(null)
-  const { selectedVideoId, videoQuality, onChangeQuality, videoDetails, setVideoDetails } = useVideo();
+  const { selectedVideoId, videoQuality, onChangeQuality, navigateToNextVideo, navigateToPreviousVideo, videoDetails, setVideoDetails } = useVideo();
 
   const [error, setError] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -59,8 +59,52 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
   const [currentQuality, setCurrentQuality] = useState('720p');
   const [chapters, setChapters] = useState([]);
   const [videoUrl, setVideoUrl] = useState('');
+  const [showControls, setShowControls] = useState(false);
+
 
   const videoSource = videoDetails?.resolutions?.find(r => r.name === videoQuality)?.url || videoDetails?.defaultUrl;
+
+  let hideControlsTimeout;
+
+  const handleVideoHover = () => {
+    clearTimeout(hideControlsTimeout); // Clear timeout to prevent hiding if already hovered
+    setShowControls(true);
+  }
+
+  const handleVideoLeave = () => {
+    // Set timeout to hide controls after 10s
+    hideControlsTimeout = setTimeout(() => {
+      setShowControls(false);
+    }, 5000); // 10000 ms = 10s
+  }
+
+  let controlVisibilityTimeout;
+
+  const resetControlVisibilityTimer = () => {
+    clearTimeout(controlVisibilityTimeout);
+    setShowControls(true); // Show the controls immediately on any mouse movement or keyboard action
+
+    // Hide the controls after 5 seconds of inactivity
+    if (isFullscreen) { // Only start the timer if the video is in fullscreen
+      controlVisibilityTimeout = setTimeout(() => {
+        setShowControls(false);
+      }, 5000); // Adjust time as needed
+    }
+  };
+
+  useEffect(() => {
+    // Listen for mouse movements and keydown events
+    const videoContainer = document.getElementById('video-container');
+    videoContainer.addEventListener('mousemove', resetControlVisibilityTimer);
+    videoContainer.addEventListener('keydown', resetControlVisibilityTimer);
+
+    return () => {
+      // Clean up event listeners
+      videoContainer.removeEventListener('mousemove', resetControlVisibilityTimer);
+      videoContainer.removeEventListener('keydown', resetControlVisibilityTimer);
+      clearTimeout(controlVisibilityTimeout);
+    };
+  }, [isFullscreen]);
 
   const handlePreviousVideo = () => {
     if (selectedTopicIndex > 0) {
@@ -103,6 +147,7 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
         setIsLoading(false);
       });
   }, [selectedVideoId, apiUrl, setVideoDetails]);
+  // eslint-disable-next-line
 
   // Setup HLS or src for the video player based on videoDetails from context
   useEffect(() => {
@@ -120,7 +165,7 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     }
   }, [videoDetails, videoQuality]);
 
-  ///////////////////////////////this is so it support .m3u8//////////////////////////////
+  /////////////////////////////////////////////////////////////
 
   // Function to change the quality of the video
   const handleQualityChange = (quality) => {
@@ -129,17 +174,22 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
   ///////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    const video = videoRef.current
-    const handleLoadedMetadata = () => {
-      setDuration(video.duration)
-    }
+    const video = videoRef.current;
+    if (!video) return;
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata)
+    const handleLoadedMetadata = () => {
+      setDuration(video.duration);
+      setTotalDuration(formatTime(video.duration));
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    console.log('Current video source:', videoSource);
 
     return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata)
-    }
-  }, [])
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  }, [videoRef, videoSource]);
+
 
   useEffect(() => {
     const video = videoRef.current;
@@ -154,8 +204,6 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     };
   }, [selectedVideoIndex]);
 
-
-  /////////////////////////useEffect for centreplaybutton ///////////////////////////
 
   const handleSubMenuSelect = (submenuTitle, isPlayed) => {
     setSelectedSubmenu(submenuTitle);
@@ -177,13 +225,13 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     setIsNotesOpen(false)
   }
 
-  const handleVideoHover = () => {
-    setIsHovered(true)
-  }
+  // const handleVideoHover = () => {
+  //   setIsHovered(true)
+  // }
 
-  const handleVideoLeave = () => {
-    setIsHovered(false)
-  }
+  // const handleVideoLeave = () => {
+  //   setIsHovered(false)
+  // }
 
 
   const handleTimeUpdate = () => {
@@ -200,18 +248,22 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
       .toString()
       .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
   }
+
   useEffect(() => {
-    const video = videoRef.current
-    video.addEventListener("timeupdate", handleTimeUpdate)
-    video.addEventListener("loadedmetadata", () => {
-      setDuration(video.duration)
-      setTotalDuration(formatTime(video.duration))
-    })
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleLoadedMetadata = () => {
+      console.log('Metadata loaded, video duration:', video.duration);
+      setTotalDuration(formatTime(video.duration));
+    };
+
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
 
     return () => {
-      video.removeEventListener("timeupdate", handleTimeUpdate)
-    }
-  }, [])
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  }, [videoRef]);
 
   useEffect(() => {
     setCurrentDuration(formatTime(currentTime))
@@ -238,11 +290,6 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     setDuration(videoRef.current.duration)
   }
 
-  // const handleSeekbarChange = (seekTime) => {
-  //   videoRef.current.currentTime = seekTime
-  //   setCurrentTime(seekTime)
-  // }
-
   const handleSeekbarChange = (newTime) => {
     if (videoRef.current) {
       videoRef.current.currentTime = newTime;
@@ -252,26 +299,26 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
 
 
   //FORWARD AND BACKWARD BUTTON
-  const seekAmount = 5; // 5 seconds seek
+  const seekAmount = 5;
 
   const handleBackward = () => {
     if (videoRef.current) {
-      const newTime = Math.max(0, videoRef.current.currentTime - 5); // Assuming 5 seconds backward
+      const newTime = Math.max(0, videoRef.current.currentTime - seekAmount);
       videoRef.current.currentTime = newTime;
-      setCurrentTime(newTime); // Update currentTime state
+      setCurrentTime(newTime);
     }
   };
 
   const handleForward = () => {
     if (videoRef.current) {
-      const newTime = Math.min(videoRef.current.duration, videoRef.current.currentTime + 5); // Assuming 5 seconds forward
+      const newTime = Math.min(videoRef.current.duration, videoRef.current.currentTime + seekAmount); // Assuming 5 seconds forward
       videoRef.current.currentTime = newTime;
-      setCurrentTime(newTime); // Update currentTime state
+      setCurrentTime(newTime);
     }
   };
 
 
-  //PlyRate
+  //PlayRate
   const handlePlayRateChange = (rate) => {
     setPlayRate(rate)
     setIsPlayRateMenuOpen(false)
@@ -300,12 +347,62 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     }
   }
 
-  
+  // const handleVideoClick = (event) => {
+  //   const clickedElement = event.target
+  //   const isSidebarElement = clickedElement.closest(".sidebar_container")
+
+  //   if (isSidebarElement) {
+  //     return
+  //   }
+  //   const isControlBarElement = clickedElement.closest(".control_btn_container")
+  //   if (isControlBarElement) {
+  //     return
+  //   }
+
+  //   handlePlayPause()
+  // }
+
+  // //Fullscreen
+  // const handleToggleFullScreen = () => {
+  //   const videoContainer = document.getElementById("video-container")
+
+  //   if (!document.fullscreenElement) {
+  //     // Enter fullscreen mode
+  //     if (videoContainer.requestFullscreen) {
+  //       videoContainer.requestFullscreen()
+  //     } else if (videoContainer.webkitRequestFullscreen) {
+  //       videoContainer.webkitRequestFullscreen()
+  //     } else if (videoContainer.mozRequestFullScreen) {
+  //       videoContainer.mozRequestFullScreen()
+  //     } else if (videoContainer.msRequestFullscreen) {
+  //       videoContainer.msRequestFullscreen()
+  //     }
+  //     setIsExpandedMode(false)
+  //     setIsFullscreen(true)
+  //   } else {
+  //     // Exit fullscreen mode
+  //     if (document.exitFullscreen) {
+  //       document.exitFullscreen()
+  //     } else if (document.webkitExitFullscreen) {
+  //       document.webkitExitFullscreen()
+  //     } else if (document.mozCancelFullScreen) {
+  //       document.mozCancelFullScreen()
+  //     } else if (document.msExitFullscreen) {
+  //       document.msExitFullscreen()
+  //     }
+  //     setIsExpandedMode(true)
+  //     setIsFullscreen(false)
+  //   }
+  // }
+
+  // const handleToggleExpandedMode = () => {
+  //   setIsExpandedMode(!isExpandedMode);
+  //   onToggleSidebar(); 
+  // };
 
   const handleVideoClick = (event) => {
     const clickedElement = event.target
     const isSidebarElement = clickedElement.closest(".sidebar_container")
-
     if (isSidebarElement) {
       return
     }
@@ -313,46 +410,32 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     if (isControlBarElement) {
       return
     }
-
     handlePlayPause()
   }
 
   //Fullscreen
   const handleToggleFullScreen = () => {
-    const videoContainer = document.getElementById("video-container")
-
+    const videoContainer = document.getElementById("video-container");
     if (!document.fullscreenElement) {
-      // Enter fullscreen mode
       if (videoContainer.requestFullscreen) {
-        videoContainer.requestFullscreen()
+        videoContainer.requestFullscreen();
       } else if (videoContainer.webkitRequestFullscreen) {
-        videoContainer.webkitRequestFullscreen()
-      } else if (videoContainer.mozRequestFullScreen) {
-        videoContainer.mozRequestFullScreen()
-      } else if (videoContainer.msRequestFullscreen) {
-        videoContainer.msRequestFullscreen()
-      }
-      setIsExpandedMode(false)
-      setIsFullscreen(true)
+        videoContainer.webkitRequestFullscreen();
+      } // Add other vendor prefixes as needed
+      setIsFullscreen(true);
+      resetControlVisibilityTimer(); // Reset the timer when entering fullscreen
     } else {
-      // Exit fullscreen mode
       if (document.exitFullscreen) {
-        document.exitFullscreen()
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen()
-      } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen()
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen()
-      }
-      setIsExpandedMode(true)
-      setIsFullscreen(false)
+        document.exitFullscreen();
+      } // Add other vendor prefixes as needed
+      setIsFullscreen(false);
+      setShowControls(true); // Ensure controls are visible when exiting fullscreen
     }
-  }
+  };
 
   const handleToggleExpandedMode = () => {
     setIsExpandedMode(!isExpandedMode);
-    onToggleSidebar(); 
+    onToggleSidebar();
   };
 
   //Toggle Sidebar
@@ -381,15 +464,16 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
       selectedChapter?.topics[selectedTopicIndex]?.selectedVideo || null;
 
   }, [selectedChapter, selectedTopicIndex]);
-
+  const handleControlClick = (event) => {
+    event.stopPropagation(); 
+  };
   return (
     <>
-      <div
+     <div
         id="video-container"
-        className={videoPlayerClass}
+        className={`video-container ${isFullscreen ? 'fullscreen' : ''}`}
         onClick={handleVideoClick}
       >
-
         {isLoading ? (
           <div className="loading-container">
             <FaSpinner className="loading-icon" />
@@ -408,16 +492,19 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
             onError={handleVideoError}
             quality={videoQuality}
             onClick={handlePlayPause}
+           
+            
           >
             {videoSource && <source src={videoSource} type="application/x-mpegURL" />}
           </video>
         )}
 
-{showCenterPlayButton && (
-            <div className="center-play-pause-button">
-              {isPlaying ? <FaPause size={50} /> : <FaPlay size={50} />}
-            </div>
-          )}
+
+        {showCenterPlayButton && (
+          <div className="center-play-pause-button">
+            {isPlaying ? <FaPause size={50} /> : <FaPlay size={50} />}
+          </div>
+        )}
 
         <div id="submenu" className="submenu-title">
           {" "}
@@ -425,16 +512,13 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
         </div>
 
         <div className="previous_next_buttons">
-          <button onClick={handlePreviousVideo}><FaChevronLeft /></button>
+          <button onClick={navigateToPreviousVideo}><FaChevronLeft /></button>
         </div>
-        <div className="next_container">
-          <button onClick={handleNextVideo}><FaChevronRight /></button>
-        </div>
-        <div
-          className={`control_btn_container ${isFullscreen ? "fullscreen" : ""
-            }`}
-        >
 
+        <div className="next_container">
+          <button onClick={navigateToNextVideo}><FaChevronRight /></button>
+        </div>
+        <div className={`control-btn-container ${showControls ? 'show' : 'hide'}`} onClick={handleControlClick}>
           {/* Seekbar */}
           <SeekBar
             currentTime={currentTime}
@@ -484,7 +568,6 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
               </button>
             </div>
 
-
             <Settings
               currentQuality={currentQuality}
               onChangeQuality={handleQualityChange}
@@ -502,7 +585,7 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
               </div>
             </div>
 
-            <div className="fullscreen_container">
+            {/* <div className="fullscreen_container">
               <button onClick={handleToggleFullScreen} className="fullscreen-button">
                 {isCurrentlyFullScreen ? (
                   <MdOutlineFullscreenExit size={25} />
@@ -522,6 +605,30 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
       </div>
 
 
+    </>
+  )
+} */}
+
+            <div className="fullscreen_container">
+              <button onClick={handleToggleFullScreen} className="fullscreen-button">
+                {isCurrentlyFullScreen ? (
+                  <MdOutlineFullscreenExit size={25} />
+                ) : (
+                  <MdOutlineFullscreen size={25} />
+                )}
+              </button>
+            </div>
+
+            {!isFullscreen && (
+              <div className="expanded_container">
+                <button onClick={handleToggleExpandedMode} className="expanded-mode-button">
+                  <CgArrowsH size={25} />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </>
   )
 }

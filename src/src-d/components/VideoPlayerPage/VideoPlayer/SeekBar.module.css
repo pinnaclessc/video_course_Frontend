@@ -1,7 +1,19 @@
+.seekBarContainer {
+  background-color: #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  transition: height 0.5s ease-out; 
+}
+
 .seekbar {
   position: relative;
-  height: 12px;
+  height: 9.5px; 
   overflow: hidden;
+  background: #ccc; 
+}
+
+.seekBarContainer:hover .seekbar {
+
 }
 
 .seekbar input[type="range"] {
@@ -23,11 +35,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .seekbar input[type="range"]:focus::-webkit-slider-thumb {
- box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
 }
 
 .seekbar input[type="range"]::-webkit-slider-thumb {
@@ -36,34 +48,14 @@
   visibility: hidden;
 }
 
-.seekBarContainer {
-  background-color: #ddd; 
-  width: 100%; 
-  box-sizing: border-box; 
-}
-
-.seekbar {
-  position: relative; 
-}
-
-.rangeInput {
-  width: 100%; 
-  cursor: pointer; 
- 
-}
-
-/* .progress {
-  position: absolute;
-  height: 5px; 
-  background-color: #4caf50; 
-  bottom: 0; 
-  left: 0;
-} */
-
-
 .bufferedBar {
   position: absolute;
   height: 100%;
-  background-color: #747171 ; 
+  background-color: #747171;
   z-index: 1;
+}
+
+.rangeInput {
+  width: 100%;
+  cursor: pointer;
 }
