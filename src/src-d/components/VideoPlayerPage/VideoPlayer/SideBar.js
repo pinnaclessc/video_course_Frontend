@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useVideo } from '../../../../context/VideoContext';
-import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine, RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri';
-import { FaFileVideo } from 'react-icons/fa';
+import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdOndemandVideo } from "react-icons/md";
 import styles from './Sidebar.module.css';
 
 const Sidebar = ({ apiUrl, onClose }) => {
-  const { selectedVideoId, setSelectedVideoId } = useVideo();
-  const [selectedResourceSubmenuId, setSelectedResourceSubmenuId] = useState(null);
+  const { selectedVideoId, setSelectedVideoId, completedVideos } = useVideo();
   const [chapters, setChapters] = useState([]);
-  const [videoDurations, setVideoDurations] = useState({});
   const [activeMenuIds, setActiveMenuIds] = useState([]);
-  const [videoNumberOffset, setVideoNumberOffset] = useState({});
-  const course_id = "65f16ac10a7f3b164321f260";
+  const course_id = "65fbf40fc6ed880eb0cd758a";
+
+  // Assume a function to update the completion status is passed via context
+  const { markVideoAsCompleted } = useVideo();
 
   useEffect(() => {
     const fetchChapters = async () => {
       try {
         const response = await fetch(`${apiUrl}/api/chapters/course/${course_id}`);
         let data = await response.json();
-
-// After setting chapters:
-if (data.length > 0 && data[0].topics.length > 0) {
-  const firstVideoId = data[0].topics[0].selectedVideo;
-  setSelectedVideoId(firstVideoId);
-}
-
+        // After setting chapters:
+        if (data.length > 0 && data[0].topics.length > 0) {
+          const firstVideoId = data[0].topics[0].selectedVideo;
+          setSelectedVideoId(firstVideoId);
+        }
         // Fetch durations for all videos in the chapters
         const videoIds = data.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
         const uniqueVideoIds = [...new Set(videoIds)];
@@ -49,7 +46,6 @@ if (data.length > 0 && data[0].topics.length > 0) {
           const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
           return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted }; // Append total duration to chapter
         });
-
         setChapters(data);
       } catch (error) {
         console.error("Failed to fetch chapters or video details:", error);
@@ -57,24 +53,14 @@ if (data.length > 0 && data[0].topics.length > 0) {
     };
 
     fetchChapters();
-  }, [apiUrl,setSelectedVideoId]);
+  }, [apiUrl, setSelectedVideoId]);
 
-
-  const toggleCompletion = async (topicId) => {
-    const updatedChapters = chapters.map(chapter => ({
-      ...chapter,
-      topics: chapter.topics.map(topic => {
-        if (topic._id === topicId) {
-          return {
-            ...topic,
-            completed: !topic.completed
-          };
-        }
-        return topic;
-      })
-    }));
-    setChapters(updatedChapters);
+  const toggleCompletion = async (topicId, selectedVideo) => {
+    const isCompleted = completedVideos[selectedVideo];
+    markVideoAsCompleted(selectedVideo, !isCompleted); // Toggle the completion status
   };
+  
+
 
   const toggleChapter = (chapterId) => {
     setActiveMenuIds(currentIds =>
@@ -97,11 +83,26 @@ if (data.length > 0 && data[0].topics.length > 0) {
     return formatDuration(totalDurationSeconds);
   };
 
-
   const calculateCompletionStatus = (topics) => {
     const completedCount = topics.filter(t => t.completed).length;
     return `${completedCount} / ${topics.length}`;
   };
+
+  const adjustTopicCounts = (chaptersData) => {
+    return chaptersData.map((chapter, index) => {
+      // Ensure each chapter has at least `index + 1` topics, for demonstration.
+      // This is purely for demonstration; in a real application, data should likely not be manipulated like this.
+      let additionalTopicsNeeded = index + 1 - chapter.topics.length;
+      while (additionalTopicsNeeded > 0) {
+        // Duplicate the first topic to increase the count, or create new mock topics as needed.
+        // This is a simplistic approach; adjust according to your real data structure and needs.
+        chapter.topics.push({ ...chapter.topics[0], _id: `${chapter.topics[0]._id}_${additionalTopicsNeeded}` });
+        additionalTopicsNeeded--;
+      }
+      return chapter;
+    });
+  };
+  
 
   return (
     <div className={styles.sidebar}>
@@ -118,7 +119,7 @@ if (data.length > 0 && data[0].topics.length > 0) {
             >
               <div className={styles.accordion_title}>
                 {chapter.chapterTitle}
-                
+
                 <div className={styles.chapterInfo}>
                   {calculateCompletionStatus(chapter.topics)} | {calculateChapterDuration(chapter.topics)}
                 </div>
@@ -135,11 +136,12 @@ if (data.length > 0 && data[0].topics.length > 0) {
                 {chapter.topics.map((topic, index) => (
                   <li key={topic._id} className={styles.submenu_item}>
                     <div className={styles.options_container}>
-                      {topic.completed ? (
-                        <MdCheckBox className={styles.checkbox_icon} size={20} />
+                      {completedVideos[topic.selectedVideo] ? (
+                        <MdCheckBox className={styles.checkbox_icon} size={20} onClick={() => toggleCompletion(topic._id, topic.selectedVideo)} />
                       ) : (
-                        <MdCheckBoxOutlineBlank className={styles.checkbox_icon} size={20} />
-                      )}<span className={styles.topic_number}>{index + 1}.</span>
+                        <MdCheckBoxOutlineBlank className={styles.checkbox_icon} size={20} onClick={() => toggleCompletion(topic._id, topic.selectedVideo)} />
+                      )}
+                      <span className={styles.topic_number}>{index + 1}.</span>
                       <div
                         className={`${styles.submenu_button} ${selectedVideoId === topic.selectedVideo ? styles.active : ''}`}
                         onClick={() => setSelectedVideoId(topic.selectedVideo)}

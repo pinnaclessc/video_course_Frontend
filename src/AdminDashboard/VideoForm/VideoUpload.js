@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import styles from './VideoUpload.module.css'; 
+import styles from './VideoUpload.module.css';
 
 function VideoUploadForm() {
     const [file, setFile] = useState(null);
@@ -13,7 +13,7 @@ function VideoUploadForm() {
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        axios.get('http://13.200.156.92:8000/courses')
+        axios.get('http://localhost:8000/courses')
             .then(response => {
                 setCourses(response.data);
             })
@@ -66,7 +66,7 @@ function VideoUploadForm() {
         });
 
         try {
-            await axios.post('http://13.200.156.92:8000/upload', formData, {
+            await axios.post('http://localhost:8000/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -107,7 +107,7 @@ function VideoUploadForm() {
     };
 
     return (
-        <div className={styles.formcontainer}> 
+        <div className={styles.formcontainer}>
             <form onSubmit={handleSubmit} className={styles.formcontainer} aria-labelledby="videoUploadForm">
                 <label htmlFor="courseSelect">Select a Course:</label>
                 <select
@@ -136,9 +136,9 @@ function VideoUploadForm() {
                     />
                 </label>
                 {uploadProgress > 0 && (
-                    <div className={styles.progressContainer} aria-live="polite"> 
+                    <div className={styles.progressContainer} aria-live="polite">
                         <div className={styles.progressBar} style={{ width: `${uploadProgress}%` }}>
-                            {uploadProgress}% 
+                            {uploadProgress}%
                         </div>
                     </div>
                 )}

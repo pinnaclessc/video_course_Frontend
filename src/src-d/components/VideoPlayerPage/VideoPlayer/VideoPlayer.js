@@ -22,8 +22,7 @@ import Hls from "hls.js";
 
 const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible,onVideoProgress }) => {
   const videoRef = useRef(null)
-  const { selectedVideoId, videoQuality, onChangeQuality, navigateToNextVideo, navigateToPreviousVideo, videoDetails, setVideoDetails } = useVideo();
-
+  const { selectedVideoId, videoQuality, onChangeQuality, navigateToNextVideo, navigateToPreviousVideo, videoDetails, setVideoDetails, markVideoAsCompleted } = useVideo();
   const [error, setError] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState()
@@ -61,13 +60,12 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
   const [videoUrl, setVideoUrl] = useState('');
   const [showControls, setShowControls] = useState(false);
 
-
   const videoSource = videoDetails?.resolutions?.find(r => r.name === videoQuality)?.url || videoDetails?.defaultUrl;
 
   let hideControlsTimeout;
 
   const handleVideoHover = () => {
-    clearTimeout(hideControlsTimeout); // Clear timeout to prevent hiding if already hovered
+    clearTimeout(hideControlsTimeout); 
     setShowControls(true);
   }
 
@@ -204,6 +202,18 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
     };
   }, [selectedVideoIndex]);
 
+  /////////////////progress of completion///////////////////////
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener('timeupdate', handleTimeUpdate);
+  
+      return () => {
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+      };
+    }
+  }, [videoRef, onVideoProgress]);
+
 
   const handleSubMenuSelect = (submenuTitle, isPlayed) => {
     setSelectedSubmenu(submenuTitle);
@@ -242,15 +252,17 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
   const handleTimeUpdate = () => {
     const currentProgress = videoRef.current.currentTime / videoRef.current.duration;
     const percentage = currentProgress * 100;
-
+    
     setCurrentTime(videoRef.current.currentTime);
-
-    // If the video has played 80%, call the onVideoProgress prop
-    if (percentage >= 80) {
-      onVideoProgress?.(true);
+    
+    // If the video has played 90%, mark it as completed
+    if (percentage >= 90) {
+      // Assuming `selectedVideoId` is the ID of the current video
+      // And there's a mechanism to prevent repeated calls for the same video
+      markVideoAsCompleted(selectedVideoId, true);
     }
   };
-
+  
   //Handle Duration
   const formatTime = (videoLengthInSeconds) => {
     const hours = Math.floor(videoLengthInSeconds / 3600)
