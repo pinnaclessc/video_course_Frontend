@@ -7,10 +7,12 @@
 
 .seekbar {
   position: relative;
-  height: 9.5px; 
+  height: 10px; 
   overflow: hidden;
   background: #ccc; 
 }
+
+
 
 .seekBarContainer:hover .seekbar {
 
@@ -38,9 +40,9 @@
   z-index: 2;
 }
 
-.seekbar input[type="range"]:focus::-webkit-slider-thumb {
+/* .seekbar input[type="range"]:focus::-webkit-slider-thumb {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
-}
+} */
 
 .seekbar input[type="range"]::-webkit-slider-thumb {
   width: 0;

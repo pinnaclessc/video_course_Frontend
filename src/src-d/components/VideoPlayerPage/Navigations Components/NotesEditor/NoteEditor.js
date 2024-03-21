@@ -1,22 +1,9 @@
 import React, { useState } from 'react';
-import { Editor, EditorState, RichUtils, Modifier } from 'draft-js';
+import { Editor, EditorState, RichUtils } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import 'draft-js/dist/Draft.css';
 import styles from './NoteEditor.module.css';
-import {
-  FaBold, FaItalic, FaUnderline, FaStrikethrough,
-  FaAlignLeft, FaAlignCenter, FaAlignRight,
-  FaListOl, FaListUl, FaLink, FaHeading, FaTextHeight
-} from 'react-icons/fa'; 
-import { BsAlphabetUppercase, BsType } from "react-icons/bs"; 
-
-// Custom style map for font sizes
-const customStyleMap = {
-  'FONT_SIZE_12': { fontSize: '12px' },
-  'FONT_SIZE_14': { fontSize: '14px' },
-  'FONT_SIZE_16': { fontSize: '16px' },
-
-};
+import { FaBold, FaItalic, FaUnderline, FaStrikethrough, FaListOl, FaListUl, FaLink } from 'react-icons/fa';
 
 const NoteEditor = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -53,19 +40,11 @@ const NoteEditor = () => {
     setUrlValue("");
   };
 
-  const applyCustomStyle = (style) => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, style));
-  };
-
   const transformText = (transformation) => {
     const selection = editorState.getSelection();
     if (!selection.isCollapsed()) {
       const contentState = editorState.getCurrentContent();
-      const newContentState = Modifier.replaceText(
-        contentState,
-        selection,
-        transformation(contentState.getBlockForKey(selection.getStartKey()).getText().slice(selection.getStartOffset(), selection.getEndOffset())),
-      );
+      const newContentState = contentState.set('text', transformation(contentState.getBlockForKey(selection.getStartKey()).getText().slice(selection.getStartOffset(), selection.getEndOffset())));
       setEditorState(EditorState.push(editorState, newContentState, 'insert-characters'));
     }
   };
@@ -75,7 +54,7 @@ const NoteEditor = () => {
     const htmlContent = stateToHTML(contentState);
     console.log("Saving HTML Content: ", htmlContent);
     try {
-      const response = await fetch(" http://localhost:8000/api/notes", {
+      const response = await fetch("http://localhost:5000/api/notes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,16 +63,12 @@ const NoteEditor = () => {
       });
       if (response.ok) {
         console.log("Content saved successfully");
-        
       } else {
         console.error("Failed to save content");
-        
       }
     } catch (error) {
       console.error("Error saving content", error);
-     
     }
-    
   };
 
   return (
@@ -106,30 +81,36 @@ const NoteEditor = () => {
         <button onClick={() => onToggleBlockType("ordered-list-item")}><FaListOl /></button>
         <button onClick={() => onToggleBlockType("unordered-list-item")}><FaListUl /></button>
         <button onClick={() => setShowLinkInput(!showLinkInput)}><FaLink /></button>
-        <button onClick={() => transformText(text => text.toUpperCase())}><BsAlphabetUppercase /></button>
-        <button onClick={() => transformText(text => text.toLowerCase())}><BsType /></button>
-        {Array.from({ length: 6 }, (_, i) => (
-          <button key={`H${i + 1}`} onClick={() => onToggleBlockType(`header-${i + 1}`)}>H{i + 1}</button>
-        ))}
-        <button onClick={() => applyCustomStyle('FONT_SIZE_12')}>12px</button>
-        <button onClick={() => applyCustomStyle('FONT_SIZE_14')}>14px</button>
-        <button onClick={() => applyCustomStyle('FONT_SIZE_16')}>16px</button>
+        <button onClick={() => onToggleBlockType("header-one")}>H1</button>
+        <button onClick={() => onToggleBlockType("header-two")}>H2</button>
+        <button onClick={() => onToggleBlockType("header-three")}>H3</button>
+        <button onClick={() => onToggleBlockType("header-four")}>H4</button>
+        <button onClick={() => onToggleBlockType("header-five")}>H5</button>
+        <button onClick={() => onToggleBlockType("header-six")}>H6</button>
       </div>
       {showLinkInput && (
-        <div>
-          <input type="text" onChange={onURLChange} value={urlValue} placeholder="Enter a URL" />
-          <button onClick={confirmLink}>Confirm</button>
-        </div>
-      )}
+  <div className={styles.linkInputContainer}>
+    <input
+      type="text"
+      onChange={onURLChange}
+      value={urlValue}
+      placeholder="Enter a URL"
+      className={styles.linkInput}
+    />
+    <button onClick={confirmLink} className={styles.confirmLinkButton}>
+      Confirm
+    </button>
+  </div>
+)}
+
       <Editor
-        customStyleMap={customStyleMap}
         editorState={editorState}
         handleKeyCommand={handleKeyCommand}
         onChange={setEditorState}
+        className={styles.editorCustomStyle}
       />
       <button onClick={saveContent}>Save Content</button>
     </div>
   );
 };
-
 export default NoteEditor;

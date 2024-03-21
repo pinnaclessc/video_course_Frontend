@@ -38,7 +38,7 @@ import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
 import Header from "./Components/HomePage01/Header/Header";
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
-import NoteEditor from "./src-d/components/VideoPlayerPage/Navigations Components/NotesEditor/NotesEditor";
+import NoteEditor from "./src-d/components/VideoPlayerPage/Navigations Components/NotesEditor/NoteEditor";
 import MyLearningMain from "./src-d/MyLearningMain";
 import VideoPlayerPageLayout from "./layouts/VideoPlayerPageLayout"
 import CourseOverview from "./src-d/components/VideoPlayerPage/Navigations Components/CourseOverview";

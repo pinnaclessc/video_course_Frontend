@@ -53,6 +53,9 @@
 .outletArea {
   height: 50vh;
 }
+.sidebar_container{
+position:sticky;
+}
 
 @media (max-width: 768px) {
   .videoArea {

@@ -33,9 +33,9 @@ const VideoPlayerPageLayout = () => {
         </div>
         </div>
         {sidebarVisible && (
-          <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />
+          <div className={styles.sidebar_container} ><Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} /></div>
         )}
-      </div>
+ </div>
     </div>
   );
 };

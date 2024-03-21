@@ -20,6 +20,12 @@ const Sidebar = ({ apiUrl, onClose }) => {
         const response = await fetch(`${apiUrl}/api/chapters/course/${course_id}`);
         let data = await response.json();
 
+// After setting chapters:
+if (data.length > 0 && data[0].topics.length > 0) {
+  const firstVideoId = data[0].topics[0].selectedVideo;
+  setSelectedVideoId(firstVideoId);
+}
+
         // Fetch durations for all videos in the chapters
         const videoIds = data.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
         const uniqueVideoIds = [...new Set(videoIds)];
@@ -51,7 +57,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
     };
 
     fetchChapters();
-  }, [apiUrl]);
+  }, [apiUrl,setSelectedVideoId]);
 
 
   const toggleCompletion = async (topicId) => {

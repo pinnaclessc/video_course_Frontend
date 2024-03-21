@@ -1,35 +1,67 @@
 .noteEditor {
-    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    margin-bottom: 10px;
-    margin: auto;
-  }
-
-  .note-inputbox{
-    border: 1px solid black;
-   
+    padding: 15px;
+    margin-top: 20px; 
   }
   
-.toolbar {
+  .toolbar {
+    border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+    padding-bottom: 5px;
   }
-.toolbar button{
-
-  }
-  .icon {
-    background: none;
+  
+  .toolbar button {
+    background-color: #f5f5f5;
     border: none;
-    font-size: 20px;
+    border-radius: 3px;
     cursor: pointer;
-    padding: 5px;
+    font-size: 14px;
     margin-right: 5px;
+    padding: 5px 10px;
+    outline: none; 
   }
   
-  .icon:hover {
-    background-color: #f0f0f0;
+  .toolbar button:hover, button:focus {
+    background-color: #e6e6e6;
   }
   
-
-.align-left { text-align: left; }
-.align-center { text-align: center; }
-.align-right { text-align: right; }
+  .editorCustomStyle {
+    cursor: text;
+    min-height: 140px; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .linkInputContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .linkInput {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .confirmLinkButton {
+    background-color: #4285f4;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .confirmLinkButton:hover {
+    background-color: #357ae8;
+  }
+  
+  
+  

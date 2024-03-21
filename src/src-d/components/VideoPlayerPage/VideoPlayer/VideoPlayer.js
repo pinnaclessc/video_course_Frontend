@@ -20,7 +20,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
 
-const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible }) => {
+const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible,onVideoProgress }) => {
   const videoRef = useRef(null)
   const { selectedVideoId, videoQuality, onChangeQuality, navigateToNextVideo, navigateToPreviousVideo, videoDetails, setVideoDetails } = useVideo();
 
@@ -234,9 +234,22 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
   // }
 
 
+  // const handleTimeUpdate = () => {
+  //   setCurrentTime(videoRef.current.currentTime)
+  // }
+
+  ///////////if video is 80% completed thn video is completed/////////////////
   const handleTimeUpdate = () => {
-    setCurrentTime(videoRef.current.currentTime)
-  }
+    const currentProgress = videoRef.current.currentTime / videoRef.current.duration;
+    const percentage = currentProgress * 100;
+
+    setCurrentTime(videoRef.current.currentTime);
+
+    // If the video has played 80%, call the onVideoProgress prop
+    if (percentage >= 80) {
+      onVideoProgress?.(true);
+    }
+  };
 
   //Handle Duration
   const formatTime = (videoLengthInSeconds) => {
@@ -465,11 +478,11 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
 
   }, [selectedChapter, selectedTopicIndex]);
   const handleControlClick = (event) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
   };
   return (
     <>
-     <div
+      <div
         id="video-container"
         className={`video-container ${isFullscreen ? 'fullscreen' : ''}`}
         onClick={handleVideoClick}
@@ -492,8 +505,8 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
             onError={handleVideoError}
             quality={videoQuality}
             onClick={handlePlayPause}
-           
-            
+
+
           >
             {videoSource && <source src={videoSource} type="application/x-mpegURL" />}
           </video>
@@ -555,6 +568,7 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
               </button>
             </div>
 
+            {/* Duration*/}
             <div className="duration">
               <span className="current_duration">{currentDuration}</span>/
               <span className="total_duration">{totalDuration}</span>
@@ -584,30 +598,6 @@ const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, is
                 />
               </div>
             </div>
-
-            {/* <div className="fullscreen_container">
-              <button onClick={handleToggleFullScreen} className="fullscreen-button">
-                {isCurrentlyFullScreen ? (
-                  <MdOutlineFullscreenExit size={25} />
-                ) : (
-                  <MdOutlineFullscreen size={25} />
-                )}
-              </button>
-            </div>
-            
-            <div className="expanded_container">
-          <button onClick={handleToggleExpandedMode} className="expanded-mode-button">
-            <CgArrowsH size={25} />
-          </button>
-        </div>
-          </div>
-        </div>
-      </div>
-
-
-    </>
-  )
-} */}
 
             <div className="fullscreen_container">
               <button onClick={handleToggleFullScreen} className="fullscreen-button">
