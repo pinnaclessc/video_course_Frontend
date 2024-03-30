@@ -1,0 +1,23 @@
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .courseItem {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #eef9f9;
+    border-radius: 5px;
+  }
+  
+  .courseLink {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .error, .empty {
+    color: #cc0000;
+    text-align: center;
+  }
+  

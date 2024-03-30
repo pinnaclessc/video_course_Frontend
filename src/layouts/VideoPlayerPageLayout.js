@@ -4,13 +4,16 @@ import VideoPlayer from '../src-d/components/VideoPlayerPage/VideoPlayer/VideoPl
 import Sidebar from '../src-d/components/VideoPlayerPage/VideoPlayer/SideBar';
 import VideoPlayerNavBar from './VideoPlayerNavBar';
 import styles from './VideoPlayerPageLayout.module.css';
-import { Outlet } from 'react-router-dom';
+import { Outlet,useParams } from 'react-router-dom';
 import VideoHeader from './VideoHeader';
 import { useVideo } from '../context/VideoContext';
 
 const apiUrl = 'http://13.200.156.92:8000';
 
 const VideoPlayerPageLayout = () => {
+  const { courseId } = useParams();
+  console.log(courseId);
+  
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const { markVideoAsCompleted } = useVideo();
 
@@ -33,7 +36,6 @@ const VideoPlayerPageLayout = () => {
         <div className={videoPlayerWrapperClass}>
           <VideoPlayer apiUrl={apiUrl} onToggleSidebar={handleToggleSidebar} isSidebarVisible={sidebarVisible} onVideoProgress={handleVideoProgress} />
           <VideoPlayerNavBar sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible} />
-    
           <div className={styles.outletArea}>
           <Outlet />  
         </div>

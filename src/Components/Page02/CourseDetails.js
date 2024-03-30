@@ -8,6 +8,7 @@ import Description from "./Description";
 import ShowMoreButton from "./ShowMoreButton";
 import Cart from "./Cart";
 import Accordion from "../../Accordion/Accordion";
+import ChapterAccordion from "./ChapterAccordion";
 import CourseRating from "../../CourseRating.js/CourseRating";
 import { useParams } from 'react-router-dom';
 export default function CourseDetails(){
@@ -30,13 +31,13 @@ export default function CourseDetails(){
               <div className={styles["Accordion-heading-div"]}>
                 Course content
               </div>
-              <div className={styles["Accordion-bellowHeading-div"]}>
+              {/* <div className={styles["Accordion-bellowHeading-div"]}>
                 <div>46 Sections</div>
                 <div>464 lectures </div>
                 <div>66 h 7 m total length</div>
-              </div>
+              </div> */}
               <div>
-              <Accordion courseId={courseId} />
+              <ChapterAccordion courseId={courseId} />
               </div>
             </div>
             <div className={styles["requirements-div"]}>

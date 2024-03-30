@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useVideo } from '../../../../context/VideoContext';
 import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdOndemandVideo } from "react-icons/md";
-import styles from './Sidebar.module.css';
+import styles from './Sidebar.module.css'
+import {useParams } from 'react-router-dom';
 
 const Sidebar = ({ apiUrl, onClose }) => {
+  
   const { selectedVideoId, setSelectedVideoId, completedVideos } = useVideo();
   const [chapters, setChapters] = useState([]);
   const [activeMenuIds, setActiveMenuIds] = useState([]);
-  const course_id = "65fbf40fc6ed880eb0cd758a";
 
+  // const course_id = "65fbf40fc6ed880eb0cd758a";
+  const { courseId } = useParams();
+  // console.log(courseId);
   // Assume a function to update the completion status is passed via context
   const { markVideoAsCompleted } = useVideo();
 
   useEffect(() => {
     const fetchChapters = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/chapters/course/${course_id}`);
+        const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
         let data = await response.json();
         // After setting chapters:
         if (data.length > 0 && data[0].topics.length > 0) {

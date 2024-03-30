@@ -20,7 +20,7 @@ export default function HoverCart() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://13.200.156.92:8000/cart/${userId}`);
+        const response = await fetch(`http://localhost:8000/vc/cart/${userId}`);
         const data = await response.json();
 
         if (data.success && Array.isArray(data.cartCourses)) {

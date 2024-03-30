@@ -50,14 +50,13 @@ const Cart = () => {
       console.error("Error fetching course details:", error);
     }
   };
-
   const handleShare = () => {
     setIsShare(!isShare);
   };
 
   const handleMonthsChange = (event) => {
-    setSelectedMonths(Number(event.target.value));
-  };
+  setSelectedMonths(Number(event.target.value));
+};
 
   const ApplyCouponHandler = () => {
     setShowCoupon(!showCoupon);
@@ -108,7 +107,7 @@ const Cart = () => {
   
     // Assuming you have the endpoint setup to mark a course as purchased.
     try {
-      const response = await fetch('http://13.200.156.92:8000/purchase-course', {
+      const response = await fetch(`http://localhost:8000/vc/purchase/${userId}/${courseId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +126,7 @@ const Cart = () => {
           icon: "success",
           confirmButtonText: "OK",
         }).then(() => {
-          navigate(`/mylearning/${userId}`);
+          navigate(`/MyLearningPage/${userId}`);
         });
       } else {
     
@@ -145,7 +144,48 @@ const Cart = () => {
   };
   
 
-  const wishlistHandler = () => {};
+  const wishlistHandler =async () => {
+    const auth = localStorage.getItem("user");
+
+    if (!auth) {
+      navigate("/signup");
+
+      return;
+    }
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user ? user._id : null;
+      const courseId = params.id;
+      const response = await fetch(
+        `http://localhost:8000/vc/addToWishlist/${userId}/${courseId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: courseId,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        Swal.fire({
+          title: "Success!",
+          text: "Added in WishList",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        console.error("Failed to purchase course");
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
+  };
   const cartHandler = async () => {
     const auth = localStorage.getItem("user");
 
@@ -159,7 +199,7 @@ const Cart = () => {
       const userId = user ? user._id : null;
       const courseId = params.id;
       const response = await fetch(
-        `http://13.200.156.92:8000/vc/add-to-cart/${userId}/${courseId}`,
+        `http://localhost:8000/vc/addToCart/${userId}/${courseId}`,
         {
           method: "POST",
           headers: {
@@ -204,7 +244,7 @@ const Cart = () => {
             alt="Course2"
             className={styles["image2"]}
             id="cart-image2"
-          />
+            />
         </div>
         <div className={styles.overlay}>
           {/* <div className={styles["video-preview-div"]}>

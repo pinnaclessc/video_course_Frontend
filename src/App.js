@@ -9,7 +9,9 @@ import Language from "./Components/HomePage01/Language/Languages";
 import LoginPage from "./Components/HomePage01/LogIn/LoginPage";
 import SignUpPage from "./Components/HomePage01/SignUpPage/SignUpPage";
 import AddToCart from "./Components/HomePage01/AddToCart/AddToCart";
-import CartPage from "./Components/HomePage01/AddToCart/CartPage";
+// import CartPage from "./Components/HomePage01/AddToCart/CartPage";
+import CartPage from "./Components/HomePage01/Header/CartPage";
+import WishlistPage from "./Components/HomePage01/Header/WishlistPage";
 import PageNotFound from "./PageNotFound/PageNotFound";
 import CartPage02 from "./Components/HomePage01/AddToCart/CartPage02";
 import GiftACourse from "./Components/Page02/GiftACourse/GiftACourse";
@@ -72,6 +74,7 @@ import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
 import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
 import CourseContent from "./src-d/components/VideoPlayerPage/Navigations Components/CourseContent"
 import { VideoProvider } from './context/VideoContext';
+import ChapterAccordion from "./Components/Page02/ChapterAccordion";
 
 
 export default function App() {
@@ -100,7 +103,9 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/cartHover" element={<AddToCart />} />
-          <Route path="/cart" element={<CartPage />} />
+          <Route path="/cartPage" element={<CartPage />} />
+          <Route path="/wishlistPage" element={<WishlistPage />} />
+
           <Route path="/error" element={<PageNotFound />} />
           <Route path="/testcart" element={<CartPage02 />} />
           <Route path="/gitACourse" element={<GiftACourse />} />
@@ -158,6 +163,10 @@ export default function App() {
             <Route path="/myplayer/learning-tool" element={<LearningTools/>} />   
             <Route path="/myplayer/reviews" element={ <Review/>} />  
         </Route>
+        {/* working on that route */}
+        <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route>
+        <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
+        {/* **** */}
         </Routes>
     
         </Router>

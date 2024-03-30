@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation,useParams } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import styles from './VideoPlayerNavBar.module.css';
 
 const VideoPlayerNavBar = ({ sidebarVisible,setSidebarVisible }) => {
+  const{courseId}=useParams();
+  console.log(courseId)
   const location = useLocation();
   const [activeLink, setActiveLink] = useState('');
 

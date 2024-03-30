@@ -11,7 +11,7 @@ export default function Hoverwishlist() {
     const fetchData = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem("user"))._id;
-        const response = await fetch(`http://13.200.156.92:8000/wishlist/${userId}`);
+        const response = await fetch(`http://localhost:8000/vc/wishlist/${userId}`);
         const data = await response.json();
         // Check if the response is successful and contains cartCourses
         if (data.success && Array.isArray(data.cartCourses)){

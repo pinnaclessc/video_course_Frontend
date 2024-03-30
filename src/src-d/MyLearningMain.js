@@ -10,7 +10,7 @@ function MyLearningMain() {
   return (
     <>
     <div className={styles.main_container}>
-    <MyLearning />
+      <MyLearning />
       <FilterComponents />
       <MainContent userId={userId} course_id={course_id} />
       </div>

@@ -1,0 +1,31 @@
+.Chapter-accordion-wrapper{}
+
+.accordion-title {
+    background-color: #f1f1f1;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  .accordion-title:hover,
+  .accordion-title.active {
+    background-color: #ccc;
+  }
+  
+  .accordion-content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f9f9f9;
+  }
+  
+  .accordion-content p,
+  .accordion-content a {
+    margin: 10px 0;
+  }
+  
