@@ -2,6 +2,7 @@ import React from "react"
 import MyLearning from "./components/MyLearningPage/MyLearning"
 import FilterComponents from "./components/BodyContent/FilteringSection/FilterComponent"
 import MainContent from "./components/BodyContent/Main Content/MainContent"
+import Header from "../Components/HomePage01/Header/Header"
 import styles from "./MyLearningMain.module.css"
 import { useParams } from "react-router"
 
@@ -10,6 +11,7 @@ function MyLearningMain() {
   return (
     <>
     <div className={styles.main_container}>
+    <Header/>
       <MyLearning />
       <FilterComponents />
       <MainContent userId={userId} course_id={course_id} />
