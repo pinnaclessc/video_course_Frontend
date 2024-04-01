@@ -83,7 +83,7 @@ function MainContent() {
               <img src={course.hindiCoverImage} alt={course._id} width="95" height="95" />
             <img src={course.englishCoverImage} alt={course._id} width="95" height="95" />
               {/* <Link to={`/mylearning/${userId}/`}> */}
-              <Link to={`/myPlayer/${course._id}`}>
+              <Link to={`/myPlayer/${course._id}/overview`}>
                 <div className={classes.play_icon}><FaPlay size={30} /></div>
               </Link>
             </div>

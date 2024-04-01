@@ -155,7 +155,7 @@ export default function App() {
 {/* //////////////////////////////////////////////////////////////////////////////////// */}
           <Route path="/myplayer" element={<VideoPlayerPageLayout />}>
           <Route path="/myplayer/search" element={<SearchBar />} />
-            <Route path="/myplayer/overview" element={<CourseOverview />} />
+            <Route path="/myplayer/:course_id/overview" element={<CourseOverview />} />
             <Route path="/myplayer/notes" element={<NoteEditor />} />
             <Route path="/myplayer/q&a" element={<QandA/>} />
             <Route path="/myplayer/announcement" element={<Announcements/>} />
