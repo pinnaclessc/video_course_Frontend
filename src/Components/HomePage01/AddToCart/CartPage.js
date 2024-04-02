@@ -10,7 +10,7 @@ export default function CartPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://13.200.156.92:8000/cart/${userId}`);
+        const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/cart/${userId}`);
         const data = await response.json();
         if (data.success && Array.isArray(data.cartCourses)) {
           setCartData(data.cartCourses);
@@ -26,7 +26,7 @@ export default function CartPage() {
   }, [userId]);
   const removeFromCartHandler = async (courseId) => {
     try {
-      const response = await fetch(`http://13.200.156.92:8000/remove-from-cart/${userId}/${courseId}`, {
+      const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/remove-from-cart/${userId}/${courseId}`, {
         method: 'POST',
       });
       const data = await response.json();

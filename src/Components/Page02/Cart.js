@@ -31,7 +31,7 @@ const Cart = () => {
   }, []);
   const getCourseDetails = async () => {
     try {
-      const response = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
+      const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
       if (!response.ok){
         throw new Error(
           `Failed to fetch course details. Status: ${response.status}`
@@ -107,7 +107,7 @@ const Cart = () => {
   
     // Assuming you have the endpoint setup to mark a course as purchased.
     try {
-      const response = await fetch(`http://localhost:8000/vc/purchase/${userId}/${courseId}`, {
+      const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ const Cart = () => {
       const userId = user ? user._id : null;
       const courseId = params.id;
       const response = await fetch(
-        `http://localhost:8000/vc/addToWishlist/${userId}/${courseId}`,
+        `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
         {
           method: "POST",
           headers: {
@@ -199,7 +199,7 @@ const Cart = () => {
       const userId = user ? user._id : null;
       const courseId = params.id;
       const response = await fetch(
-        `http://localhost:8000/vc/addToCart/${userId}/${courseId}`,
+        `https://videocoursebackend.ssccglpinnacle.com/vc/addToCart/${userId}/${courseId}`,
         {
           method: "POST",
           headers: {
@@ -345,7 +345,7 @@ export default Cart;
 //   const getCourseDetails = async () => {
 //     try {
 //       const response = await fetch(
-//         `http://13.200.156.92:8000/course/${params.id}`
+//         `https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`
 //       );
 
 //       if (!response.ok) {
@@ -406,7 +406,7 @@ export default Cart;
 //     try {
 //       const userId = JSON.parse(localStorage.getItem("user"))._id;
 //       const response = await fetch(
-//         `http://13.200.156.92:8000/purchase/${userId}/${params.id}`,
+//         `https://videocoursebackend.ssccglpinnacle.com/purchase/${userId}/${params.id}`,
 //         {
 //           method: "POST",
 //           headers: {
@@ -448,7 +448,7 @@ export default Cart;
 //   try {
 //     const userId = JSON.parse(localStorage.getItem("user"))._id;
 //     const response = await fetch(
-//       `http://13.200.156.92:8000/add-to-cart/${userId}/${params.id}`,
+//       `https://videocoursebackend.ssccglpinnacle.com/add-to-cart/${userId}/${params.id}`,
 
 //       {
 //         method: "POST",
@@ -490,7 +490,7 @@ export default Cart;
 //     try {
 //       const userId = JSON.parse(localStorage.getItem("user"))._id;
 //       const response = await fetch(
-//         `http://13.200.156.92:8000/add-to-wishlist/${userId}/${params.id}`,
+//         `https://videocoursebackend.ssccglpinnacle.com/add-to-wishlist/${userId}/${params.id}`,
 
 //         {
 //           method: "POST",

@@ -94,7 +94,7 @@ const InstructorForm = () => {
       formData.append('instructorName', instructorName);
       formData.append('instructorDescription', htmlContent);
 
-      await axios.post('http://13.200.156.92:8000/upload-image', formData);
+      await axios.post('https://videocoursebackend.ssccglpinnacle.com/upload-image', formData);
 
       Swal.fire({
         icon: 'success',
@@ -249,7 +249,7 @@ export default InstructorForm;
 //       formData.append('instructorName', instructorName);
 //       formData.append('instructorDescription', editorValue);
 
-//       await axios.post('http://13.200.156.92:8000/upload-image', formData);
+//       await axios.post('https://videocoursebackend.ssccglpinnacle.com/upload-image', formData);
 //       Swal.fire({
 //         icon: 'success',
 //         title: 'Instructor Created!',

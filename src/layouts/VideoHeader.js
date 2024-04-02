@@ -4,7 +4,7 @@ import { IoIosShareAlt, IoLogoFacebook, IoLogoTwitter, IoIosMail, IoLogoWhatsapp
 import styles from './VideoHeader.module.css';
 
 const VideoHeader = () => {
-  const apiUrl ="http://localhost:8000/"
+  const apiUrl ="https://videocoursebackend.ssccglpinnacle.com"
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const [error,setError] = useState();
   const [courseDetails,setCourseDetails] = useState()
@@ -19,7 +19,7 @@ const VideoHeader = () => {
   useEffect(() => {
     const fetchCourseDetails = async () => {
       try {
-        const response = await fetch(`${apiUrl}course/${courseId}`);
+        const response = await fetch(`${apiUrl}/course/${courseId}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -33,7 +33,7 @@ const VideoHeader = () => {
     };
   
     fetchCourseDetails();
-  }, [courseId, apiUrl]); // Also, add `apiUrl` to the dependencies array
+  }, [courseId, apiUrl]);
   
   const handleShareClick = () => {
     setShareModalOpen(true);

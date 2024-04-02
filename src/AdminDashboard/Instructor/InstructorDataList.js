@@ -13,7 +13,7 @@ const InstructorDataList = () => {
   useEffect(() => {
     const fetchInstructors = async () => {
       try {
-        const response = await axios.get('http://13.200.156.92:8000/instructors');
+        const response = await axios.get('https://videocoursebackend.ssccglpinnacle.com/instructors');
         setInstructors(response.data.instructors);
       } catch (error) {
         console.error('Error fetching instructors:', error.message);

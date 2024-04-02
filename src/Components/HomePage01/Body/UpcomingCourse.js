@@ -17,7 +17,7 @@ export default function UpcomingCourse() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("http://13.200.156.92:8000/courses")
+    fetch("https://videocoursebackend.ssccglpinnacle.com/courses")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched data:", data);

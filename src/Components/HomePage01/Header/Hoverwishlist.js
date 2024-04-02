@@ -28,7 +28,7 @@ export default function Hoverwishlist() {
       }
 
       try {
-        const response = await axios.get(`http://localhost:8000/vc/cart/${userId}`);
+        const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/vc/cart/${userId}`);
         const data = response.data;
 
         if (data.success && Array.isArray(data.cartCourses)) {
@@ -49,7 +49,7 @@ export default function Hoverwishlist() {
       }
 
       try {
-        const response = await axios.get(`http://localhost:8000/vc/wishlist/${userId}`);
+        const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/vc/wishlist/${userId}`);
         if (response.data.success && response.data.wishlistCourses) {
           const courseIds = response.data.wishlistCourses;
           fetchCourseDetails(courseIds);
@@ -67,7 +67,7 @@ export default function Hoverwishlist() {
       try {
         const details = await Promise.all(
           courseIds.map(async (courseId) => {
-            const response = await axios.get(`http://localhost:8000/course/${courseId}`);
+            const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/course/${courseId}`);
             return response.data;
           })
         );

@@ -12,7 +12,7 @@ export default function Description() {
   }, []); // Dependency array is empty, so this runs once on mount
 
   const getCourseDetails = async () => {
-    let result = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
+    let result = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
     result = await result.json();
     setCourseDetails(result.longDescription);
   };
@@ -43,7 +43,7 @@ export default function Description() {
 //     getCourseDetails();
 //   }, []);
 //     const getCourseDetails = async () => {
-//     let result = await fetch(`http://13.200.156.92:8000/course/${params.id}`);
+//     let result = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
 //     result = await result.json();
 //     setCourseDetails(result.longDescription);
 //   };
