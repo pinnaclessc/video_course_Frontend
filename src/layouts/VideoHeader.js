@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
-import { FaFacebook } from "react-icons/fa6";
+import React, { useState ,useEffect} from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { IoIosShareAlt, IoLogoFacebook, IoLogoTwitter, IoIosMail, IoLogoWhatsapp,IoMdClose } from "react-icons/io";
 import styles from './VideoHeader.module.css';
 
-
 const VideoHeader = () => {
+  const apiUrl ="http://localhost:8000/"
   const [isShareModalOpen, setShareModalOpen] = useState(false);
+  const [error,setError] = useState();
+  const [courseDetails,setCourseDetails] = useState()
   const navigate = useNavigate();
   const { courseId } = useParams();
+  console.log(courseId);
   const totalCourseLength = 30;
   const userProgress = 20;
-  const courseTitle = 'SSC CGL MATHEMATICS';
+  // const courseTitle = 'SSC CGL MATHEMATICS';
   const shareUrl = `https://www.videos.ssccglpinnacle.com/course/${courseId}`;
+
+  useEffect(() => {
+    const fetchCourseDetails = async () => {
+      try {
+        const response = await fetch(`${apiUrl}course/${courseId}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setCourseDetails(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching video details:", error);
+        setError(error.toString());
+      }
+    };
+  
+    fetchCourseDetails();
+  }, [courseId, apiUrl]); // Also, add `apiUrl` to the dependencies array
+  
   const handleShareClick = () => {
     setShareModalOpen(true);
     console.log('Share button clicked');
@@ -33,14 +55,16 @@ const VideoHeader = () => {
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
   };
+
   return (
     <div className={styles.courseHeader}>
       
       <button onClick={() => navigate('/courses')} className={styles.backButton}>
         <img src="https://dgkwgu5olgqh6.cloudfront.net/Image/pinnacleWhiteLogo.png" alt="Back to courses" />
       </button>
+      {/* <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.title : 'Loading...'}</h1> */}
 
-      <h1 className={styles.courseTitle}>{courseTitle}</h1>
+      <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.title: "Loading...."}</h1>
 
       <div className={styles.progressContainer}>
         <progress className={styles.videoContentProgress} value={userProgress} max={totalCourseLength}></progress>

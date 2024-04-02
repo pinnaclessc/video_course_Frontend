@@ -11,9 +11,9 @@ function VideoUploadForm() {
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isUploading, setIsUploading] = useState(false);
     const fileInputRef = useRef(null);
-
+    
     useEffect(() => {
-        axios.get('http://localhost:8000/courses')
+        axios.get('https://videocoursebackend.ssccglpinnacle.com/courses')
             .then(response => {
                 setCourses(response.data);
             })
@@ -66,7 +66,7 @@ function VideoUploadForm() {
         });
 
         try {
-            await axios.post('http://localhost:8000/upload', formData, {
+            await axios.post('https://videocoursebackend.ssccglpinnacle.com/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

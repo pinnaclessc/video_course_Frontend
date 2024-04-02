@@ -16,6 +16,7 @@ function SearchBar() {
                     id="product-search"
                     placeholder="Search For Anything"
                 />
+                
             </div>
         </div>
     );

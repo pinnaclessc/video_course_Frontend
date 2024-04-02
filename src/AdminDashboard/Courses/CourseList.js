@@ -10,7 +10,7 @@ const CourseList = () => {
     const [coursesPerPage] = useState(10);
 
     useEffect(() => {
-        axios.get('http://13.200.156.92:8000/courses')
+        axios.get('https://videocoursebackend.ssccglpinnacle.com/courses')
             .then(response => {
                 setCourses(response.data);
                 setLoading(false);

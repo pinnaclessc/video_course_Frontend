@@ -30,14 +30,14 @@ const CourseForm = () => {
   useEffect(() => {
     const fetchCategoriesAndInstructors = async () => {
       try {
-        const categoryResponse = await axios.get('http://13.200.156.92:8000/categories');
+        const categoryResponse = await axios.get('https://videocoursebackend.ssccglpinnacle.com/categories');
         setCategories(categoryResponse.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
 
       try {
-        const instructorResponse = await axios.get('http://13.200.156.92:8000/instructors');
+        const instructorResponse = await axios.get('https://videocoursebackend.ssccglpinnacle.com/instructors');
         setInstructors(instructorResponse.data.instructors || []);
       } catch (error) {
         console.error('Error fetching instructors:', error);
@@ -117,7 +117,7 @@ const CourseForm = () => {
     });
 
     try {
-      await axios.post('http://13.200.156.92:8000/create-course', formData, {
+      await axios.post('https://videocoursebackend.ssccglpinnacle.com/create-course', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
