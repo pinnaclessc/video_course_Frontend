@@ -183,11 +183,11 @@ export default function Header() {
           </div>
           <div
             className={classes["wishlist-icon"]}
-            onClick={() => navigate("/cart")}
+            onClick={() => navigate("/wishlistPage")}
           >
             <Hoverwishlist size={35} />
           </div>
-          <div className={classes.cart_icone} onClick={() => navigate("/cart")}>
+          <div className={classes.cart_icone} onClick={() => navigate("/cartPage")}>
             <HoverCart size={35} />
           </div>
           <Account className={classes["Account-div"]} />

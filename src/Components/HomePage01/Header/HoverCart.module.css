@@ -143,14 +143,12 @@
   
   .GoToCart-btn{
     background-color:#48448C;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-left: 1rem;
-    width:90%;
+    margin: auto;
+    width:80%;
     font-size: 14px;
-    line-height: 40px;
     color:white;
     font-weight: bold;
+    text-align: center;
   }
   
   

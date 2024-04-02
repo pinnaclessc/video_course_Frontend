@@ -82,7 +82,7 @@ export default function App() {
     <>
        <VideoProvider>
       <Router>
-        <Timer/>
+        {/* <Timer/> */}
         {/* <Header /> */}
         <Routes>
         <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
@@ -105,7 +105,6 @@ export default function App() {
           <Route path="/cartHover" element={<AddToCart />} />
           <Route path="/cartPage" element={<CartPage />} />
           <Route path="/wishlistPage" element={<WishlistPage />} />
-
           <Route path="/error" element={<PageNotFound />} />
           <Route path="/testcart" element={<CartPage02 />} />
           <Route path="/gitACourse" element={<GiftACourse />} />

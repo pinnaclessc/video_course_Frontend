@@ -1,23 +1,95 @@
-.container {
-    max-width: 600px;
-    margin: 20px auto;
+.cartContainer {
+    width: 80%;
+    margin: auto;
     padding: 20px;
   }
   
-  .courseItem {
-    margin: 10px 0;
+  .courseContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .courseCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: calc(33.333% - 20px);
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .courseCard:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+
+  .courseImageContainer {
+    display: flex;
+    justify-content: space-around;
     padding: 10px;
     background-color: #f9f9f9;
-    border-radius: 5px;
   }
   
-  .courseLink {
+  .coverImage {
+    width: 48%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 5px;
+  }
+  
+  .courseDetails {
+    padding: 10px;
+  }
+  
+  .courseTitle {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+  
+  .courseInstructor {
+    color: #666;
+    font-size: 1em;
+  }
+  
+  .courseMeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em;
+  }
+  
+  .rating {
+    color: #ffd700;
+  }
+  
+  .priceSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .monthSelector {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .price {
+    font-size: 1.1em;
+    font-weight: bold;
     color: #333;
-    text-decoration: none;
   }
   
-  .error, .empty {
-    color: #cc0000;
-    text-align: center;
+  .totalPriceSection {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 1.4em;
+    font-weight: bold;
   }
+  
   

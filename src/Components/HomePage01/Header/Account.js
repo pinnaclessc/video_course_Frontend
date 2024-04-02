@@ -85,10 +85,10 @@ function Account()
             <Link to={`/MyLearningPage/${userId}`}>
               <li className={classes.list1}>My learning</li>
             </Link>
-              <Link to="/mylearning/cart">
+              <Link to="/cartPage">
                 <li className={classes.list1}>My Cart</li>
               </Link>
-              <Link to="/mylearning/wishlist">
+              <Link to="/wishlistPage">
                 <li className={classes.list1}>Wishlist</li>
               </Link>
             </ul>

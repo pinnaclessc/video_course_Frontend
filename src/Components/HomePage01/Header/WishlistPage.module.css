@@ -1,23 +1,202 @@
-.container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-  }
-  
-  .courseItem {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #eef9f9;
-    border-radius: 5px;
-  }
-  
-  .courseLink {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .error, .empty {
-    color: #cc0000;
-    text-align: center;
-  }
-  
+.wishlistContainer {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.wishlistHeader {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.courseCard {
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+
+.courseImageContainer {
+  width: 100%;
+  height: 140px; /* Maintain the container height */
+  background-color: #f9f9f9;
+  display: flex; /* Use flexbox to place images side by side */
+  justify-content: space-between; /* Space the images evenly */
+  overflow: hidden; /* Ensure images don't overflow the container */
+}
+
+.coverImage {                                                                                                                                                                                  
+  width: 50%; /* Each image takes up half of the container width */
+  height: 100%; /* Images fill the container height */
+  object-fit: cover; /* Cover ensures the aspect ratio is maintained */
+}
+
+
+.courseContent {
+  padding: 15px;
+}
+
+.courseTitle {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.courseInstructor {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.courseRating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.ratingValue {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.ratingCount {
+  margin-left: 8px;
+  color: #999;
+}
+
+.courseMeta {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.totalHours {
+  margin-right: 5px;
+}
+
+.lectureCount {
+  font-style: italic;
+}
+
+.coursePriceSection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.currentPrice {
+  font-size: 22px;
+  color: #e91e63;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.originalPrice {
+  font-size: 16px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.bestsellerTag {
+  background-color: #ffc107;
+  color: #fff;
+  padding: 3px 7px;
+  font-size: 12px;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: -1px;
+  transform: translateX(-50%);
+}
+
+.wishlistHeart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #ff4081;
+  cursor: pointer;
+}
+
+.loading {
+  text-align: center;
+}
+
+.error {
+  color: #ff1744;
+  text-align: center;
+}
+
+.empty {
+  text-align: center;
+}
+
+.monthsSelector {
+  margin: 0.5rem 0;
+  padding: 0.25rem;
+}
+
+.totalPriceSection {
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: right;
+  font-size: 1.25rem;
+  border-top: 1px solid #e1e1e1;
+}
+
+
+
+/* .wishlistContainer {
+  padding: 20px;
+}
+
+.wishlistItem {
+  border: 1px solid red;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  width: 20%;
+  display: flex;
+}
+
+.imageSection {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  border: 1px solid;
+}
+
+.coverImage {
+  width: calc(50% - 10px);
+  height: auto;
+  border-radius: 4px;
+}
+
+.courseInfo {
+  text-align: center;
+}
+
+.courseTitle {
+  font-size: 20px;
+  color: #333;
+}
+
+.instructorName {
+  font-size: 16px;
+  color: #666;
+}
+
+.courseReview {
+  font-size: 14px;
+  color: #999;
+}
+
+.wishlistError, .empty {
+  text-align: center;
+  color: red;
+} */
