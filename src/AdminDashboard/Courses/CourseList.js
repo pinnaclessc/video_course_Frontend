@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './CourseList.module.css';
+import { Link } from 'react-router-dom';
 
 const CourseList = () => {
     const [courses, setCourses] = useState([]);
@@ -22,6 +23,48 @@ const CourseList = () => {
             });
     }, []);
 
+    const searchHandler = async (event) => {
+        let key = event.target.value;
+        if (!key) {
+          setLoading(true);
+          // Reload the courses if the search key is cleared
+          fetch("https://videocoursebackend.ssccglpinnacle.com/courses")
+            .then((response) => response.json())
+            .then((data) => {
+              if (Array.isArray(data)) {
+                setCourses(data);
+              } else {
+                setCourses([]);
+              }
+            })
+            .catch((error) => console.error("Error fetching courses:", error))
+            .finally(() => setLoading(false));
+        } else {
+          let result = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/course-search/${key}`);
+          result = await result.json();
+          if (Array.isArray(result)) {
+            setCourses(result);
+          } else {
+            console.error("Search result is not an array:", result);
+          }
+        }
+      };
+      const deleteHandler = async (id) => {
+        const confirm = window.confirm("Are you sure you want to delete this course?");
+        if (confirm) {
+          try {
+            let response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${id}`, { method: "DELETE" });
+            if (response.ok) {
+              setCourses(courses.filter(course => course._id !== id)); // Optimistically remove the course from UI
+            } else {
+            alert("Failed to delete the course.");
+            }
+          } catch (error) {
+            console.error("Error deleting course:", error);
+          }
+        }
+      };
+
     // Calculate the currently displayed courses
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
@@ -29,10 +72,11 @@ const CourseList = () => {
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
     return (
         <div className={styles.courseListContainer}>
-            <h4>Course List</h4>
+        <div className={styles["AllCourses-searchbar-div"]}>
+        <input type='text' placeholder='Search for Courses' className={styles["AllCourses-searchbar"]} onChange={searchHandler}/>
+        </div>
             {loading && <p>Loading...</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <table className={styles.courseTable}>
@@ -43,7 +87,8 @@ const CourseList = () => {
                         <th>Instructor Name</th>
                         <th>Price</th>
                         <th>MRP</th>
-                        <th>Timestamp</th>
+                        <th>Actions</th>
+                        {/* <th>Timestamp</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +100,11 @@ const CourseList = () => {
                                 <td>{course.instructorName}</td>
                                 <td>{course.price}</td>
                                 <td>{course.mrp}</td>
-                                <td>{new Date(course.created_at).toLocaleString()}</td>
+                                <td>
+                <button onClick={() => deleteHandler(course._id)} className={styles["AllCourses-DeleteBTN"]}>Delete</button>
+                <Link to={`/ucf/${course._id}`} className={styles["AllCourses-editLink"]}>Edit</Link>
+              </td>
+                                {/* <td>{new Date(course.created_at).toLocaleString()}</td> */}
                             </tr>
                         ))
                     ) : (

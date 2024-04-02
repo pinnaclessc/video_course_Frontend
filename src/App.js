@@ -75,6 +75,7 @@ import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
 import CourseContent from "./src-d/components/VideoPlayerPage/Navigations Components/CourseContent"
 import { VideoProvider } from './context/VideoContext';
 import ChapterAccordion from "./Components/Page02/ChapterAccordion";
+import UpdateCourseForm from "./Admin/Pages/UpdateCourseForm";
 
 
 export default function App() {
@@ -165,6 +166,8 @@ export default function App() {
         {/* working on that route */}
         <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route>
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
+        <Route path="/ucf/:courseId" element={<UpdateCourseForm />}></Route>
+        
         {/* **** */}
         </Routes>
     

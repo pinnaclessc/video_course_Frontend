@@ -12,7 +12,8 @@ const LoginPage = () => {
     event.preventDefault();
   
     try {
-      let result = await fetch("https://13.200.156.92:8000/vc/login", {
+      let result = await fetch("http://localhost:8000/vc/login", {
+    
         method: "post",
         body: JSON.stringify({ email, password }),
         headers: { "Content-Type": "application/json" },
