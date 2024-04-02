@@ -8,7 +8,7 @@ function AccountHelp() {
         <ul className={classes.unordered_list}>
           <li className={classes.ordered_list}>Back to Pinnacle</li>
           <li className={classes.ordered_list1}>
-            <img
+            <img alt=""
               className={classes.header_img}
               src="/images/Pinnacle logo colored.svg"
             />

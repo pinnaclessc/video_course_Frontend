@@ -12,12 +12,7 @@ const LoginPage = () => {
     event.preventDefault();
   
     try {
-<<<<<<< HEAD
-      let result = await fetch("http://localhost:8000/vc/login", {
-    
-=======
       let result = await fetch("https://videocoursebackend.ssccglpinnacle.com/vc/login", {
->>>>>>> a912f2c8d82cf313c08857264e871cf7315855a4
         method: "post",
         body: JSON.stringify({ email, password }),
         headers: { "Content-Type": "application/json" },
