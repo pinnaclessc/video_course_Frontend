@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "./TearmAndCondition.module.css";
+import Styles from "./TermsAndCondition.module.css";
 
 export default function TearmAndCondition() {
   return (

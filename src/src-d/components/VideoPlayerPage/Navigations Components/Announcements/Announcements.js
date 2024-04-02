@@ -10,7 +10,7 @@ export default function Announcements() {
           <img
             alt="instructor"
             className={classes.instructor_image}
-            src="/images/Baljitsir_image.png"
+            src=""
           />
         </div>
 

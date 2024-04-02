@@ -1,14 +1,12 @@
 import React, { useState, useRef, useEffect } from "react"
 import "./VideoPlayer.css"
-import { Link, Outlet } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { BsArrowCounterclockwise, BsArrowClockwise } from "react-icons/bs"
-import { AiOutlineSearch } from "react-icons/ai"
 import { CgArrowsH } from "react-icons/cg"
 import {
   MdEditNote,
   MdOutlineFullscreenExit,
   MdOutlineFullscreen,
-
 } from "react-icons/md"
 import { FaPause, FaPlay, FaSpinner } from "react-icons/fa"
 import PlayRateButtons from "./PlayRateButttons"
@@ -20,7 +18,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
 
-const VideoPlayer = ({ apiUrl = 'http://13.200.156.92:8000', onToggleSidebar, isSidebarVisible,onVideoProgress }) => {
+const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com', onToggleSidebar, isSidebarVisible,onVideoProgress }) => {
   const videoRef = useRef(null)
   const { selectedVideoId, videoQuality, onChangeQuality, navigateToNextVideo, navigateToPreviousVideo, videoDetails, setVideoDetails, markVideoAsCompleted } = useVideo();
   const [error, setError] = useState(false)

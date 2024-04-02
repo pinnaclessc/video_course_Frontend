@@ -3,30 +3,31 @@ import { useVideo } from '../../../../context/VideoContext';
 import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdOndemandVideo } from "react-icons/md";
 import styles from './Sidebar.module.css'
-import {useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const Sidebar = ({ apiUrl, onClose }) => {
-  
+
   const { selectedVideoId, setSelectedVideoId, completedVideos } = useVideo();
   const [chapters, setChapters] = useState([]);
   const [activeMenuIds, setActiveMenuIds] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // const course_id = "65fbf40fc6ed880eb0cd758a";
   const { courseId } = useParams();
-  // console.log(courseId);
-  // Assume a function to update the completion status is passed via context
+
   const { markVideoAsCompleted } = useVideo();
 
   useEffect(() => {
     const fetchChapters = async () => {
       try {
         const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
+        setIsLoading(true);
         let data = await response.json();
         // After setting chapters:
         if (data.length > 0 && data[0].topics.length > 0) {
           const firstVideoId = data[0].topics[0].selectedVideo;
           setSelectedVideoId(firstVideoId);
         }
+
         // Fetch durations for all videos in the chapters
         const videoIds = data.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
         const uniqueVideoIds = [...new Set(videoIds)];
@@ -54,6 +55,9 @@ const Sidebar = ({ apiUrl, onClose }) => {
       } catch (error) {
         console.error("Failed to fetch chapters or video details:", error);
       }
+      finally {
+        setIsLoading(false);
+      }
     };
 
     fetchChapters();
@@ -61,10 +65,8 @@ const Sidebar = ({ apiUrl, onClose }) => {
 
   const toggleCompletion = async (topicId, selectedVideo) => {
     const isCompleted = completedVideos[selectedVideo];
-    markVideoAsCompleted(selectedVideo, !isCompleted); // Toggle the completion status
+    markVideoAsCompleted(selectedVideo, !isCompleted);
   };
-  
-
 
   const toggleChapter = (chapterId) => {
     setActiveMenuIds(currentIds =>
@@ -92,21 +94,8 @@ const Sidebar = ({ apiUrl, onClose }) => {
     return `${completedCount} / ${topics.length}`;
   };
 
-  const adjustTopicCounts = (chaptersData) => {
-    return chaptersData.map((chapter, index) => {
-      // Ensure each chapter has at least `index + 1` topics, for demonstration.
-      // This is purely for demonstration; in a real application, data should likely not be manipulated like this.
-      let additionalTopicsNeeded = index + 1 - chapter.topics.length;
-      while (additionalTopicsNeeded > 0) {
-        // Duplicate the first topic to increase the count, or create new mock topics as needed.
-        // This is a simplistic approach; adjust according to your real data structure and needs.
-        chapter.topics.push({ ...chapter.topics[0], _id: `${chapter.topics[0]._id}_${additionalTopicsNeeded}` });
-        additionalTopicsNeeded--;
-      }
-      return chapter;
-    });
-  };
   
+
 
   return (
     <div className={styles.sidebar}>
@@ -114,6 +103,9 @@ const Sidebar = ({ apiUrl, onClose }) => {
         <h3>Course Content</h3>
         <RiCloseLine size={24} onClick={onClose} className={styles.closeIcon} />
       </div>
+      {isLoading ? (
+      <div className={styles.loader}></div> // Display the loader when data is being fetched
+    ) : (
       <div className={styles.content}>
         {chapters.map((chapter) => (
           <div key={chapter._id} className={styles.accordion}>
@@ -171,6 +163,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
           </div>
         ))}
       </div>
+    )}
     </div>
   );
 };

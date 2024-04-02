@@ -89,7 +89,7 @@ export default function ExploreMore() {
     const scrollRef = useRef(null);
   
     useEffect(() => {
-      fetch("http://13.200.156.92:8000/courses/ssc")
+      fetch("https://videocoursebackend.ssccglpinnacle.com/courses/ssc")
         .then((response) => response.json())
         .then((data) => {
           console.log("Fetched data:", data);

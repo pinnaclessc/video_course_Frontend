@@ -21,34 +21,34 @@ const VideoPlayerNavBar = ({ sidebarVisible,setSidebarVisible }) => {
   return (
     <>
     <div className={styles.videoNavbar}>
-      <Link to="/myplayer/search" className={`${styles.navlinks} ${activeLink === '/myplayer/search' ? styles.active : ''}`}>
+      <Link to="#search" className={`${styles.navlinks} ${activeLink === '#search' ? styles.active : ''}`}>
         <AiOutlineSearch size={25} />
       </Link>
       {!sidebarVisible && (
         <Link
-        to="/myplayer/coursesContent"
+        to="#coursesContent"
        
-        className={`${styles.navlinks} ${activeLink === '/myplayer/coursescontent' ? styles.active : ''}`}
+        className={`${styles.navlinks} ${activeLink === '#coursescontent' ? styles.active : ''}`}
       >
         Course Content
       </Link>
       )}
-      <Link to="/myplayer/overview" className={`${styles.navlinks} ${activeLink === '/myplayer/overview' ? styles.active : ''}`}>
+      <Link to="#overview" className={`${styles.navlinks} ${activeLink === '#overview' ? styles.active : ''}`}>
         Overview
       </Link>
-      <Link to="/myplayer/q&a" className={`${styles.navlinks} ${activeLink === '/myplayer/q&a' ? styles.active : ''}`}>
+      <Link to="#q&a" className={`${styles.navlinks} ${activeLink === '#q&a' ? styles.active : ''}`}>
         Q&A
       </Link>
-      <Link to="/myplayer/notes" className={`${styles.navlinks} ${activeLink === '/myplayer/notes' ? styles.active : ''}`}>
+      <Link to="#notes" className={`${styles.navlinks} ${activeLink === '#notes' ? styles.active : ''}`}>
         Notes
       </Link>
-      <Link to="/myplayer/announcement" className={`${styles.navlinks} ${activeLink === '/myplayer/announcement' ? styles.active : ''}`}>
+      <Link to="#announcement" className={`${styles.navlinks} ${activeLink === '#announcement' ? styles.active : ''}`}>
         Announcement
       </Link>
-      <Link to="/myplayer/reviews" className={`${styles.navlinks} ${activeLink === '/myplayer/reviews' ? styles.active : ''}`}>
+      <Link to="#reviews" className={`${styles.navlinks} ${activeLink === '#reviews' ? styles.active : ''}`}>
         Reviews
       </Link>
-      <Link to="/myplayer/learningtools" className={`${styles.navlinks} ${activeLink === '/myplayer/learningtools' ? styles.active : ''}`}>
+      <Link to="#learningtools" className={`${styles.navlinks} ${activeLink === '#learningtools' ? styles.active : ''}`}>
         Learning Tools
       </Link>
     </div>

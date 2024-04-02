@@ -65,7 +65,7 @@ function WishlistPage() {
 
       try {
         const response = await axios.get(
-          `http://localhost:8000/vc/wishlist/${userId}`
+          `https://videocoursebackend.ssccglpinnacle.com/vc/wishlist/${userId}`
         );
         if (response.data.success && response.data.wishlistCourses) {
           const courseIds = response.data.wishlistCourses;
@@ -85,7 +85,7 @@ function WishlistPage() {
         const details = await Promise.all(
           courseIds.map(async (courseId) => {
             const response = await axios.get(
-              `http://localhost:8000/course/${courseId}`
+              `https://videocoursebackend.ssccglpinnacle.com/course/${courseId}`
             );
             return response.data;
           })

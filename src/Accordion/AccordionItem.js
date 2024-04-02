@@ -10,7 +10,7 @@ const AccordionItem = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/chapters/course/${course_id}`);
+        const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/chapters/course/${course_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

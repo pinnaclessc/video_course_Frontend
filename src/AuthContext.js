@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(null);
 
   const login = (userData) => {
-    setUsername(userData.username); // Assuming the username property exists in userData
+    setUsername(userData.username); 
     localStorage.setItem("username", userData.username);
   };
 

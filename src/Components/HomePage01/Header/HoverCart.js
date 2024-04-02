@@ -47,7 +47,7 @@ export default function HoverCart() {
       }
 
       try {
-        const response = await axios.get(`http://localhost:8000/vc/cart/${userId}`);
+        const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/vc/cart/${userId}`);
         if (response.data.success && response.data.addToCart) {
           const courseIds = response.data.addToCart;
           fetchCourseDetails(courseIds);
@@ -65,7 +65,7 @@ export default function HoverCart() {
       try {
         const details = await Promise.all(
           courseIds.map(async (courseId) => {
-            const response = await axios.get(`http://localhost:8000/course/${courseId}`);
+            const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/course/${courseId}`);
             return response.data;
           })
         );

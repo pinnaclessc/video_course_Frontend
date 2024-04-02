@@ -10,7 +10,7 @@ const PdfUploadForm = () => {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/courses')
+    fetch('https://videocoursebackend.ssccglpinnacle.com/courses')
       .then(response => response.json())
       .then(data => setCourses(data))
       .catch(error => console.error('Error fetching courses:', error));
@@ -34,7 +34,7 @@ const PdfUploadForm = () => {
         formData.append('pdf', file);
         formData.append('courseId', selectedCourseId);
 
-        const response = await fetch('http://localhost:8000/api/upload-pdf', {
+        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/api/upload-pdf', {
           method: 'POST',
           body: formData,
         });

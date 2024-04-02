@@ -12,7 +12,7 @@ const ChapterAccordion = () => {
   useEffect(() => {
     const fetchChapters = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/chapters/course/65d5c59aca321455979ee32d`);
+        const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/api/chapters/course/65d5c59aca321455979ee32d`);
         // const response = await axios.get(`http://localhost:8000/api/chapters/course/${courseId}`);
         setChapters(response.data);
         console.log(response.data);

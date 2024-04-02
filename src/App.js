@@ -28,7 +28,7 @@ import AboutUs from "./AboutUs/AboutUs";
 import ContectUs from "./Contect us/ContectUs";
 import PrivacyPolicy from "./Privacy Policy/PrivacyPolicy";
 import RefundPolicy from "./Refund Policy/RefundPolicy";
-import TearmAndCondition from "./TearmsAndCondition/TearmAndCondition";
+import TermAndCondition from "./TermsAndCondition/TermsAndCondition";
 import CourseRating from "./CourseRating.js/CourseRating";
 import ReportAbousenew from "./ReportAbouse/ReportAbouse";
 import AddCourse from "./Admin/Pages/AddCourse";
@@ -121,7 +121,7 @@ export default function App() {
           <Route path="/contectus" element={<ContectUs />} />
           <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
           <Route path="/refundPolicy" element={<RefundPolicy />} />
-          <Route path="/TearmAndCondition" element={<TearmAndCondition />} />
+          <Route path="/TermAndCondition" element={<TermAndCondition />} />
           <Route path="/CourseRating" element={<CourseRating />} />
           <Route path="/reportAbouse" element={<ReportAbousenew />} />
           <Route path="/exploreByCategory" element={<ExplorCategory />} />
@@ -152,18 +152,10 @@ export default function App() {
           <Route path="/troubleshooting" element={<TroubleshootingHelp />}/>
           <Route path="/edit-chapter" element={<EditChapterForm/>}/>
 {/* //////////////////////////////////////////////////////////////////////////////////// */}
-          <Route path="/myplayer" element={<VideoPlayerPageLayout />}>
-          <Route path="/myplayer/search" element={<SearchBar />} />
-            <Route path="/myplayer/:course_id/overview" element={<CourseOverview />} />
-            <Route path="/myplayer/notes" element={<NoteEditor />} />
-            <Route path="/myplayer/q&a" element={<QandA/>} />
-            <Route path="/myplayer/announcement" element={<Announcements/>} />
-            <Route path="/myplayer/coursesContent" element={<CourseContent/>} />
-            <Route path="/myplayer/learning-tool" element={<LearningTools/>} />   
-            <Route path="/myplayer/reviews" element={ <Review/>} />  
-        </Route>
+          <Route path="/myplayer/:courseId" element={<VideoPlayerPageLayout />}/>
+        
         {/* working on that route */}
-        <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route>
+        {/* <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route> */}
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
         {/* **** */}
         </Routes>
