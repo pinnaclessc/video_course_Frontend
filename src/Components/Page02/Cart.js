@@ -7,6 +7,7 @@ import ApplyCoupon from "./ApplyCoupon";
 import Share from "./ShareComponent/Share";
 import { IoHeartCircleOutline } from "react-icons/io5";
 import { FaCartPlus } from "react-icons/fa";
+import Payment from "./Payment";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -280,9 +281,9 @@ const Cart = () => {
 
           <button
             className={styles["Buy-this-course"]}
-            onClick={buycouseHandler}
+            // onClick={buycouseHandler}
           >
-            Buy this course
+           <Payment/>
           </button>
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
