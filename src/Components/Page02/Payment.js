@@ -22,7 +22,7 @@ const Payment = ({ user, subtotal }) => {
 
   const createOrder = async () => {
     try {
-      const response = await fetch("http://localhost:8000/payment-for-upi", {
+      const response = await fetch("https://videocoursebackend.ssccglpinnacle.com/payment-for-upi", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,8 +69,6 @@ const Payment = ({ user, subtotal }) => {
 
   return (
     <div onClick={payMe}>
-      {/* <BsCart2 size={30} className="cart-svg-bottom" />
-      Check out */}
       Buy This Course
     </div>
   );
