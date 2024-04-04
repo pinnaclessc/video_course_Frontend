@@ -179,6 +179,49 @@ const Cart = () => {
       console.error("Error during purchase:", error);
     }
   };
+  const buycouseHandler = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user ? user._id : null;
+    const courseId = params.id;
+    const finalPrice = getPrice();
+  
+    // Assuming you have the endpoint setup to mark a course as purchased.
+    try {
+      const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          courseId,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+      
+        Swal.fire({
+          title: "Success!",
+          text: "Course purchased successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate(`/MyLearningPage/${userId}`);
+        });
+      } else {
+    
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to purchase course",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+     
+    }
+  };
 
 
   return (
@@ -230,12 +273,18 @@ const Cart = () => {
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
 
-          <Payment 
+          {/* <Payment 
         user={user} 
         courseId={id} 
         finalPrice={getPrice()} 
         onPaymentSuccess={onPaymentSuccess} 
-      />
+      /> */}
+                <button
+            className={styles["Buy-this-course"]}
+            onClick={buycouseHandler}
+          >
+            Buy this course
+          </button>
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
@@ -377,49 +426,49 @@ export default Cart;
 //   //   console.log("Price: ₹", finalPrice);
 //   // };
 
-//   const buycouseHandler = async () => {
-//     const user = JSON.parse(localStorage.getItem("user"));
-//     const userId = user ? user._id : null;
-//     const courseId = params.id;
-//     const finalPrice = getPrice();
+  // const buycouseHandler = async () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   const userId = user ? user._id : null;
+  //   const courseId = params.id;
+  //   const finalPrice = getPrice();
   
-//     // Assuming you have the endpoint setup to mark a course as purchased.
-//     try {
-//       const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           userId,
-//           courseId,
-//         }),
-//       });
-//       const data = await response.json();
-//       if (data.success) {
+  //   // Assuming you have the endpoint setup to mark a course as purchased.
+  //   try {
+  //     const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         userId,
+  //         courseId,
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     if (data.success) {
       
-//         Swal.fire({
-//           title: "Success!",
-//           text: "Course purchased successfully",
-//           icon: "success",
-//           confirmButtonText: "OK",
-//         }).then(() => {
-//           navigate(`/MyLearningPage/${userId}`);
-//         });
-//       } else {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Course purchased successfully",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       }).then(() => {
+  //         navigate(`/MyLearningPage/${userId}`);
+  //       });
+  //     } else {
     
-//         Swal.fire({
-//           title: "Error!",
-//           text: "Failed to purchase course",
-//           icon: "error",
-//           confirmButtonText: "OK",
-//         });
-//       }
-//     } catch (error) {
-//       console.error("Error during purchase:", error);
+  //       Swal.fire({
+  //         title: "Error!",
+  //         text: "Failed to purchase course",
+  //         icon: "error",
+  //         confirmButtonText: "OK",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
      
-//     }
-//   };
+  //   }
+  // };
   
 
   // const wishlistHandler =async () => {
