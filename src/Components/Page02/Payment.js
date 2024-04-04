@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { load } from "@cashfreepayments/cashfree-js";
-import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
   const [cashfree, setCashfree] = useState(null);
@@ -47,46 +47,21 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
     }
   };
 
-  const buyCourseHandler = async (paymentResponse) => {
-    // Use paymentResponse to get any details required for verification before proceeding
-    try {
-      const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${user._id}/${courseId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: user._id,
-          courseId,
-        }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        onPaymentSuccess(); // Call the onPaymentSuccess callback
-      } else {
-        Swal.fire({
-          title: "Error!",
-          text: "Failed to purchase course",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-      }
-    } catch (error) {
-      console.error("Error during purchase:", error);
-    }
-  };
-
   const doPayment = (sessionId) => {
     if (cashfree) {
       cashfree.checkout({
         paymentSessionId: sessionId,
         redirectTarget: "_self",
       }).then((response) => {
-        if (response.paymentStatus === 'SUCCESS') {
-          buyCourseHandler(response);
+        if (response.status === 'OK') { // Check if the response contains the status and is 'OK' for a successful payment
+          onPaymentSuccess();
         } else {
-          console.error("Payment failed:", response);
-          // Optionally show an error message to the user
+          Swal.fire({
+            title: "Payment Failed",
+            text: "Your payment was not successful, please try again.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         }
       }).catch((error) => {
         console.error("Payment process error:", error);
@@ -104,6 +79,7 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
 };
 
 export default Payment;
+
 
 
 
