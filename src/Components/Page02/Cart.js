@@ -273,18 +273,18 @@ const Cart = () => {
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
 
-          {/* <Payment 
+          <Payment 
         user={user} 
         courseId={id} 
         finalPrice={getPrice()} 
         onPaymentSuccess={onPaymentSuccess} 
-      /> */}
-                <button
+      />
+                {/* <button
             className={styles["Buy-this-course"]}
             onClick={buycouseHandler}
           >
             Buy this course
-          </button>
+          </button> */}
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
