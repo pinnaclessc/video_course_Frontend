@@ -63,5 +63,25 @@
     background-color: #357ae8;
   }
   
+  .saveButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .saveButton:hover {
+    background-color: #45a049;
+  }
+  
+  .saveButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
   
   

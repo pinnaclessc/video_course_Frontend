@@ -1,5 +1,5 @@
 import React from "react"
-// import { BiSolidStar } from "react-icons/bi"
+import { BiSolidStar } from "react-icons/bi"
 import styles from "./StarRating.module.css"
 
 const StarRating = ({ onClick, filledStars }) => {
@@ -20,11 +20,11 @@ const StarRating = ({ onClick, filledStars }) => {
               className={styles.star}
               onClick={() => handleStarClick(starValue)}
             >
-              {/* <BiSolidStar
+              <BiSolidStar
                 size={20}
                 color={starValue <= filledStars ? "#f1c40f" : "#d1d7dc"}
-              /> */}
-              Star
+              />
+              {/* Star */}
             </label>
           )
         })}

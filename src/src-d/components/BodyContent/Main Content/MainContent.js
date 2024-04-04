@@ -22,7 +22,7 @@ function MainContent() {
         if (!userId) {
           throw new Error('User ID not found in URL parameters.');
         }
-        const response = await axios.get(`http://localhost:8000/vc/purchasedCourses/${userId}`);
+        const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/vc/purchasedCourses/${userId}`);
         console.log('Purchased Courses:', response.data.purchasedCourses);
         fetchCourseDetails(response.data.purchasedCourses);
       } catch (error) {
@@ -33,7 +33,7 @@ function MainContent() {
 
     const fetchCourseDetails = async (courseIds) => {
       const courseDetailsPromises = courseIds.map(courseId =>
-        axios.get(`http://localhost:8000/course/${courseId}`).catch(err => {
+        axios.get(`https://videocoursebackend.ssccglpinnacle.com/course/${courseId}`).catch(err => {
           console.error(`Error fetching details for courseId: ${courseId}`, err);
           return null; // Return null for errors to filter out later
         })
@@ -83,7 +83,7 @@ function MainContent() {
               <img src={course.hindiCoverImage} alt={course._id} width="95" height="95" />
             <img src={course.englishCoverImage} alt={course._id} width="95" height="95" />
               {/* <Link to={`/mylearning/${userId}/`}> */}
-              <Link to={`/myPlayer/${course._id}/overview`}>
+              <Link to={`/myplayer/${course._id}`}>
                 <div className={classes.play_icon}><FaPlay size={30} /></div>
               </Link>
             </div>
@@ -97,7 +97,7 @@ function MainContent() {
             )}
           </div>
           <div className={classes.heading}>
-            <Link to={`/mylearning/${userId}/${course._id}`} className={classes.title}>
+          <Link to={`/myplayer/${course._id}`} className={classes.title}>
               {course.title}
             </Link>
             <div className={classes.instructor}>{course.instructorName}</div>
@@ -141,7 +141,7 @@ export default MainContent;
 //         if (!userId) {
 //           throw new Error('User ID not found in URL parameters.');
 //         }
-//         const response = await axios.get(`http://localhost:8000/vc/purchasedCourses/${userId}`);
+//         const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/vc/purchasedCourses/${userId}`);
 //         setPurchasedCourses(response.data.purchasedCourses);
 //         console.log(purchasedCourses)
 //         setVerticalOptions(Array(response.data.purchasedCourses.length).fill(false));

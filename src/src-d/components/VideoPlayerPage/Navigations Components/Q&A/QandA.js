@@ -7,7 +7,7 @@ function QandA() {
     <>
       <div className={classes.searchbox_container}>
         <div className={classes.searchbox}>
-          <form className={classes.inputbox}>
+        <form className={classes.inputbox}>
             <input
               className={classes.input_Ques}
               type="text"

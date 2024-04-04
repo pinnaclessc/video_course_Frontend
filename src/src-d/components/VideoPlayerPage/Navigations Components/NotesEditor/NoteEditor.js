@@ -54,7 +54,7 @@ const NoteEditor = () => {
     const htmlContent = stateToHTML(contentState);
     console.log("Saving HTML Content: ", htmlContent);
     try {
-      const response = await fetch("http://localhost:5000/api/notes", {
+      const response = await fetch("https://videocoursebackend.ssccglpinnacle.com/api/notes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,9 +66,23 @@ const NoteEditor = () => {
       } else {
         console.error("Failed to save content");
       }
-    } catch (error) {
-      console.error("Error saving content", error);
-    }
+    }catch (error) {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.error("Error data", error.response.data);
+          console.error("Error status", error.response.status);
+          console.error("Error headers", error.response.headers);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.error("Error request", error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error('Error', error.message);
+        }
+        console.error("Error config", error.config);
+      }
+      
   };
 
   return (
@@ -109,7 +123,7 @@ const NoteEditor = () => {
         onChange={setEditorState}
         className={styles.editorCustomStyle}
       />
-      <button onClick={saveContent}>Save Content</button>
+      <button className={styles.saveButton} onClick={saveContent}>Save Content</button>
     </div>
   );
 };

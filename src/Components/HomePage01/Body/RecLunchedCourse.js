@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from "./UpcomingCourse.module.css";
-import coverImage1 from "./coverImage0101.svg";
-import coverImage2 from "./coverImage0102.svg";
+
 import {
   AiFillLeftCircle,
   AiFillRightCircle,
@@ -13,7 +12,6 @@ export default function UpcomingCourse() {
   // const userId = JSON.parse(localStorage.getItem('user'))._id;
   const navigate = useNavigate();
   const [course, setCourse] = useState();
-
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -49,9 +47,6 @@ export default function UpcomingCourse() {
     }
   };
 
-  const cartHandler = () => {};
-  const wishlistHandler = () => {};
-
   return (
     <div className={styles["UpcomingCourse-firstDiv"]}>
       <div className={styles.forbutton_div}>
@@ -63,7 +58,7 @@ export default function UpcomingCourse() {
         <div className={styles["scroll-container"]} ref={scrollRef}>
           <div className={styles["card-wrapper"]}>
             {course &&
-              course.map((data, index) => (
+              course.map((data) => (
                 <div key={data.id} className={styles["card"]}>
                   <div className={styles["Upcomming-course-fullPage"]}>
                   <div className={styles["Image-section"]} onClick={() => navigate("/CourseDescription/" + data._id)}>

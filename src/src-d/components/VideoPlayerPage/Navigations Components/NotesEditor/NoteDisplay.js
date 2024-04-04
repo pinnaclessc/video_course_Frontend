@@ -4,7 +4,7 @@ const NoteDisplay = () => {
   const [noteContent, setNoteContent] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/notes')
+    fetch('https://videocoursebackend.ssccglpinnacle.com/api/notes')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
