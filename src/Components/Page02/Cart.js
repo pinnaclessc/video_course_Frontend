@@ -88,8 +88,94 @@ const Cart = () => {
   };
 
   const buycourseHandler = () => {
+    console.log(`user : ${user} and courseId : ${id} and month:${selectedMonths}and:${user.email} `)
     // This will run after a successful payment
-    navigate(`/MyLearningPage/${user._id}`);
+    // navigate(`/MyLearningPage/${user._id}`);
+  };
+
+  const wishlistHandler =async () => {
+    const auth = localStorage.getItem("user");
+
+    if (!auth) {
+      navigate("/signup");
+
+      return;
+    }
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user ? user._id : null;
+      const courseId = id
+      const response = await fetch(
+        `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: courseId,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        Swal.fire({
+          title: "Success!",
+          text: "Added in WishList",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        console.error("Failed to purchase course");
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
+  };
+  const cartHandler = async () => {
+    const auth = localStorage.getItem("user");
+
+    if (!auth) {
+      navigate("/signup");
+
+      return;
+    }
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const userId = user ? user._id : null;
+      const courseId = id;
+      const response = await fetch(
+        `https://videocoursebackend.ssccglpinnacle.com/vc/addToCart/${userId}/${courseId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            courseId: courseId,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        Swal.fire({
+          title: "Success!",
+          text: "Added in cart",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        console.error("Failed to purchase course");
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+    }
   };
 
   return (
@@ -113,7 +199,13 @@ const Cart = () => {
             <p className={styles.months}>Months: {selectedMonths}</p>
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
-          <Payment user={user} courseId={id} finalPrice={getPrice()} onPaymentSuccess={buycourseHandler} />
+          <Payment user={user}
+                  courseId={id}
+                  finalPrice={getPrice()}
+                  selectedMonths={selectedMonths}
+                  userId={user?._id}
+                  userEmail={user?.email}
+                  onPaymentSuccess={buycourseHandler}/>
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
@@ -129,8 +221,8 @@ const Cart = () => {
         </div>
         {isShare && <Share />}
         <div className={styles["cart-wishlist-Btn-div"]}>
-          {/* Placeholder for cartHandler */}
-          {/* Placeholder for wishlistHandler */}
+        <button className={styles["cartBtn"]} onClick={cartHandler}><FaCartPlus /></button>
+        <button className={styles["wishListBtn"]} onClick={wishlistHandler}><IoHeartCircleOutline size={40} /></button>
         </div>
       </div>
     </div>
@@ -270,90 +362,90 @@ export default Cart;
 //   };
   
 
-//   const wishlistHandler =async () => {
-//     const auth = localStorage.getItem("user");
+  // const wishlistHandler =async () => {
+  //   const auth = localStorage.getItem("user");
 
-//     if (!auth) {
-//       navigate("/signup");
+  //   if (!auth) {
+  //     navigate("/signup");
 
-//       return;
-//     }
-//     try {
-//       const user = JSON.parse(localStorage.getItem("user"));
-//       const userId = user ? user._id : null;
-//       const courseId = params.id;
-//       const response = await fetch(
-//         `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             userId: userId,
-//             courseId: courseId,
-//           }),
-//         }
-//       );
+  //     return;
+  //   }
+  //   try {
+  //     const user = JSON.parse(localStorage.getItem("user"));
+  //     const userId = user ? user._id : null;
+  //     const courseId = params.id;
+  //     const response = await fetch(
+  //       `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userId: userId,
+  //           courseId: courseId,
+  //         }),
+  //       }
+  //     );
 
-//       const data = await response.json();
+  //     const data = await response.json();
 
-//       if (data.success) {
-//         Swal.fire({
-//           title: "Success!",
-//           text: "Added in WishList",
-//           icon: "success",
-//           confirmButtonText: "OK",
-//         });
-//       } else {
-//         console.error("Failed to purchase course");
-//       }
-//     } catch (error) {
-//       console.error("Error during purchase:", error);
-//     }
-//   };
-//   const cartHandler = async () => {
-//     const auth = localStorage.getItem("user");
+  //     if (data.success) {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Added in WishList",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       });
+  //     } else {
+  //       console.error("Failed to purchase course");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
+  //   }
+  // };
+  // const cartHandler = async () => {
+  //   const auth = localStorage.getItem("user");
 
-//     if (!auth) {
-//       navigate("/signup");
+  //   if (!auth) {
+  //     navigate("/signup");
 
-//       return;
-//     }
-//     try {
-//       const user = JSON.parse(localStorage.getItem("user"));
-//       const userId = user ? user._id : null;
-//       const courseId = params.id;
-//       const response = await fetch(
-//         `https://videocoursebackend.ssccglpinnacle.com/vc/addToCart/${userId}/${courseId}`,
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({
-//             userId: userId,
-//             courseId: courseId,
-//           }),
-//         }
-//       );
+  //     return;
+  //   }
+  //   try {
+  //     const user = JSON.parse(localStorage.getItem("user"));
+  //     const userId = user ? user._id : null;
+  //     const courseId = params.id;
+  //     const response = await fetch(
+  //       `https://videocoursebackend.ssccglpinnacle.com/vc/addToCart/${userId}/${courseId}`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userId: userId,
+  //           courseId: courseId,
+  //         }),
+  //       }
+  //     );
 
-//       const data = await response.json();
+  //     const data = await response.json();
 
-//       if (data.success) {
-//         Swal.fire({
-//           title: "Success!",
-//           text: "Added in cart",
-//           icon: "success",
-//           confirmButtonText: "OK",
-//         });
-//       } else {
-//         console.error("Failed to purchase course");
-//       }
-//     } catch (error) {
-//       console.error("Error during purchase:", error);
-//     }
-//   };
+  //     if (data.success) {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Added in cart",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       });
+  //     } else {
+  //       console.error("Failed to purchase course");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
+  //   }
+  // };
 
 //   return (
 //     <div className={styles["above-cart-fullpage"]}>
@@ -379,14 +471,14 @@ export default Cart;
 //         {showCoupon && <ApplyCoupon />}
 //         {isShare && <Share />}
 //         <div className={styles["cart-wishlist-Btn-div"]}>
-//           <button className={styles["cartBtn"]} onClick={cartHandler}>
-//             <FaCartPlus />
-//             {/* Other elements like text/span */}
-//           </button>
-//           <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
-//             <IoHeartCircleOutline size={40} />
-//             {/* Other elements like text/span */}
-//           </button>
+          // <button className={styles["cartBtn"]} onClick={cartHandler}>
+          //   <FaCartPlus />
+          //   {/* Other elements like text/span */}
+          // </button>
+          // <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+          //   <IoHeartCircleOutline size={40} />
+          //   {/* Other elements like text/span */}
+          // </button>
 //         </div>
 //       </div>
 //     </div>

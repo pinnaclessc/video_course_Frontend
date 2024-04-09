@@ -3,7 +3,8 @@ import { load } from "@cashfreepayments/cashfree-js";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
+// const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
+  const Payment = ({ user, courseId, finalPrice, selectedMonths, userId, userEmail, onPaymentSuccess }) => {
   const [cashfree, setCashfree] = useState(null);
   const navigate = useNavigate();
 
@@ -22,7 +23,10 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
   }, []);
 
   const createOrder = async () => {
+    console.log("Preparing for Payment:");
+    console.log(`Course ID: ${courseId}, User ID: ${userId}, User Email: ${userEmail}, Selected Months: ${selectedMonths}, Final Price: ${finalPrice}`);
     try {
+
       const response = await fetch("https://videocoursebackend.ssccglpinnacle.com/payment-for-upi", {
         method: "POST",
         headers: {
@@ -33,7 +37,10 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
           orderAmount: finalPrice.toString(),
           courseId: courseId,
           customerId: user._id,
-        }),
+          
+        }
+      ),
+        
       });
 
       if (response.ok) {
