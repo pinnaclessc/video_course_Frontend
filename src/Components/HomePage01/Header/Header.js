@@ -169,7 +169,6 @@ export default function Header() {
             target="blank"
             className={classes["Playstore-a"]}
           >
-            {" "}
             Download Mobile app
           </a>
         </div>

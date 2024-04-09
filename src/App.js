@@ -38,17 +38,9 @@ import Railway from "./ExploreByCategory/Railway";
 import AllCourses from "./Admin/Pages/AllCourses";
 import UpdateCourse from "./Admin/Pages/UpdateCourse";
 import AddUserForm from './Admin/user/AddUserForm';
-import Header from "./Components/HomePage01/Header/Header";
 import PdfManagementForm from "./Admin/Pages/PdfManagementForm";
-import NoteEditor from "./src-d/components/VideoPlayerPage/Navigations Components/NotesEditor/NoteEditor";
 import MyLearningMain from "./src-d/MyLearningMain";
 import VideoPlayerPageLayout from "./layouts/VideoPlayerPageLayout"
-import CourseOverview from "./src-d/components/VideoPlayerPage/Navigations Components/CourseOverview";
-import QandA from "./src-d/components/VideoPlayerPage/Navigations Components/Q&A/QandA";
-import LearningTools from "./src-d/components/VideoPlayerPage/Navigations Components/LearningTools/LearningTools";
-import Announcements from "./src-d/components/VideoPlayerPage/Navigations Components/Announcements/Announcements";
-import SearchBar from "./src-d/components/VideoPlayerPage/Navigations Components/SearchBar";
-import Review from "./src-d/components/VideoPlayerPage/Navigations Components/Review/Review";
 import PinnacleProfile from "./src-d/components/VideoPlayerPage/AccountPage/PublicProfile";
 import EditPhoto from "./src-d/components/VideoPlayerPage/AccountPage/EditPhoto";
 import AccountSecurity from "./src-d/components/VideoPlayerPage/AccountPage/AccountSecurity";
@@ -63,7 +55,6 @@ import Messages from "./src-d/components/VideoPlayerPage/AccountPage/Messages";
 import PinnacleHelp from "./src-d/components/VideoPlayerPage/AccountPage/PinnacleHelp";
 import SignUpHelp from "./src-d/components/VideoPlayerPage/AccountPage/Messages/SignUpHelp";
 import TroubleshootingHelp from "./src-d/components/VideoPlayerPage/AccountPage/Messages/TroubleshootingHelp";
-import Footer from "./Footer02.js/Footer";
 import AdminPage from "./Admin/AdminPage";
 import AddVideoForm from "./Admin/Pages/AddVideoForm";
 import UpdateChapter from "./Admin/Pages/UpdateChapter";
@@ -72,19 +63,14 @@ import InstructorForm from "./AdminDashboard/Instructor/InstructorForm";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
 import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
-import CourseContent from "./src-d/components/VideoPlayerPage/Navigations Components/CourseContent"
 import { VideoProvider } from './context/VideoContext';
 import ChapterAccordion from "./Components/Page02/ChapterAccordion";
-import UpdateCourseForm from "./Admin/Pages/UpdateCourseForm";
-
-
+import UpdateCourseForm from "./AdminDashboard/Courses/Course_UpdateForm";
 export default function App() {
   return (
     <>
        <VideoProvider>
       <Router>
-        {/* <Timer/> */}
-        {/* <Header /> */}
         <Routes>
         <Route path="/admin/show-course-Content" element={<ShowCourseContent />}></Route>
           <Route path="/admin/allCourses" element={<AllCourses/>}></Route>
@@ -159,7 +145,6 @@ export default function App() {
         {/* <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route> */}
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
         <Route path="/ucf/:courseId" element={<UpdateCourseForm />}></Route>
-        
         {/* **** */}
         </Routes>
     

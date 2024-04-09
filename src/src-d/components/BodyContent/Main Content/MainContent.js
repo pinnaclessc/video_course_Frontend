@@ -88,14 +88,14 @@ function MainContent() {
               </Link>
             </div>
           </div>
-          <div className={classes.sidedots} ref={ref}>
+          {/* <div className={classes.sidedots} ref={ref}>
             <button onClick={() => handleDotClick(index)}>
               <BsThreeDotsVertical className={classes.threedots} size={15} />
             </button>
             {openIndex === index && (
               <SideDots isOpen={true} onClose={() => setOpenIndex(-1)} />
             )}
-          </div>
+          </div> */}
           <div className={classes.heading}>
           <Link to={`/myplayer/${course._id}`} className={classes.title}>
               {course.title}

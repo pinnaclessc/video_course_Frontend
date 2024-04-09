@@ -27,7 +27,6 @@ const CourseList = () => {
         let key = event.target.value;
         if (!key) {
           setLoading(true);
-          // Reload the courses if the search key is cleared
           fetch("https://videocoursebackend.ssccglpinnacle.com/courses")
             .then((response) => response.json())
             .then((data) => {
@@ -55,7 +54,7 @@ const CourseList = () => {
           try {
             let response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${id}`, { method: "DELETE" });
             if (response.ok) {
-              setCourses(courses.filter(course => course._id !== id)); // Optimistically remove the course from UI
+              setCourses(courses.filter(course => course._id !== id));
             } else {
             alert("Failed to delete the course.");
             }
@@ -64,13 +63,9 @@ const CourseList = () => {
           }
         }
       };
-
-    // Calculate the currently displayed courses
     const indexOfLastCourse = currentPage * coursesPerPage;
     const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
     const currentCourses = courses.slice(indexOfFirstCourse, indexOfLastCourse);
-
-    // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
         <div className={styles.courseListContainer}>
@@ -82,19 +77,20 @@ const CourseList = () => {
             <table className={styles.courseTable}>
                 <thead>
                     <tr>
+                    <th>S.No.</th> 
                         <th>Title</th>
                         <th>Category</th>
                         <th>Instructor Name</th>
                         <th>Price</th>
                         <th>MRP</th>
                         <th>Actions</th>
-                        {/* <th>Timestamp</th> */}
                     </tr>
                 </thead>
                 <tbody>
                     {currentCourses && currentCourses.length > 0 ? (
-                        currentCourses.map(course => (
+                        currentCourses.map((course, index) => (
                             <tr key={course._id}>
+                                <td>{indexOfFirstCourse + index + 1}</td> {/* Calculate S.No. based on index and currentPage */}
                                 <td>{course.title}</td>
                                 <td>{course.category}</td>
                                 <td>{course.instructorName}</td>
@@ -103,13 +99,12 @@ const CourseList = () => {
                                 <td>
                 <button onClick={() => deleteHandler(course._id)} className={styles["AllCourses-DeleteBTN"]}>Delete</button>
                 <Link to={`/ucf/${course._id}`} className={styles["AllCourses-editLink"]}>Edit</Link>
-              </td>
-                                {/* <td>{new Date(course.created_at).toLocaleString()}</td> */}
+                                </td>
                             </tr>
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="6">No courses available</td>
+                            <td colSpan="7">No courses available</td>
                         </tr>
                     )}
                 </tbody>
