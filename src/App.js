@@ -69,7 +69,7 @@ import ChapterAccordion from "./Components/Page02/ChapterAccordion";
 import PDFViewer from "./layouts/PdfViewer";
 import YouTubePlayer from "./layouts/YoutubePlayer";
 import UpdateCourseForm from "./AdminDashboard/Courses/Course_UpdateForm";
-
+import PaymentSuccessHandler from "./Components/Page02/PaymentSuccessHandler";
 export default function App() {
   return (
     <>
@@ -148,9 +148,9 @@ export default function App() {
           <Route path="/youtubePlayer" element= {<YouTubePlayer videoId="9xwazD5SyVg" />}/>
         
         {/* working on that route */}
-        {/* <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route> */}
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
         <Route path="/ucf/:courseId" element={<UpdateCourseForm />}></Route>
+        <Route path="/paymentSuccessHandler/:userId/:{courseId" element={<PaymentSuccessHandler/>}></Route>
         {/* **** */}
         </Routes>
     
