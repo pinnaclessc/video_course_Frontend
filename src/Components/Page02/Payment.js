@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { load } from "@cashfreepayments/cashfree-js";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
+// const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
+  const Payment = ({ user, courseId, finalPrice, selectedMonths, userId, userEmail, onPaymentSuccess }) => {
   const [cashfree, setCashfree] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initializeSDK = async () => {
@@ -19,19 +23,24 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
   }, []);
 
   const createOrder = async () => {
+    console.log("Preparing for Payment:");
+    console.log(`Course ID: ${courseId}, User ID: ${userId}, User Email: ${userEmail}, Selected Months: ${selectedMonths}, Final Price: ${finalPrice}`);
     try {
+
       const response = await fetch("https://videocoursebackend.ssccglpinnacle.com/payment-for-upi", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email_id: user.email, // Dynamic email from user props
-          orderAmount: finalPrice.toString(), // Dynamic finalPrice from props
-          courseId: courseId, // Dynamic courseId for identifying the course being purchased
-          customerId: user._id, // Dynamic user ID from user props
-          // Additional user and course details can be added here if required
-        }),
+          email_id: user.email,
+          orderAmount: finalPrice.toString(),
+          courseId: courseId,
+          customerId: user._id,
+          
+        }
+      ),
+        
       });
 
       if (response.ok) {
@@ -51,53 +60,16 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
         paymentSessionId: sessionId,
         redirectTarget: "_self",
       }).then((response) => {
-        // Here you handle the payment response. For simplification, let's assume payment is successful if we get here.
-        console.log(response);
-
-        // const buycouseHandler = async () => {
-        //   const user = JSON.parse(localStorage.getItem("user"));
-        //   const userId = user ? user._id : null;
-        //   const courseId = params.id;
-        //   const finalPrice = getPrice();
-        
-        //   // Assuming you have the endpoint setup to mark a course as purchased.
-        //   try {
-        //     const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json',
-        //       },
-        //       body: JSON.stringify({
-        //         userId,
-        //         courseId,
-        //       }),
-        //     });
-        //     const data = await response.json();
-        //     if (data.success) {
-            
-        //       Swal.fire({
-        //         title: "Success!",
-        //         text: "Course purchased successfully",
-        //         icon: "success",
-        //         confirmButtonText: "OK",
-        //       }).then(() => {
-        //         navigate(`/MyLearningPage/${userId}`);
-        //       });
-        //     } else {
-          
-        //       Swal.fire({
-        //         title: "Error!",
-        //         text: "Failed to purchase course",
-        //         icon: "error",
-        //         confirmButtonText: "OK",
-        //       });
-        //     }
-        //   } catch (error) {
-        //     console.error("Error during purchase:", error);
-           
-        //   }
-        // };
-        onPaymentSuccess();
+        if (response.status === 'OK') { // Check if the response contains the status and is 'OK' for a successful payment
+          onPaymentSuccess();
+        } else {
+          Swal.fire({
+            title: "Payment Failed",
+            text: "Your payment was not successful, please try again.",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
       }).catch((error) => {
         console.error("Payment process error:", error);
       });
@@ -114,6 +86,8 @@ const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
 };
 
 export default Payment;
+
+
 
 
 // import React, { useEffect, useState } from "react";

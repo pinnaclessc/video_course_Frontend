@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import data from "./data.json"; // Assume this contains course static data if needed
 import styles from "./Cart.module.css";
-import { useNavigate, useParams,Link} from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import ApplyCoupon from "./ApplyCoupon"; // Your ApplyCoupon component
 import Share from "./ShareComponent/Share"; // Your Share component
 import { IoHeartCircleOutline } from "react-icons/io5";
 import { FaCartPlus } from "react-icons/fa";
-import Payment from "./Payment";
+import Payment from "./Payment"; // Your Payment component
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -24,9 +24,7 @@ const Cart = () => {
   const [hindiImage, setHindiImage] = useState();
   const [EnglishImage, setEnglishImage] = useState();
 
-  // Dummy user data, replace with actual data from your auth system
   const user = JSON.parse(localStorage.getItem("user"));
-  const params=useParams();
 
   useEffect(() => {
     const getCourseDetails = async () => {
@@ -70,31 +68,31 @@ const Cart = () => {
     let finalPrice = price;
     switch (selectedMonths) {
       case 6:
-        // finalPrice = price * 0.95;  5% less
         finalPrice = price;
         break;
       case 12:
-        finalPrice = 2 * price * 0.9; // (2*price) - 10%
+        finalPrice = 2 * price * 0.9;
         break;
       case 18:
-        finalPrice = 3 * price * 0.85; // (3*price) - 15%
+        finalPrice = 3 * price * 0.85;
         break;
       case 24:
-        finalPrice = 4 * price * 0.8; // (4*price) - 20%
+        finalPrice = 4 * price * 0.8;
         break;
       default:
+        finalPrice = price; // Default case if none of the above matches
         break;
     }
 
     return Math.round(finalPrice);
   };
 
-  const onPaymentSuccess = () => {
-    // Implement what happens after a successful payment
-    Swal.fire("Success", "Course has been purchased!", "success").then(() => navigate("/my-courses"));
+  const buycourseHandler = () => {
+    console.log(`user : ${user} and courseId : ${id} and month:${selectedMonths}and:${user.email} `)
+    // This will run after a successful payment
+    // navigate(`/MyLearningPage/${user._id}`);
   };
 
-  // Other handlers like wishlistHandler, cartHandler...
   const wishlistHandler =async () => {
     const auth = localStorage.getItem("user");
 
@@ -106,7 +104,7 @@ const Cart = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user ? user._id : null;
-      const courseId = params.id;
+      const courseId = id
       const response = await fetch(
         `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
         {
@@ -148,7 +146,7 @@ const Cart = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user ? user._id : null;
-      const courseId = params.id;
+      const courseId = id;
       const response = await fetch(
         `https://videocoursebackend.ssccglpinnacle.com/vc/addToCart/${userId}/${courseId}`,
         {
@@ -180,34 +178,14 @@ const Cart = () => {
     }
   };
 
-
   return (
     <div className={styles["above-cart-fullpage"]}>
       <div className={styles["cart-fullpage"]}>
         <div className={styles["image-section"]}>
-          <img
-            src={hindiImage}
-            alt="Course1"
-            className={styles["image1"]}
-            id="cart-image1"
-          />
-          <img
-            src={EnglishImage}
-            alt="Course2"
-            className={styles["image2"]}
-            id="cart-image2"
-            />
+          <img src={hindiImage} alt="Course in Hindi" className={styles["image1"]} id="cart-image1" />
+          <img src={EnglishImage} alt="Course in English" className={styles["image2"]} id="cart-image2" />
         </div>
         <div className={styles.overlay}>
-          {/* <div className={styles["video-preview-div"]}>
-            <div className={styles["video-icon"]} onClick={() => navigate(`/mylearning/${params.id}`)}>
-              <AiOutlinePlayCircle size={40} />
-            </div>
-            <div className={styles["video-icon-p-div"]}>
-              <p>Preview this course</p>
-            </div>
-          </div> */}
-
           <h2 className={styles.heading}>{courseTitle}</h2>
           <p className={styles.course}>
             {courseDetails}
@@ -215,64 +193,300 @@ const Cart = () => {
             <Link to="/personalPlane">Learn More</Link>
           </p>
           <div className={styles["range-slider-container"]}>
-            <input
-              type="range"
-              min="6"
-              max="24"
-              step="6"
-              value={selectedMonths}
-              onChange={handleMonthsChange}
-              className={styles["range-slider"]}
-            />
+            <input type="range" min="6" max="24" step="6" value={selectedMonths} onChange={handleMonthsChange} className={styles["range-slider"]} />
           </div>
           <div className={styles["Months-price-section"]}>
             <p className={styles.months}>Months: {selectedMonths}</p>
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
-
-          <Payment 
-        user={user} 
-        courseId={id} 
-        finalPrice={getPrice()} 
-        onPaymentSuccess={onPaymentSuccess} 
-      />
+          <Payment user={user}
+                  courseId={id}
+                  finalPrice={getPrice()}
+                  selectedMonths={selectedMonths}
+                  userId={user?._id}
+                  userEmail={user?.email}
+                  onPaymentSuccess={buycourseHandler}/>
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
             </button>
-
-            <button
-              className={styles["individual-btn"]}
-              onClick={() => navigate("/giftACourse")}
-            >
+            <button className={styles["individual-btn"]} onClick={() => navigate("/giftACourse")}>
               Gift this course
             </button>
-            <button
-              className={styles["individual-btn"]}
-              onClick={ApplyCouponHandler}
-            >
+            <button className={styles["individual-btn"]} onClick={ApplyCouponHandler}>
               Apply coupon
             </button>
           </div>
-
           {showCoupon && <ApplyCoupon />}
         </div>
         {isShare && <Share />}
         <div className={styles["cart-wishlist-Btn-div"]}>
-          <button className={styles["cartBtn"]} onClick={cartHandler}>
-            <FaCartPlus />
-            {/* <span>Add To Cart</span> */}
-          </button>
-          <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
-            <IoHeartCircleOutline size={40} />
-          </button>
+        <button className={styles["cartBtn"]} onClick={cartHandler}><FaCartPlus /></button>
+        <button className={styles["wishListBtn"]} onClick={wishlistHandler}><IoHeartCircleOutline size={40} /></button>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Cart;
+
+
+// import React, { useState, useEffect } from "react";
+// import Swal from "sweetalert2";
+// import styles from "./Cart.module.css";
+// import { useNavigate, useParams } from "react-router-dom";
+// import ApplyCoupon from "./ApplyCoupon"; // Your ApplyCoupon component
+// import Share from "./ShareComponent/Share"; // Your Share component
+// import Payment from "./Payment"; // Your Payment component
+// import { IoHeartCircleOutline } from "react-icons/io5";
+// import { FaCartPlus } from "react-icons/fa";
+
+// const Cart = () => {
+//   const navigate = useNavigate();
+//   const { id } = useParams();
+//   const [selectedMonths, setSelectedMonths] = useState(6);
+//   const [showCoupon, setShowCoupon] = useState(false);
+//   const [isShare, setIsShare] = useState(false);
+//   const [courseTitle, setCourseTitle] = useState("");
+//   const [courseDetails, setCourseDetails] = useState("");
+//   // ... other state variables like teacherName, rating, price, mrp, hindiImage, EnglishImage
+  
+//   const user = JSON.parse(localStorage.getItem("user"));
+
+
+//   useEffect(() => {
+//     getCourseDetails();
+//   }, []);
+//   const getCourseDetails = async () => {
+//     try {
+//       const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
+//       if (!response.ok){
+//         throw new Error(
+//           `Failed to fetch course details. Status: ${response.status}`
+//         );
+//       }
+//       const result = await response.json();
+//       setCourseTitle(result.title);
+//       setCourseDetails(result.shortDescription);
+//       setTeacherName(result.instructorName);
+//       setRating(result.rating);
+//       setPrice(result.price);
+//       setMrp(result.mrp);
+//       setHindiImage(result.hindiCoverImage);
+//       setEnglishImage(result.englishCoverImage);
+//     } catch (error) {
+//       console.error("Error fetching course details:", error);
+//     }
+//   };
+
+//   const handleShare = () => {
+//     setIsShare(!isShare);
+//   };
+
+//   const handleMonthsChange = (event) => {
+//     setSelectedMonths(Number(event.target.value));
+//   };
+
+//   const ApplyCouponHandler = () => {
+//     setShowCoupon(!showCoupon);
+//   };
+
+//   const getPrice = () => {
+//     if (!price) return 0;
+
+//     let finalPrice = price;
+//     switch (selectedMonths) {
+//       case 6:
+//         // finalPrice = price * 0.95;  5% less
+//         finalPrice = price;
+//         break;
+//       case 12:
+//         finalPrice = 2 * price * 0.9; // (2*price) - 10%
+//         break;
+//       case 18:
+//         finalPrice = 3 * price * 0.85; // (3*price) - 15%
+//         break;
+//       case 24:
+//         finalPrice = 4 * price * 0.8; // (4*price) - 20%
+//         break;
+//       default:
+//         break;
+//     }
+
+//     return Math.round(finalPrice);
+//   };
+
+//   const buycourseHandler = async () => {
+//     const user = JSON.parse(localStorage.getItem("user"));
+//     const userId = user ? user._id : null;
+//     const courseId = params.id;
+//     const finalPrice = getPrice();
+  
+//     // Assuming you have the endpoint setup to mark a course as purchased.
+//     try {
+//       const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           userId,
+//           courseId,
+//         }),
+//       });
+//       const data = await response.json();
+//       if (data.success) {
+      
+//         Swal.fire({
+//           title: "Success!",
+//           text: "Course purchased successfully",
+//           icon: "success",
+//           confirmButtonText: "OK",
+//         }).then(() => {
+//           navigate(`/MyLearningPage/${userId}`);
+//         });
+//       } else {
+    
+//         Swal.fire({
+//           title: "Error!",
+//           text: "Failed to purchase course",
+//           icon: "error",
+//           confirmButtonText: "OK",
+//         });
+//       }
+//     } catch (error) {
+//       console.error("Error during purchase:", error);
+     
+//     }
+//   };
+  
+
+  // const wishlistHandler =async () => {
+  //   const auth = localStorage.getItem("user");
+
+  //   if (!auth) {
+  //     navigate("/signup");
+
+  //     return;
+  //   }
+  //   try {
+  //     const user = JSON.parse(localStorage.getItem("user"));
+  //     const userId = user ? user._id : null;
+  //     const courseId = params.id;
+  //     const response = await fetch(
+  //       `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userId: userId,
+  //           courseId: courseId,
+  //         }),
+  //       }
+  //     );
+
+  //     const data = await response.json();
+
+  //     if (data.success) {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Added in WishList",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       });
+  //     } else {
+  //       console.error("Failed to purchase course");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
+  //   }
+  // };
+  // const cartHandler = async () => {
+  //   const auth = localStorage.getItem("user");
+
+  //   if (!auth) {
+  //     navigate("/signup");
+
+  //     return;
+  //   }
+  //   try {
+  //     const user = JSON.parse(localStorage.getItem("user"));
+  //     const userId = user ? user._id : null;
+  //     const courseId = params.id;
+  //     const response = await fetch(
+  //       `https://videocoursebackend.ssccglpinnacle.com/vc/addToCart/${userId}/${courseId}`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           userId: userId,
+  //           courseId: courseId,
+  //         }),
+  //       }
+  //     );
+
+  //     const data = await response.json();
+
+  //     if (data.success) {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Added in cart",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       });
+  //     } else {
+  //       console.error("Failed to purchase course");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
+  //   }
+  // };
+
+//   return (
+//     <div className={styles["above-cart-fullpage"]}>
+//       <div className={styles["cart-fullpage"]}>
+//         <div className={styles["image-section"]}>
+//           {/* Images here */}
+//         </div>
+//         <div className={styles.overlay}>
+//           <h2 className={styles.heading}>{courseTitle}</h2>
+//           <p className={styles.course}>
+//             {courseDetails}
+//             {/* Add more course details here if needed */}
+//           </p>
+//           {/* The rest of your cart page layout */}
+//           <Payment
+//             user={user}
+//             courseId={id}
+//             finalPrice={getPrice()}
+//             onPaymentSuccess={buycourseHandler}
+//           />
+//           {/* ...additional cart layout components like ApplyCoupon, Share, etc. */}
+//         </div>
+//         {showCoupon && <ApplyCoupon />}
+//         {isShare && <Share />}
+//         <div className={styles["cart-wishlist-Btn-div"]}>
+          // <button className={styles["cartBtn"]} onClick={cartHandler}>
+          //   <FaCartPlus />
+          //   {/* Other elements like text/span */}
+          // </button>
+          // <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+          //   <IoHeartCircleOutline size={40} />
+          //   {/* Other elements like text/span */}
+          // </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Cart;
+
 
 
 // import React, { useState, useEffect } from "react";
@@ -304,30 +518,30 @@ export default Cart;
 
 //   const { image1, image2, heading, description, subscriptionPrice } = data;
 
-//   useEffect(() => {
-//     getCourseDetails();
-//   }, []);
-//   const getCourseDetails = async () => {
-//     try {
-//       const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
-//       if (!response.ok){
-//         throw new Error(
-//           `Failed to fetch course details. Status: ${response.status}`
-//         );
-//       }
-//       const result = await response.json();
-//       setCourseTitle(result.title);
-//       setCourseDetails(result.shortDescription);
-//       setTeacherName(result.instructorName);
-//       setRating(result.rating);
-//       setPrice(result.price);
-//       setMrp(result.mrp);
-//       setHindiImage(result.hindiCoverImage);
-//       setEnglishImage(result.englishCoverImage);
-//     } catch (error) {
-//       console.error("Error fetching course details:", error);
-//     }
-//   };
+  // useEffect(() => {
+  //   getCourseDetails();
+  // }, []);
+  // const getCourseDetails = async () => {
+  //   try {
+  //     const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
+  //     if (!response.ok){
+  //       throw new Error(
+  //         `Failed to fetch course details. Status: ${response.status}`
+  //       );
+  //     }
+  //     const result = await response.json();
+  //     setCourseTitle(result.title);
+  //     setCourseDetails(result.shortDescription);
+  //     setTeacherName(result.instructorName);
+  //     setRating(result.rating);
+  //     setPrice(result.price);
+  //     setMrp(result.mrp);
+  //     setHindiImage(result.hindiCoverImage);
+  //     setEnglishImage(result.englishCoverImage);
+  //   } catch (error) {
+  //     console.error("Error fetching course details:", error);
+  //   }
+  // };
 //   const handleShare = () => {
 //     setIsShare(!isShare);
 //   };
@@ -377,49 +591,49 @@ export default Cart;
 //   //   console.log("Price: ₹", finalPrice);
 //   // };
 
-//   const buycouseHandler = async () => {
-//     const user = JSON.parse(localStorage.getItem("user"));
-//     const userId = user ? user._id : null;
-//     const courseId = params.id;
-//     const finalPrice = getPrice();
+  // const buycouseHandler = async () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   const userId = user ? user._id : null;
+  //   const courseId = params.id;
+  //   const finalPrice = getPrice();
   
-//     // Assuming you have the endpoint setup to mark a course as purchased.
-//     try {
-//       const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           userId,
-//           courseId,
-//         }),
-//       });
-//       const data = await response.json();
-//       if (data.success) {
+  //   // Assuming you have the endpoint setup to mark a course as purchased.
+  //   try {
+  //     const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         userId,
+  //         courseId,
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     if (data.success) {
       
-//         Swal.fire({
-//           title: "Success!",
-//           text: "Course purchased successfully",
-//           icon: "success",
-//           confirmButtonText: "OK",
-//         }).then(() => {
-//           navigate(`/MyLearningPage/${userId}`);
-//         });
-//       } else {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Course purchased successfully",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       }).then(() => {
+  //         navigate(`/MyLearningPage/${userId}`);
+  //       });
+  //     } else {
     
-//         Swal.fire({
-//           title: "Error!",
-//           text: "Failed to purchase course",
-//           icon: "error",
-//           confirmButtonText: "OK",
-//         });
-//       }
-//     } catch (error) {
-//       console.error("Error during purchase:", error);
+  //       Swal.fire({
+  //         title: "Error!",
+  //         text: "Failed to purchase course",
+  //         icon: "error",
+  //         confirmButtonText: "OK",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
      
-//     }
-//   };
+  //   }
+  // };
   
 
   // const wishlistHandler =async () => {
