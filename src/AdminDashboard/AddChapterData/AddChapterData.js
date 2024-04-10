@@ -26,6 +26,26 @@ const ChapterForm = () => {
     fetchCourses();
   }, []);
   
+  // useEffect(() => {
+  //   const fetchVideosAndPdfs = async () => {
+  //     if (!selectedCourse) return;
+  
+  //     try {
+  //       const videosResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/videos/${selectedCourse}`);
+  //       const videosData = await videosResponse.json();
+  //       setVideos(videosData);
+  
+  //       const pdfsResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/pdfs/course/${selectedCourse}`);
+  //       const pdfsData = await pdfsResponse.json();
+  //       setPdfs(pdfsData);
+  //     } catch (error) {
+  //       console.error('Error fetching videos/pdfs:', error);
+  //     }
+  //   };
+  
+  //   fetchVideosAndPdfs();
+  // }, [selectedCourse]);
+
   useEffect(() => {
     const fetchVideosAndPdfs = async () => {
       if (!selectedCourse) return;
@@ -37,6 +57,7 @@ const ChapterForm = () => {
   
         const pdfsResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/pdfs/course/${selectedCourse}`);
         const pdfsData = await pdfsResponse.json();
+        // Assuming each item in pdfsData includes the cloudFrontUrl
         setPdfs(pdfsData);
       } catch (error) {
         console.error('Error fetching videos/pdfs:', error);
@@ -45,6 +66,7 @@ const ChapterForm = () => {
   
     fetchVideosAndPdfs();
   }, [selectedCourse]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();

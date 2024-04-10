@@ -184,3 +184,11 @@
   width: 100%;
   gap: 10px;
 }
+
+
+.pdfview{
+  width:100%;
+  /* height: 100vh; */
+  border: red solid 2px;
+  background-color: aqua;
+}

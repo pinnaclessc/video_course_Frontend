@@ -25,7 +25,7 @@ const Loading = ({ videoProgress }) => {
     margin: "0",
     width: "10%",
     position: "absolute",
-    fontSize: "12px", // Adjust the font size value as per your preference
+    fontSize: "12px", 
   }
 
   useEffect(() => {

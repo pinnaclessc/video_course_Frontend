@@ -3,7 +3,7 @@ import { Link, useLocation,useParams } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import styles from './VideoPlayerNavBar.module.css';
 
-const VideoPlayerNavBar = ({ sidebarVisible,setSidebarVisible }) => {
+const VideoPlayerNavBar = ({ sidebarVisible,setSidebarVisible, onToggleSidebar }) => {
   const{courseId}=useParams();
   console.log(courseId)
   const location = useLocation();
@@ -13,10 +13,10 @@ const VideoPlayerNavBar = ({ sidebarVisible,setSidebarVisible }) => {
     setActiveLink(location.pathname);
   }, [location]);
 
-  const handleCourseContentClick = (e) => {
-    e.preventDefault(); 
-    setSidebarVisible(!sidebarVisible);
-  };
+  // const handleCourseContentClick = () => {
+  //   onCourseContentClick(); // This should trigger the Sidebar to render in the outlet
+  // };
+  
 
   return (
     <>

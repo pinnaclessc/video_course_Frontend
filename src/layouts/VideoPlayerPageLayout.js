@@ -76,13 +76,34 @@ const VideoPlayerPageLayout = () => {
   const location = useLocation();
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const { markVideoAsCompleted } = useVideo();
+  const [sidebarInOutlet, setSidebarInOutlet] = useState(false);
+  const [renderSidebarInOutlet, setRenderSidebarInOutlet] = useState(false); // 
 
   // Extract hash directly from location.hash
   const currentHash = location.hash;
 
+  // const handleToggleSidebar = () => {
+  //   setSidebarVisible(!sidebarVisible);
+  // };
+
   const handleToggleSidebar = () => {
+    if (currentHash === '#courseContent') {
+      setRenderSidebarInOutlet(false); // Reset when toggling off from courseContent
+    }
     setSidebarVisible(!sidebarVisible);
   };
+  const handleCourseContentClick = () => {
+    // Assuming setRenderSidebarInOutlet is your state setter for controlling
+    // whether the Sidebar should render in the outlet.
+    setRenderSidebarInOutlet(true);
+  };
+  
+  
+  // const handleCourseContentClick = () => {
+  //   // Toggle sidebar visibility and ensure it renders in the correct location
+  //   setRenderSidebarInOutlet(true); // Sidebar should now render in the outlet area
+  //   setSidebarVisible(true); // Make sure the sidebar is visible
+  // };
 
   const handleVideoProgress = (videoId) => {
     markVideoAsCompleted(videoId);
@@ -102,6 +123,7 @@ const VideoPlayerPageLayout = () => {
     }
   };
 
+
   const videoPlayerWrapperClass = sidebarVisible ? styles.videoPlayerWrapper : `${styles.videoPlayerWrapper} ${styles.fullWidthVideoPlayer}`;
 
   return (
@@ -110,12 +132,19 @@ const VideoPlayerPageLayout = () => {
       <div className={styles.videoArea}>
         <div className={videoPlayerWrapperClass}>
           <VideoPlayer apiUrl={apiUrl} onToggleSidebar={handleToggleSidebar} isSidebarVisible={sidebarVisible} onVideoProgress={handleVideoProgress} />
-          <VideoPlayerNavBar sidebarVisible={sidebarVisible} setSidebarVisible={setSidebarVisible} />
+          <VideoPlayerNavBar 
+  sidebarVisible={sidebarVisible} 
+  setSidebarVisible={setSidebarVisible}  
+  onCourseContentClick={handleCourseContentClick} // Passing the function as a prop
+/>
           <div className={styles.outletArea}>
-            {renderComponentBasedOnHash(currentHash)}
-          </div>
+  {renderSidebarInOutlet ? <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} /> : renderComponentBasedOnHash(currentHash)}
+</div>
+
         </div>
-        {sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />}
+        {/* {!sidebarInOutlet && sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />} */}
+        {/* {sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />} */}
+        {!renderSidebarInOutlet && sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />}
       </div>
     </div>
   );

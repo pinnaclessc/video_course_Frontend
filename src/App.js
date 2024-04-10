@@ -76,6 +76,8 @@ import CourseContent from "./src-d/components/VideoPlayerPage/Navigations Compon
 import { VideoProvider } from './context/VideoContext';
 import ChapterAccordion from "./Components/Page02/ChapterAccordion";
 import UpdateCourseForm from "./Admin/Pages/UpdateCourseForm";
+import PDFViewer from "./layouts/PdfViewer";
+import YouTubePlayer from "./layouts/YoutubePlayer";
 
 
 export default function App() {
@@ -154,13 +156,15 @@ export default function App() {
           <Route path="/edit-chapter" element={<EditChapterForm/>}/>
 {/* //////////////////////////////////////////////////////////////////////////////////// */}
           <Route path="/myplayer/:courseId" element={<VideoPlayerPageLayout />}/>
+          <Route path="/pdfviewer/:pdfId" element={<PDFViewer />} />
+          <Route path="/youtubePlayer" element= {<YouTubePlayer videoId="9xwazD5SyVg" />}/>
         
         {/* working on that route */}
         {/* <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route> */}
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
         <Route path="/ucf/:courseId" element={<UpdateCourseForm />}></Route>
         
-        {/* **** */}
+        {/******/}
         </Routes>
     
         </Router>
