@@ -422,10 +422,14 @@
 
 .previous_next_buttons {
   left: 10px;
+  background-color: white;
+    opacity: 0.5;
 }
 
 .next_container {
   right: 10px;
+  background-color: white;
+    opacity: 0.5;
 }
 
 .previous_next_buttons button,

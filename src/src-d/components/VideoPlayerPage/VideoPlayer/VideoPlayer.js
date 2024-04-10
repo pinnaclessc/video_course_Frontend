@@ -18,7 +18,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
 
-const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com', onToggleSidebar, isSidebarVisible,onVideoProgress }) => {
+const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com', onToggleSidebar, isSidebarVisible, onVideoProgress }) => {
   const videoRef = useRef(null)
   const { selectedVideoId, videoQuality, onChangeQuality, navigateToNextVideo, navigateToPreviousVideo, videoDetails, setVideoDetails, markVideoAsCompleted } = useVideo();
   const [error, setError] = useState(false)
@@ -49,7 +49,6 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(0);
-  const [isSidebarBelowNavVisible, setIsSidebarBelowNavVisible] = useState(false);
   const [selectedQuality, setSelectedQuality] = useState()
   const [currentVideo, setCurrentVideo] = useState(null);
   const [selectedChapterIndex, setSelectedChapterIndex] = useState(0);
@@ -57,34 +56,36 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
   const [chapters, setChapters] = useState([]);
   const [videoUrl, setVideoUrl] = useState('');
   const [showControls, setShowControls] = useState(false);
+  const [centerButtonTimeout, setCenterButtonTimeout] = useState(null);
+
 
   const videoSource = videoDetails?.resolutions?.find(r => r.name === videoQuality)?.url || videoDetails?.defaultUrl;
 
   let hideControlsTimeout;
 
   const handleVideoHover = () => {
-    clearTimeout(hideControlsTimeout); 
+    clearTimeout(hideControlsTimeout);
     setShowControls(true);
   }
 
   const handleVideoLeave = () => {
-    // Set timeout to hide controls after 10s
+
     hideControlsTimeout = setTimeout(() => {
       setShowControls(false);
-    }, 5000); // 10000 ms = 10s
+    }, 5000);
   }
 
   let controlVisibilityTimeout;
 
   const resetControlVisibilityTimer = () => {
     clearTimeout(controlVisibilityTimeout);
-    setShowControls(true); // Show the controls immediately on any mouse movement or keyboard action
+    setShowControls(true);
 
     // Hide the controls after 5 seconds of inactivity
     if (isFullscreen) { // Only start the timer if the video is in fullscreen
       controlVisibilityTimeout = setTimeout(() => {
         setShowControls(false);
-      }, 5000); // Adjust time as needed
+      }, 5000);
     }
   };
 
@@ -102,54 +103,152 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
     };
   }, [isFullscreen]);
 
-  const handlePreviousVideo = () => {
-    if (selectedTopicIndex > 0) {
-      setSelectedTopicIndex(selectedTopicIndex - 1);
-    } else if (selectedChapterIndex > 0) {
-      setSelectedChapterIndex(selectedChapterIndex - 1);
-      setSelectedTopicIndex(chapters[selectedChapterIndex - 1].topics.length - 1);
-    }
-  };
+  // const handlePreviousVideo = () => {
+  //   if (selectedTopicIndex > 0) {
+  //     setSelectedTopicIndex(selectedTopicIndex - 1);
+  //   } else if (selectedChapterIndex > 0) {
+  //     setSelectedChapterIndex(selectedChapterIndex - 1);
+  //     setSelectedTopicIndex(chapters[selectedChapterIndex - 1].topics.length - 1);
+  //   }
+  // };
 
-  const handleNextVideo = () => {
-    if (selectedTopicIndex < chapters[selectedChapterIndex].topics.length - 1) {
-      setSelectedTopicIndex(selectedTopicIndex + 1);
-    } else if (selectedChapterIndex < chapters.length - 1) {
-      setSelectedChapterIndex(selectedChapterIndex + 1);
-      setSelectedTopicIndex(0);
-    }
-  };
+  // const handleNextVideo = () => {
+  //   if (selectedTopicIndex < chapters[selectedChapterIndex].topics.length - 1) {
+  //     setSelectedTopicIndex(selectedTopicIndex + 1);
+  //   } else if (selectedChapterIndex < chapters.length - 1) {
+  //     setSelectedChapterIndex(selectedChapterIndex + 1);
+  //     setSelectedTopicIndex(0);
+  //   }
+  // };
 
   /////////////////////////////////////////////////////
   // Fetch video details by selectedVideoId
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(`${apiUrl}/videos/${selectedVideoId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setVideoDetails(data);
-        setError(null);
-      })
-      .catch(error => {
-        console.error("Error fetching video details:", error);
-        setError(error.toString());
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [selectedVideoId, apiUrl, setVideoDetails]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetch(`${apiUrl}/videos/${selectedVideoId}`)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       setVideoDetails(data);
+  //       setError(null);
+  //     })
+  //     .catch(error => {
+  //       console.error("Error fetching video details:", error);
+  //       setError(error.toString());
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // }, [selectedVideoId, apiUrl, setVideoDetails]);
   // eslint-disable-next-line
+
+  // Setup HLS or src for the video player based on videoDetails from context
+  // useEffect(() => {
+  //   if (!videoDetails || !videoRef.current) return;
+
+  //   const videoSource = videoDetails.resolutions.find(r => r.name === videoQuality)?.url;
+  //   if (videoSource) {
+  //     if (Hls.isSupported()) {
+  //       const hls = new Hls();
+  //       hls.loadSource(videoSource);
+  //       hls.attachMedia(videoRef.current);
+  //     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+  //       videoRef.current.src = videoSource;
+  //     }
+  //   }
+  // }, [videoDetails, videoQuality]);
+
+
+  ///////////////////Working////////////////////
+  // useEffect(() => {
+  //   if (!videoDetails || !videoRef.current) return;
+
+  //   // Save the current play state and time
+  //   const wasPlaying = !videoRef.current.paused;
+  //   const currentTime = videoRef.current.currentTime;
+  //   const videoSource = videoDetails.resolutions.find(r => r.name === videoQuality)?.url;
+
+  //   if (videoSource) {
+  //     const loadVideo = () => {
+  //       if (Hls.isSupported()) {
+  //         const hls = new Hls();
+  //         hls.loadSource(videoSource);
+  //         hls.attachMedia(videoRef.current);
+  //         hls.on(Hls.Events.MANIFEST_PARSED, () => {
+  //           videoRef.current.currentTime = currentTime;
+  //           // Restore the play state after seeking to the currentTime
+  //           if (wasPlaying) {
+  //             videoRef.current.play().catch(e => console.error("Play failed", e));
+  //           }
+  //         });
+  //       } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+  //         videoRef.current.src = videoSource;
+  //         videoRef.current.addEventListener('loadedmetadata', () => {
+  //           videoRef.current.currentTime = currentTime;
+  //           // Restore the play state after seeking to the currentTime
+  //           if (wasPlaying) {
+  //             videoRef.current.play().catch(e => console.error("Play failed", e));
+  //           }
+  //         }, { once: true });
+  //       }
+  //     };
+
+  //     // Pause the video if it was playing, to avoid playing the old content while loading the new source
+  //     if (wasPlaying) videoRef.current.pause();
+  //     loadVideo();
+  //   }
+  // }, [videoQuality, videoDetails, videoRef]);
+
+  ///////////////////////////////////////////////////////////////////
+  // Fetch video details by selectedVideoId
+  // useEffect(() => {
+  //   const fetchVideoDetails = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const response = await fetch(`${apiUrl}/videos/${selectedVideoId}`);
+  //       const data = await response.json();
+  //       setVideoDetails(data);
+  //     } catch (error) {
+  //       console.error("Error fetching video details:", error);
+  //       setError(true);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   if (selectedVideoId) {
+  //     fetchVideoDetails();
+  //   }
+  // }, [apiUrl, selectedVideoId, setVideoDetails]);
+
+  useEffect(() => {
+    // Assuming you have a way to fetch video details based on selectedVideoId
+    // For demonstration, using a placeholder fetch function
+    const fetchVideoDetails = async () => {
+      // Placeholder fetch logic
+      try {
+        const response = await fetch(`${apiUrl}/videos/${selectedVideoId}`);
+        const data = await response.json();
+        setVideoDetails(data); 
+      } catch (error) {
+        console.error("Error fetching video details:", error);
+      }
+    };
+
+    if (selectedVideoId) {
+      fetchVideoDetails();
+    }
+  }, [apiUrl, selectedVideoId, setVideoDetails]);
 
   // Setup HLS or src for the video player based on videoDetails from context
   useEffect(() => {
     if (!videoDetails || !videoRef.current) return;
 
-    const videoSource = videoDetails.resolutions.find(r => r.name === videoQuality)?.url;
+    const videoSource = videoDetails.resolutions.find(r => r.name === videoQuality)?.url || videoDetails.defaultUrl;
     if (videoSource) {
       if (Hls.isSupported()) {
         const hls = new Hls();
@@ -160,7 +259,6 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
       }
     }
   }, [videoDetails, videoQuality]);
-
   /////////////////////////////////////////////////////////////
 
   // Function to change the quality of the video
@@ -205,7 +303,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
     const video = videoRef.current;
     if (video) {
       video.addEventListener('timeupdate', handleTimeUpdate);
-  
+
       return () => {
         video.removeEventListener('timeupdate', handleTimeUpdate);
       };
@@ -233,34 +331,49 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
     setIsNotesOpen(false)
   }
 
-  // const handleVideoHover = () => {
-  //   setIsHovered(true)
-  // }
 
-  // const handleVideoLeave = () => {
-  //   setIsHovered(false)
-  // }
-
-
-  // const handleTimeUpdate = () => {
-  //   setCurrentTime(videoRef.current.currentTime)
-  // }
-
-  ///////////if video is 80% completed thn video is completed/////////////////
   const handleTimeUpdate = () => {
-    const currentProgress = videoRef.current.currentTime / videoRef.current.duration;
-    const percentage = currentProgress * 100;
-    
-    setCurrentTime(videoRef.current.currentTime);
-    
-    // If the video has played 90%, mark it as completed
-    if (percentage >= 90) {
-      // Assuming `selectedVideoId` is the ID of the current video
-      // And there's a mechanism to prevent repeated calls for the same video
-      markVideoAsCompleted(selectedVideoId, true);
+    // Ensure videoRef.current exists before trying to access its properties
+    if (videoRef.current) {
+      const currentProgress = videoRef.current.currentTime / videoRef.current.duration;
+      const percentage = currentProgress * 100;
+
+      setCurrentTime(videoRef.current.currentTime);
+
+      // If the video has played 90%, mark it as completed
+      if (percentage >= 90) {
+        markVideoAsCompleted(selectedVideoId, true);
+      }
     }
   };
-  
+
+
+  useEffect(() => {
+    // Function that sets up event listeners
+    const subscribeToVideoEvents = () => {
+      const videoElement = videoRef.current;
+      if (videoElement) {
+        videoElement.addEventListener('timeupdate', handleTimeUpdate);
+      }
+    };
+
+    // Function that cleans up event listeners
+    const unsubscribeFromVideoEvents = () => {
+      const videoElement = videoRef.current;
+      if (videoElement) {
+        videoElement.removeEventListener('timeupdate', handleTimeUpdate);
+      }
+    };
+
+    // Subscribe when the component mounts or when videoSource changes
+    subscribeToVideoEvents();
+
+    // Unsubscribe when the component unmounts or when videoSource changes
+    return () => {
+      unsubscribeFromVideoEvents();
+    };
+  }, [videoSource]);
+
   //Handle Duration
   const formatTime = (videoLengthInSeconds) => {
     const hours = Math.floor(videoLengthInSeconds / 3600)
@@ -293,17 +406,48 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
   }, [currentTime])
 
   //PLAY AND PAUSE BUTTON
+  // const handlePlayPause = () => {
+  //   const video = videoRef.current
+  //   setShowCenterPlayButton(false)
+  //   if (video.paused) {
+  //     video.play()
+  //     setIsPlaying(true)
+  //   } else {
+  //     video.pause()
+  //     setIsPlaying(false)
+  //   }
+  // }
+
+
   const handlePlayPause = () => {
-    const video = videoRef.current
-    setShowCenterPlayButton(false)
-    if (video.paused) {
-      video.play()
-      setIsPlaying(true)
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Toggle play/pause
+    if (video.paused || video.ended) {
+      video.play();
+      setIsPlaying(true);
     } else {
-      video.pause()
-      setIsPlaying(false)
+      video.pause();
+      setIsPlaying(false);
     }
-  }
+
+    // Show the center play/pause button
+    setShowCenterPlayButton(true);
+
+    // Clear any previous timeout to avoid multiple timeouts running
+    if (centerButtonTimeout) {
+      clearTimeout(centerButtonTimeout);
+    }
+
+    // Set a new timeout to automatically hide the center play/pause button
+    const timeout = setTimeout(() => {
+      setShowCenterPlayButton(false);
+    }, 1000); // Adjust the duration as needed
+
+    setCenterButtonTimeout(timeout);
+  };
+
 
   const handleVideoTimeUpdate = () => {
     setCurrentTime(videoRef.current.currentTime)
@@ -370,71 +514,48 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
     }
   }
 
-  // const handleVideoClick = (event) => {
-  //   const clickedElement = event.target
-  //   const isSidebarElement = clickedElement.closest(".sidebar_container")
-
-  //   if (isSidebarElement) {
-  //     return
-  //   }
-  //   const isControlBarElement = clickedElement.closest(".control_btn_container")
-  //   if (isControlBarElement) {
-  //     return
-  //   }
-
-  //   handlePlayPause()
-  // }
-
-  // //Fullscreen
-  // const handleToggleFullScreen = () => {
-  //   const videoContainer = document.getElementById("video-container")
-
-  //   if (!document.fullscreenElement) {
-  //     // Enter fullscreen mode
-  //     if (videoContainer.requestFullscreen) {
-  //       videoContainer.requestFullscreen()
-  //     } else if (videoContainer.webkitRequestFullscreen) {
-  //       videoContainer.webkitRequestFullscreen()
-  //     } else if (videoContainer.mozRequestFullScreen) {
-  //       videoContainer.mozRequestFullScreen()
-  //     } else if (videoContainer.msRequestFullscreen) {
-  //       videoContainer.msRequestFullscreen()
-  //     }
-  //     setIsExpandedMode(false)
-  //     setIsFullscreen(true)
-  //   } else {
-  //     // Exit fullscreen mode
-  //     if (document.exitFullscreen) {
-  //       document.exitFullscreen()
-  //     } else if (document.webkitExitFullscreen) {
-  //       document.webkitExitFullscreen()
-  //     } else if (document.mozCancelFullScreen) {
-  //       document.mozCancelFullScreen()
-  //     } else if (document.msExitFullscreen) {
-  //       document.msExitFullscreen()
-  //     }
-  //     setIsExpandedMode(true)
-  //     setIsFullscreen(false)
-  //   }
-  // }
-
-  // const handleToggleExpandedMode = () => {
-  //   setIsExpandedMode(!isExpandedMode);
-  //   onToggleSidebar(); 
-  // };
-
   const handleVideoClick = (event) => {
-    const clickedElement = event.target
-    const isSidebarElement = clickedElement.closest(".sidebar_container")
-    if (isSidebarElement) {
-      return
+    event.stopPropagation();
+    const clickedElement = event.target;
+    const isSidebarElement = clickedElement.closest(".sidebar_container");
+    const isControlBarElement = clickedElement.closest(".control_btn_container");
+    const isPreviousElement = clickedElement.closest(".previous_next_buttons");
+    const isNextElement = clickedElement.closest(".next_container");
+
+    //this is to prevent play/pause on clicking particular places
+    if (isSidebarElement || isControlBarElement || isPreviousElement || isNextElement) {
+
+      return;
     }
-    const isControlBarElement = clickedElement.closest(".control_btn_container")
-    if (isControlBarElement) {
-      return
+    // Determine the current playing state before toggling
+    const currentlyPlaying = isPlaying;
+
+    // Toggle play/pause
+    handlePlayPause();
+
+    // Clear any existing timeout
+    if (centerButtonTimeout) {
+      clearTimeout(centerButtonTimeout);
+      setCenterButtonTimeout(null);
     }
-    handlePlayPause()
-  }
+
+    // Show the center button
+    setShowCenterPlayButton(true);
+
+    // If the video was playing, we're now pausing it, so show the pause button for 4 seconds
+    if (currentlyPlaying) {
+      const timeout = setTimeout(() => {
+        setShowCenterPlayButton(false);
+      }, 1000); // Hide after 2 seconds
+      setCenterButtonTimeout(timeout);
+    } else {
+      // If the video was paused, we're now playing it, so hide the play button after 4 seconds
+      const timeout = setTimeout(() => {
+        setShowCenterPlayButton(false);
+      }, 1000); // Hide after 4 seconds
+      setCenterButtonTimeout(timeout);
+    }
+  };
 
   //Fullscreen
   const handleToggleFullScreen = () => {
@@ -444,15 +565,15 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
         videoContainer.requestFullscreen();
       } else if (videoContainer.webkitRequestFullscreen) {
         videoContainer.webkitRequestFullscreen();
-      } // Add other vendor prefixes as needed
+      }
       setIsFullscreen(true);
-      resetControlVisibilityTimer(); // Reset the timer when entering fullscreen
+      resetControlVisibilityTimer();
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } // Add other vendor prefixes as needed
+      }
       setIsFullscreen(false);
-      setShowControls(true); // Ensure controls are visible when exiting fullscreen
+      setShowControls(true);
     }
   };
 
@@ -487,9 +608,31 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
       selectedChapter?.topics[selectedTopicIndex]?.selectedVideo || null;
 
   }, [selectedChapter, selectedTopicIndex]);
+
   const handleControlClick = (event) => {
     event.stopPropagation();
   };
+
+
+  useEffect(() => {
+    setShowCenterPlayButton(true);
+    const timeout = setTimeout(() => {
+      setShowCenterPlayButton(false);
+    }, 1000); // Adjust as needed
+
+    return () => clearTimeout(timeout);
+  }, [isPlaying]);
+
+  /////////////////////////////for next and previous button///////////////////
+  // Then, in your component where you define the next and previous button handlers:
+  const handleNextVideo = () => {
+    navigateToNextVideo(); // This now references the function from your context
+  };
+
+  const handlePreviousVideo = () => {
+    navigateToPreviousVideo(); // This now references the function from your context
+  };
+
   return (
     <>
       <div
@@ -505,7 +648,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
           <video
             className="video-element"
             ref={videoRef}
-            // src={videoUrl}
+            // src="https://www.youtube.com/watch?v=9xwazD5SyVg"
             type="application/x-mpegURL"
             onTimeUpdate={handleVideoTimeUpdate}
             onLoadedMetadata={handleVideoLoadedMetadata}
@@ -514,19 +657,16 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
             onCanPlayThrough={() => setError(false)}
             onError={handleVideoError}
             quality={videoQuality}
-            onClick={handlePlayPause}
-
-
           >
-            {videoSource && <source src={videoSource} type="application/x-mpegURL" />}
+            <source src= "https://www.youtube.com/watch?v=9xwazD5SyVg" type="video/mp4" />
+            {/* {videoSource && <source src={videoSource} type="application/x-mpegURL" />} */}
           </video>
         )}
 
-
         {showCenterPlayButton && (
-          <div className="center-play-pause-button">
-            {isPlaying ? <FaPause size={50} /> : <FaPlay size={50} />}
-          </div>
+          <button className="center-play-pause-button" onClick={handlePlayPause}>
+            {isPlaying ? <FaPause size={25} /> : <FaPlay size={25} />}
+          </button>
         )}
 
         <div id="submenu" className="submenu-title">
@@ -534,13 +674,22 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
           {selectedSubmenu}
         </div>
 
-        <div className="previous_next_buttons">
+        {/* <div className="previous_next_buttons">
           <button onClick={navigateToPreviousVideo}><FaChevronLeft /></button>
         </div>
 
         <div className="next_container">
           <button onClick={navigateToNextVideo}><FaChevronRight /></button>
+        </div> */}
+        <div className="previous_next_buttons">
+          <button onClick={navigateToPreviousVideo}><FaChevronLeft size={30} /></button>
         </div>
+
+        <div className="next_container">
+          <button onClick={navigateToNextVideo}><FaChevronRight size={30} /></button>
+        </div>
+
+
         <div className={`control-btn-container ${showControls ? 'show' : 'hide'}`} onClick={handleControlClick}>
           {/* Seekbar */}
           <SeekBar
@@ -553,7 +702,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
           {/* All Control Buttons */}
           <div className={`control_bar ${isFullscreen ? "fullscreen" : ""}`}>
             <div className="play_pause_container">
-              <PlayPauseButton videoRef={videoRef} />
+              <PlayPauseButton isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
             </div>
 
             {/* Backward button */}

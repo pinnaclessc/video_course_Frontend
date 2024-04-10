@@ -4,6 +4,7 @@ import styles from './Settings.module.css';
 import { useVideo } from '../../../../context/VideoContext';
 
 const Settings = () => {
+
   const { videoQuality, setVideoQuality, videoDetails } = useVideo();
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 

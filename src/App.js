@@ -65,6 +65,9 @@ import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
 import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
 import { VideoProvider } from './context/VideoContext';
 import ChapterAccordion from "./Components/Page02/ChapterAccordion";
+// import UpdateCourseForm from "./Admin/Pages/UpdateCourseForm";
+import PDFViewer from "./layouts/PdfViewer";
+import YouTubePlayer from "./layouts/YoutubePlayer";
 import UpdateCourseForm from "./AdminDashboard/Courses/Course_UpdateForm";
 import PaymentSuccessHandler from "./Components/Page02/PaymentSuccessHandler";
 export default function App() {
@@ -141,6 +144,8 @@ export default function App() {
           <Route path="/edit-chapter" element={<EditChapterForm/>}/>
 {/* //////////////////////////////////////////////////////////////////////////////////// */}
           <Route path="/myplayer/:courseId" element={<VideoPlayerPageLayout />}/>
+          <Route path="/pdfviewer/:pdfId" element={<PDFViewer />} />
+          <Route path="/youtubePlayer" element= {<YouTubePlayer videoId="9xwazD5SyVg" />}/>
         
         {/* working on that route */}
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>

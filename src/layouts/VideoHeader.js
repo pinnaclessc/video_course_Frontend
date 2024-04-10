@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { IoIosShareAlt, IoLogoFacebook, IoLogoTwitter, IoIosMail, IoLogoWhatsapp,IoMdClose } from "react-icons/io";
 import styles from './VideoHeader.module.css';
+import { useVideo } from '../context/VideoContext';
 
 const VideoHeader = () => {
   const apiUrl ="https://videocoursebackend.ssccglpinnacle.com"
@@ -13,6 +14,15 @@ const VideoHeader = () => {
   console.log(courseId);
   const totalCourseLength = 30;
   const userProgress = 20;
+  const auth = localStorage.getItem("user");
+  const getUserId = () => {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user)._id : null;
+  };
+
+  const { completedVideos } = useVideo();
+  const [progressPercentage, setProgressPercentage] = useState(0); 
+  const userId = getUserId();
   // const courseTitle = 'SSC CGL MATHEMATICS';
   const shareUrl = `https://www.videos.ssccglpinnacle.com/course/${courseId}`;
 
@@ -48,7 +58,36 @@ const VideoHeader = () => {
     navigator.clipboard.writeText(shareUrl);
   };
 
-  const progressPercentage = (userProgress / totalCourseLength) * 100;
+  
+// const calculateProgress = () => {
+//   if (!courseDetails) return 0;
+//   const totalTopics = courseDetails.chapters.reduce((acc, curr) => acc + curr.topics.length, 0);
+//   const completedTopics = courseDetails.chapters.flatMap(chapter => chapter.topics).filter(topic => topic.completedBy.includes(userId)).length; // Assuming you have a way to identify the current user's ID
+//   return (completedTopics / totalTopics) * 100;
+// };
+
+const calculateProgress = () => {
+  if (!courseDetails || !courseDetails.chapters) return 0;
+  const totalTopics = courseDetails.chapters.reduce((acc, curr) => acc + curr.topics.length, 0);
+  const completedTopics = courseDetails.chapters
+    .flatMap(chapter => chapter.topics)
+    .reduce((acc, topic) => acc + (completedVideos[topic.selectedVideo] ? 1 : 0), 0);
+
+  return (completedTopics / totalTopics) * 100;
+};
+useEffect(() => {
+  if (courseDetails?.chapters) {
+    const totalTopics = courseDetails.chapters.reduce((acc, chapter) => acc + chapter.topics.length, 0);
+    const completedTopics = courseDetails.chapters.flatMap(chapter => chapter.topics).reduce((acc, topic) => acc + (completedVideos[topic.selectedVideo] ? 1 : 0), 0);
+
+    const percentage = (completedTopics / totalTopics) * 100;
+    setProgressPercentage(percentage);
+  }
+}, [courseDetails, completedVideos]);
+// const progressPercentage = calculateProgress();
+
+// const progressPercentage = calculateProgress();
+  // const progressPercentage = (userProgress / totalCourseLength) * 100;
 
   const shareOnWhatsApp = () => {
     const text = `Check out this course I'm taking on SSC CGL MATHEMATICS! ${shareUrl}`;
@@ -66,10 +105,15 @@ const VideoHeader = () => {
 
       <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.title: "Loading...."}</h1>
 
-      <div className={styles.progressContainer}>
+      {/* <div className={styles.progressContainer}>
         <progress className={styles.videoContentProgress} value={userProgress} max={totalCourseLength}></progress>
         <span>{progressPercentage.toFixed(0)}% of course completed</span>
+      </div> */}
+<div className={styles.progressContainer}>
+        <progress className={styles.videoContentProgress} value={progressPercentage} max={100}></progress>
+        <span>{progressPercentage.toFixed(0)}% of course completed</span>
       </div>
+
 
       <button onClick={handleShareClick} className={styles.shareButton}>
         Share <IoIosShareAlt size={20} />
