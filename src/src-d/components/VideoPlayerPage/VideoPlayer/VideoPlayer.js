@@ -658,8 +658,8 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
             onError={handleVideoError}
             quality={videoQuality}
           >
-            <source src= "https://www.youtube.com/watch?v=9xwazD5SyVg" type="video/mp4" />
-            {/* {videoSource && <source src={videoSource} type="application/x-mpegURL" />} */}
+            {/* <source src= "https://www.youtube.com/watch?v=9xwazD5SyVg" type="video/mp4" /> */}
+            {videoSource && <source src={videoSource} type="application/x-mpegURL" />}
           </video>
         )}
 
