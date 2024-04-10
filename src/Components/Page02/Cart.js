@@ -64,34 +64,70 @@ const Cart = () => {
 
   const getPrice = () => {
     if (!price) return 0;
-
     let finalPrice = price;
     switch (selectedMonths) {
       case 6:
         finalPrice = price;
         break;
       case 12:
-        finalPrice = 2 * price * 0.9;
+        finalPrice = 2 * price * 0.9; // 10% discount
         break;
       case 18:
-        finalPrice = 3 * price * 0.85;
+        finalPrice = 3 * price * 0.85; // 15% discount
         break;
       case 24:
-        finalPrice = 4 * price * 0.8;
+        finalPrice = 4 * price * 0.8; // 20% discount
         break;
       default:
-        finalPrice = price; // Default case if none of the above matches
+        finalPrice = price;
         break;
     }
-
     return Math.round(finalPrice);
   };
 
-  const buycourseHandler = () => {
-    console.log(`user : ${user} and courseId : ${id} and month:${selectedMonths}and:${user.email} `)
-    // This will run after a successful payment
-    // navigate(`/MyLearningPage/${user._id}`);
+  const buycourseHandler = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user ? user._id : null;
+    const courseId = id;
+    const finalPrice = getPrice();
+    try {
+      const response = await fetch(`http://localhost:8000/vc/purchase/${userId}/${courseId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          courseId,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        console.log("Reached on Buy this course Handler")
+      
+        Swal.fire({
+          title: "Success!",
+          text: "Course purchased successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate(`/MyLearningPage/${userId}`);
+        });
+      } else {
+    
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to purchase course",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("Error during purchase:", error);
+     
+    }
   };
+  
 
   const wishlistHandler =async () => {
     const auth = localStorage.getItem("user");
@@ -104,7 +140,7 @@ const Cart = () => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const userId = user ? user._id : null;
-      const courseId = id
+      const courseId = id;
       const response = await fetch(
         `https://videocoursebackend.ssccglpinnacle.com/vc/addToWishlist/${userId}/${courseId}`,
         {
@@ -199,13 +235,15 @@ const Cart = () => {
             <p className={styles.months}>Months: {selectedMonths}</p>
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
-          <Payment user={user}
-                  courseId={id}
-                  finalPrice={getPrice()}
-                  selectedMonths={selectedMonths}
-                  userId={user?._id}
-                  userEmail={user?.email}
-                  onPaymentSuccess={buycourseHandler}/>
+          <Payment 
+            userName={user.name}
+            userEmail={user.email} 
+            userId={user._id}
+            courseId={id}
+            finalPrice={getPrice()}
+            selectedMonths={selectedMonths}
+            onPaymentSuccess={buycourseHandler} 
+          />
           <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
@@ -221,8 +259,12 @@ const Cart = () => {
         </div>
         {isShare && <Share />}
         <div className={styles["cart-wishlist-Btn-div"]}>
-        <button className={styles["cartBtn"]} onClick={cartHandler}><FaCartPlus /></button>
-        <button className={styles["wishListBtn"]} onClick={wishlistHandler}><IoHeartCircleOutline size={40} /></button>
+        <button className={styles["cartBtn"]} onClick={cartHandler}>
+            <FaCartPlus />
+          </button>
+          <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+            <IoHeartCircleOutline size={40} />
+          </button>
         </div>
       </div>
     </div>
@@ -317,49 +359,49 @@ export default Cart;
 //     return Math.round(finalPrice);
 //   };
 
-//   const buycourseHandler = async () => {
-//     const user = JSON.parse(localStorage.getItem("user"));
-//     const userId = user ? user._id : null;
-//     const courseId = params.id;
-//     const finalPrice = getPrice();
+  // const buycourseHandler = async () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   const userId = user ? user._id : null;
+  //   const courseId = params.id;
+  //   const finalPrice = getPrice();
   
-//     // Assuming you have the endpoint setup to mark a course as purchased.
-//     try {
-//       const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           userId,
-//           courseId,
-//         }),
-//       });
-//       const data = await response.json();
-//       if (data.success) {
+  //   // Assuming you have the endpoint setup to mark a course as purchased.
+  //   try {
+  //     const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/purchase/${userId}/${courseId}`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         userId,
+  //         courseId,
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     if (data.success) {
       
-//         Swal.fire({
-//           title: "Success!",
-//           text: "Course purchased successfully",
-//           icon: "success",
-//           confirmButtonText: "OK",
-//         }).then(() => {
-//           navigate(`/MyLearningPage/${userId}`);
-//         });
-//       } else {
+  //       Swal.fire({
+  //         title: "Success!",
+  //         text: "Course purchased successfully",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //       }).then(() => {
+  //         navigate(`/MyLearningPage/${userId}`);
+  //       });
+  //     } else {
     
-//         Swal.fire({
-//           title: "Error!",
-//           text: "Failed to purchase course",
-//           icon: "error",
-//           confirmButtonText: "OK",
-//         });
-//       }
-//     } catch (error) {
-//       console.error("Error during purchase:", error);
+  //       Swal.fire({
+  //         title: "Error!",
+  //         text: "Failed to purchase course",
+  //         icon: "error",
+  //         confirmButtonText: "OK",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error during purchase:", error);
      
-//     }
-//   };
+  //   }
+  // };
   
 
   // const wishlistHandler =async () => {
@@ -471,14 +513,14 @@ export default Cart;
 //         {showCoupon && <ApplyCoupon />}
 //         {isShare && <Share />}
 //         <div className={styles["cart-wishlist-Btn-div"]}>
-          // <button className={styles["cartBtn"]} onClick={cartHandler}>
-          //   <FaCartPlus />
-          //   {/* Other elements like text/span */}
-          // </button>
-          // <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
-          //   <IoHeartCircleOutline size={40} />
-          //   {/* Other elements like text/span */}
-          // </button>
+//           <button className={styles["cartBtn"]} onClick={cartHandler}>
+//             <FaCartPlus />
+//             {/* Other elements like text/span */}
+//           </button>
+//           <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+//             <IoHeartCircleOutline size={40} />
+//             {/* Other elements like text/span */}
+//           </button>
 //         </div>
 //       </div>
 //     </div>
@@ -799,13 +841,13 @@ export default Cart;
   //       </div>
   //       {isShare && <Share />}
   //       <div className={styles["cart-wishlist-Btn-div"]}>
-  //         <button className={styles["cartBtn"]} onClick={cartHandler}>
-  //           <FaCartPlus />
-  //           {/* <span>Add To Cart</span> */}
-  //         </button>
-  //         <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
-  //           <IoHeartCircleOutline size={40} />
-  //         </button>
+          // <button className={styles["cartBtn"]} onClick={cartHandler}>
+          //   <FaCartPlus />
+          //   {/* <span>Add To Cart</span> */}
+          // </button>
+          // <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+          //   <IoHeartCircleOutline size={40} />
+          // </button>
   //       </div>
   //     </div>
   //   </div>

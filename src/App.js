@@ -66,6 +66,7 @@ import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
 import { VideoProvider } from './context/VideoContext';
 import ChapterAccordion from "./Components/Page02/ChapterAccordion";
 import UpdateCourseForm from "./AdminDashboard/Courses/Course_UpdateForm";
+import PaymentSuccessHandler from "./Components/Page02/PaymentSuccessHandler";
 export default function App() {
   return (
     <>
@@ -142,9 +143,9 @@ export default function App() {
           <Route path="/myplayer/:courseId" element={<VideoPlayerPageLayout />}/>
         
         {/* working on that route */}
-        {/* <Route path="/myPlayer/:courseId" element={<VideoPlayerPageLayout />}></Route> */}
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
         <Route path="/ucf/:courseId" element={<UpdateCourseForm />}></Route>
+        <Route path="/paymentSuccessHandler/:userId/:{courseId" element={<PaymentSuccessHandler/>}></Route>
         {/* **** */}
         </Routes>
     

@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios'; // Import axios for making HTTP requests
 import { load } from "@cashfreepayments/cashfree-js";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
-// const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
-  const Payment = ({ user, courseId, finalPrice, selectedMonths, userId, userEmail, onPaymentSuccess }) => {
+const Payment = ({ userName, userEmail, userId, courseId, finalPrice, selectedMonths, onPaymentSuccess }) => {
   const [cashfree, setCashfree] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const initializeSDK = async () => {
-      try {
+      try{
         const sdk = await load({
-          mode: "production", // or "test" depending on your environment
+          mode: "sandbox",
         });
         setCashfree(sdk);
       } catch (error) {
@@ -23,28 +21,19 @@ import { useNavigate } from "react-router-dom";
   }, []);
 
   const createOrder = async () => {
-    console.log("Preparing for Payment:");
-    console.log(`Course ID: ${courseId}, User ID: ${userId}, User Email: ${userEmail}, Selected Months: ${selectedMonths}, Final Price: ${finalPrice}`);
     try {
-
-      const response = await fetch("https://videocoursebackend.ssccglpinnacle.com/payment-for-upi", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email_id: user.email,
-          orderAmount: finalPrice.toString(),
-          courseId: courseId,
-          customerId: user._id,
-          
-        }
-      ),
-        
+      // Modify the request body to include userName, userEmail, userId, and selectedMonths
+      const response = await axios.post("http://localhost:8000/payment-for-upi", {
+        userName,
+        userEmail,
+        userId,
+        courseId,
+        orderAmount: finalPrice.toString(),
+        selectedMonths,
       });
 
-      if (response.ok) {
-        const responseData = await response.json();
+      if (response.status === 200) {
+        const responseData = response.data;
         doPayment(responseData.message);
       } else {
         console.error("Failed to create payment order:", response.status);
@@ -60,8 +49,10 @@ import { useNavigate } from "react-router-dom";
         paymentSessionId: sessionId,
         redirectTarget: "_self",
       }).then((response) => {
-        if (response.status === 'OK') { // Check if the response contains the status and is 'OK' for a successful payment
-          onPaymentSuccess();
+        if (response.status === 'OK') {
+          console.log("reach on onPaymentSuccess function  ")
+        onPaymentSuccess();
+
         } else {
           Swal.fire({
             title: "Payment Failed",
@@ -79,34 +70,31 @@ import { useNavigate } from "react-router-dom";
   };
 
   return (
-    <button onClick={createOrder}>
-      Buy This Course
-    </button>
+    <div>
+      <button onClick={createOrder}>Buy This Course</button>
+    </div>
   );
 };
 
 export default Payment;
 
-
-
-
 // import React, { useEffect, useState } from "react";
+// import axios from 'axios'; // Import axios for making HTTP requests
 // import { load } from "@cashfreepayments/cashfree-js";
-// import { BsCart2 } from "react-icons/bs";
+// import Swal from "sweetalert2";
 
-// const Payment = ({ user, subtotal }) => {
+// const Payment = ({ user, courseId, finalPrice, onPaymentSuccess }) => {
 //   const [cashfree, setCashfree] = useState(null);
 
 //   useEffect(() => {
 //     const initializeSDK = async () => {
 //       try {
 //         const sdk = await load({
-//           mode: "production", // Change this to "production" when you're ready to go live
+//           mode: "sandbox", // Use "sandbox" for testing
 //         });
 //         setCashfree(sdk);
 //       } catch (error) {
 //         console.error("Error initializing Cashfree SDK:", error);
-//         // Handle initialization error, if any
 //       }
 //     };
 //     initializeSDK();
@@ -114,56 +102,56 @@ export default Payment;
 
 //   const createOrder = async () => {
 //     try {
-//       const response = await fetch("https://videocoursebackend.ssccglpinnacle.com/payment-for-upi", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         // body: JSON.stringify({ email_id: "shakshisinha@ssccglpinnacle.com" }),
-//         body: JSON.stringify({
-//           email_id: "shakshisinha@ssccglpinnacle.com", // Assuming user.email contains the user's email address
-//         //   orderAmount: subtotal, // Pass the subtotal as orderAmount
-//         //   customerDetails:  user.username,
-//         //   customerId: user.id,
-//         //   customerPhone:"7877481590"
-//             // Pass the customer details (e.g., username)
-//         }),
+//       // Using axios for the POST request
+//       const response = await axios.post("http://localhost:8000/payment-for-upi", {
+//         email_id: user.email,
+//         orderAmount: finalPrice.toString(),
+//         courseId: courseId,
+//         customerId: user._id,
 //       });
 
-//       if (response.ok) {
-//         const responseData = await response.json();
+//       if (response.status === 200) {
+//         const responseData = response.data;
 //         doPayment(responseData.message);
 //       } else {
-//         console.error("Response Error:", response.status);
-//         // Handle response error, if any
+//         console.error("Failed to create payment order:", response.status);
 //       }
 //     } catch (error) {
-//       console.error("Error fetching data:", error);
-//       // Handle fetch error, if any
+//       console.error("Error creating payment order:", error);
 //     }
 //   };
 
-//   const doPayment = (id) => {
+//   const doPayment = (sessionId) => {
 //     if (cashfree) {
-//       const checkoutOptions = {
-//         paymentSessionId: id,
+//       cashfree.checkout({
+//         paymentSessionId: sessionId,
 //         redirectTarget: "_self",
-//       };
-//       cashfree.checkout(checkoutOptions);
+//       }).then((response) => {
+//         if (response.status === 'OK') {
+//           onPaymentSuccess();
+//         } else {
+//           Swal.fire({
+//             title: "Payment Failed",
+//             text: "Your payment was not successful, please try again.",
+//             icon: "error",
+//             confirmButtonText: "OK",
+//           });
+//         }
+//       }).catch((error) => {
+//         console.error("Payment process error:", error);
+//       });
 //     } else {
 //       console.error("Cashfree SDK not initialized.");
 //     }
 //   };
 
-//   const payMe = () => {
-//     createOrder();
-//   }; 
-
 //   return (
-//     <div onClick={payMe}>
-//       Buy This Course
+//     <div>
+//       <button onClick={createOrder}>Pay Now</button>
 //     </div>
 //   );
 // };
 
 // export default Payment;
+
+
