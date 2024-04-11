@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './AddTopicForm.module.css';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
 const AddTopicForm = () => {
   const [courses, setCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState('');
@@ -15,21 +11,13 @@ const AddTopicForm = () => {
   const [pdfTitle, setPdfTitle] = useState('');
   const [selectedPdf, setSelectedPdf] = useState('');
   const [availableVideos, setAvailableVideos] = useState([]);
-<<<<<<< HEAD
   const [availablePdfs, setAvailablePdfs] = useState([]);
-=======
-  const [availablePdfs, setAvailablePdfs] = useState([]); // Initialize as an empty array
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
 
   useEffect(() => {
     // Fetch the list of courses
     const fetchCourses = async () => {
       try {
-<<<<<<< HEAD
-        const response = await fetch('http://13.200.156.92:8000/api/courses');
-=======
-        const response = await fetch('http://localhost:8000/api/courses');
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
+        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/api/courses');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -54,11 +42,7 @@ const AddTopicForm = () => {
       if (!selectedCourse) return;
 
       try {
-<<<<<<< HEAD
-        const response = await fetch(`http://13.200.156.92:8000/vc/api/chapters/${selectedCourse}`);
-=======
-        const response = await fetch(`http://localhost:8000/vc/api/chapters/${selectedCourse}`);
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
+        const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/vc/api/chapters/${selectedCourse}`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -84,24 +68,15 @@ const AddTopicForm = () => {
       if (!selectedCourse) return;
 
       try {
-<<<<<<< HEAD
         const videosResponse = await fetch(`http://13.200.156.92:8000/api/videos/${selectedCourse}`);
-=======
-        const videosResponse = await fetch(`http://localhost:8000/api/videos/${selectedCourse}`);
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
         if (!videosResponse.ok) {
           throw new Error(`HTTP error! Status: ${videosResponse.status}`);
         }
         const videosData = await videosResponse.json();
         setAvailableVideos(videosData);
 
-<<<<<<< HEAD
-        const pdfsResponse = await fetch(`http://13.200.156.92:8000/api/pdfs/${selectedCourse}`);
+        const pdfsResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/pdfs/${selectedCourse}`);
 
-=======
-        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/${selectedCourse}`);
-  
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
 
         if (!pdfsResponse.ok) {
           throw new Error(`HTTP error! Status: ${pdfsResponse.status}`);
@@ -117,22 +92,6 @@ const AddTopicForm = () => {
   }, [selectedCourse]);
 
   const handleAddTopic = async () => {
-<<<<<<< HEAD
-    if (!selectedChapter || !videoTitle || !selectedVideo || !pdfTitle || !selectedPdf) {
-      console.error('Incomplete data. Please fill in all required fields.');
-      window.alert('Incomplete data. Please fill in all required fields.');
-      return;
-    }
-
-    const newTopic = {
-      videoTitle,
-      selectedVideo,
-      pdfTitle,
-      selectedPdf,
-    };
-
-    try {
-=======
     // Validate inputs
     if (!selectedCourse || !selectedChapter || !videoTitle || !selectedVideo) {
       console.error('Incomplete data. Please fill in all required fields.');
@@ -148,7 +107,6 @@ const AddTopicForm = () => {
         completed: [],
       };
 
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       const response = await fetch(`http://localhost:8000/api/chapters/${selectedChapter}/add-topic`, {
         method: 'POST',
         headers: {
@@ -161,23 +119,16 @@ const AddTopicForm = () => {
         throw new Error('Failed to add topic');
       }
 
-<<<<<<< HEAD
       // Success logic here
       console.log('Topic added successfully');
       window.alert('Topic added successfully!');
 
       // Reset the form state here
-=======
-      console.log('Topic added successfully');
-
-      // Clear form fields after successful addition
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       setVideoTitle('');
       setSelectedVideo('');
       setPdfTitle('');
       setSelectedPdf('');
     } catch (error) {
-<<<<<<< HEAD
       console.error('Error adding topic:', error);
       window.alert('Error adding topic. Please try again.');
     }
@@ -186,14 +137,6 @@ const AddTopicForm = () => {
 
   return (
     <div className={styles['topic-form']}>
-=======
-      console.error('Error adding topic:', error.message);
-    }
-  };
-
-  return (
-    <div className={styles.container}>
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       <label>
         Select Course:
         <select name="course" value={selectedCourse} onChange={(e) => setSelectedCourse(e.target.value)}>
@@ -217,11 +160,7 @@ const AddTopicForm = () => {
       </label>
 
       <label>
-<<<<<<< HEAD
         Topic Title:
-=======
-        Video Title:
->>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
         <input type="text" value={videoTitle} onChange={(e) => setVideoTitle(e.target.value)} />
       </label>
 

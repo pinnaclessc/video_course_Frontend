@@ -7,7 +7,7 @@ export default function AllCourses() {
   const [loading, setLoading] = useState(true); // Initialize loading state to true
 
   useEffect(() => {
-    fetch("http://localhost:8000/courses")
+    fetch("https://videocoursebackend.ssccglpinnacle.com/courses")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -25,7 +25,7 @@ export default function AllCourses() {
     const confirm = window.confirm("Are you sure you want to delete this course?");
     if (confirm) {
       try {
-        let response = await fetch(`http://13.200.156.92:8000/course/${id}`, { method: "DELETE" });
+        let response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${id}`, { method: "DELETE" });
         if (response.ok) {
           setCourses(courses.filter(course => course._id !== id)); // Optimistically remove the course from UI
         } else {
@@ -42,7 +42,7 @@ export default function AllCourses() {
     if (!key) {
       setLoading(true);
       // Reload the courses if the search key is cleared
-      fetch("http://localhost:8000/courses")
+      fetch("https://videocoursebackend.ssccglpinnacle.com/courses")
         .then((response) => response.json())
         .then((data) => {
           if (Array.isArray(data)) {
