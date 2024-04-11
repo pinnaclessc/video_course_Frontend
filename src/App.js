@@ -62,7 +62,6 @@ import ShowCourseContent from "./Admin/Pages/ShowCourseContent";
 import InstructorForm from "./AdminDashboard/Instructor/InstructorForm";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import VideoUpload from "./AdminDashboard/VideoForm/VideoUpload";
-import EditChapterForm from "./AdminDashboard/AddChapterData/EditChapterData";
 import { VideoProvider } from './context/VideoContext';
 import ChapterAccordion from "./Components/Page02/ChapterAccordion";
 // import UpdateCourseForm from "./Admin/Pages/UpdateCourseForm";
@@ -70,6 +69,8 @@ import PDFViewer from "./layouts/PdfViewer";
 import YouTubePlayer from "./layouts/YoutubePlayer";
 import UpdateCourseForm from "./AdminDashboard/Courses/Course_UpdateForm";
 import PaymentSuccessHandler from "./Components/Page02/PaymentSuccessHandler";
+import StudentList from "./AdminDashboard/studentFrom/StudentList";
+import StudentUpdateForm from "./AdminDashboard/studentFrom/StudentUpdateForm";
 export default function App() {
   return (
     <>
@@ -141,7 +142,6 @@ export default function App() {
           <Route path="/signuphelp" element={<SignUpHelp />} />
           <Route path="/account-main" element={<AccountMain />} />
           <Route path="/troubleshooting" element={<TroubleshootingHelp />}/>
-          <Route path="/edit-chapter" element={<EditChapterForm/>}/>
 {/* //////////////////////////////////////////////////////////////////////////////////// */}
           <Route path="/myplayer/:courseId" element={<VideoPlayerPageLayout />}/>
           <Route path="/pdfviewer/:pdfId" element={<PDFViewer />} />
@@ -151,6 +151,9 @@ export default function App() {
         <Route path="/chapterAccordion" element={<ChapterAccordion />}></Route>
         <Route path="/ucf/:courseId" element={<UpdateCourseForm />}></Route>
         <Route path="/paymentSuccessHandler/:userId/:{courseId" element={<PaymentSuccessHandler/>}></Route>
+        <Route path="/stL" element={<StudentList/>}></Route>
+        <Route path="/stUL/:id" element={<StudentUpdateForm/>}></Route>
+        <Route path="/editChapter" element={<StudentUpdateForm/>}></Route>
         {/* **** */}
         </Routes>
     

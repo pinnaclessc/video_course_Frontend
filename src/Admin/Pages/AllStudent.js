@@ -6,7 +6,7 @@ export default function AllStudent() {
   const [students, setStudents] = useState([]);
   
   useEffect(() => {
-    fetch("http://13.200.156.92:8000/student")
+    fetch("http://localhost:8000/vc/allStudents")
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -23,7 +23,7 @@ export default function AllStudent() {
     const confirm = window.confirm("Are you sure you want to delete?");
     if (confirm) {
       try {
-        await fetch(`http://localhost:8000/student/${id}`, { method: "DELETE" });
+        await fetch(`http://localhost:8000/vc/student/${id}`, { method: "DELETE" });
         setStudents(students.filter(student => student._id !== id)); // Optimistically remove the student from UI
       } catch (error) {
         console.error("Error deleting student:", error);
@@ -52,7 +52,7 @@ export default function AllStudent() {
               <td>{student.purchasedCourses.length}</td>
               <td>
                 <button onClick={() => deleteHandler(student._id)} className={styles.deleteBtn}>Delete</button>
-                <Link to={`/admin/updateStudent/${student._id}`} className={styles.editLink}>Edit</Link>
+                <Link to={`/stUL/${student._id}}`} className={styles.editLink}>Edit</Link>
               </td>
             </tr>
           )) : <tr><td colSpan="5">No Data Found</td></tr>}

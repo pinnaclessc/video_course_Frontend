@@ -1,0 +1,76 @@
+.Show-container {
+    margin: 20px;
+  }
+  
+  .selectLabel {
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .selectInput {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .chapterContainer {
+    margin-top: 20px;
+  }
+  
+  .Show-chapter {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .Show-chapterTitle {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .topicList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .topicItem {
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding: 10px;
+  }
+  
+  .topicTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .Show-editLink,
+  .Show-DeleteBTN {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .Show-editLink:hover,
+  .Show-DeleteBTN:hover {
+    background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+    .topicTitle {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .Show-editLink,
+    .Show-DeleteBTN {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  }
+  

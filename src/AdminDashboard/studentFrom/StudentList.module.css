@@ -1,0 +1,84 @@
+.studentListContainer {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+  }
+  
+  .studentTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .studentTable th,
+  .studentTable td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .studentTable th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .studentTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .studentTable .DeleteBTN,
+  .studentTable .editLink {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .studentTable .DeleteBTN {
+    background-color: #ff4d4f;
+    color: white;
+  }
+  
+  .studentTable .editLink {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .searchBar {
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .pagination button {
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .pagination .active {
+    background-color: #007bff;
+    color: white;
+  }
+  
