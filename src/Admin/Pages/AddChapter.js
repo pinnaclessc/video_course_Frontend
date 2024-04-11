@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // import React, { useState, useEffect } from "react";
 // import styles from "./AddChapter.module.css";
+=======
+import React, { useState, useEffect } from 'react';
+import styles from './AddChapter.module.css';
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
 
 // const AddChapterForm = () => {
 //   const [videoTitle, setVideoTitle] = useState("");
@@ -265,6 +270,7 @@ const AddChapterForm = () => {
   const [pdfTitle, setPdfTitle] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
   const [courses, setCourses] = useState([]);
+<<<<<<< HEAD
   const [selectedCourse, setSelectedCourse] = useState("");
   const [chapterTitle, setChapterTitle] = useState("");
   const [availableVideos, setAvailableVideos] = useState([]);
@@ -276,22 +282,48 @@ const AddChapterForm = () => {
   const [forpdf, setForPdf] = useState("");
   const [forvideo, setForVideo] = useState("");
   const [currentCourseId, setCurrentCourseId] = useState("");
+=======
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [chapterTitle, setChapterTitle] = useState('');
+  const [availableVideos, setAvailableVideos] = useState([]);
+  const [availablePdfs, setAvailablePdfs] = useState([]);
+  const [currentTitle, setCurrentTitle] = useState('');
+  const [currentSelectedVideo, setCurrentSelectedVideo] = useState('');
+  const [currentPdfTitle, setCurrentPdfTitle] = useState('');
+  const [currentSelectedPdf, setCurrentSelectedPdf] = useState('');
+  const [forpdf, setForPdf] = useState('');
+  const [forvideo, setForVideo] = useState('');
+  const [currentCourseId, setCurrentCourseId] = useState('');
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
+<<<<<<< HEAD
         const response = await fetch("http://13.200.156.92:8000/api/courses");
+=======
+        const response = await fetch('http://localhost:8000/api/courses');
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
         setCourses(data);
 
+<<<<<<< HEAD
         const firstCourseId = data.length > 0 ? data[0]._id : "";
         setCurrentCourseId(firstCourseId);
         setSelectedCourse(firstCourseId);
       } catch (error) {
         console.error("Error fetching courses:", error);
+=======
+        // Extract course_id and set it in state
+        const firstCourseId = data.length > 0 ? data[0]._id : '';
+        setCurrentCourseId(firstCourseId);
+        setSelectedCourse(firstCourseId); 
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       }
     };
 
@@ -345,16 +377,58 @@ const AddChapterForm = () => {
     availablePdfs,
   ]);
 
+  useEffect(() => {
+    const fetchVideosAndPdfs = async () => {
+      try {
+        const videosResponse = await fetch(`http://localhost:8000/api/videos/${selectedCourse}`);
+        if (!videosResponse.ok) {
+          throw new Error(`HTTP error! Status: ${videosResponse.status}`);
+        }
+        const videosData = await videosResponse.json();
+        setAvailableVideos(videosData);
+
+        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/${selectedCourse}`);
+        if (!pdfsResponse.ok) {
+          throw new Error(`HTTP error! Status: ${pdfsResponse.status}`);
+        }
+        const pdfsData = await pdfsResponse.json();
+        setAvailablePdfs(pdfsData);
+      } catch (error) {
+        console.error('Error fetching videos and PDFs:', error);
+      }
+    };
+
+    if (selectedCourse) {
+      fetchVideosAndPdfs();
+    }
+  }, [selectedCourse]);
+
+  useEffect(() => {
+    const videoData = availableVideos.find((video) => video.s3Key === currentSelectedVideo);
+    const pdfData = availablePdfs.find((pdf) => pdf.s3Key === currentSelectedPdf);
+    setForVideo(videoData ? videoData.url : '');
+    setForPdf(pdfData ? pdfData.url : '');
+  }, [currentSelectedVideo, currentSelectedPdf, availableVideos, availablePdfs]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "course") {
       setSelectedCourse(value);
+<<<<<<< HEAD
       setCurrentCourseId(value);
       setVideoTitle("");
       setVideoUrl("");
       setPdfTitle("");
       setPdfUrl("");
     } else if (name === "chapterTitle") {
+=======
+      setCurrentCourseId(value); 
+      setVideoTitle('');
+      setVideoUrl('');
+      setPdfTitle('');
+      setPdfUrl('');
+    } else if (name === 'chapterTitle') {
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       setChapterTitle(value);
     } else {
       if (name === "videoTitle") setVideoTitle(value);
@@ -365,12 +439,12 @@ const AddChapterForm = () => {
       else if (name === "currentPdfTitle") setCurrentPdfTitle(value);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const newTopic = {
+<<<<<<< HEAD
         videoTitle: currentTitle || "Default Video Title",
         selectedVideo: currentSelectedVideo,
         pdfTitle: pdfTitle || "Default PDF Title",
@@ -383,11 +457,24 @@ const AddChapterForm = () => {
       );
       const selectedCourseId = selectedCourseObject._id;
 
+=======
+        videoTitle: currentTitle || 'Default Video Title',
+        selectedVideo: currentSelectedVideo,
+        pdfTitle,
+        selectedPdf: currentSelectedPdf,
+        completed: [],
+      };
+  
+      const selectedCourseObject = courses.find((course) => course._id === selectedCourse);
+      const selectedCourseId = selectedCourseObject._id;
+  
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       const newChapter = {
         chapterTitle: chapterTitle || selectedCourseObject.courseTitle,
         course: selectedCourseId,
         topics: [newTopic],
       };
+<<<<<<< HEAD
 
       const response = await fetch(
         "http://13.200.156.92:8000/vc/api/chapters",
@@ -421,11 +508,51 @@ const AddChapterForm = () => {
       setCurrentSelectedPdf("");
     } catch (error) {
       console.error("Error adding chapter:", error.message);
+=======
+  
+      console.log('Sending data to server:', newChapter);
+  
+      const response = await fetch('http://localhost:8000/vc/api/chapters', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newChapter),
+      });
+  
+      console.log('Server response:', response);
+  
+      if (!response.ok) {
+        throw new Error('Failed to add chapter');
+      }
+  
+      const result = await response.json();
+      console.log('Chapter added successfully:', result);
+  
+      // Reset form fields
+      setVideoTitle('');
+      setVideoUrl('');
+      setPdfTitle('');
+      setPdfUrl('');
+      setSelectedCourse('');
+      setChapterTitle('');
+      setCurrentTitle('');
+      setCurrentSelectedVideo('');
+      setCurrentPdfTitle('');
+      setCurrentSelectedPdf('');
+    } catch (error) {
+      console.error('Error adding chapter:', error.message);
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
     }
   };
+  
 
   return (
+<<<<<<< HEAD
     <form onSubmit={handleSubmit} className={styles["AddChapter-wrapper"]}>
+=======
+    <form onSubmit={handleSubmit} className={styles["AddChapter-wraper"]}>
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
       <label>
         Select Course:
         <select
@@ -460,12 +587,20 @@ const AddChapterForm = () => {
           <div>
             <input
               type="text"
+<<<<<<< HEAD
               placeholder="Enter Topic Title"
+=======
+              placeholder="Enter Video Title"
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
               value={currentTitle}
               onChange={(e) => setCurrentTitle(e.target.value)}
             />
             <select
+<<<<<<< HEAD
               value={currentSelectedVideo || ""}
+=======
+              value={currentSelectedVideo || ''}
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
               onChange={(e) => setCurrentSelectedVideo(e.target.value)}
             >
               <option value="" disabled>
@@ -481,11 +616,19 @@ const AddChapterForm = () => {
             <input
               type="text"
               placeholder="Enter PDF Title"
+<<<<<<< HEAD
               value={pdfTitle}
               onChange={(e) => setPdfTitle(e.target.value)}
             />
             <select
               value={currentSelectedPdf || ""}
+=======
+              value={currentPdfTitle}
+              onChange={(e) => setCurrentPdfTitle(e.target.value)}
+            />
+            <select
+              value={currentSelectedPdf || ''}
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
               onChange={(e) => setCurrentSelectedPdf(e.target.value)}
             >
               <option value="" disabled>
@@ -493,6 +636,10 @@ const AddChapterForm = () => {
               </option>
               {availablePdfs.map((pdf) => (
                 <option key={pdf.s3Key} value={pdf.cloudFrontUrl}>
+<<<<<<< HEAD
+=======
+                  {/* {pdf.s3Key} */}
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8
                   {pdf.originalname}
                 </option>
               ))}
@@ -505,5 +652,9 @@ const AddChapterForm = () => {
   );
 };
 
+<<<<<<< HEAD
 export default AddChapterForm;
 
+=======
+export default AddTopicForm;
+>>>>>>> bc38ad3a6b7ddde425984e296eed7064852f45f8

@@ -156,7 +156,5 @@ export default function App() {
     
         </Router>
         </VideoProvider>
-
-    </>
-  );
-}
+        </>
+)}

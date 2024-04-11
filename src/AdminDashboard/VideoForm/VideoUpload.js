@@ -13,7 +13,7 @@ function VideoUploadForm() {
     const fileInputRef = useRef(null);
     
     useEffect(() => {
-        axios.get('http://localhost:8000/courses')
+        axios.get('https://videocoursebackend.ssccglpinnacle.com/courses')
             .then(response => {
                 setCourses(response.data);
             })

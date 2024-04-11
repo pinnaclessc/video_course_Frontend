@@ -9,12 +9,35 @@ const PdfUploadForm = () => {
   const [uploadStatus, setUploadStatus] = useState('idle');
   const fileInputRef = useRef(null);
 
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/courses')
+  //     .then(response => response.json())
+  //     .then(data => setCourses(data))
+  //     .catch(error => console.error('Error fetching courses:', error));
+  // }, []);
+
   useEffect(() => {
-    fetch('http://localhost:8000/courses')
-      .then(response => response.json())
-      .then(data => setCourses(data))
-      .catch(error => console.error('Error fetching courses:', error));
+    fetch('https://videocoursebackend.ssccglpinnacle.com/courses')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+       
+        if (Array.isArray(data)) {
+          setCourses(data);
+        } else {
+          throw new Error('Data is not an array');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching courses or data format error:', error);
+        setCourses([]); 
+      });
   }, []);
+  
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
