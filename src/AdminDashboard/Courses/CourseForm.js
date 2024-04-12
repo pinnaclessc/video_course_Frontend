@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 import { Editor, EditorState, RichUtils, Modifier } from 'draft-js';
-import { stateToHTML } from 'draft-js-export-html'; // Import stateToHTML
+import { stateToHTML } from 'draft-js-export-html'; 
 import 'draft-js/dist/Draft.css';
 import Swal from 'sweetalert2';
 import styles from './CourseForm.module.css';
@@ -16,7 +16,7 @@ const CourseForm = () => {
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [urlValue, setUrlValue] = useState("");
   const [courseData, setCourseData] = useState({
-    title: '',
+    courseTitle: '',
     shortDescription: '',
     category: '',
     instructorName: '',
@@ -117,7 +117,7 @@ const CourseForm = () => {
     });
 
     try {
-      await axios.post('https://videocoursebackend.ssccglpinnacle.com/create-course', formData, {
+      await axios.post('http://localhost:8000/create-course', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -131,6 +131,7 @@ const CourseForm = () => {
       setLoading(false);
     }
   };
+
   const transformText = (transformation) => {
     const selection = editorState.getSelection();
     if (!selection.isCollapsed()) {
@@ -155,8 +156,8 @@ const CourseForm = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
-        <label>Title:</label>
-        <input type="text" name="title" value={courseData.title} onChange={handleChange} required />
+        <label>Course Title:</label>
+        <input type="text" name="courseTitle" value={courseData.title} onChange={handleChange} required />
 
         <label>Short Description:</label>
         <textarea name="shortDescription" value={courseData.shortDescription} onChange={handleChange} required />

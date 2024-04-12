@@ -15,7 +15,7 @@ const ChapterForm = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/courses');
+        const response = await fetch('http://localhost:8000/courses');
         const data = await response.json();
         setCourses(data);
       } catch (error) {
@@ -123,7 +123,7 @@ const ChapterForm = () => {
       >
         <option value="" disabled style={{ color: 'gray' }}>Select a Course</option>
         {courses.map((course) => (
-          <option key={course._id} value={course._id}>{course.title}</option>
+          <option key={course._id} value={course._id}>{course.courseTitle}</option>
         ))}
       </select>
       

@@ -17,7 +17,7 @@ const PdfUploadForm = () => {
   // }, []);
 
   useEffect(() => {
-    fetch('https://videocoursebackend.ssccglpinnacle.com/courses')
+    fetch('http://localhost:8000/courses')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -105,7 +105,7 @@ const PdfUploadForm = () => {
         <option value="">Select a Course</option>
 
         {courses.map((course) => (
-          <option key={course._id} value={course._id}>{course.title}</option>
+          <option key={course._id} value={course._id}>{course.courseTitle}</option>
         ))}
 
       </select>

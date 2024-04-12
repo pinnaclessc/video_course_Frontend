@@ -13,7 +13,7 @@ function VideoUploadForm() {
     const fileInputRef = useRef(null);
     
     useEffect(() => {
-        axios.get('https://videocoursebackend.ssccglpinnacle.com/courses')
+        axios.get('http://localhost:8000/courses')
             .then(response => {
                 setCourses(response.data);
             })
@@ -119,7 +119,7 @@ function VideoUploadForm() {
                 >
                     <option value="">Select a Course</option>
                     {courses.map((course) => (
-                        <option key={course._id} value={course._id}>{course.title}</option>
+                        <option key={course._id} value={course._id}>{course.courseTitle}</option>
                     ))}
                 </select>
                 <label className={styles.label}>

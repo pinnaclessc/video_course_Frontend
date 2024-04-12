@@ -78,7 +78,7 @@ const CourseList = () => {
                 <thead>
                     <tr>
                     <th>S.No.</th> 
-                        <th>Title</th>
+                        <th>Course Title</th>
                         <th>Category</th>
                         <th>Instructor Name</th>
                         <th>Price</th>
@@ -90,8 +90,8 @@ const CourseList = () => {
                     {currentCourses && currentCourses.length > 0 ? (
                         currentCourses.map((course, index) => (
                             <tr key={course._id}>
-                                <td>{indexOfFirstCourse + index + 1}</td> {/* Calculate S.No. based on index and currentPage */}
-                                <td>{course.title}</td>
+                                <td>{indexOfFirstCourse + index + 1}</td> 
+                                <td>{course.courseTitle}</td>
                                 <td>{course.category}</td>
                                 <td>{course.instructorName}</td>
                                 <td>{course.price}</td>

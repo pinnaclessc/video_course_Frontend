@@ -18,7 +18,7 @@ const AddTopicForm = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/api/courses');
+        const response = await fetch('http://localhost:8000/api/courses');
         const data = await response.json();
         setCourses(data);
         setSelectedCourse(data[0]?._id);
@@ -34,7 +34,7 @@ const AddTopicForm = () => {
     const fetchChapters = async () => {
       if (!selectedCourse) return;
       try {
-        const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/chapters/course/${selectedCourse}`);
+        const response = await fetch(`http://localhost:8000/api/chapters/course/${selectedCourse}`);
         const data = await response.json();
         setChapters(data);
         setSelectedChapter(data[0]?._id);
@@ -50,12 +50,12 @@ const AddTopicForm = () => {
     const fetchResources = async () => {
       if (!selectedCourse) return;
       try {
-        const videosResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/videos/course/${selectedCourse}`);
+        const videosResponse = await fetch(`http://localhost:8000/api/videos/course/${selectedCourse}`);
         let videosData = await videosResponse.json();
         videosData = Array.isArray(videosData) ? videosData : [];
         setAvailableVideos(videosData);
 
-        const pdfsResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/pdfs/course/${selectedCourse}`);
+        const pdfsResponse = await fetch(`http://localhost:8000/api/pdfs/course/${selectedCourse}`);
         let pdfsData = await pdfsResponse.json();
         pdfsData = Array.isArray(pdfsData) ? pdfsData : [];
         setAvailablePdfs(pdfsData);
@@ -83,7 +83,7 @@ const AddTopicForm = () => {
     };
 
     try {
-      const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/chapters/${selectedChapter}/add-topic`, {
+      const response = await fetch(`http://localhost:8000/api/chapters/${selectedChapter}/add-topic`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const AddTopicForm = () => {
         onChange={(e) => setSelectedCourse(e.target.value)}>
         <option value="" disabled style={{ color: 'gray' }}>Select the course</option>
         {courses.map((course) => (
-          <option key={course._id} value={course._id}>{course.title}</option>
+          <option key={course._id} value={course._id}>{course.courseTitle}</option>
         ))}
       </select>
 
