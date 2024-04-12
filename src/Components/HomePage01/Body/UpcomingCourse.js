@@ -85,7 +85,7 @@ export default function UpcomingCourse() {
                       className={styles["description-section"]}
                       onClick={() => navigate("/CourseDescription/" + data._id)}
                     >
-                      <div className={styles["title"]}>{data.title}</div>
+                      <div className={styles["title"]}>{data.courseTitle}</div>
                       <div className={styles["teacher"]}>
                         Mr./Ms.{data.instructorName}
                       </div>

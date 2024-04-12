@@ -19,7 +19,7 @@ export default function Details() {
     let result = await fetch(`https://videocoursebackend.ssccglpinnacle.com/course/${params.id}`);
     result = await result.json();
     console.log(result);
-    setCourseTitle(result.title);
+    setCourseTitle(result.courseTitle);
     setCourseDetails(result.shortDescription);
     setTeacherName(result.instructorName);
     setRating(result.rating);
