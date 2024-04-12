@@ -18,6 +18,7 @@ const ChapterForm = () => {
         const response = await fetch('http://localhost:8000/courses');
         const data = await response.json();
         setCourses(data);
+        console.log("COURSES", data)
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
@@ -54,11 +55,13 @@ const ChapterForm = () => {
         const videosResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/videos/${selectedCourse}`);
         const videosData = await videosResponse.json();
         setVideos(videosData);
+        console.log("VIDEODATA",videosData)
   
         const pdfsResponse = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/pdfs/course/${selectedCourse}`);
         const pdfsData = await pdfsResponse.json();
         // Assuming each item in pdfsData includes the cloudFrontUrl
         setPdfs(pdfsData);
+        console.log("PDFDATA",videosData)
       } catch (error) {
         console.error('Error fetching videos/pdfs:', error);
       }
@@ -66,6 +69,7 @@ const ChapterForm = () => {
   
     fetchVideosAndPdfs();
   }, [selectedCourse]);
+
   
 
   const handleSubmit = (e) => {
@@ -76,7 +80,7 @@ const ChapterForm = () => {
       topics
     };
 
-    fetch('https://videocoursebackend.ssccglpinnacle.com/api/chapters', {
+    fetch('http://localhost:8000/api/chapters', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -160,7 +164,6 @@ const ChapterForm = () => {
           <option key={video._id} value={video._id}>{video.originalFilename}</option>
         ))}
           </select>
-
 
           <label className={styles.label}>Pdf Title:</label>
           <input
