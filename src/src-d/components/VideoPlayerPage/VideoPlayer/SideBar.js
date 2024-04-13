@@ -244,16 +244,15 @@ const Sidebar = ({ apiUrl, onClose }) => {
         data = data.map(chapter => {
           let chapterDurationSeconds = 0;
           const updatedTopics = chapter.topics.map(topic => {
-            const duration = durationsMap[topic.selectedVideo] || 0; // Fallback to 0 if duration is not found
+            const duration = durationsMap[topic.selectedVideo] || 0; 
             chapterDurationSeconds += duration;
             return { ...topic, duration };
           });
           const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
           return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
         });
-
-        updateChapters(data); // Update the global chapters data
-        setChapters(data); // Also set the local state
+        updateChapters(data);
+        setChapters(data); 
         setIsLoading(false);
       } catch (error) {
         console.error("Failed to fetch chapters or video details:", error);
