@@ -239,6 +239,7 @@ const Cart = () => {
             <p className={styles.price}>Price: ₹{getPrice()}</p>
           </div>
           <Payment 
+           className={styles["Buy-this-course"]}
             userName={user.name}
             userEmail={user.email} 
             userId={user._id}
@@ -266,7 +267,7 @@ const Cart = () => {
             <FaCartPlus />
           </button>
           <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
-            {isAddedToWishlist ? <IoHeart size={40} color="red" /> : < FaRegHeart size={40} />}
+            {isAddedToWishlist ? <IoHeart size={40} color="red" /> : <FaRegHeart size={40}/>}
           </button>
         </div>
       </div>
