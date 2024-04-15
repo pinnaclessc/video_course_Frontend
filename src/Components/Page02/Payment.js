@@ -22,7 +22,6 @@ const Payment = ({ userName, userEmail, userId, courseId, finalPrice, selectedMo
 
   const createOrder = async () => {
     try {
-      // Modify the request body to include userName, userEmail, userId, and selectedMonths
       const response = await axios.post("http://localhost:8000/payment-for-upi", {
         userName,
         userEmail,
