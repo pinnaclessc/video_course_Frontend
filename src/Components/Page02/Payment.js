@@ -49,7 +49,7 @@ const Payment = ({ userName, userEmail, userId, courseId, finalPrice, selectedMo
         redirectTarget: "_self",
       }).then((response) => {
         if (response.status === 'OK') {
-          console.log("reach on onPaymentSuccess function  ")
+          console.log("reach on onPaymentSuccess function")
         onPaymentSuccess();
 
         } else {
