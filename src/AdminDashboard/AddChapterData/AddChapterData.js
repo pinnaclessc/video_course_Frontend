@@ -15,7 +15,7 @@ const ChapterForm = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://localhost:8000/courses');
+        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/courses');
         const data = await response.json();
         setCourses(data);
         console.log("COURSES", data)
@@ -80,7 +80,7 @@ const ChapterForm = () => {
       topics
     };
 
-    fetch('http://localhost:8000/api/chapters', {
+    fetch('https://videocoursebackend.ssccglpinnacle.com/api/chapters', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
