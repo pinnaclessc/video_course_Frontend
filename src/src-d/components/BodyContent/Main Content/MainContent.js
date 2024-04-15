@@ -35,7 +35,7 @@ function MainContent() {
       const courseDetailsPromises = courseIds.map(courseId =>
         axios.get(`https://videocoursebackend.ssccglpinnacle.com/course/${courseId}`).catch(err => {
           console.error(`Error fetching details for courseId: ${courseId}`, err);
-          return null; // Return null for errors to filter out later
+          return null;
         })
       );
 
@@ -98,7 +98,7 @@ function MainContent() {
           </div> */}
           <div className={classes.heading}>
           <Link to={`/myplayer/${course._id}`} className={classes.title}>
-              {course.title}
+              {course.courseTitle}
             </Link>
             <div className={classes.instructor}>{course.instructorName}</div>
           </div>
