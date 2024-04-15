@@ -17,6 +17,7 @@ import PlayPauseButton from "./PlayButton"
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
+import Spinner from "../../../../UI/Spinner"
 
 const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com', onToggleSidebar, isSidebarVisible, onVideoProgress }) => {
   const videoRef = useRef(null)
@@ -57,7 +58,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
   const [videoUrl, setVideoUrl] = useState('');
   const [showControls, setShowControls] = useState(false);
   const [centerButtonTimeout, setCenterButtonTimeout] = useState(null);
-
+  const [loading, setLoading] = useState(true);
 
   const videoSource = videoDetails?.resolutions?.find(r => r.name === videoQuality)?.url || videoDetails?.defaultUrl;
 
@@ -633,6 +634,12 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
     navigateToPreviousVideo(); // This now references the function from your context
   };
 
+
+
+  const handleLoadedMetadata = () => {
+      setLoading(false);
+  };
+
   return (
     <>
       <div
@@ -641,9 +648,12 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
         onClick={handleVideoClick}
       >
         {isLoading ? (
+          // <div className="loading-container">
+          //   <FaSpinner className="loading-icon" />
+          // </div>
           <div className="loading-container">
-            <FaSpinner className="loading-icon" />
-          </div>
+        <Spinner />
+    </div>
         ) : (
           <video
             className="video-element"

@@ -117,7 +117,7 @@ const CourseForm = () => {
     });
 
     try {
-      await axios.post('http://localhost:8000/create-course', formData, {
+      await axios.post('https://videocoursebackend.ssccglpinnacle.com/create-course', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

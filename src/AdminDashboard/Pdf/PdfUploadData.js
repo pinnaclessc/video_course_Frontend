@@ -17,7 +17,7 @@ const PdfUploadForm = () => {
   // }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8000/courses')
+    fetch('https://videocoursebackend.ssccglpinnacle.com/courses')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
