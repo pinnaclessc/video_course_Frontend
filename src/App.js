@@ -4,12 +4,12 @@ import Timer from "./Components/HomePage01/Header/Timer"
 import HomePage01 from "./Components/HomePage01/HomePage01";
 import Page02 from "./Components/Page02/Page02";
 import Share from "./Components/Page02/ShareComponent/Share";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Language from "./Components/HomePage01/Language/Languages";
 import LoginPage from "./Components/HomePage01/LogIn/LoginPage";
 import SignUpPage from "./Components/HomePage01/SignUpPage/SignUpPage";
 import AddToCart from "./Components/HomePage01/AddToCart/AddToCart";
-// import CartPage from "./Components/HomePage01/AddToCart/CartPage";
+// import CartPage from "./Components/HomePage01/AddToCart/CartPage";  
 import CartPage from "./Components/HomePage01/Header/CartPage";
 import WishlistPage from "./Components/HomePage01/Header/WishlistPage";
 import PageNotFound from "./PageNotFound/PageNotFound";
@@ -71,6 +71,7 @@ import UpdateCourseForm from "./AdminDashboard/Courses/Course_UpdateForm";
 import PaymentSuccessHandler from "./Components/Page02/PaymentSuccessHandler";
 import StudentList from "./AdminDashboard/studentFrom/StudentList";
 import StudentUpdateForm from "./AdminDashboard/studentFrom/StudentUpdateForm";
+import VideoUpdateForm from "./AdminDashboard/VideoForm/VideoUpdateForm";
 export default function App() {
   return (
     <>
@@ -154,9 +155,9 @@ export default function App() {
         <Route path="/stL" element={<StudentList/>}></Route>
         <Route path="/stUL/:id" element={<StudentUpdateForm/>}></Route>
         <Route path="/editChapter" element={<StudentUpdateForm/>}></Route>
+        <Route path="/VUF" element={<VideoUpdateForm/>}></Route>
         {/* **** */}
         </Routes>
-    
         </Router>
         </VideoProvider>
         </>

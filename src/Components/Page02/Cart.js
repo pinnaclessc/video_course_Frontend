@@ -276,10 +276,6 @@ const Cart = () => {
 };
 
 export default Cart;
-
-
-
-
 // import React, { useState, useEffect } from "react";
 // import Swal from "sweetalert2";
 // import data from "./data.json"; // Assume this contains course static data if needed
