@@ -42,7 +42,7 @@ export default function AdminDashboard() {
   return (
     <div className={style["admin-wraper"]}>
       <div className={style["admin-navbar"]}>
-      <Link to="/"v ><TbHome className={style["admin-navItems"]} size={20}/></Link>
+      <Link to="/" ><TbHome className={style["admin-navItems"]} size={20}/></Link>
         <div className={style["admin-navItems"]} onClick={() => handleNavigation('allCourses')}>All Courses</div>
         {/* <div className={style["admin-navItems"]} onClick={() => handleNavigation('allStudent')}>All Students</div> */}
         <div className={style["admin-navItems"]} onClick={() => handleNavigation('addCourse')}>Add New Course</div>
