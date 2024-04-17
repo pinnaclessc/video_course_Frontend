@@ -3,12 +3,15 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { IoIosShareAlt, IoLogoFacebook, IoLogoTwitter, IoIosMail, IoLogoWhatsapp,IoMdClose } from "react-icons/io";
 import styles from './VideoHeader.module.css';
 import { useVideo } from '../context/VideoContext';
+import { BeatLoader } from 'react-spinners';
 
 const VideoHeader = () => {
   const apiUrl ="https://videocoursebackend.ssccglpinnacle.com"
   const [isShareModalOpen, setShareModalOpen] = useState(false);
   const [error,setError] = useState();
   const [courseDetails,setCourseDetails] = useState()
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
   const { courseId } = useParams();
   console.log(courseId);
@@ -24,7 +27,7 @@ const VideoHeader = () => {
   const [progressPercentage, setProgressPercentage] = useState(0); 
   const userId = getUserId();
   // const courseTitle = 'SSC CGL MATHEMATICS';
-  const shareUrl = `https://www.videos.ssccglpinnacle.com/course/${courseId}`;
+  const shareUrl = window.location.href;
 
   useEffect(() => {
     const fetchCourseDetails = async () => {
@@ -35,13 +38,15 @@ const VideoHeader = () => {
         }
         const data = await response.json();
         setCourseDetails(data);
+        setLoading(false); 
         console.log(data);
       } catch (error) {
         console.error("Error fetching video details:", error);
         setError(error.toString());
+        setLoading(false); 
       }
     };
-  
+
     fetchCourseDetails();
   }, [courseId, apiUrl]);
   
@@ -82,6 +87,7 @@ useEffect(() => {
 
     const percentage = (completedTopics / totalTopics) * 100;
     setProgressPercentage(percentage);
+    setLoading(false);
   }
 }, [courseDetails, completedVideos]);
 // const progressPercentage = calculateProgress();
@@ -98,12 +104,22 @@ useEffect(() => {
   return (
     <div className={styles.courseHeader}>
       
-      <button onClick={() => navigate('/courses')} className={styles.backButton}>
+      {/* <button onClick={() => navigate('/')} className={styles.backButton}>
         <img src="https://dgkwgu5olgqh6.cloudfront.net/Image/pinnacleWhiteLogo.png" alt="Back to courses" />
-      </button>
-      {/* <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.title : 'Loading...'}</h1> */}
+      </button> */}
+      <div className={styles.titleContainer}>
+  <button onClick={() => navigate('/')} className={styles.backButton}>
+    <img src="https://dgkwgu5olgqh6.cloudfront.net/Image/pinnacleWhiteLogo.png" alt="Back to courses" />
+  </button>
+  <div className={styles.verticalLine}></div>
+</div>
+      <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.courseTitle : 'Loading...'}</h1>
 
-      <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.title: "Loading...."}</h1>
+       {/* {loading ? (
+      <BeatLoader className={styles.courseTitle} color={'#333'} loading={loading} size={15} />
+    ) : (
+      <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.courseTitle : 'Course Not Found'}</h1>
+    )} */}
 
       {/* <div className={styles.progressContainer}>
         <progress className={styles.videoContentProgress} value={userProgress} max={totalCourseLength}></progress>

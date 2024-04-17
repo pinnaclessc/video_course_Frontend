@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import style from './AdminDashboard.module.css';
 import CourseList from './Courses/CourseList';
 import CourseForm from './Courses/CourseForm';
+import { TbHome } from "react-icons/tb";
 import AddCourseContent from './AddCourseContentData/AddCourseContentData';
 import InstructorForm from "./Instructor/InstructorForm";
 import InstructorDataList from "./Instructor/InstructorDataList"
@@ -40,6 +42,7 @@ export default function AdminDashboard() {
   return (
     <div className={style["admin-wraper"]}>
       <div className={style["admin-navbar"]}>
+      <Link to="/" ><TbHome className={style["admin-navItems"]} size={20}/></Link>
         <div className={style["admin-navItems"]} onClick={() => handleNavigation('allCourses')}>All Courses</div>
         {/* <div className={style["admin-navItems"]} onClick={() => handleNavigation('allStudent')}>All Students</div> */}
         <div className={style["admin-navItems"]} onClick={() => handleNavigation('addCourse')}>Add New Course</div>

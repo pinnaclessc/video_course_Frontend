@@ -171,6 +171,8 @@ import { useVideo } from '../../../../context/VideoContext';
 import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
 import { MdCheckBox, MdCheckBoxOutlineBlank, MdOndemandVideo } from "react-icons/md";
 import styles from './Sidebar.module.css';
+import LoadingSkeleton from '../../../../UI/LoadingSkeleton';
+import ClipLoader from '../../../../UI/ClipLoader';
 
 const Sidebar = ({ apiUrl, onClose }) => {
   const navigate = useNavigate();
@@ -383,7 +385,11 @@ const Sidebar = ({ apiUrl, onClose }) => {
         <RiCloseLine size={24} onClick={onClose} className={styles.closeIcon} />
       </div>
       {isLoading ? (
-        <div className={styles.loader}></div>
+       <div className={`${styles['loader-container']} `}>
+       <ClipLoader color={'#333'} loading={isLoading} size={50} />
+   </div>
+   
+        
       ) : (
         <div className={styles.content}>
           {chapters.map((chapter) => (
@@ -458,12 +464,12 @@ const Sidebar = ({ apiUrl, onClose }) => {
                           >
                             Resources
                           </button> */}
-                          <button
-                            className={styles.resource_button}
-                            onClick={() => navigateToPdfViewer(topic.selectedPdf)} // Adjust the onClick handler
-                          >
-                            Resources
-                          </button>
+                         <button
+  className={styles.resource_button}
+  onClick={() => navigateToPdfViewer(topic.selectedPdf)} 
+>
+  Resources
+</button>
                         </div>
                       </li>
                     );

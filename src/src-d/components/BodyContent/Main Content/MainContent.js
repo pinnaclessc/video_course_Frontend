@@ -22,7 +22,7 @@ function MainContent() {
         if (!userId) {
           throw new Error('User ID not found in URL parameters.');
         }
-        const response = await axios.get(`https://videocoursebackend.ssccglpinnacle.com/vc/purchasedCourses/${userId}`);
+        const response = await axios.get(`http://localhost:8000/vc/purchasedCourses/${userId}`);
         console.log('Purchased Courses:', response.data.purchasedCourses);
         fetchCourseDetails(response.data.purchasedCourses);
       } catch (error) {
@@ -33,7 +33,7 @@ function MainContent() {
 
     const fetchCourseDetails = async (courseIds) => {
       const courseDetailsPromises = courseIds.map(courseId =>
-        axios.get(`https://videocoursebackend.ssccglpinnacle.com/course/${courseId}`).catch(err => {
+        axios.get(`http://localhost:8000/course/${courseId}`).catch(err => {
           console.error(`Error fetching details for courseId: ${courseId}`, err);
           return null;
         })
