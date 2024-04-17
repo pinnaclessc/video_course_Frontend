@@ -14,8 +14,7 @@ const PDFViewer = ({ apiUrl }) => {
             try {
                 const response = await fetch(`https://videocoursebackend.ssccglpinnacle.com/api/pdfs/${pdfId}`, {
                     headers: {
-                        'Content-Type': 'application/json',
-                       
+                        'Content-Type': 'application/json',   
                     },
                 });
         

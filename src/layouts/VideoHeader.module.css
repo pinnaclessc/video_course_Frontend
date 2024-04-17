@@ -2,12 +2,37 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 20px;
-  background-color: #3f3d3d;
+  padding: 8px 15px;
+  background-color: #2D2F31;
   color: #ffffff;
+  border-top: 0.01px solid #FAFAFA;
+  border-bottom: 0.01px solid #FAFAFA;
+  /* border:  0.1px solid rgb(248, 246, 218); */
+  
+}
+.titleContainer {
+  display: flex;
+  align-items: center;
 }
 
-.backButton,
+.verticalLine {
+  height: 20px; /* Set the height of the vertical line */
+  border-left: 1px solid gray; /* Set the style, width, and color of the vertical line */
+  margin-left: 10px; 
+  padding-right:2px;/* Adjust the margin to create space between the button and the vertical line */
+}
+
+.backButton::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+  background-color: white;
+  margin-left: 10px; /* Adjust as needed */
+}
+
+
+/* .backButton,
 .previewButton,
 .settingsButton {
   cursor: pointer;
@@ -18,14 +43,14 @@
   border-radius: 4px;
   font-weight: bold;
   transition: background-color 0.3s, color 0.3s;
-}
+} */
 
-.backButton:hover,
+/* .backButton:hover,
 .previewButton:hover,
 .settingsButton:hover {
   background-color: #ffffff;
   color: #1e1e2f;
-}
+} */
 
 .courseTitle {
   font-size: 20px;

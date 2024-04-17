@@ -1,0 +1,36 @@
+/* LoadingSkeleton.module.css */
+
+.loadingSkeleton {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #f3f3f3;
+  }
+  
+  .loader {
+    width: 100px;
+    height: 16px;
+    margin-bottom: 16px;
+    background-color: #e0e0e0;
+    animation: loadingAnimation 1s infinite alternate;
+  }
+  
+  @keyframes loadingAnimation {
+    from {
+      background-color: #e0e0e0;
+    }
+    to {
+      background-color: #f0f0f0;
+    }
+  }
+  
+  .placeholder {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 8px;
+    background-color: #e0e0e0;
+  }
+  
+  
+  

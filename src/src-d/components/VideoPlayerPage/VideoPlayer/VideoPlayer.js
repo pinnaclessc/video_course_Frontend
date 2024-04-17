@@ -18,6 +18,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useVideo } from '../../../../context/VideoContext'
 import Hls from "hls.js";
 import Spinner from "../../../../UI/Spinner"
+import ClipLoader from "../../../../UI/ClipLoader"
 
 const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com', onToggleSidebar, isSidebarVisible, onVideoProgress }) => {
   const videoRef = useRef(null)
@@ -226,24 +227,43 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
   //   }
   // }, [apiUrl, selectedVideoId, setVideoDetails]);
 
+  ////////////////////////////Working//////////////////////
+  // useEffect(() => {
+  //   // Assuming you have a way to fetch video details based on selectedVideoId
+  //   // For demonstration, using a placeholder fetch function
+  //   const fetchVideoDetails = async () => {
+  //     // Placeholder fetch logic
+  //     try {
+  //       const response = await fetch(`${apiUrl}/videos/${selectedVideoId}`);
+  //       const data = await response.json();
+  //       setVideoDetails(data); 
+  //     } catch (error) {
+  //       console.error("Error fetching video details:", error);
+  //     }
+  //   };
+
+  //   if (selectedVideoId) {
+  //     fetchVideoDetails();
+  //   }
+  // }, [apiUrl, selectedVideoId, setVideoDetails]);
   useEffect(() => {
-    // Assuming you have a way to fetch video details based on selectedVideoId
-    // For demonstration, using a placeholder fetch function
     const fetchVideoDetails = async () => {
-      // Placeholder fetch logic
+      setIsLoading(true);
       try {
         const response = await fetch(`${apiUrl}/videos/${selectedVideoId}`);
         const data = await response.json();
-        setVideoDetails(data); 
+        setVideoDetails(data);
       } catch (error) {
         console.error("Error fetching video details:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-
+  
     if (selectedVideoId) {
       fetchVideoDetails();
     }
-  }, [apiUrl, selectedVideoId, setVideoDetails]);
+  }, [apiUrl, selectedVideoId, setVideoDetails, setIsLoading]);
 
   // Setup HLS or src for the video player based on videoDetails from context
   useEffect(() => {
@@ -651,9 +671,22 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
           // <div className="loading-container">
           //   <FaSpinner className="loading-icon" />
           // </div>
-          <div className="loading-container">
-        <Spinner />
-    </div>
+        //   <ClipLoader
+        //   color={'yellow'}
+        //   size={50}
+        //   loading={isLoading}
+        //   css={`
+        //     position: absolute;
+        //     top: 50%;
+        //     left: 50%;
+        //     transform: translate(-50%, -50%);
+        //     border: 2px red solid;
+        //   `}
+        // />
+        <div className="loader-container">
+            <ClipLoader color={'white'} size={55} loading={isLoading} />
+          </div>
+        
         ) : (
           <video
             className="video-element"
@@ -691,6 +724,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
         <div className="next_container">
           <button onClick={navigateToNextVideo}><FaChevronRight /></button>
         </div> */}
+
         <div className="previous_next_buttons">
           <button onClick={navigateToPreviousVideo}><FaChevronLeft size={30} /></button>
         </div>
@@ -737,7 +771,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
               </button>
             </div>
 
-            {/* Duration*/}
+            {/* Duration */}
             <div className="duration">
               <span className="current_duration">{currentDuration}</span>/
               <span className="total_duration">{totalDuration}</span>
