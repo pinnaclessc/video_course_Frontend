@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 import { load } from "@cashfreepayments/cashfree-js";
 import Swal from "sweetalert2";
 
@@ -49,7 +49,7 @@ const Payment = ({ userName, userEmail, userId, courseId, finalPrice, selectedMo
         redirectTarget: "_self",
       }).then((response) => {
         if (response.status === 'OK') {
-          console.log("reach on onPaymentSuccess function")
+          console.log("reach on onPaymentSuccess function ")
         onPaymentSuccess();
 
         } else {

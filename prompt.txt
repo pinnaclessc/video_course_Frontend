@@ -1,0 +1,50 @@
+for updating Topics's  video and Pdf of a particular  . first we should select particular course  we got All Courses through " http://localhost:8000/courses" . this Api gives {
+"_id": "6618c8b4282a20c687c09547",
+"courseTitle": "SSC CGL Maths 6800 ",
+"shortDescription": "SSC CGL Maths 6800 ",
+"longDescription": "<p>SSC CGL Maths 6800&nbsp;</p>",
+"category": "TEST ",
+"instructorName": "Deepa Arya",
+"price": 299,
+"mrp": 599,
+"SEOCode": "test",
+"hindiCoverImage": "https://d3m4h509gttb94.cloudfront.net/Image/1712900275980_100 Sets English 512.jpg",
+"englishCoverImage": "https://d3m4h509gttb94.cloudfront.net/Image/1712900276220_Delhi police computer GK book course lapptop (1).jpg",
+"review": "11",
+"isActive": false,
+"rating": 5,
+"created_at": "2024-04-12T05:37:56.509Z",
+"updated_at": "2024-04-12T05:37:56.509Z",
+"__v": 0
+} 
+
+this type of data . we can select course from that Through course id and we can select Chapters through courseid  with the Help of "http://localhost:8000/api/chapters/course/661e206b580f9c76a4e3ba6a"  this Api Gives data like  [
+{
+"_id": "661e339a580f9c76a4e3bfb3",
+"chapterTitle": "Test Chapter 1",
+"course": "661e206b580f9c76a4e3ba6a",
+"topics": [
+{
+"videoTitle": "initial Topic 1 ",
+"selectedVideo": "661e3218580f9c76a4e3bf09",
+"pdfTitle": "pdf title 1",
+"selectedPdf": "661e313d580f9c76a4e3befe",
+"_id": "661e339a580f9c76a4e3bfb4",
+"completed": []
+}
+],
+"__v": 0
+}
+] . from this Api We got all Chapters. Through this  chapter id we got all topics with the help of "http://localhost:8000/api/chapters/661e339a580f9c76a4e3bfb3/topics" this Api And This Api gives 
+
+[
+{
+"videoTitle": "initial Topic 1 ",
+"selectedVideo": "661e3218580f9c76a4e3bf09",
+"pdfTitle": "pdf title 1",
+"selectedPdf": "661e313d580f9c76a4e3befe",
+"_id": "661e339a580f9c76a4e3bfb4",
+"completed": []
+}
+] 
+this type of data . and in this we got video And Pdf Associated with topic i want to update video and pdf

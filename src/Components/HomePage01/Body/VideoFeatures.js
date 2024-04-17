@@ -17,7 +17,6 @@ export default function VideoFeatures() {
           <div className={classes.features}>04. Modern video player</div>
           <div className={classes.features}>05. increase or decrease speed</div>
           <div className={classes.features}>06. Increase or decrease quality</div>
-
         </div>
         <div className={classes.content_box2}>
         <div className={classes.features}>07. watch on web - Laptop/desktop or mobile app</div>

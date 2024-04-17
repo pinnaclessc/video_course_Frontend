@@ -197,7 +197,7 @@ const handleSubmit = async (e) => {
     });
     
     try {
-      await axios.put(`http://localhost:8000/vc/updateCourse/${courseId}`, formData, {
+      await axios.put(`http://localhost:8000/vc/updateCourse/${courseId}`,formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
