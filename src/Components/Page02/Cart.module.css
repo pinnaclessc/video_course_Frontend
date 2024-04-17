@@ -4,9 +4,10 @@
   width: 24%;
   left:70%;
   margin-top: -17.5%;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   background-color: white;
   padding: 0.5rem;
+  height:15rem;
+
 }
 .cart-fullpage{
   display: inline;
@@ -150,8 +151,8 @@
   appearance: none;
   outline: none;
   /* background: linear-gradient(to right, #0271B4 0%, #707070 100%); */
-  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
-  background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 35%,  rgba(2,0,36,1)100%);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  /* background: linear-gradient(90deg,rgba(0,212,255,1)  0%, rgba(9,9,121,1) 35%,  rgba(2,0,36,1)100%); */
   border-radius: 10px;
   opacity: 0.7;
   -webkit-transition: 0.2s;
@@ -182,28 +183,76 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  width: 90%;
 }
 
 .cartBtn{
-  background-color: #0271b4;
-  color: white;
+  width: 70%;
+  color:black;
+  font-weight: 600;
   cursor: pointer;
+  border: 1px solid black;
   padding: 0.5rem;
-  margin-left: 1rem;
+  margin: 0.25rem;
 }
 
 .cartBtn:hover{
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  border-radius: 22px;
+  background-color: #F7F9FA;
 }
 
 .wishListBtn{
+  width: 25%;
   color: black;
+  border: 1px solid black;
   padding: 0.25rem;
+  margin: 0.25rem;
 
 }
 
 .cart-btn{
   
+}
+
+/* new RangeSelector css */
+.range-slider-container {
+  position: relative;
+  width: 250px;
+  height: 6px;
+  margin-top: 20px;
+}
+
+.range-slider {
+  width: 100%;
+  appearance: none;
+  outline: none;
+  background: linear-gradient(to right, #0271B4 0%, #707070 100%);
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: transparent; 
+  position: relative;
+  margin-top: -16px;
+  border: 10px solid transparent;
+  border-top-color: #000000;
+}
+
+.range-slider::-moz-range-thumb {
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  position: relative;
+  margin-top: -10px;
+  cursor: pointer;
+  border: 10px solid transparent;
+  border-top-color: #000000;
+}
+
+.range-slider::-ms-thumb {
+  /* IE/Edge specific styles */
 }

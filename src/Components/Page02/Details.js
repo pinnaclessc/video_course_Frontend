@@ -38,9 +38,7 @@ export default function Details() {
         </div>
         <div className={styles["Faculty"]}>Faculty : {teacherName}</div>
         <div className={styles["bestSeler-div"]}>
-          <div>
-            <button className={styles["bestSeler-btn"]}>Best Seller</button>
-          </div>
+          <div><button className={styles["bestSeler-btn"]}>Best Seller</button></div>
           <div className={styles["rate"]}>
             <AiFillStar className={styles.ratingStar} />
             <AiFillStar className={styles.ratingStar} />
@@ -56,9 +54,7 @@ export default function Details() {
             <MdLanguage size={30} />
           </div>
           <div>Hinglish</div>
-          <div>
-            <MdOutlineClosedCaptionOff size={30} />
-          </div>
+          <div><MdOutlineClosedCaptionOff size={30} /></div>
           <div>Hindi, English,Bengali,Telgu,Tamil, 3 more</div>
         </div>
       </div>
