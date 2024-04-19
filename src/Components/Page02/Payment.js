@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { load } from "@cashfreepayments/cashfree-js";
 import Swal from "sweetalert2";
+import styles from "./Payment.module.css"
 
 const Payment = ({ userName, userEmail, userId, courseId, finalPrice, selectedMonths, onPaymentSuccess }) => {
   const [cashfree, setCashfree] = useState(null);
@@ -70,7 +71,7 @@ const Payment = ({ userName, userEmail, userId, courseId, finalPrice, selectedMo
 
   return (
     <div>
-      <button onClick={createOrder}>Buy This Course</button>
+      <button onClick={createOrder} className={styles["Payment-BTN"]}>Buy This Course</button>
     </div>
   );
 };

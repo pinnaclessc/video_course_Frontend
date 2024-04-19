@@ -226,11 +226,11 @@ const Cart = () => {
         </div>
         <div className={styles.overlay}>
           <h2 className={styles.heading}>{courseTitle}</h2>
-          <p className={styles.course}>
+          {/* <p className={styles.course}>
             {courseDetails}
             <br />
-            {/* <Link to="/personalPlane">Learn More</Link> */}
-          </p>
+            <Link to="/personalPlane">Learn More</Link>
+          </p> */}
           <div className={styles["range-slider-container"]}>
             <input type="range" min="6" max="24" step="6" value={selectedMonths} onChange={handleMonthsChange} className={styles["range-slider"]} />
           </div>
@@ -248,7 +248,15 @@ const Cart = () => {
             selectedMonths={selectedMonths}
             onPaymentSuccess={buycourseHandler} 
           />
-          {/* <div className={styles["buttons-section"]}>
+          <div className={styles["cart-wishlist-Btn-div"]}>
+          <button className={styles["cartBtn"]} onClick={cartHandler}>
+          Add To Cart
+          </button>
+          <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
+            {isAddedToWishlist ? <IoHeart size={20} color="red" /> : <FaRegHeart size={20}/>}
+          </button>
+        </div>
+          <div className={styles["buttons-section"]}>
             <button className={styles["individual-btn"]} onClick={handleShare}>
               Share
             </button>
@@ -258,18 +266,18 @@ const Cart = () => {
             <button className={styles["individual-btn"]} onClick={ApplyCouponHandler}>
               Apply coupon
             </button>
-          </div> */}
+          </div>
           {showCoupon && <ApplyCoupon />}
         </div>
         {isShare && <Share />}
-        <div className={styles["cart-wishlist-Btn-div"]}>
+        {/* <div className={styles["cart-wishlist-Btn-div"]}>
           <button className={styles["cartBtn"]} onClick={cartHandler}>
             <FaCartPlus />
           </button>
           <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
             {isAddedToWishlist ? <IoHeart size={40} color="red" /> : <FaRegHeart size={40}/>}
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

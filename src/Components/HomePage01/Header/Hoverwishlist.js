@@ -116,8 +116,8 @@ export default function Hoverwishlist() {
                         {/* <img src={data.hindiCoverImage} alt="courseimage" className={Styles["Image"]} /> */}
                         </div>
                         <div className={Styles["CartList-descriptionSection"]}>
-                          <div className={Styles["courseName"]}>{data.title}</div>
-                          <div className={Styles["facult"]}>{data.instructorName}</div>
+                          <div className={Styles["courseName"]}>{data.courseTitle}</div>
+                          <div className={Styles["facult"]}>By -: {data.instructorName}</div>
                         </div>
                       </div>
                     </div>
