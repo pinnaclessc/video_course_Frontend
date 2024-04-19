@@ -184,24 +184,6 @@ const Sidebar = ({ apiUrl, onClose }) => {
   const [expandedChapters, setExpandedChapters] = useState({});
   const { markVideoAsCompleted } = useVideo();
 
-  // useEffect(() => {
-
-  //   const fetchChapters = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
-  //       if (!response.ok) throw new Error('Failed to fetch chapters');
-  //       const data = await response.json();
-  //       console.log("Fetched chapters data:", data); 
-  //       updateChapters(data);
-  //       setChapters(data); 
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error("Failed to fetch chapters:", error);
-  //       setIsLoading(false);
-  //     }
-  //   };  fetchChapters();
-  // }, [apiUrl, courseId]);
   /////////////////////////////////New for duration////////////////
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -215,18 +197,18 @@ const Sidebar = ({ apiUrl, onClose }) => {
   };
 
   useEffect(() => {
-    const fetchChapters = async () => {
+    const fetchChaptersAndDurations = async () => {
       setIsLoading(true);
       try {
         const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
         if (!response.ok) throw new Error('Failed to fetch chapters');
-        let data = await response.json();
-
-        // Fetch durations for all videos in the chapters
-        const videoIds = data.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
-        const uniqueVideoIds = [...new Set(videoIds)]; // Ensure we only fetch unique video IDs
-
-        // Fetching durations for each video
+        let chaptersData = await response.json();
+  
+        // Extract unique video IDs from all chapters
+        const videoIds = chaptersData.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
+        const uniqueVideoIds = [...new Set(videoIds)];
+  
+        // Fetch durations for each video
         const durationsPromises = uniqueVideoIds.map(id =>
           fetch(`${apiUrl}/videos/${id}`).then(res => {
             if (!res.ok) {
@@ -241,30 +223,94 @@ const Sidebar = ({ apiUrl, onClose }) => {
           acc[video._id] = video.duration || 0;
           return acc;
         }, {});
-
-        // Include durations in topics and calculate total chapter durations
-        data = data.map(chapter => {
+  
+        // Update chapters with durations and format them
+        const updatedChapters = chaptersData.map(chapter => {
           let chapterDurationSeconds = 0;
           const updatedTopics = chapter.topics.map(topic => {
-            const duration = durationsMap[topic.selectedVideo] || 0; 
+            const duration = durationsMap[topic.selectedVideo] || 0;
             chapterDurationSeconds += duration;
             return { ...topic, duration };
           });
           const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
           return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
         });
-        updateChapters(data);
-        setChapters(data); 
+  
+        // Update state with formatted chapters data
+        setChapters(updatedChapters);
+  
+        // Set the first video ID to be played if available
+        if (updatedChapters.length > 0 && updatedChapters[0].topics.length > 0) {
+          const firstVideoId = updatedChapters[0].topics[0].selectedVideo;
+          setSelectedVideoId(firstVideoId);
+        }
+  
         setIsLoading(false);
       } catch (error) {
         console.error("Failed to fetch chapters or video details:", error);
         setIsLoading(false);
       }
     };
-
-    fetchChapters();
-  }, [apiUrl, courseId]);
-
+  
+    fetchChaptersAndDurations();
+  }, [apiUrl, courseId, setSelectedVideoId]);
+  
+ useEffect(() => {
+    const fetchChaptersAndDurations = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
+        if (!response.ok) throw new Error('Failed to fetch chapters');
+        let chaptersData = await response.json();
+  
+        // Extract unique video IDs from all chapters
+        const videoIds = chaptersData.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
+        const uniqueVideoIds = [...new Set(videoIds)];
+  
+        // Fetch durations for each video
+        const durationsPromises = uniqueVideoIds.map(id =>
+          fetch(`${apiUrl}/videos/${id}`).then(res => {
+            if (!res.ok) {
+              console.error(`Failed to fetch video details for video ID: ${id}`);
+              return { _id: id, duration: 0 }; // Fallback if specific video detail fetch fails
+            }
+            return res.json();
+          })
+        );
+        const durations = await Promise.all(durationsPromises);
+        const durationsMap = durations.reduce((acc, video) => {
+          acc[video._id] = video.duration || 0;
+          return acc;
+        }, {});
+  
+        // Update chapters with durations and format them
+        const updatedChapters = chaptersData.map(chapter => {
+          let chapterDurationSeconds = 0;
+          const updatedTopics = chapter.topics.map(topic => {
+            const duration = durationsMap[topic.selectedVideo] || 0;
+            chapterDurationSeconds += duration;
+            return { ...topic, duration };
+          });
+          const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
+          return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
+        });
+        updateChapters(updatedChapters);
+        setIsLoading(false);
+  
+        // Set the first video ID to be played if available
+        if (updatedChapters.length > 0 && updatedChapters[0].topics.length > 0) {
+          const firstVideoId = updatedChapters[0].topics[0].selectedVideo;
+          setSelectedVideoId(firstVideoId);
+        }
+      } catch (error) {
+        console.error("Failed to fetch chapters or video details:", error);
+        setIsLoading(false);
+      }
+    };
+  
+    fetchChaptersAndDurations();
+  }, [apiUrl, courseId]); 
+  
   const toggleChapterVisibility = (chapterId) => {
     setExpandedChapters(prevState => ({
       ...prevState,

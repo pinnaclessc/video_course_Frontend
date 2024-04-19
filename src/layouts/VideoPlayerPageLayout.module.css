@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -86,4 +86,98 @@ position:sticky;
   .sidebar {
     display: none;
   }
+} */
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full height of the viewport */
 }
+
+.videoHeader {
+  background-color: #1c1c1c;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.videoArea {
+  display: grid;
+  grid-template-columns: 1fr 295px; /* Sidebar fixed width */
+  flex-grow: 1; /* Video area takes up remaining space */
+}
+
+.videoPlayerWrapper {
+  position: relative;
+}
+
+.fullWidthVideoPlayer {
+  grid-column: 1 / -1; /* Makes the video player full width */
+}
+
+.sidebar {
+  background-color: #f8f8f8;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 50px); /* Full height minus header height */
+  box-shadow: -1px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.outletContainer {
+  padding: 1rem;
+}
+
+.videoPlayerNavBar {
+  position: sticky;
+  bottom: 0;
+  background-color: #222;
+  color: white;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+}
+
+/* .outletArea {
+  height: 50vh;
+} */
+
+.outletArea {
+  grid-column: 1 / -1; /* Makes the outlet area span across all columns */
+  background-color: #fff; /* Background color for the outlet area */
+}
+
+@media (max-width: 768px) {
+  /* Adjusted media query styles for mobile */
+  .videoArea {
+    grid-template-columns: 1fr; /* Single column layout on small screens */
+  }
+  .outletArea {
+    /* Ensure the outlet area takes the full width on small screens */
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* .sidebar_container {
+  position: sticky;
+  top: 0; 
+}
+
+
+@media (max-width: 768px) {
+  .videoArea {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar, .fullWidthVideoPlayer {
+    display: none; 
+  }
+
+  .fullWidthVideoPlayer {
+    grid-column: 1 / -1; 
+  }
+} */

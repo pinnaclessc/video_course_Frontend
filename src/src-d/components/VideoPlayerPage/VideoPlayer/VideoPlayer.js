@@ -266,22 +266,78 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
   }, [apiUrl, selectedVideoId, setVideoDetails, setIsLoading]);
 
   // Setup HLS or src for the video player based on videoDetails from context
-  useEffect(() => {
-    if (!videoDetails || !videoRef.current) return;
+  // useEffect(() => {
+  //   if (!videoDetails || !videoRef.current) return;
 
-    const videoSource = videoDetails.resolutions.find(r => r.name === videoQuality)?.url || videoDetails.defaultUrl;
-    if (videoSource) {
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(videoSource);
-        hls.attachMedia(videoRef.current);
-      } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-        videoRef.current.src = videoSource;
-      }
+  //   const videoSource = videoDetails.resolutions.find(r => r.name === videoQuality)?.url || videoDetails.defaultUrl;
+  //   if (videoSource) {
+  //     if (Hls.isSupported()) {
+  //       const hls = new Hls();
+  //       hls.loadSource(videoSource);
+  //       hls.attachMedia(videoRef.current);
+  //     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+  //       videoRef.current.src = videoSource;
+  //     }
+  //   }
+  // }, [videoDetails, videoQuality]);
+
+  // Setup HLS or src for the video player based on videoDetails from context
+// useEffect(() => {
+//   if (!videoDetails || !videoRef.current) return;
+
+//   // Check if the resolutions array is available and contains at least one entry
+//   if (videoDetails.resolutions && videoDetails.resolutions.length > 0) {
+//     const sourceInfo = videoDetails.resolutions.find(r => r.name === '1080p') || videoDetails.resolutions[0]; // fallback to the first resolution if 1080p is not available
+//     const videoSource = sourceInfo?.url; // Safe access using optional chaining
+
+//     if (videoSource) {
+//       if (Hls.isSupported()) {
+//         const hls = new Hls();
+//         hls.loadSource(videoSource);
+//         hls.attachMedia(videoRef.current);
+//         hls.on(Hls.Events.MANIFEST_PARSED, () => {
+//           videoRef.current.play();  // This line ensures that the video starts playing as soon as it's ready
+//         });
+//       } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+//         videoRef.current.src = videoSource;
+//         videoRef.current.play();
+//       }
+//     }
+//   } else {
+//     console.error('Video details are incomplete or resolutions are not defined.');
+//   }
+// }, [videoQuality, videoDetails]);
+//////////////////////////TO PLAY VIDEO IN different resolution///////////////////////
+useEffect(() => {
+  if (!videoDetails || !videoRef.current) return;
+
+  // Adjust the resolution name to match what's actually in the data
+  const sourceInfo = videoDetails.resolutions.find(r => r.name === '1080p HLS') || videoDetails.resolutions[0]; 
+  const videoSource = sourceInfo?.url; 
+
+  if (videoSource) {
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSource);
+      hls.attachMedia(videoRef.current);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        // videoRef.current.play(); 
+      });
+    } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
+      videoRef.current.src = videoSource;
+      // videoRef.current.play();
     }
-  }, [videoDetails, videoQuality]);
-  /////////////////////////////////////////////////////////////
+  } else {
+    console.error('Video source URL is undefined or resolutions are not properly defined.');
+  }
+}, [videoDetails]);
 
+console.log('Video Details:', videoDetails);
+
+console.log("Video source URL: ", videoDetails.resolutions.find(r => r.name === videoQuality)?.url);
+  /////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////////////
   // Function to change the quality of the video
   const handleQualityChange = (quality) => {
     setCurrentQuality(quality);
@@ -701,8 +757,10 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
             onError={handleVideoError}
             quality={videoQuality}
           >
+            {videoQuality && <source src={videoDetails.resolutions.find(r => r.name === videoQuality)?.url} type="video/mp4" />}
+             {/* <source src={videoSource} type="application/x-mpegURL" /> */}
             {/* <source src= "https://www.youtube.com/watch?v=9xwazD5SyVg" type="video/mp4" /> */}
-            {videoSource && <source src={videoSource} type="application/x-mpegURL" />}
+            {/* {videoSource && <source src={videoSource} type="application/x-mpegURL" />} */}
           </video>
         )}
 
@@ -725,7 +783,7 @@ const VideoPlayer = ({ apiUrl = 'https://videocoursebackend.ssccglpinnacle.com',
           <button onClick={navigateToNextVideo}><FaChevronRight /></button>
         </div> */}
 
-        <div className="previous_next_buttons">
+<div className="previous_next_buttons">
           <button onClick={navigateToPreviousVideo}><FaChevronLeft size={30} /></button>
         </div>
 

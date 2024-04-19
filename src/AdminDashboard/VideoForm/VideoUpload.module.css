@@ -36,23 +36,6 @@
     border: 1px solid #ced4da;
   }
   
-  /* .progressContainer {
-    width: 100%;
-    background-color: #e9ecef;
-    border-radius: 20px;
-    margin-top: 10px;
-  }
-  
-  .progressBar {
-    height: 20px;
-    background-color: #007bff;
-    text-align: center;
-    line-height: 20px;
-    color: white;
-    border-radius: 20px;
-    transition: width 0.4s ease;
-  } */
-  
   .formcontainer button {
     width: 100%;
     padding: 10px 15px;
@@ -65,10 +48,6 @@
     margin-top: 15px;
     transition: background-color 0.2s;
   }
-  
-  /* .button:hover {
-    background-color: #218838;
-  } */
 
   .modal {
     position: fixed;
