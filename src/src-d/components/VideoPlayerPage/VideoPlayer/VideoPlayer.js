@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
 import "./VideoPlayer.css"
-import { Link } from "react-router-dom"
+import { Link ,useNavigate} from "react-router-dom"
 import { BsArrowCounterclockwise, BsArrowClockwise } from "react-icons/bs"
 import { CgArrowsH } from "react-icons/cg"
 import {
@@ -654,10 +654,16 @@ console.log("Video source URL: ", videoDetails.resolutions.find(r => r.name === 
     }
   };
 
+  // const handleToggleExpandedMode = () => {
+  //   setIsExpandedMode(!isExpandedMode);
+  //   onToggleSidebar();
+  // };
+  const navigate = useNavigate();
   const handleToggleExpandedMode = () => {
-    setIsExpandedMode(!isExpandedMode);
-    onToggleSidebar();
-  };
+    setIsExpandedMode(!isExpandedMode)
+      onToggleSidebar();  
+    navigate('/#overview');  // Navigate to #overview
+};
 
   //Toggle Sidebar
   const handleToggleSidebar = () => {

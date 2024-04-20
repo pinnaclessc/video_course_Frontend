@@ -8,7 +8,7 @@ const ClipLoader = ({ color, size, loading }) => {
   const override = css`
     display: block;
     margin: 0 auto;
-    border-color: ${color}; // Use the color prop for the border color
+    border-color: ${color}; 
   `;
 
   return (

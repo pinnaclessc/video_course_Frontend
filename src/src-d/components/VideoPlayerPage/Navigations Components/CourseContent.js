@@ -162,3 +162,343 @@ const CourseContent = ({ apiUrl, onClose }) => {
   );
 };
 export default CourseContent;
+// import React, { useState, useEffect } from 'react';
+// import { useParams, useNavigate } from 'react-router-dom';
+// import { useVideo } from '../../../../context/VideoContext';
+// import { RiCloseLine, RiArrowDropDownLine, RiArrowDropUpLine } from 'react-icons/ri';
+// import { MdCheckBox, MdCheckBoxOutlineBlank, MdOndemandVideo } from "react-icons/md";
+// import styles from '../VideoPlayer/Sidebar.module.css';
+// import LoadingSkeleton from '../../../../UI/LoadingSkeleton';
+// import ClipLoader from '../../../../UI/ClipLoader';
+
+// const CourseContent = ({ apiUrl, onClose }) => {
+//   const navigate = useNavigate();
+//   const { courseId } = useParams();
+//   const [chapters, setChapters] = useState([]);
+//   const [activeMenuIds, setActiveMenuIds] = useState([]);
+//   const { selectedVideoId, setSelectedVideoId, updateChapters, completedVideos } = useVideo();
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [expandedChapters, setExpandedChapters] = useState({});
+//   const { markVideoAsCompleted } = useVideo();
+
+//   /////////////////////////////////New for duration////////////////
+//   const formatDuration = (seconds) => {
+//     const hours = Math.floor(seconds / 3600);
+//     const minutes = Math.floor((seconds % 3600) / 60);
+//     const remainingSeconds = (seconds % 60).toFixed(2);
+//     return [
+//       hours ? `${hours}h` : null,
+//       `${minutes}m`,
+//       `${remainingSeconds}s`
+//     ].filter(Boolean).join(' ');
+//   };
+
+//   useEffect(() => {
+//     const fetchChaptersAndDurations = async () => {
+//       setIsLoading(true);
+//       try {
+//         const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
+//         if (!response.ok) throw new Error('Failed to fetch chapters');
+//         let chaptersData = await response.json();
+  
+//         // Extract unique video IDs from all chapters
+//         const videoIds = chaptersData.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
+//         const uniqueVideoIds = [...new Set(videoIds)];
+  
+//         // Fetch durations for each video
+//         const durationsPromises = uniqueVideoIds.map(id =>
+//           fetch(`${apiUrl}/videos/${id}`).then(res => {
+//             if (!res.ok) {
+//               console.error(`Failed to fetch video details for video ID: ${id}`);
+//               return { _id: id, duration: 0 }; 
+//             }
+//             return res.json();
+//           })
+//         );
+//         const durations = await Promise.all(durationsPromises);
+//         const durationsMap = durations.reduce((acc, video) => {
+//           acc[video._id] = video.duration || 0;
+//           return acc;
+//         }, {});
+  
+//         // Update chapters with durations and format them
+//         const updatedChapters = chaptersData.map(chapter => {
+//           let chapterDurationSeconds = 0;
+//           const updatedTopics = chapter.topics.map(topic => {
+//             const duration = durationsMap[topic.selectedVideo] || 0;
+//             chapterDurationSeconds += duration;
+//             return { ...topic, duration };
+//           });
+//           const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
+//           return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
+//         });
+  
+//         // Update state with formatted chapters data
+//         setChapters(updatedChapters);
+  
+//         // Set the first video ID to be played if available
+//         if (updatedChapters.length > 0 && updatedChapters[0].topics.length > 0) {
+//           const firstVideoId = updatedChapters[0].topics[0].selectedVideo;
+//           setSelectedVideoId(firstVideoId);
+//         }
+  
+//         setIsLoading(false);
+//       } catch (error) {
+//         console.error("Failed to fetch chapters or video details:", error);
+//         setIsLoading(false);
+//       }
+//     };
+  
+//     fetchChaptersAndDurations();
+//   }, [apiUrl, courseId, setSelectedVideoId]);
+  
+//  useEffect(() => {
+//     const fetchChaptersAndDurations = async () => {
+//       setIsLoading(true);
+//       try {
+//         const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
+//         if (!response.ok) throw new Error('Failed to fetch chapters');
+//         let chaptersData = await response.json();
+  
+//         // Extract unique video IDs from all chapters
+//         const videoIds = chaptersData.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
+//         const uniqueVideoIds = [...new Set(videoIds)];
+  
+//         // Fetch durations for each video
+//         const durationsPromises = uniqueVideoIds.map(id =>
+//           fetch(`${apiUrl}/videos/${id}`).then(res => {
+//             if (!res.ok) {
+//               console.error(`Failed to fetch video details for video ID: ${id}`);
+//               return { _id: id, duration: 0 }; 
+//             }
+//             return res.json();
+//           })
+//         );
+//         const durations = await Promise.all(durationsPromises);
+//         const durationsMap = durations.reduce((acc, video) => {
+//           acc[video._id] = video.duration || 0;
+//           return acc;
+//         }, {});
+  
+//         // Update chapters with durations and format them
+//         const updatedChapters = chaptersData.map(chapter => {
+//           let chapterDurationSeconds = 0;
+//           const updatedTopics = chapter.topics.map(topic => {
+//             const duration = durationsMap[topic.selectedVideo] || 0;
+//             chapterDurationSeconds += duration;
+//             return { ...topic, duration };
+//           });
+//           const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
+//           return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
+//         });
+//         updateChapters(updatedChapters);
+//         setIsLoading(false);
+  
+//         // Set the first video ID to be played if available
+//         if (updatedChapters.length > 0 && updatedChapters[0].topics.length > 0) {
+//           const firstVideoId = updatedChapters[0].topics[0].selectedVideo;
+//           setSelectedVideoId(firstVideoId);
+//         }
+//       } catch (error) {
+//         console.error("Failed to fetch chapters or video details:", error);
+//         setIsLoading(false);
+//       }
+//     };
+  
+//     fetchChaptersAndDurations();
+//   }, [apiUrl, courseId]); 
+  
+//   const toggleChapterVisibility = (chapterId) => {
+//     setExpandedChapters(prevState => ({
+//       ...prevState,
+//       [chapterId]: !prevState[chapterId]
+//     }));
+//   };
+
+//   const fetchAndOpenPdf = async (pdfId) => {
+//     try {
+//       const response = await fetch(`${apiUrl}/api/pdfs/${pdfId}`);
+//       if (!response.ok) throw new Error('Failed to fetch PDF data');
+//       const pdfData = await response.json();
+//       window.open(pdfData.cloudFrontUrl, '_blank');
+//     } catch (error) {
+//       console.error("Failed to fetch PDF data:", error);
+//     }
+//   };
+
+//   // Use navigate to redirect to PDFViewer page
+//   const navigateToPdfViewer = (pdfId) => {
+//     navigate(`/pdfviewer/${pdfId}`); 
+//   };
+
+//   // const handleToggleCompletion = (videoId) => {
+//   //   // Toggle the completion status based on the current state
+//   //   const isCurrentlyCompleted = !!completedVideos[videoId];
+//   //   markVideoAsCompleted(videoId, !isCurrentlyCompleted);
+//   // };
+
+//   const calculateChapterDuration = (topics) => {
+//     const totalDurationSeconds = topics.reduce((acc, topic) => acc + topic.duration, 0);
+//     return formatDuration(totalDurationSeconds);
+//   };
+
+//   const auth = localStorage.getItem("user");
+
+//   const getUserId = () => {
+//     const user = localStorage.getItem("user");
+//     return user ? JSON.parse(user)._id : null;
+//   };
+
+//   const userId = getUserId();
+  
+
+//   const handleToggleCompletion = (videoId) => {
+//     const newCompletionStatus = !completedVideos[videoId];
+//     markVideoAsCompleted(videoId, newCompletionStatus);
+//   };
+
+//   // const calculateCompletionStatus = (topics) => {
+//   //   const completedCount = topics.filter(t => t.completed).length;
+//   //   return `${completedCount} / ${topics.length}`;
+//   // };
+
+//   const calculateCompletionStatus = (topics) => {
+//     const completedCount = topics.reduce((acc, topic) => acc + (completedVideos[topic.selectedVideo] ? 1 : 0), 0);
+//     return `${completedCount} / ${topics.length}`;
+//   };
+
+//   const toggleCompletion = async (topicId, selectedVideo) => {
+//     const isCompleted = completedVideos[selectedVideo];
+//     markVideoAsCompleted(selectedVideo, !isCompleted);
+//   };
+
+//   const toggleChapter = (chapterId) => {
+//     setActiveMenuIds(currentIds =>
+//       currentIds.includes(chapterId)
+//         ? currentIds.filter(id => id !== chapterId)
+//         : [...currentIds, chapterId]
+//     );
+//   };
+
+//   // const fetchAndOpenPdf = async (pdfId) => {
+//   //   try {
+//   //     const response = await fetch(`${apiUrl}/api/pdf/${pdfId}`);
+//   //     if (!response.ok) throw new Error('Failed to fetch PDF data');
+//   //     const pdfData = await response.json();
+//   //     window.open(pdfData.cloudFrontUrl, '_blank');
+//   //   } catch (error) {
+//   //     console.error("Failed to fetch PDF data:", error);
+//   //   }
+//   // };
+
+//   let topicCounter = 0;
+
+//   return (
+//     <div className={styles.sidebar}>
+//       <div className={styles.sidebarHeading}>
+//         <h3>Course Content</h3>
+//         <RiCloseLine size={24} onClick={onClose} className={styles.closeIcon} />
+//       </div>
+//       {isLoading ? (
+//        <div className={`${styles['loader-container']} `}>
+//        <ClipLoader color={'#333'} loading={isLoading} size={50} />
+//    </div>
+   
+        
+//       ) : (
+//         <div className={styles.content}>
+//           {chapters.map((chapter) => (
+//             <div key={chapter._id} className={styles.accordion}>
+//               <div
+//                 className={styles.accordion_title_container}
+//                 onClick={() => toggleChapter(chapter._id)}
+//               >
+//                 <div className={styles.accordion_title}>
+//                   {chapter.chapterTitle}
+//                   <div className={styles.chapterInfo}>
+//                     {calculateCompletionStatus(chapter.topics)} | {calculateChapterDuration(chapter.topics)}
+//                   </div>
+//                 </div>
+//                 {activeMenuIds.includes(chapter._id) ? <RiArrowDropUpLine size={24} /> : <RiArrowDropDownLine size={24} />}
+//               </div>
+//               {activeMenuIds.includes(chapter._id) && (
+//                 //   <ul className={styles.submenu_list}>
+//                 //     {chapter.topics.map((topic, index) => (
+//                 //       <li key={topic._id} className={styles.submenu_item}>
+//                 //         <div className={styles.options_container}>
+//                 //            {completedVideos[topic.selectedVideo] ? (
+//                 //               <MdCheckBox size={20} onClick={() => handleToggleCompletion(topic.selectedVideo)} />
+//                 //             ) : (
+//                 //               <MdCheckBoxOutlineBlank size={20} onClick={() => handleToggleCompletion(topic.selectedVideo)} />
+//                 //             )}
+//                 //           <span className={styles.topic_number}>{index + 1}.</span>
+//                 //           <div
+//                 //             className={`${styles.submenu_button} ${selectedVideoId === topic.selectedVideo ? styles.active : ''}`}
+//                 //             onClick={() => setSelectedVideoId(topic.selectedVideo)}
+//                 //           >
+//                 //             {topic.videoTitle}
+//                 //           </div>
+//                 //           <MdOndemandVideo size={18} />
+//                 //           <span className={styles.video_duration}>{formatDuration(topic.duration)}</span>
+//                 //           <button
+//                 //             className={styles.resource_button}
+//                 //             onClick={() => window.open(topic.selectedPdf, '_blank')}
+//                 //           >
+//                 //             Resources
+//                 //           </button>
+//                 //         </div>
+//                 //       </li>
+//                 //     ))}
+//                 //   </ul>
+//                 // )}
+//                 <ul className={styles.submenu_list}>
+//                   {chapter.topics.map((topic, index) => {
+//                     topicCounter++;
+//                     return (
+//                       <li key={topic._id} className={styles.submenu_item}>
+//                         <div className={styles.options_container}>
+//                           {completedVideos[topic.selectedVideo] ? (
+//                             <MdCheckBox size={20} onClick={() => handleToggleCompletion(topic.selectedVideo)} />
+//                           ) : (
+//                             <MdCheckBoxOutlineBlank size={20} onClick={() => handleToggleCompletion(topic.selectedVideo)} />
+//                           )}
+
+//                           {/* Use topicCounter for sequential numbering instead of index + 1 */}
+//                           <span className={styles.topic_number}>{topicCounter}.</span>
+//                           <div
+//                             className={`${styles.submenu_button} ${selectedVideoId === topic.selectedVideo ? styles.active : ''}`}
+//                             onClick={() => setSelectedVideoId(topic.selectedVideo)}
+//                           >
+//                             {topic.videoTitle}
+//                           </div>
+//                           <MdOndemandVideo size={18} />
+//                           <span className={styles.video_duration}>{formatDuration(topic.duration)}</span>
+//                           {/* <button
+//                             className={styles.resource_button}
+//                             onClick={() => window.open(topic.selectedPdf, '_blank')}
+//                           >
+//                             Resources
+//                           </button> */}
+//                          <button
+//   className={styles.resource_button}
+//   onClick={() => navigateToPdfViewer(topic.selectedPdf)} 
+// >
+//   Resources
+// </button>
+//                         </div>
+//                       </li>
+//                     );
+//                   })}
+//                 </ul>
+//               )}
+//             </div>
+//           ))}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+
+// export default CourseContent;
+

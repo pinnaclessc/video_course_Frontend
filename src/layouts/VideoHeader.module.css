@@ -16,10 +16,10 @@
 }
 
 .verticalLine {
-  height: 20px; /* Set the height of the vertical line */
-  border-left: 1px solid gray; /* Set the style, width, and color of the vertical line */
+  height: 20px; 
+  border-left: 1px solid gray; 
   margin-left: 10px; 
-  padding-right:2px;/* Adjust the margin to create space between the button and the vertical line */
+  padding-right:2px;
 }
 
 .backButton::after {
@@ -28,7 +28,7 @@
   width: 1px;
   height: 100%;
   background-color: white;
-  margin-left: 10px; /* Adjust as needed */
+  margin-left: 10px;
 }
 
 
@@ -83,7 +83,7 @@
 }
 
 .shareButton {
-  background-color: #000;
+  background-color: #2D2F31;
   color: #fff;
   border: none;
   padding: 5px 10px;
@@ -192,7 +192,7 @@
 }
 
 .shareButton {
-  background-color: #000;
+  background-color: #2D2F31;
   color: #fff;
   border: none;
   padding: 5px 10px;

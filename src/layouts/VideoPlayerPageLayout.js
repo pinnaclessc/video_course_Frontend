@@ -150,12 +150,196 @@
 // export default VideoPlayerPageLayout;
 
 //////////////////////////////////////WORKING////////////////////////////////////////////
+// import React, { useState, useEffect } from 'react';
+// import VideoPlayer from '../src-d/components/VideoPlayerPage/VideoPlayer/VideoPlayer';
+// import Sidebar from '../src-d/components/VideoPlayerPage/VideoPlayer/SideBar';
+// import VideoPlayerNavBar from './VideoPlayerNavBar';
+// import styles from './VideoPlayerPageLayout.module.css';
+// import { useParams, useLocation, Outlet } from 'react-router-dom';
+// import VideoHeader from './VideoHeader';
+// import { useVideo } from '../context/VideoContext';
+// import SearchBar from "../src-d/components/VideoPlayerPage/Navigations Components/SearchBar";
+// import CourseOverview from '../src-d/components/VideoPlayerPage/Navigations Components/CourseOverview';
+// import NoteEditor from '../src-d/components/VideoPlayerPage/Navigations Components/NotesEditor/NoteEditor';
+// import QandA from '../src-d/components/VideoPlayerPage/Navigations Components/Q&A/QandA';
+// import Announcements from '../src-d/components/VideoPlayerPage/Navigations Components/Announcements/Announcements';
+// import CourseContent from '../src-d/components/VideoPlayerPage/Navigations Components/CourseContent';
+// import LearningTools from '../src-d/components/VideoPlayerPage/Navigations Components/LearningTools/LearningTools';
+// import Review from '../src-d/components/VideoPlayerPage/Navigations Components/Review/Review';
+
+
+// const apiUrl = 'https://videocoursebackend.ssccglpinnacle.com';
+
+// // const VideoPlayerPageLayout = () => {
+// //   const { courseId } = useParams();
+// //   const location = useLocation();
+// //   const [sidebarVisible, setSidebarVisible] = useState(true);
+// //   const { markVideoAsCompleted } = useVideo();
+// //   const [renderSidebarInOutlet, setRenderSidebarInOutlet] = useState(false);
+
+// //   const handleToggleSidebar = () => {
+// //     setSidebarVisible(!sidebarVisible);
+// //     if (renderSidebarInOutlet) {
+// //       setRenderSidebarInOutlet(false);
+// //     }
+// //   };
+
+// //   const handleCourseContentClick = () => {
+// //     setRenderSidebarInOutlet(true);
+// //     setSidebarVisible(true);
+// //   };
+
+// //   const handleVideoProgress = (videoId) => {
+// //     markVideoAsCompleted(videoId);
+// //   };
+
+//   // const renderComponentBasedOnHash = () => {
+//   //   switch (location.hash) {
+//   //     case '#search': return <SearchBar />;
+//   //     case '#overview': return <CourseOverview />;
+//   //     case '#notes': return <NoteEditor />;
+//   //     case '#q&a': return <QandA />;
+//   //     case '#announcement': return <Announcements />;
+//   //     case '#coursesContent': return <CourseContent />;
+//   //     case '#learning-tools': return <LearningTools />;
+//   //     case '#reviews': return <Review />;
+//   //     default: return <CourseOverview />;
+//   //   }
+//   // };
+
+// //   const videoPlayerWrapperClass = sidebarVisible ? styles.videoPlayerWrapper : `${styles.videoPlayerWrapper} ${styles.fullWidthVideoPlayer}`;
+
+// //   return (
+// //     <div className={styles.container}>
+// //       <VideoHeader />
+
+// //       <div className={styles.videoArea}>
+// //         <div className={videoPlayerWrapperClass}>
+// //           <VideoPlayer
+// //             apiUrl={apiUrl}
+// //             onToggleSidebar={handleToggleSidebar}
+// //             isSidebarVisible={sidebarVisible}
+// //             onVideoProgress={handleVideoProgress}
+// //           />
+// //           <VideoPlayerNavBar
+// //             sidebarVisible={sidebarVisible}
+// //             setSidebarVisible={setSidebarVisible}
+// //             onCourseContentClick={handleCourseContentClick}
+// //           />
+// //           <div className={styles.outletArea}>
+// //             {/* <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />  */}
+// //             <Outlet />
+// //           </div>
+// //         </div>
+// //         {!renderSidebarInOutlet && sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />}
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+// // export default VideoPlayerPageLayout;
+// //////////////////////////////////////////////////////////////////////////////////////////
+
+// const VideoPlayerPageLayout = () => {
+//   const { courseId } = useParams();
+//   const location = useLocation();
+//   const [sidebarVisible, setSidebarVisible] = useState(true);
+//   const { markVideoAsCompleted } = useVideo();
+//   const [renderSidebarInOutlet, setRenderSidebarInOutlet] = useState(false);
+
+//   // const handleToggleSidebar = () => {
+//   //   setSidebarVisible(!sidebarVisible);
+//   //   if (renderSidebarInOutlet) {
+//   //     setRenderSidebarInOutlet(false);
+//   //   }
+//   // };
+
+//   const handleToggleSidebar = () => {
+//     setSidebarVisible(!sidebarVisible);
+//     if (!sidebarVisible) {
+//       setRenderSidebarInOutlet(false);
+//     }
+//   };
+
+//   const handleCourseContentClick = () => {
+//     setRenderSidebarInOutlet(true);
+//     setSidebarVisible(true);
+//   };
+
+//   const handleVideoProgress = (videoId) => {
+//     markVideoAsCompleted(videoId);
+//   };
+
+//     const renderComponentBasedOnHash = () => {
+//     switch (location.hash) {
+//       case '#search': return <SearchBar />;
+//       case '#overview': return <CourseOverview />;
+//       case '#notes': return <NoteEditor />;
+//       case '#q&a': return <QandA />;
+//       case '#announcement': return <Announcements />;
+//       case '#coursesContent': return <Sidebar />;
+//       case '#learning-tools': return <LearningTools />;
+//       case '#reviews': return <Review />;
+//       default: return <CourseOverview />;
+//     }
+//   };
+
+//   // useEffect(() => {
+   
+//   // }, [location]);
+
+//   useEffect(() => {
+//     const handleHashChange = () => {
+//       // You could also manage the hash change here if necessary
+//     };
+
+//     window.addEventListener('hashchange', handleHashChange);
+//     return () => window.removeEventListener('hashchange', handleHashChange);
+//   }, []);
+
+//   const videoPlayerWrapperClass = sidebarVisible ? styles.videoPlayerWrapper : `${styles.videoPlayerWrapper} ${styles.fullWidthVideoPlayer}`;
+
+//   return (
+//     <div className={styles.container}>
+//       <VideoHeader />
+
+//       <div className={styles.videoArea}>
+//         <div className={videoPlayerWrapperClass}>
+//           <VideoPlayer
+//             apiUrl={apiUrl}
+//             onToggleSidebar={handleToggleSidebar}
+//             isSidebarVisible={sidebarVisible}
+//             onVideoProgress={handleVideoProgress}
+//           />
+//           <VideoPlayerNavBar
+//             sidebarVisible={sidebarVisible}
+//             setSidebarVisible={setSidebarVisible}
+//             onCourseContentClick={handleCourseContentClick}
+//           />
+//           {/* <div className={styles.outletArea}>
+//             {renderComponentBasedOnHash()}
+//           </div> */}
+//            <div className={styles.outletArea}>
+//             {renderSidebarInOutlet && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />}
+//             {renderComponentBasedOnHash()}
+//           </div>
+//         </div>
+//          {!renderSidebarInOutlet && sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />}
+//         {/* {!renderSidebarInOutlet && sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />} */}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default VideoPlayerPageLayout;
+
+
+/////////////////////////////////////////////////////////////////////////////////////
 import React, { useState, useEffect } from 'react';
+import { useParams, useLocation ,useNavigate} from 'react-router-dom';
 import VideoPlayer from '../src-d/components/VideoPlayerPage/VideoPlayer/VideoPlayer';
 import Sidebar from '../src-d/components/VideoPlayerPage/VideoPlayer/SideBar';
 import VideoPlayerNavBar from './VideoPlayerNavBar';
-import styles from './VideoPlayerPageLayout.module.css';
-import { useParams, useLocation } from 'react-router-dom';
 import VideoHeader from './VideoHeader';
 import { useVideo } from '../context/VideoContext';
 import SearchBar from "../src-d/components/VideoPlayerPage/Navigations Components/SearchBar";
@@ -166,27 +350,26 @@ import Announcements from '../src-d/components/VideoPlayerPage/Navigations Compo
 import CourseContent from '../src-d/components/VideoPlayerPage/Navigations Components/CourseContent';
 import LearningTools from '../src-d/components/VideoPlayerPage/Navigations Components/LearningTools/LearningTools';
 import Review from '../src-d/components/VideoPlayerPage/Navigations Components/Review/Review';
-
-
-const apiUrl = 'https://videocoursebackend.ssccglpinnacle.com';
+import styles from './VideoPlayerPageLayout.module.css';
 
 const VideoPlayerPageLayout = () => {
   const { courseId } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const { markVideoAsCompleted } = useVideo();
   const [renderSidebarInOutlet, setRenderSidebarInOutlet] = useState(false);
 
   const handleToggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
-    if (renderSidebarInOutlet) {
+    if (!sidebarVisible) {
       setRenderSidebarInOutlet(false);
     }
   };
 
   const handleCourseContentClick = () => {
-    setRenderSidebarInOutlet(true);  
-    setSidebarVisible(true); 
+    setRenderSidebarInOutlet(true);
+    setSidebarVisible(true);
   };
 
   const handleVideoProgress = (videoId) => {
@@ -207,34 +390,43 @@ const VideoPlayerPageLayout = () => {
     }
   };
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      setRenderSidebarInOutlet(false); 
+      setSidebarVisible(false); 
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const videoPlayerWrapperClass = sidebarVisible ? styles.videoPlayerWrapper : `${styles.videoPlayerWrapper} ${styles.fullWidthVideoPlayer}`;
 
   return (
     <div className={styles.container}>
       <VideoHeader />
-    
       <div className={styles.videoArea}>
         <div className={videoPlayerWrapperClass}>
           <VideoPlayer
-            apiUrl={apiUrl}
+            apiUrl={'https://videocoursebackend.ssccglpinnacle.com'}
             onToggleSidebar={handleToggleSidebar}
             isSidebarVisible={sidebarVisible}
             onVideoProgress={handleVideoProgress}
           />
-            <VideoPlayerNavBar
-        sidebarVisible={sidebarVisible}
-        setSidebarVisible={setSidebarVisible}
-        onCourseContentClick={handleCourseContentClick}
-      />
+          <VideoPlayerNavBar
+            sidebarVisible={sidebarVisible}
+            setSidebarVisible={setSidebarVisible}
+            onCourseContentClick={handleCourseContentClick}
+          />
           <div className={styles.outletArea}>
-           <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} /> 
+            {renderSidebarInOutlet && <Sidebar apiUrl={'https://videocoursebackend.ssccglpinnacle.com'} onClose={handleToggleSidebar} />}
+            {renderComponentBasedOnHash()}
           </div>
         </div>
-        {!renderSidebarInOutlet && sidebarVisible && <Sidebar apiUrl={apiUrl} onClose={handleToggleSidebar} />}
+        {!renderSidebarInOutlet && sidebarVisible && <Sidebar apiUrl={'https://videocoursebackend.ssccglpinnacle.com'} onClose={handleToggleSidebar} />}
       </div>
     </div>
   );
 };
 
 export default VideoPlayerPageLayout;
-//////////////////////////////////////////////////////////////////////////////////////////

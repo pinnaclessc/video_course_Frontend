@@ -188,7 +188,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = (seconds % 60).toFixed(2);//rounded sec in 2 decimal place
+    const remainingSeconds = (seconds % 60).toFixed(2);
     return [
       hours ? `${hours}h` : null,
       `${minutes}m`,
@@ -213,7 +213,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
           fetch(`${apiUrl}/videos/${id}`).then(res => {
             if (!res.ok) {
               console.error(`Failed to fetch video details for video ID: ${id}`);
-              return { _id: id, duration: 0 }; // Fallback if specific video detail fetch fails
+              return { _id: id, duration: 0 }; 
             }
             return res.json();
           })
@@ -272,7 +272,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
           fetch(`${apiUrl}/videos/${id}`).then(res => {
             if (!res.ok) {
               console.error(`Failed to fetch video details for video ID: ${id}`);
-              return { _id: id, duration: 0 }; // Fallback if specific video detail fetch fails
+              return { _id: id, duration: 0 }; 
             }
             return res.json();
           })
@@ -331,7 +331,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
 
   // Use navigate to redirect to PDFViewer page
   const navigateToPdfViewer = (pdfId) => {
-    navigate(`/pdfviewer/${pdfId}`); // Use navigate for routing
+    navigate(`/pdfviewer/${pdfId}`); 
   };
 
   // const handleToggleCompletion = (videoId) => {
@@ -353,33 +353,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
   };
 
   const userId = getUserId();
-  // const handleToggleCompletion = (videoId) => {
-  //   // Toggle the completion status based on the current state
-  //   const isCurrentlyCompleted = !!completedVideos[videoId];
-  //   markVideoAsCompleted(videoId, !isCurrentlyCompleted);
-
-  //   // Optionally update the backend with the new completion status
-  //   // and then fetch updated course details to reflect in the UI.
-  //   // This is assuming you have an API endpoint to update the video completion status.
-  //   const updateCompletionStatusAPI = `${apiUrl}/updateCompletionStatus`; // Example API endpoint
-  //   fetch(updateCompletionStatusAPI, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       userId: getUserId(), // Assuming you have a function to get the current user's ID
-  //       videoId: videoId,
-  //       completed: !isCurrentlyCompleted,
-  //     }),
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     // Trigger an event or call a function that fetches updated course details
-  //     // to reflect the new completion status in the VideoHeader component.
-  //   })
-  //   .catch(error => console.error('Error updating completion status:', error));
-  // };
+  
 
   const handleToggleCompletion = (videoId) => {
     const newCompletionStatus = !completedVideos[videoId];
@@ -419,8 +393,6 @@ const Sidebar = ({ apiUrl, onClose }) => {
   //     console.error("Failed to fetch PDF data:", error);
   //   }
   // };
-
-
 
   let topicCounter = 0;
 

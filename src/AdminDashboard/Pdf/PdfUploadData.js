@@ -57,7 +57,7 @@ const PdfUploadForm = () => {
         formData.append('pdf', file);
         formData.append('courseId', selectedCourseId);
 
-        const response = await fetch('http://localhost:8000/api/upload-pdf', {
+        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/api/upload-pdf', {
           method: 'POST',
           body: formData,
         

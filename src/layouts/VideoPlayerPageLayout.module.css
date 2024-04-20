@@ -104,8 +104,8 @@ position:sticky;
 
 .videoArea {
   display: grid;
-  grid-template-columns: 1fr 295px; /* Sidebar fixed width */
-  flex-grow: 1; /* Video area takes up remaining space */
+  grid-template-columns: 1fr 295px; 
+  flex-grow: 1; 
 }
 
 .videoPlayerWrapper {
@@ -113,7 +113,7 @@ position:sticky;
 }
 
 .fullWidthVideoPlayer {
-  grid-column: 1 / -1; /* Makes the video player full width */
+  grid-column: 1 / -1;
 }
 
 .sidebar {
@@ -121,7 +121,7 @@ position:sticky;
   overflow-y: auto;
   position: sticky;
   top: 0;
-  height: calc(100vh - 50px); /* Full height minus header height */
+  height: calc(100vh - 50px); 
   box-shadow: -1px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -146,17 +146,17 @@ position:sticky;
 } */
 
 .outletArea {
-  grid-column: 1 / -1; /* Makes the outlet area span across all columns */
-  background-color: #fff; /* Background color for the outlet area */
+  grid-column: 1 / -1; 
+  background-color: #fff; 
 }
 
 @media (max-width: 768px) {
-  /* Adjusted media query styles for mobile */
+
   .videoArea {
-    grid-template-columns: 1fr; /* Single column layout on small screens */
+    grid-template-columns: 1fr; 
   }
   .outletArea {
-    /* Ensure the outlet area takes the full width on small screens */
+ 
     grid-column: 1 / -1;
   }
 }
