@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import data from "./data.json"; // Assume this contains course static data if needed
 import styles from "./Cart.module.css";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import ApplyCoupon from "./ApplyCoupon"; // Your ApplyCoupon component
-import Share from "./ShareComponent/Share"; // Your Share component
-import { IoHeartCircleOutline, IoHeart } from "react-icons/io5"; // Import the empty and filled heart icons
-import { FaCartPlus } from "react-icons/fa";
+import { useNavigate, useParams} from "react-router-dom";
+import ApplyCoupon from "./ApplyCoupon";
+import Share from "./ShareComponent/Share";
+import { IoHeart } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa6";
-import Payment from "./Payment"; // Your Payment component
+import Payment from "./Payment";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Assuming this ID is the courseId
+  const { id } = useParams(); 
   const [selectedMonths, setSelectedMonths] = useState(6);
   const [showCoupon, setShowCoupon] = useState(false);
   const [isShare, setIsShare] = useState(false);
@@ -160,7 +158,7 @@ const Cart = () => {
       const data = await response.json();
 
       if (data.success) {
-        setIsAddedToWishlist(true); // Set the state to true if added to wishlist
+        setIsAddedToWishlist(true);
         Swal.fire({
           title: "Success!",
           text: "Added in WishList",
@@ -226,11 +224,6 @@ const Cart = () => {
         </div>
         <div className={styles.overlay}>
           <h2 className={styles.heading}>{courseTitle}</h2>
-          {/* <p className={styles.course}>
-            {courseDetails}
-            <br />
-            <Link to="/personalPlane">Learn More</Link>
-          </p> */}
           <div className={styles["range-slider-container"]}>
             <input type="range" min="6" max="24" step="6" value={selectedMonths} onChange={handleMonthsChange} className={styles["range-slider"]} />
           </div>
@@ -270,14 +263,6 @@ const Cart = () => {
           {showCoupon && <ApplyCoupon />}
         </div>
         {isShare && <Share />}
-        {/* <div className={styles["cart-wishlist-Btn-div"]}>
-          <button className={styles["cartBtn"]} onClick={cartHandler}>
-            <FaCartPlus />
-          </button>
-          <button className={styles["wishListBtn"]} onClick={wishlistHandler}>
-            {isAddedToWishlist ? <IoHeart size={40} color="red" /> : <FaRegHeart size={40}/>}
-          </button>
-        </div> */}
       </div>
     </div>
   );
