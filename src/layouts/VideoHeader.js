@@ -80,21 +80,35 @@ const calculateProgress = () => {
 
   return (completedTopics / totalTopics) * 100;
 };
-useEffect(() => {
-  if (courseDetails?.chapters) {
-    const totalTopics = courseDetails.chapters.reduce((acc, chapter) => acc + chapter.topics.length, 0);
-    const completedTopics = courseDetails.chapters.flatMap(chapter => chapter.topics).reduce((acc, topic) => acc + (completedVideos[topic.selectedVideo] ? 1 : 0), 0);
 
-    const percentage = (completedTopics / totalTopics) * 100;
-    setProgressPercentage(percentage);
-    setLoading(false);
-  }
-}, [courseDetails, completedVideos]);
+//////////////////////////////////////////////////////////////////////////////////////
+// useEffect(() => {
+//   if (courseDetails?.chapters) {
+//     const totalTopics = courseDetails.chapters.reduce((acc, chapter) => acc + chapter.topics.length, 0);
+//     const completedTopics = courseDetails.chapters.flatMap(chapter => chapter.topics).reduce((acc, topic) => acc + (completedVideos[topic.selectedVideo] ? 1 : 0), 0);
+
+//     const percentage = (completedTopics / totalTopics) * 100;
+//     setProgressPercentage(percentage);
+//     setLoading(false);
+//   }
+// }, [courseDetails, completedVideos]);
 // const progressPercentage = calculateProgress();
 
 // const progressPercentage = calculateProgress();
   // const progressPercentage = (userProgress / totalCourseLength) * 100;
+////////////////////////////////////////////////////////////////////////////////
 
+useEffect(() => {
+  if (courseDetails && courseDetails.chapters) {
+    const totalTopics = courseDetails.chapters.reduce((acc, chapter) => acc + chapter.topics.length, 0);
+    const completedTopics = courseDetails.chapters
+      .flatMap(chapter => chapter.topics)
+      .reduce((acc, topic) => acc + (completedVideos[topic.selectedVideo] ? 1 : 0), 0);
+    setProgressPercentage((completedTopics / totalTopics) * 100);
+  }
+}, [courseDetails, completedVideos]);
+
+///////////////////////////////////////////////////////////////
   const shareOnWhatsApp = () => {
     const text = `Check out this course I'm taking on SSC CGL MATHEMATICS! ${shareUrl}`;
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
@@ -121,15 +135,15 @@ useEffect(() => {
       <h1 className={styles.courseTitle}>{courseDetails ? courseDetails.courseTitle : 'Course Not Found'}</h1>
     )} */}
 
-      {/* <div className={styles.progressContainer}>
-        <progress className={styles.videoContentProgress} value={userProgress} max={totalCourseLength}></progress>
+     
+{/* <div className={styles.progressContainer}>
+        <progress className={styles.videoContentProgress} value={progressPercentage} max={100}></progress>
         <span>{progressPercentage.toFixed(0)}% of course completed</span>
       </div> */}
-<div className={styles.progressContainer}>
+ <div className={styles.progressContainer}>
         <progress className={styles.videoContentProgress} value={progressPercentage} max={100}></progress>
         <span>{progressPercentage.toFixed(0)}% of course completed</span>
       </div>
-
 
       <button onClick={handleShareClick} className={styles.shareButton}>
         Share <IoIosShareAlt size={20} />

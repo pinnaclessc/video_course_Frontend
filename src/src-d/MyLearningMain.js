@@ -16,8 +16,9 @@ function MyLearningMain() {
       <MyLearning />
       {/* <FilterComponents /> */}
       <MainContent userId={userId} course_id={course_id} />
-      <Footer/>
+   
       </div>
+      <Footer/>
     </>
   )
 }

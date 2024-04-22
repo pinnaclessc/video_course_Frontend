@@ -57,7 +57,7 @@ const PdfUploadForm = () => {
         formData.append('pdf', file);
         formData.append('courseId', selectedCourseId);
 
-        const response = await fetch('http://localhost:8000/api/upload-pdf', {
+        const response = await fetch('https://videocoursebackend.ssccglpinnacle.com/api/upload-pdf', {
           method: 'POST',
           body: formData,
         
@@ -94,6 +94,7 @@ const PdfUploadForm = () => {
 
   return (
     <div className={styles.container}>
+       <h2 className={styles.formTitle}>Add New PDF</h2>
       <label htmlFor="courseSelect">Select a Course:</label>
 
       <select
@@ -102,7 +103,7 @@ const PdfUploadForm = () => {
         className={styles.courseSelect}
         required
       >
-        <option value="">Select a Course</option>
+     <option value="" disabled style={{ color: 'gray' }}>Select a Course</option>
 
         {courses.map((course) => (
           <option key={course._id} value={course._id}>{course.courseTitle}</option>

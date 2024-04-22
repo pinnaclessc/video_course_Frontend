@@ -184,29 +184,11 @@ const Sidebar = ({ apiUrl, onClose }) => {
   const [expandedChapters, setExpandedChapters] = useState({});
   const { markVideoAsCompleted } = useVideo();
 
-  // useEffect(() => {
-
-  //   const fetchChapters = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
-  //       if (!response.ok) throw new Error('Failed to fetch chapters');
-  //       const data = await response.json();
-  //       console.log("Fetched chapters data:", data); 
-  //       updateChapters(data);
-  //       setChapters(data); 
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error("Failed to fetch chapters:", error);
-  //       setIsLoading(false);
-  //     }
-  //   };  fetchChapters();
-  // }, [apiUrl, courseId]);
   /////////////////////////////////New for duration////////////////
   const formatDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = (seconds % 60).toFixed(2);//rounded sec in 2 decimal place
+    const remainingSeconds = (seconds % 60).toFixed(2);
     return [
       hours ? `${hours}h` : null,
       `${minutes}m`,
@@ -215,23 +197,23 @@ const Sidebar = ({ apiUrl, onClose }) => {
   };
 
   useEffect(() => {
-    const fetchChapters = async () => {
+    const fetchChaptersAndDurations = async () => {
       setIsLoading(true);
       try {
         const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
         if (!response.ok) throw new Error('Failed to fetch chapters');
-        let data = await response.json();
-
-        // Fetch durations for all videos in the chapters
-        const videoIds = data.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
-        const uniqueVideoIds = [...new Set(videoIds)]; // Ensure we only fetch unique video IDs
-
-        // Fetching durations for each video
+        let chaptersData = await response.json();
+  
+        // Extract unique video IDs from all chapters
+        const videoIds = chaptersData.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
+        const uniqueVideoIds = [...new Set(videoIds)];
+  
+        // Fetch durations for each video
         const durationsPromises = uniqueVideoIds.map(id =>
           fetch(`${apiUrl}/videos/${id}`).then(res => {
             if (!res.ok) {
               console.error(`Failed to fetch video details for video ID: ${id}`);
-              return { _id: id, duration: 0 }; // Fallback if specific video detail fetch fails
+              return { _id: id, duration: 0 }; 
             }
             return res.json();
           })
@@ -241,30 +223,94 @@ const Sidebar = ({ apiUrl, onClose }) => {
           acc[video._id] = video.duration || 0;
           return acc;
         }, {});
-
-        // Include durations in topics and calculate total chapter durations
-        data = data.map(chapter => {
+  
+        // Update chapters with durations and format them
+        const updatedChapters = chaptersData.map(chapter => {
           let chapterDurationSeconds = 0;
           const updatedTopics = chapter.topics.map(topic => {
-            const duration = durationsMap[topic.selectedVideo] || 0; 
+            const duration = durationsMap[topic.selectedVideo] || 0;
             chapterDurationSeconds += duration;
             return { ...topic, duration };
           });
           const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
           return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
         });
-        updateChapters(data);
-        setChapters(data); 
+  
+        // Update state with formatted chapters data
+        setChapters(updatedChapters);
+  
+        // Set the first video ID to be played if available
+        if (updatedChapters.length > 0 && updatedChapters[0].topics.length > 0) {
+          const firstVideoId = updatedChapters[0].topics[0].selectedVideo;
+          setSelectedVideoId(firstVideoId);
+        }
+  
         setIsLoading(false);
       } catch (error) {
         console.error("Failed to fetch chapters or video details:", error);
         setIsLoading(false);
       }
     };
-
-    fetchChapters();
-  }, [apiUrl, courseId]);
-
+  
+    fetchChaptersAndDurations();
+  }, [apiUrl, courseId, setSelectedVideoId]);
+  
+ useEffect(() => {
+    const fetchChaptersAndDurations = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`${apiUrl}/api/chapters/course/${courseId}`);
+        if (!response.ok) throw new Error('Failed to fetch chapters');
+        let chaptersData = await response.json();
+  
+        // Extract unique video IDs from all chapters
+        const videoIds = chaptersData.flatMap(chapter => chapter.topics.map(topic => topic.selectedVideo));
+        const uniqueVideoIds = [...new Set(videoIds)];
+  
+        // Fetch durations for each video
+        const durationsPromises = uniqueVideoIds.map(id =>
+          fetch(`${apiUrl}/videos/${id}`).then(res => {
+            if (!res.ok) {
+              console.error(`Failed to fetch video details for video ID: ${id}`);
+              return { _id: id, duration: 0 }; 
+            }
+            return res.json();
+          })
+        );
+        const durations = await Promise.all(durationsPromises);
+        const durationsMap = durations.reduce((acc, video) => {
+          acc[video._id] = video.duration || 0;
+          return acc;
+        }, {});
+  
+        // Update chapters with durations and format them
+        const updatedChapters = chaptersData.map(chapter => {
+          let chapterDurationSeconds = 0;
+          const updatedTopics = chapter.topics.map(topic => {
+            const duration = durationsMap[topic.selectedVideo] || 0;
+            chapterDurationSeconds += duration;
+            return { ...topic, duration };
+          });
+          const chapterDurationFormatted = formatDuration(chapterDurationSeconds);
+          return { ...chapter, topics: updatedTopics, chapterDuration: chapterDurationFormatted };
+        });
+        updateChapters(updatedChapters);
+        setIsLoading(false);
+  
+        // Set the first video ID to be played if available
+        if (updatedChapters.length > 0 && updatedChapters[0].topics.length > 0) {
+          const firstVideoId = updatedChapters[0].topics[0].selectedVideo;
+          setSelectedVideoId(firstVideoId);
+        }
+      } catch (error) {
+        console.error("Failed to fetch chapters or video details:", error);
+        setIsLoading(false);
+      }
+    };
+  
+    fetchChaptersAndDurations();
+  }, [apiUrl, courseId]); 
+  
   const toggleChapterVisibility = (chapterId) => {
     setExpandedChapters(prevState => ({
       ...prevState,
@@ -285,7 +331,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
 
   // Use navigate to redirect to PDFViewer page
   const navigateToPdfViewer = (pdfId) => {
-    navigate(`/pdfviewer/${pdfId}`); // Use navigate for routing
+    navigate(`/pdfviewer/${pdfId}`); 
   };
 
   // const handleToggleCompletion = (videoId) => {
@@ -307,33 +353,7 @@ const Sidebar = ({ apiUrl, onClose }) => {
   };
 
   const userId = getUserId();
-  // const handleToggleCompletion = (videoId) => {
-  //   // Toggle the completion status based on the current state
-  //   const isCurrentlyCompleted = !!completedVideos[videoId];
-  //   markVideoAsCompleted(videoId, !isCurrentlyCompleted);
-
-  //   // Optionally update the backend with the new completion status
-  //   // and then fetch updated course details to reflect in the UI.
-  //   // This is assuming you have an API endpoint to update the video completion status.
-  //   const updateCompletionStatusAPI = `${apiUrl}/updateCompletionStatus`; // Example API endpoint
-  //   fetch(updateCompletionStatusAPI, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       userId: getUserId(), // Assuming you have a function to get the current user's ID
-  //       videoId: videoId,
-  //       completed: !isCurrentlyCompleted,
-  //     }),
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     // Trigger an event or call a function that fetches updated course details
-  //     // to reflect the new completion status in the VideoHeader component.
-  //   })
-  //   .catch(error => console.error('Error updating completion status:', error));
-  // };
+  
 
   const handleToggleCompletion = (videoId) => {
     const newCompletionStatus = !completedVideos[videoId];
@@ -373,8 +393,6 @@ const Sidebar = ({ apiUrl, onClose }) => {
   //     console.error("Failed to fetch PDF data:", error);
   //   }
   // };
-
-
 
   let topicCounter = 0;
 
