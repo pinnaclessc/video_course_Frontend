@@ -505,10 +505,9 @@ function VideoUploadForm() {
                 }
             });
 
-            const response = await axios.post('https://videocoursebackend.ssccglpinnacle.com/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            const response = await axios.post('http://localhost:8000/upload', formData, {
+                headers: {'Content-Type': 'multipart/form-data'},
+                timeout: 10800000, 
             });
 
             Swal.close();
