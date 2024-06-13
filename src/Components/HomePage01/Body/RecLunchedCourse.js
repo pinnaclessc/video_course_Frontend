@@ -15,14 +15,12 @@ export default function UpcomingCourse() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    fetch("https://videocoursebackend.ssccglpinnacle.com/courses")
+    fetch("https://auth.ssccglpinnacle.com/api/recent-courses")
       .then((response) => response.json())
       .then((data) => {
-        console.log("Fetched data:", data);
         if (Array.isArray(data)) {
           setCourse(data);
         } else {
-          console.error("Data is not an array:", data);
           setCourse([]);
         }
       })
@@ -55,13 +53,15 @@ export default function UpcomingCourse() {
         </button>
         <div className={styles.Course_Heading}>Recently Launched Course
         </div>
+        <div className ={styles["main-card-wrapper"]}>
         <div className={styles["scroll-container"]} ref={scrollRef}>
           <div className={styles["card-wrapper"]}>
             {course &&
               course.map((data) => (
-                <div key={data.id} className={styles["card"]}>
+                <div key={data._id} className={styles["card"]}>
                   <div className={styles["Upcomming-course-fullPage"]}>
                   <div className={styles["Image-section"]} onClick={() => navigate("/CourseDescription/" + data._id)}>
+                    
                       <img className={styles.imagecard}
                         src={data.hindiCoverImage}
                         alt=""
@@ -77,7 +77,8 @@ export default function UpcomingCourse() {
                     </div>
                     <div
                       className={styles["description-section"]}
-                      onClick={() => navigate("/CourseDescription/" + data._id)}
+                      onClick={() => 
+                        navigate("/CourseDescription/" + data._id)}
                     >
                       <div className={styles["title"]}>{data.courseTitle}</div>
                       <div className={styles["teacher"]}>
@@ -110,6 +111,7 @@ export default function UpcomingCourse() {
                 </div>
               ))}
           </div>
+        </div>
         </div>
         <button onClick={scrollRight} className={styles["sliderButton-right"]}>
           <AiFillRightCircle size={30} />
